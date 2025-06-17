@@ -1,4 +1,4 @@
-package com.chacha.create.controller;
+package com.chacha.create.controller.mainhome;
 
 import java.text.DateFormat;
 import java.util.Date;
