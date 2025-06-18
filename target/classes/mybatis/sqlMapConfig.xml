@@ -58,7 +58,7 @@
     <typeHandler handler="com.chacha.create.common.typehandler.TypeCategoryEnumTypeHandler"/>
     
     <!-- 상품 이미지 Enum용 TypeHandler (예: PImgEnumTypeHandler) -->
-    <typeHandler handler="com.chacha.create.common.typehandler.PImgEnumTypeHandler"/>
+    <typeHandler handler="com.chacha.create.common.typehandler.ProductImageTypeEnumTypeHandler"/>
     
     <!-- 주문 상태 Enum용 TypeHandler -->
     <typeHandler handler="com.chacha.create.common.typehandler.OrderStatusEnumTypeHandler"/>
