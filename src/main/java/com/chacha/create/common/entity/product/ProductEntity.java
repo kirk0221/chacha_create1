@@ -1,5 +1,6 @@
 package com.chacha.create.common.entity.product;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 import lombok.AllArgsConstructor;
@@ -33,7 +34,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductEntity {
+public class ProductEntity implements Serializable{
     private Integer productId;
     private Integer storeId;
     private Integer typeCategoryId;
