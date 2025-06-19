@@ -41,7 +41,7 @@
 		<property name="configLocation"
 			value="classpath:mybatis/sqlMapConfig.xml" />
 		<property name="mapperLocations"
-			value="classpath:mybatis/mappers/*.xml" />
+			value="classpath:mybatis/mappers/**/*.xml" />
 	</bean>
 
 	<!-- Mapper의 SQL구문을 실행할 수 있다. SQL문은 session단위로 실행 -->
