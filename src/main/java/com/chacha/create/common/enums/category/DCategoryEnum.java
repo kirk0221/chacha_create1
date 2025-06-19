@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,7 +33,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-@JsonFormat(shape = JsonFormat.Shape.OBJECT)
+@JsonFormat(shape = JsonFormat.Shape.STRING)
 public enum DCategoryEnum {
 
     // 패션잡화
@@ -71,6 +72,7 @@ public enum DCategoryEnum {
     private final int id;
 
     /** 하위 카테고리 이름 */
+    @JsonValue
     private final String name;
 
     /** 연결된 상위 카테고리 (u_category 테이블의 외래키 매핑) */
@@ -96,10 +98,25 @@ public enum DCategoryEnum {
      * @throws IllegalArgumentException 해당 ID에 대응하는 enum이 없는 경우 예외 발생
      */
     @JsonCreator
-    public static DCategoryEnum fromId(@JsonProperty("id") int id) {
+    public static DCategoryEnum fromName(@JsonProperty("dcategoryId") String input) {
+        for (DCategoryEnum d : values()) {
+            if (d.name().equalsIgnoreCase(input) || d.name.equals(input)) {
+                return d;
+            }
+        }
+        throw new IllegalArgumentException("Invalid DCategory name: " + input);
+    }
+
+    public static DCategoryEnum fromId(int id) {
         for (DCategoryEnum d : values()) {
             if (d.id == id) return d;
         }
         throw new IllegalArgumentException("Invalid DCategory id: " + id);
     }
+    
+    @Override
+    public String toString() {
+        return name;
+    }
+
 }

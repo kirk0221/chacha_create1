@@ -1,5 +1,7 @@
 package com.chacha.create.service.seller.product_insert;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.chacha.create.common.entity.product.PImgEntity;
@@ -26,5 +28,9 @@ public class ProductService {
 	public int productInsert(ProductEntity product) {
 		productMapper.insert(product);
 		return 0;
+	}
+	
+	public List<ProductEntity> productlist(){
+		return productMapper.selectAll();
 	}
 }

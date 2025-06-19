@@ -1,7 +1,9 @@
 package com.chacha.create.common.entity.product;
 
-import java.io.Serializable;
 import java.sql.Date;
+
+import com.chacha.create.common.enums.category.DCategoryEnum;
+import com.chacha.create.common.enums.category.TypeCategoryEnum;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,11 +36,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductEntity implements Serializable{
+public class ProductEntity{
     private Integer productId;
     private Integer storeId;
-    private Integer typeCategoryId;
-    private Integer dCategoryId;
+    private TypeCategoryEnum typeCategoryId;
+    private DCategoryEnum dCategoryId;
     private String productName;
 
     private Integer price;
@@ -50,6 +52,7 @@ public class ProductEntity implements Serializable{
 
     private Integer stock;
     private Date productDate;
+    private Date lastModifiedDate;
     private Integer saleCnt;
     private Integer viewCnt;
     private Integer flagshipCheck;
