@@ -1,0 +1,687 @@
+{
+  "member1": {
+    "member_id": "seq_member_id.nextval",
+    "member_email": "user1@example.com",
+    "member_name": "홍길동1",
+    "member_pwd": "pwd1",
+    "member_phone": "010-1111-1111",
+    "member_regi": "REG001",
+    "join_date": "2025-01-01"
+  },
+
+  "member2": {
+    "member_id": "seq_member_id.nextval",
+    "member_email": "user2@example.com",
+    "member_name": "홍길동2",
+    "member_pwd": "pwd2",
+    "member_phone": "010-2222-2222",
+    "member_regi": "REG002",
+    "join_date": "2025-01-02"
+  },
+
+  "member3": {
+    "member_id": "seq_member_id.nextval",
+    "member_email": "user3@example.com",
+    "member_name": "홍길동3",
+    "member_pwd": "pwd3",
+    "member_phone": "010-3333-3333",
+    "member_regi": "REG003",
+    "join_date": "2025-01-03"
+  },
+
+  "member4": {
+    "member_id": "seq_member_id.nextval",
+    "member_email": "user4@example.com",
+    "member_name": "홍길동4",
+    "member_pwd": "pwd4",
+    "member_phone": "010-4444-4444",
+    "member_regi": "REG004",
+    "join_date": "2025-01-04"
+  },
+
+  "member5": {
+    "member_id": "seq_member_id.nextval",
+    "member_email": "user5@example.com",
+    "member_name": "홍길동5",
+    "member_pwd": "pwd5",
+    "member_phone": "010-5555-5555",
+    "member_regi": "REG005",
+    "join_date": "2025-01-05"
+  },
+
+  "seller1": {
+  "seller_id": "seq_seller_id.nextval",
+  "member_id": 1,
+  "opening_date": "2024-01-01",
+  "account": "123-456-7890",
+  "account_bank": "국민은행",
+  "profile_info": "프로필1"
+},
+
+"seller2": {
+  "seller_id": "seq_seller_id.nextval",
+  "member_id": 2,
+  "opening_date": "2024-02-01",
+  "account": "234-567-8901",
+  "account_bank": "신한은행",
+  "profile_info": "프로필2"
+},
+
+"seller3": {
+  "seller_id": "seq_seller_id.nextval",
+  "member_id": 3,
+  "opening_date": "2024-03-01",
+  "account": "345-678-9012",
+  "account_bank": "하나은행",
+  "profile_info": "프로필3"
+},
+
+"seller4": {
+  "seller_id": "seq_seller_id.nextval",
+  "member_id": 4,
+  "opening_date": "2024-04-01",
+  "account": "456-789-0123",
+  "account_bank": "우리은행",
+  "profile_info": "프로필4"
+},
+
+"seller5": {
+  "seller_id": "seq_seller_id.nextval",
+  "member_id": 5,
+  "opening_date": "2024-05-01",
+  "account": "567-890-1234",
+  "account_bank": "농협은행",
+  "profile_info": "프로필5"
+},
+"store1": {
+  "store_id": "seq_store_id.nextval",
+  "seller_id": 1,
+  "logo_img": "logo1.jpg",
+  "store_name": "스토어1",
+  "store_detail": "설명1",
+  "store_url": "store1",
+  "sale_cnt": 10,
+  "view_cnt": 100
+},
+
+"store2": {
+  "store_id": "seq_store_id.nextval",
+  "seller_id": 2,
+  "logo_img": "logo2.jpg",
+  "store_name": "스토어2",
+  "store_detail": "설명2",
+  "store_url": "store2",
+  "sale_cnt": 20,
+  "view_cnt": 200
+},
+
+"store3": {
+  "store_id": "seq_store_id.nextval",
+  "seller_id": 3,
+  "logo_img": "logo3.jpg",
+  "store_name": "스토어3",
+  "store_detail": "설명3",
+  "store_url": "store3",
+  "sale_cnt": 30,
+  "view_cnt": 300
+},
+
+"store4": {
+  "store_id": "seq_store_id.nextval",
+  "seller_id": 4,
+  "logo_img": "logo4.jpg",
+  "store_name": "스토어4",
+  "store_detail": "설명4",
+  "store_url": "store4",
+  "sale_cnt": 40,
+  "view_cnt": 400
+},
+
+"store5": {
+  "store_id": "seq_store_id.nextval",
+  "seller_id": 5,
+  "logo_img": "logo5.jpg",
+  "store_name": "스토어5",
+  "store_detail": "설명5",
+  "store_url": "store5",
+  "sale_cnt": 50,
+  "view_cnt": 500
+},
+"product1": {
+  "product_id": "seq_product_id.nextval",
+  "store_id": 1,
+  "type_category_id": 1,
+  "d_category_id": 1,
+  "product_name": "상품1",
+  "price": 10000,
+  "product_detail": "상세설명1",
+  "stock": 50,
+  "product_date": "2025-05-01",
+  "last_modified_date": "2025-05-10",
+  "sale_cnt": 5,
+  "view_cnt": 100,
+  "flagship_check": 1
+},
+
+"product2": {
+  "product_id": "seq_product_id.nextval",
+  "store_id": 2,
+  "type_category_id": 2,
+  "d_category_id": 2,
+  "product_name": "상품2",
+  "price": 20000,
+  "product_detail": "상세설명2",
+  "stock": 30,
+  "product_date": "2025-05-02",
+  "last_modified_date": "2025-05-11",
+  "sale_cnt": 15,
+  "view_cnt": 150,
+  "flagship_check": 0
+},
+
+"product3": {
+  "product_id": "seq_product_id.nextval",
+  "store_id": 3,
+  "type_category_id": 3,
+  "d_category_id": 3,
+  "product_name": "상품3",
+  "price": 30000,
+  "product_detail": "상세설명3",
+  "stock": 20,
+  "product_date": "2025-05-03",
+  "last_modified_date": "2025-05-12",
+  "sale_cnt": 25,
+  "view_cnt": 200,
+  "flagship_check": 0
+},
+
+"product4": {
+  "product_id": "seq_product_id.nextval",
+  "store_id": 4,
+  "type_category_id": 4,
+  "d_category_id": 4,
+  "product_name": "상품4",
+  "price": 40000,
+  "product_detail": "상세설명4",
+  "stock": 40,
+  "product_date": "2025-05-04",
+  "last_modified_date": "2025-05-13",
+  "sale_cnt": 35,
+  "view_cnt": 250,
+  "flagship_check": 1
+},
+
+"product5": {
+  "product_id": "seq_product_id.nextval",
+  "store_id": 5,
+  "type_category_id": 5,
+  "d_category_id": 5,
+  "product_name": "상품5",
+  "price": 50000,
+  "product_detail": "상세설명5",
+  "stock": 10,
+  "product_date": "2025-05-05",
+  "last_modified_date": "2025-05-14",
+  "sale_cnt": 45,
+  "view_cnt": 300,
+  "flagship_check": 0
+},
+"p_img1": {
+  "p_img_id": "seq_p_img_id.nextval",
+  "product_id": 1,
+  "p_img_url": "prod1_thumb.jpg",
+  "p_img_enum": "THUMBNAIL",
+  "p_img_seq": 1
+},
+
+"p_img2": {
+  "p_img_id": "seq_p_img_id.nextval",
+  "product_id": 1,
+  "p_img_url": "prod1_desc1.jpg",
+  "p_img_enum": "DESCRIPTION",
+  "p_img_seq": 2
+},
+
+"p_img3": {
+  "p_img_id": "seq_p_img_id.nextval",
+  "product_id": 2,
+  "p_img_url": "prod2_thumb.jpg",
+  "p_img_enum": "THUMBNAIL",
+  "p_img_seq": 1
+},
+
+"p_img4": {
+  "p_img_id": "seq_p_img_id.nextval",
+  "product_id": 3,
+  "p_img_url": "prod3_thumb.jpg",
+  "p_img_enum": "THUMBNAIL",
+  "p_img_seq": 1
+},
+
+"p_img5": {
+  "p_img_id": "seq_p_img_id.nextval",
+  "product_id": 4,
+  "p_img_url": "prod4_thumb.jpg",
+  "p_img_enum": "THUMBNAIL",
+  "p_img_seq": 1
+},
+
+"order_info1": {
+  "order_id": "seq_order_info_id.nextval",
+  "member_id": 1,
+  "order_date": "SYSDATE",
+  "order_name": "홍길동",
+  "order_phone": "010-1111-1111",
+  "address_id": 1,
+  "card_id": 1,
+  "order_status": "ORDER_OK"
+},
+
+"order_info2": {
+  "order_id": "seq_order_info_id.nextval",
+  "member_id": 2,
+  "order_date": "SYSDATE",
+  "order_name": "김철수",
+  "order_phone": "010-2222-2222",
+  "address_id": 2,
+  "card_id": 2,
+  "order_status": "CONFIRM"
+},
+
+"order_info3": {
+  "order_id": "seq_order_info_id.nextval",
+  "member_id": 3,
+  "order_date": "SYSDATE",
+  "order_name": "이영희",
+  "order_phone": "010-3333-3333",
+  "address_id": 3,
+  "card_id": 3,
+  "order_status": "REFUND"
+},
+
+"order_info4": {
+  "order_id": "seq_order_info_id.nextval",
+  "member_id": 4,
+  "order_date": "SYSDATE",
+  "order_name": "박민수",
+  "order_phone": "010-4444-4444",
+  "address_id": 4,
+  "card_id": 4,
+  "order_status": "REFUND_OK"
+},
+
+"order_info5": {
+  "order_id": "seq_order_info_id.nextval",
+  "member_id": 5,
+  "order_date": "SYSDATE",
+  "order_name": "최지우",
+  "order_phone": "010-5555-5555",
+  "address_id": 5,
+  "card_id": 5,
+  "order_status": "ORDER_OK"
+},
+"order_detail1": {
+  "order_detail_id": "seq_order_detail_id.nextval",
+  "order_id": 1,
+  "product_id": 1,
+  "order_cnt": 2,
+  "order_price": 20000
+},
+
+"order_detail2": {
+  "order_detail_id": "seq_order_detail_id.nextval",
+  "order_id": 2,
+  "product_id": 2,
+  "order_cnt": 1,
+  "order_price": 20000
+},
+
+"order_detail3": {
+  "order_detail_id": "seq_order_detail_id.nextval",
+  "order_id": 3,
+  "product_id": 3,
+  "order_cnt": 3,
+  "order_price": 90000
+},
+
+"order_detail4": {
+  "order_detail_id": "seq_order_detail_id.nextval",
+  "order_id": 4,
+  "product_id": 4,
+  "order_cnt": 1,
+  "order_price": 40000
+},
+
+"order_detail5": {
+  "order_detail_id": "seq_order_detail_id.nextval",
+  "order_id": 5,
+  "product_id": 5,
+  "order_cnt": 5,
+  "order_price": 250000
+},
+"delivery1": {
+  "delivery_id": "seq_delivery_id.nextval",
+  "order_id": 1,
+  "delivery_check": 0,
+  "delivery_date": "2025-06-01",
+  "delivery_fin_date": "2025-06-03"
+},
+
+"delivery2": {
+  "delivery_id": "seq_delivery_id.nextval",
+  "order_id": 2,
+  "delivery_check": 0,
+  "delivery_date": "2025-06-02",
+  "delivery_fin_date": "2025-06-04"
+},
+
+"delivery3": {
+  "delivery_id": "seq_delivery_id.nextval",
+  "order_id": 3,
+  "delivery_check": 0,
+  "delivery_date": "2025-06-03",
+  "delivery_fin_date": "2025-06-05"
+},
+
+"delivery4": {
+  "delivery_id": "seq_delivery_id.nextval",
+  "order_id": 4,
+  "delivery_check": 0,
+  "delivery_date": "2025-06-04",
+  "delivery_fin_date": "2025-06-06"
+},
+
+"delivery5": {
+  "delivery_id": "seq_delivery_id.nextval",
+  "order_id": 5,
+  "delivery_check": 0,
+  "delivery_date": "2025-06-05",
+  "delivery_fin_date": "2025-06-07"
+},
+"review1": {
+  "review_id": "seq_review_id.nextval",
+  "order_detail_id": 1,
+  "review_date": "SYSDATE",
+  "review_text": "좋은 상품입니다."
+},
+"review2": {
+  "review_id": "seq_review_id.nextval",
+  "order_detail_id": 2,
+  "review_date": "SYSDATE",
+  "review_text": "만족합니다."
+},
+"review3": {
+  "review_id": "seq_review_id.nextval",
+  "order_detail_id": 3,
+  "review_date": "SYSDATE",
+  "review_text": "배송이 빨랐어요."
+},
+"review4": {
+  "review_id": "seq_review_id.nextval",
+  "order_detail_id": 4,
+  "review_date": "SYSDATE",
+  "review_text": "포장이 꼼꼼했어요."
+},
+"review5": {
+  "review_id": "seq_review_id.nextval",
+  "order_detail_id": 5,
+  "review_date": "SYSDATE",
+  "review_text": "재구매 의사 있습니다."
+},
+"question1": {
+  "question_id": "seq_question_id.nextval",
+  "member_id": 1,
+  "question_date": "SYSDATE",
+  "question_title": "문의사항1",
+  "question_text": "내용1"
+},
+"question2": {
+  "question_id": "seq_question_id.nextval",
+  "member_id": 2,
+  "question_date": "SYSDATE",
+  "question_title": "문의사항2",
+  "question_text": "내용2"
+},
+"question3": {
+  "question_id": "seq_question_id.nextval",
+  "member_id": 3,
+  "question_date": "SYSDATE",
+  "question_title": "문의사항3",
+  "question_text": "내용3"
+},
+"question4": {
+  "question_id": "seq_question_id.nextval",
+  "member_id": 4,
+  "question_date": "SYSDATE",
+  "question_title": "문의사항4",
+  "question_text": "내용4"
+},
+"question5": {
+  "question_id": "seq_question_id.nextval",
+  "member_id": 5,
+  "question_date": "SYSDATE",
+  "question_title": "문의사항5",
+  "question_text": "내용5"
+},
+"addr1": {
+  "address_id": "seq_address_id.nextval",
+  "member_id": 1,
+  "post_num": "12345",
+  "address_road": "서울시 강남구",
+  "address_detail": "테헤란로 123",
+  "address_extra": "101동 202호",
+  "address_check": 1
+},
+"addr2": {
+  "address_id": "seq_address_id.nextval",
+  "member_id": 2,
+  "post_num": "23456",
+  "address_road": "서울시 서초구",
+  "address_detail": "서초대로 456",
+  "address_extra": "201동 303호",
+  "address_check": 0
+},
+"addr3": {
+  "address_id": "seq_address_id.nextval",
+  "member_id": 3,
+  "post_num": "34567",
+  "address_road": "서울시 송파구",
+  "address_detail": "올림픽로 789",
+  "address_extra": "301동 404호",
+  "address_check": 1
+},
+"addr4": {
+  "address_id": "seq_address_id.nextval",
+  "member_id": 4,
+  "post_num": "45678",
+  "address_road": "서울시 마포구",
+  "address_detail": "마포대로 101",
+  "address_extra": "401동 505호",
+  "address_check": 0
+},
+"addr5": {
+  "address_id": "seq_address_id.nextval",
+  "member_id": 5,
+  "post_num": "56789",
+  "address_road": "서울시 용산구",
+  "address_detail": "용산로 202",
+  "address_extra": "501동 606호",
+  "address_check": 1
+},
+"card1": {
+  "card_id": "seq_card_id.nextval",
+  "member_id": 1,
+  "card_num": "1111-2222-3333-4444",
+  "card_company": "신한카드",
+  "card_token": "token1",
+  "card_alias": "나의카드1"
+},
+"card2": {
+  "card_id": "seq_card_id.nextval",
+  "member_id": 2,
+  "card_num": "2222-3333-4444-5555",
+  "card_company": "국민카드",
+  "card_token": "token2",
+  "card_alias": "나의카드2"
+},
+"card3": {
+  "card_id": "seq_card_id.nextval",
+  "member_id": 3,
+  "card_num": "3333-4444-5555-6666",
+  "card_company": "현대카드",
+  "card_token": "token3",
+  "card_alias": "나의카드3"
+},
+"card4": {
+  "card_id": "seq_card_id.nextval",
+  "member_id": 4,
+  "card_num": "4444-5555-6666-7777",
+  "card_company": "롯데카드",
+  "card_token": "token4",
+  "card_alias": "나의카드4"
+},
+"card5": {
+  "card_id": "seq_card_id.nextval",
+  "member_id": 5,
+  "card_num": "5555-6666-7777-8888",
+  "card_company": "우리카드",
+  "card_token": "token5",
+  "card_alias": "나의카드5"
+},
+"chatroom1": {
+    "chatroom_id": "seq_chatroom_id.nextval",
+    "member_id": 1,
+    "store_id": 1
+  },
+  "chatroom2": {
+    "chatroom_id": "seq_chatroom_id.nextval",
+    "member_id": 2,
+    "store_id": 2
+  },
+  "chatroom3": {
+    "chatroom_id": "seq_chatroom_id.nextval",
+    "member_id": 3,
+    "store_id": 3
+  },
+  "chatroom4": {
+    "chatroom_id": "seq_chatroom_id.nextval",
+    "member_id": 4,
+    "store_id": 4
+  },
+  "chatroom5": {
+    "chatroom_id": "seq_chatroom_id.nextval",
+    "member_id": 5,
+    "store_id": 5
+  },
+  "chatting1": {
+    "chatting_id": "seq_chatting_id.nextval",
+    "chatroom_id": 1,
+    "chatting_text": "안녕하세요! 주문 문의 드립니다.",
+    "chatting_date": "SYSDATE"
+  },
+  "chatting2": {
+    "chatting_id": "seq_chatting_id.nextval",
+    "chatroom_id": 1,
+    "chatting_text": "안녕하세요! 무엇을 도와드릴까요?",
+    "chatting_date": "SYSDATE"
+  },
+  "chatting3": {
+    "chatting_id": "seq_chatting_id.nextval",
+    "chatroom_id": 2,
+    "chatting_text": "배송 언제쯤 되나요?",
+    "chatting_date": "SYSDATE"
+  },
+  "chatting4": {
+    "chatting_id": "seq_chatting_id.nextval",
+    "chatroom_id": 2,
+    "chatting_text": "내일 출고 예정입니다.",
+    "chatting_date": "SYSDATE"
+  },
+  "chatting5": {
+    "chatting_id": "seq_chatting_id.nextval",
+    "chatroom_id": 3,
+    "chatting_text": "상품 취소 가능한가요?",
+    "chatting_date": "SYSDATE"
+  },
+  "report1": {
+    "report_id": "seq_report_id.nextval",
+    "member_id": 1,
+    "seller_id": 1,
+    "report_date": "SYSDATE",
+    "report_title": "욕설 및 비방",
+    "report_text": "사용자가 욕설을 포함한 메시지를 보냈습니다."
+  },
+  "report2": {
+    "report_id": "seq_report_id.nextval",
+    "member_id": 2,
+    "seller_id": 2,
+    "report_date": "SYSDATE",
+    "report_title": "허위 광고",
+    "report_text": "상품 설명과 실제 상품이 다릅니다."
+  },
+  "report3": {
+    "report_id": "seq_report_id.nextval",
+    "member_id": 3,
+    "seller_id": 3,
+    "report_date": "SYSDATE",
+    "report_title": "악성 댓글",
+    "report_text": "리뷰에 부적절한 댓글이 포함되어 있습니다."
+  },
+  "report4": {
+    "report_id": "seq_report_id.nextval",
+    "member_id": 4,
+    "seller_id": 4,
+    "report_date": "SYSDATE",
+    "report_title": "스팸 메시지",
+    "report_text": "반복적인 광고 메시지를 보냈습니다."
+  },
+  "report5": {
+    "report_id": "seq_report_id.nextval",
+    "member_id": 5,
+    "seller_id": 5,
+    "report_date": "SYSDATE",
+    "report_title": "불량 제품",
+    "report_text": "상품이 고장 난 상태로 도착했습니다."
+  },
+  "notice1": {
+    "notice_id": "seq_notice_id.nextval",
+    "store_id": 1,
+    "notice_check": 0,
+    "notice_title": "시스템 점검 안내",
+    "notice_text": "2025년 6월 30일 00시부터 06시까지 시스템 점검이 진행됩니다.",
+    "notice_date": "SYSDATE"
+  },
+  "notice2": {
+    "notice_id": "seq_notice_id.nextval",
+    "store_id": 2,
+    "notice_check": 1,
+    "notice_title": "신규 이벤트 안내",
+    "notice_text": "7월 한달간 특별 할인 이벤트를 진행합니다.",
+    "notice_date": "SYSDATE"
+  },
+  "notice3": {
+    "notice_id": "seq_notice_id.nextval",
+    "store_id": 3,
+    "notice_check": 0,
+    "notice_title": "배송 지연 안내",
+    "notice_text": "일부 지역 배송이 지연되고 있습니다.",
+    "notice_date": "SYSDATE"
+  },
+  "notice4": {
+    "notice_id": "seq_notice_id.nextval",
+    "store_id": 4,
+    "notice_check": 1,
+    "notice_title": "서비스 이용약관 변경",
+    "notice_text": "서비스 이용약관이 일부 변경되었습니다.",
+    "notice_date": "SYSDATE"
+  },
+  "notice5": {
+    "notice_id": "seq_notice_id.nextval",
+    "store_id": 5,
+    "notice_check": 1,
+    "notice_title": "회원 혜택 안내",
+    "notice_text": "신규 회원 가입 시 5,000원 쿠폰을 드립니다.",
+    "notice_date": "SYSDATE"
+  }
+
+}
