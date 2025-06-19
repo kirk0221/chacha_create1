@@ -40,7 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		) VALUES (
 		seq_product_id.NEXTVAL, #{storeId}, #{typeCategoryId}, #{dCategoryId}, #{productName},
 		#{price}, #{productDetail}, #{stock}, #{productDate},
-		#{lastModifiedDate},
+		sysdate,
 		#{saleCnt}, #{viewCnt}, #{flagshipCheck}
 		)
 	</insert>
