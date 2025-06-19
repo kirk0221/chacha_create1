@@ -27,7 +27,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AddressEntity {
+public class AddrEntity {
 
     /**
      * 주소 고유 ID (기본 키)

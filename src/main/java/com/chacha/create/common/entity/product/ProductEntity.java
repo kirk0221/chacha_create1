@@ -51,4 +51,5 @@ public class ProductEntity {
     private Date productDate;
     private Integer saleCnt;
     private Integer viewCnt;
+    private Integer flagshipCheck;
 }
