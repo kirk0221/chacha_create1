@@ -5,6 +5,7 @@
   "https://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 
+
    <!-- log값 처리, jdbc가 null이 왔을때 처리 -->
    <settings>
       <setting name="logImpl" value="LOG4J" />
