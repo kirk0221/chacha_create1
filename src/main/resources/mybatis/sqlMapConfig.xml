@@ -22,7 +22,7 @@
 	    <typeAlias type="com.chacha.create.common.entity.chat.ChatroomEntity" alias="chatroomEntity" />
 	    <typeAlias type="com.chacha.create.common.entity.chat.ChattingEntity" alias="chattingEntity" />
 	    <!-- member -->
-	    <typeAlias type="com.chacha.create.common.entity.member.AddressEntity" alias="addressEntity" />
+	    <typeAlias type="com.chacha.create.common.entity.member.AddrEntity" alias="addrEntity" />
 	    <typeAlias type="com.chacha.create.common.entity.member.CardEntity" alias="cardEntity" />
 	    <typeAlias type="com.chacha.create.common.entity.member.CartEntity" alias="cartEntity" />
 	    <typeAlias type="com.chacha.create.common.entity.member.MemberEntity" alias="memberEntity" />
