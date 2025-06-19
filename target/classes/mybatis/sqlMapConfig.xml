@@ -9,6 +9,7 @@
 	<settings>
 		<setting name="logImpl" value="LOG4J" />
 		<setting name="jdbcTypeForNull" value="NULL" />
+		<!-- <setting name="mapUnderscoreToCamelCase" value="true"/> -->
 	</settings>
 
 	<!-- 타입 별칭 지정 -->
@@ -49,19 +50,19 @@
 	<!-- Enum과 DB 매핑 -->
 	<typeHandlers>
     <!-- 상위 카테고리 Enum용 TypeHandler -->
-    <typeHandler handler="com.chacha.create.common.typehandler.UCategoryEnumTypeHandler"/>
+    <typeHandler handler="com.chacha.create.common.typehandler.UCategoryEnumTypeHandler" javaType="com.chacha.create.common.enums.category.UCategoryEnum"/>
     
     <!-- 하위 카테고리 Enum용 TypeHandler -->
-    <typeHandler handler="com.chacha.create.common.typehandler.DCategoryEnumTypeHandler"/>
+    <typeHandler handler="com.chacha.create.common.typehandler.DCategoryEnumTypeHandler" javaType="com.chacha.create.common.enums.category.DCategoryEnum"/>
     
     <!-- 수공예 기법 Enum용 TypeHandler -->
-    <typeHandler handler="com.chacha.create.common.typehandler.TypeCategoryEnumTypeHandler"/>
+    <typeHandler handler="com.chacha.create.common.typehandler.TypeCategoryEnumTypeHandler" javaType="com.chacha.create.common.enums.category.TypeCategoryEnum"/>
     
     <!-- 상품 이미지 Enum용 TypeHandler (예: PImgEnumTypeHandler) -->
-    <typeHandler handler="com.chacha.create.common.typehandler.ProductImageTypeEnumTypeHandler"/>
+    <typeHandler handler="com.chacha.create.common.typehandler.ProductImageTypeEnumTypeHandler" javaType="com.chacha.create.common.enums.image.ProductImageTypeEnum"/>
     
     <!-- 주문 상태 Enum용 TypeHandler -->
-    <typeHandler handler="com.chacha.create.common.typehandler.OrderStatusEnumTypeHandler"/>
+    <typeHandler handler="com.chacha.create.common.typehandler.OrderStatusEnumTypeHandler" javaType="com.chacha.create.common.enums.order.OrderStatusEnum"/>
   </typeHandlers>
 
 </configuration>
