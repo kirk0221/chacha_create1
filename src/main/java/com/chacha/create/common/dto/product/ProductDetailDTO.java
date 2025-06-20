@@ -1,8 +1,8 @@
 package com.chacha.create.common.dto.product;
 
-import java.util.List;
+import java.sql.Date;
 
-import com.chacha.create.common.entity.product.ProductDetailEntity;
+import com.chacha.create.common.enums.category.UCategoryEnum;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,11 +11,31 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class ProductDetailDTO {
-    private ProductDetailEntity productDetail;
-    private List<String> thumbnailImageUrls;
-    private List<String> descriptionImageUrls;
-    private String mainThumbnailUrl;
+	// ProductEntity
+    private Integer productId;
+    private Integer storeId;
+    private Integer typeCategoryId;
+    private Integer dCategoryId;
+    private String productName;
+    private Integer price;
+    private String productDetail;
+    private Integer stock;
+    private Date productDate;
+    private Date lastModifiedDate;
+    private Integer saleCnt;
+    private Integer viewCnt;
+    private Integer flagshipCheck;
+
+    // DCategoryEntity
+    private UCategoryEnum uCategoryId;
+    private String dCategoryName;
+    
+    // UCategoryEntity
+    private String uCategoryName;
+    
+    // TypeCategoryEntity
+    private String typeCategoryName;
 }
