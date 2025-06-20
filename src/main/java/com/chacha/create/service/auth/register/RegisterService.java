@@ -32,4 +32,6 @@ public class RegisterService {
     	int result = sellerMapper.insert(sellerEntity);
     	return result;
     }
+    
+    
 }
