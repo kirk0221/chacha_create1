@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 public class RegisterRestController {
 	
 	@Autowired
-	RegisterService registerService;
+	private RegisterService registerService;
 	
 	@PostMapping(value = "/userinfo", produces = MediaType.APPLICATION_JSON_VALUE)
 	public int userinfo(@RequestBody MemberEntity memberEntity) {
