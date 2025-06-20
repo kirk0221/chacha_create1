@@ -3,6 +3,8 @@ package com.chacha.create.common.enums.category;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -16,7 +18,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-@JsonFormat(shape = JsonFormat.Shape.OBJECT) // JSON 직렬화 시 객체 형태로 변환
+@JsonFormat(shape = JsonFormat.Shape.STRING) // JSON 직렬화 시 문자 형태로 변환
 public enum TypeCategoryEnum {
 
     /** 금속을 주재료로 하는 공예 */
@@ -53,6 +55,7 @@ public enum TypeCategoryEnum {
     private final int id;
 
     /** 수공예 기법 이름 (한글) */
+    @JsonValue
     private final String name;
 
     /**
@@ -62,11 +65,26 @@ public enum TypeCategoryEnum {
      * @return 해당 ID를 갖는 {@link TypeCategoryEnum}
      * @throws IllegalArgumentException ID가 유효하지 않을 경우 예외 발생
      */
-    @JsonCreator
-    public static TypeCategoryEnum fromId(@JsonProperty("id") int id) {
+    public static TypeCategoryEnum fromId(@JsonProperty("typeCategoryId") int id) {
         for (TypeCategoryEnum t : values()) {
             if (t.id == id) return t;
         }
         throw new IllegalArgumentException("Invalid TypeCategory id: " + id);
     }
+    
+    @JsonCreator
+    public static TypeCategoryEnum fromName(@JsonProperty("typeCategoryId") String input) {
+        for (TypeCategoryEnum type : values()) {
+            if (type.name().equalsIgnoreCase(input) || type.name.equals(input)) {
+                return type;
+            }
+        }
+        throw new IllegalArgumentException("Invalid TypeCategory name: " + input);
+    }
+
+    @Override
+    public String toString() {
+        return name; // JSON 출력 시 문자열로
+    }
+
 }
