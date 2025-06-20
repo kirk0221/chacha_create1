@@ -18,8 +18,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="selectByMemberId" resultMap="memberResultMap"
-		parameterType="long">
+		parameterType="int">
 		SELECT * FROM MEMBER WHERE MEMBER_ID = #{memberId}
+	</select>
+
+	<select id="selectByMemberEmail" resultMap="memberResultMap"
+		parameterType="String">
+		SELECT * FROM MEMBER WHERE MEMBER_EMAIL = #{memberEmail}
 	</select>
 
 	<insert id="insert" parameterType="memberEntity">
