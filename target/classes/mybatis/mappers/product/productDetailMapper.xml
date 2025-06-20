@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chacha.create.common.mapper.product.ProductDetailMapper">
+
+	<select id="selectByProductId" 
+				resultType="com.chacha.create.common.dto.product.ProductDetailDTO"
+	        	parameterType="int">
+	    SELECT
+	        p.*,
+	        t.type_category_name,
+	        d.d_category_name,
+	        u.u_category_name
+	    FROM
+	        product p
+	        LEFT JOIN type_category t ON p.type_category_id = t.type_category_id
+	        LEFT JOIN d_category d ON p.d_category_id = d.d_category_id
+	        LEFT JOIN u_category u ON d.u_category_id = u.u_category_id
+	    WHERE
+	        p.product_id = #{productId}
+	</select>
+	
+</mapper>
