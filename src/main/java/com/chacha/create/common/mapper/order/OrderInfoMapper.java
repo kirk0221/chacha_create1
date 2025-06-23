@@ -1,10 +1,12 @@
 package com.chacha.create.common.mapper.order;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
 import com.chacha.create.common.entity.order.OrderInfoEntity;
+import com.chacha.create.common.entity.order.OrderSumDTO;
 
 /**
  * {@code order_info} 테이블에 대한 CRUD 작업을 수행하는 MyBatis 매퍼 인터페이스입니다.
@@ -59,4 +61,11 @@ public interface OrderInfoMapper {
      * @return 영향 받은 행 수
      */
     int delete(int orderId);
+    
+    
+    List<Map<String,Object>> selectByStatus(String  storeUrl);
+    
+    List<OrderSumDTO> selectByDayOrderSum(String  storeUrl);
+    
+    
 }

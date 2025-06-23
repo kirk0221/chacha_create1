@@ -2,10 +2,12 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.chacha.create.common.mapper.store.StoreMapper">
+<mapper
+	namespace="com.chacha.create.common.mapper.store.StoreMapper">
 
 	<resultMap id="storeResultMap" type="storeEntity">
 		<id property="storeId" column="store_id" />
+		<result property="logoImg" column="logo_img" />
 		<result property="sellerId" column="seller_id" />
 		<result property="storeName" column="store_name" />
 		<result property="storeDetail" column="store_detail" />
@@ -19,11 +21,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="selectByStoreId" resultMap="storeResultMap">
-		SELECT * FROM store WHERE store_id = #{storeId}
+		SELECT * FROM store WHERE
+		store_id = #{storeId}
 	</select>
 
 	<select id="selectBySellerId" resultMap="storeResultMap">
-		SELECT * FROM store WHERE seller_id = #{sellerId}
+		SELECT * FROM store
+		WHERE seller_id = #{sellerId}
 	</select>
 
 	<insert id="insert" parameterType="storeEntity">
@@ -41,8 +45,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 
 	<delete id="delete" parameterType="int">
-		DELETE FROM store WHERE store_id = #{storeId}
+		DELETE FROM store WHERE
+		store_id = #{storeId}
 	</delete>
+
+	<select id="selectByStoreInfo" resultMap="storeResultMap" parameterType="string">
+		SELECT store_name, store_detail, logo_img
+		FROM store
+		WHERE store.store_Url = #{storeUrl}
+	</select>
 
 
 </mapper>
