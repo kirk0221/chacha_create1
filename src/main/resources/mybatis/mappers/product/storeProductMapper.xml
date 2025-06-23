@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.chacha.create.common.mapper.product.StoreProductMapper">
 
 
-	<resultMap id="bestProductResultMap" type="com.chacha.create.common.entity.product.StoreProductEntity">
+	<resultMap id="bestProductResultMap" type="com.chacha.create.common.dto.product.StoreProductDTO">
 		<id property="productId" column="product_id" />
 		<result property="storeId" column="store_id" />
 		<result property="typeCategoryId" column="type_category_id" />
@@ -26,18 +26,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 	<!-- 추가 쿼리문 -->
-	<!-- 스토어ID로 해당 스토어의 대표사진 조회 -->
-	<select id="storemainProduct" resultMap="bestProductResultMap">
-		<![CDATA[
-			select *
-			FROM product
-			WHERE FLAGSHIP_CHECK = 1
-			AND STORE_ID = #{store_id}
-		]]>
+	
+	<!-- 스토어ID로 해당 스토어의 대표상품 조회 -->
+	<select id="selectForMainProduct" resultMap="bestProductResultMap">
+		SELECT p.*, ca.type_category_name, dc.d_category_name, uc.u_category_name, img.p_img_url
+		FROM product p 
+		LEFT JOIN type_category ca ON p.type_category_id = ca.type_category_id
+		LEFT JOIN d_category dc ON p.d_category_id = dc.d_category_id
+		LEFT JOIN u_category uc ON dc.u_category_id = uc.u_category_id
+		LEFT JOIN (
+		        SELECT product_id, p_img_url
+		        FROM (
+		        SELECT product_id, p_img_url,
+		        ROW_NUMBER() OVER (PARTITION BY product_id ORDER BY p_img_seq ASC) AS rn
+		        FROM p_img
+		        ) sub
+		    WHERE rn = 1    
+		) img ON p.product_id = img.product_id                         
+		WHERE FLAGSHIP_CHECK = 1
+		AND STORE_ID = #{storeId}
 	</select>
 	
 	<!-- 해당 스토어의 인기 상품 조회  -->
-	<select id="selectBestProduct" resultMap="bestProductResultMap">
+	<select id="selectForBestProduct" resultMap="bestProductResultMap">
 		<![CDATA[
 			SELECT p.*, ca.type_category_name, dc.d_category_name, uc.u_category_name, img.p_img_url
 			FROM product p
