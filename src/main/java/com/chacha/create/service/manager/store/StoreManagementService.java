@@ -14,7 +14,7 @@ public class StoreManagementService {
 	private StoreMapper storeMapper;
 	
 	@Autowired
-	StoreManagementService(StoreMapper storeMapper){
+	public StoreManagementService(StoreMapper storeMapper){
 		this.storeMapper = storeMapper;
 	}
 	
