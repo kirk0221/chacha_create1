@@ -40,6 +40,7 @@ public enum ProductImageTypeEnum {
 
     @JsonCreator
     public static ProductImageTypeEnum from(Object value) {
+    	
         if (value instanceof String) {
             String str = (String) value;
             for (ProductImageTypeEnum type : values()) {

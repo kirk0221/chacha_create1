@@ -11,20 +11,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.chacha.create.common.entity.product.ProductEntity;
-import com.chacha.create.service.seller.product_insert.ProductService;
+import com.chacha.create.service.seller.product.ProductService;
 
 import lombok.extern.slf4j.Slf4j;
 
 
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/{storeUrl}/seller/sell-register")
 @Slf4j
-public class ProductRestController {
+public class ProductInsertRestController {
 	
 	@Autowired
 	ProductService productService;
 	
-	@PostMapping(value="/productinsert.do",
+	@PostMapping(value="/productinsert",
 			produces="text/plain;charset=utf-8", consumes = "application/json")
 	public String f1(@RequestBody ProductEntity productentity) {
 		System.out.println(productentity);
@@ -32,7 +32,7 @@ public class ProductRestController {
 		return result==0?"insert 성공":"insert 실패";
 	}
 	
-	@GetMapping(value="/productlist.do")
+	@GetMapping(value="/productlist")
 	public List<ProductEntity> productlist() {
 		return productService.productlist();
 	}

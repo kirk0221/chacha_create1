@@ -56,4 +56,5 @@ public class ProductEntity{
     private Integer saleCnt;
     private Integer viewCnt;
     private Integer flagshipCheck;
+    private Integer deleteCheck;
 }
