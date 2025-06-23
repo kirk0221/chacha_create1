@@ -1,0 +1,20 @@
+package com.chacha.create.common.dto.product;
+
+import java.util.List;
+
+import com.chacha.create.common.entity.product.PImgEntity;
+import com.chacha.create.common.entity.product.ProductEntity;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class ProductWithImagesDTO {
+    private ProductEntity product;
+    private List<PImgEntity> images;
+}
