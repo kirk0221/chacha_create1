@@ -2,7 +2,8 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.chacha.create.common.mapper.member.SellerMapper">
+<mapper
+	namespace="com.chacha.create.common.mapper.member.SellerMapper">
 
 	<resultMap id="sellerResultMap" type="sellerEntity">
 		<id property="sellerId" column="seller_id" />
@@ -18,34 +19,55 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="selectBySellerId" resultMap="sellerResultMap">
-		SELECT * FROM seller WHERE seller_id = #{sellerId}
+		SELECT * FROM seller
+		WHERE seller_id = #{sellerId}
 	</select>
 
 	<select id="selectByMemberId" resultMap="sellerResultMap">
-		SELECT * FROM seller WHERE member_id = #{memberId}
+		SELECT * FROM seller
+		WHERE member_id = #{memberId}
 	</select>
 
 	<insert id="insert" parameterType="sellerEntity">
 		INSERT INTO seller (
-		seller_id, member_id, opening_date, account, account_bank, profile_info
+		seller_id, member_id, opening_date, account, account_bank,
+		profile_info
 		) VALUES (
-		seq_seller_id.NEXTVAL, #{memberId}, #{openingDate}, #{account}, #{accountBank},
+		seq_seller_id.NEXTVAL, #{memberId},
+		#{openingDate}, #{account}, #{accountBank},
 		#{profileInfo}
 		)
 	</insert>
 
 	<update id="update" parameterType="sellerEntity">
 		UPDATE seller
-		SET member_id = #{memberId},
+		SET member_id =
+		#{memberId},
 		opening_date = #{openingDate},
 		account = #{account},
 		account_bank = #{accountBank},
 		profile_info = #{profileInfo}
-		WHERE seller_id = #{sellerId}
+		WHERE
+		seller_id = #{sellerId}
 	</update>
 
 	<delete id="delete" parameterType="int">
-		DELETE FROM seller WHERE seller_id = #{sellerId}
+		DELETE FROM seller WHERE
+		seller_id = #{sellerId}
 	</delete>
+
+	<select id="selectBySellerInfo"
+		resultType="com.chacha.create.common.entity.member.SellerInfoDTO"
+		parameterType="string">
+		SELECT
+		m.member_name AS sellerName,
+		m.member_phone AS sellerPhone,
+		m.member_email AS sellerEmail,
+		s.profile_info AS sellerProfile
+		FROM store st
+		JOIN seller s ON st.seller_id = s.seller_id
+		JOIN member m ON s.member_id = m.member_id
+		WHERE st.store_url = #{storeUrl}
+	</select>
 
 </mapper>

@@ -1,6 +1,7 @@
 package com.chacha.create.common.mapper.order;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -61,4 +62,6 @@ public interface ReviewMapper {
      * @return 삭제된 행 수
      */
     int delete(int reviewId);
+    
+    List<Map<String, Object>> selectByReview(String storeUrl);
 }

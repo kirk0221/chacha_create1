@@ -1,6 +1,7 @@
 package com.chacha.create.common.mapper.store;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -60,4 +61,6 @@ public interface StoreMapper {
      * @return 처리된 행 수
      */
     int delete(int storeId);
+    
+    List<StoreEntity> selectByStoreInfo(String storeUrl);
 }
