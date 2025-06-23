@@ -1,4 +1,4 @@
-package com.chacha.create.service;
+package com.chacha.create.service.buyer.storeinfo;
 
 import java.util.List;
 import java.util.Map;
@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public class StoreinfoService {
+public class StoreInfoService {
 	
 	@Autowired
 	StoreMapper storeMapper;
@@ -33,6 +33,5 @@ public class StoreinfoService {
 		List<SellerInfoDTO> result = sellerMapper.selectBySellerInfo(storeUrl);
 		return result;
 	}
-	
 	
 }

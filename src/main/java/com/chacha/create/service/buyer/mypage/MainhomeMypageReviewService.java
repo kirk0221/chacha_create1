@@ -23,7 +23,6 @@ public class MainhomeMypageReviewService {
 	}
 	
 	
-	
 	public ReviewEntity selectReviewById(int reviewId) {
         return reviewMapper.selectById(reviewId);
     }

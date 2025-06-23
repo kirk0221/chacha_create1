@@ -5,9 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.chacha.create.common.entity.member.MemberEntity;
@@ -17,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @Slf4j
-@RequestMapping("/storeUrl/mypage")
+@RequestMapping("/{storeUrl}/mypage")
 public class MyPageRestController {
 
 	@Autowired
@@ -26,14 +24,14 @@ public class MyPageRestController {
 	@PostMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
 	public int mypageupdate(HttpSession session) {
 		MemberEntity member= (MemberEntity) session.getAttribute("loginMember");
-			int result = mypageService.memberupdate(member);
+		int result = mypageService.memberupdate(member);
 		return result;
 	}
 	
 	@PostMapping(value = "/delete", produces = MediaType.APPLICATION_JSON_VALUE)
 	public int mypagedelete(HttpSession session) {
 		MemberEntity member= (MemberEntity) session.getAttribute("loginMember");
-			int result = mypageService.memberdelete(member.getMemberId());
+		int result = mypageService.memberdelete(member.getMemberId());
 		return result;
 	}
 

@@ -64,4 +64,6 @@ public interface ReviewMapper {
     int delete(int reviewId);
 
     List<Map<String, Object>> selectByReview(String storeUrl);
+
+	List<ReviewEntity> selectByMemberId(int memberId);
 }

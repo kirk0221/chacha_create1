@@ -1,4 +1,4 @@
-package com.chacha.create.controller.buyer;
+package com.chacha.create.controller.buyer.storeinfo;
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.chacha.create.common.entity.member.SellerInfoDTO;
 import com.chacha.create.common.entity.store.StoreEntity;
-import com.chacha.create.service.StoreinfoService;
+import com.chacha.create.service.buyer.storeinfo.StoreInfoService;
 
 @RestController // @Controller+@ResponseBody
 @RequestMapping("/{storeUrl}")
-public class StoreinfoController {
+public class StoreInfoController {
 
 	@Autowired
-	StoreinfoService storeinfo;
+	StoreInfoService storeinfo;
 
 	@GetMapping("/info")
 	Map<String, List<?>> storeinfo(@PathVariable String storeUrl) {
