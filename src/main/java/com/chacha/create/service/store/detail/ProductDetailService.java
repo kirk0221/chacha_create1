@@ -36,14 +36,14 @@ public class ProductDetailService {
 	    int minSeq = Integer.MAX_VALUE;
 
 	    for (PImgEntity img : pImgList) {
-	        if (ProductImageTypeEnum.THUMBNAIL.equals(img.getPImgEnum())) {
-	            thumbnailUrls.add(img.getPImgUrl());
-	            if (img.getPImgSeq() != null && img.getPImgSeq() < minSeq) {
-	                minSeq = img.getPImgSeq();
-	                mainThumbnailUrl = img.getPImgUrl();
+	        if (ProductImageTypeEnum.THUMBNAIL.equals(img.getPimgEnum())) {
+	            thumbnailUrls.add(img.getPimgUrl());
+	            if (img.getPimgSeq() != null && img.getPimgSeq() < minSeq) {
+	                minSeq = img.getPimgSeq();
+	                mainThumbnailUrl = img.getPimgUrl();
 	            }
-	        } else if (ProductImageTypeEnum.DESCRIPTION.equals(img.getPImgEnum())) {
-	            descriptionUrls.add(img.getPImgUrl());
+	        } else if (ProductImageTypeEnum.DESCRIPTION.equals(img.getPimgEnum())) {
+	            descriptionUrls.add(img.getPimgUrl());
 	        }
 	    }
 	    

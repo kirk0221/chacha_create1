@@ -3,6 +3,7 @@ package com.chacha.create.service.message;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.chacha.create.common.entity.chat.ChatroomEntity;
 import com.chacha.create.common.entity.chat.MessageDTO;
@@ -10,6 +11,7 @@ import com.chacha.create.common.entity.member.MemberEntity;
 import com.chacha.create.common.mapper.chat.ChatroomMapper;
 import com.chacha.create.common.mapper.chat.MessageMapper;
 
+@Service
 public class MessageService {
 
 	private MessageMapper messageMapper;
