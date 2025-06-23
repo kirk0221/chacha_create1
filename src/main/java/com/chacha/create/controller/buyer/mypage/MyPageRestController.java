@@ -1,5 +1,7 @@
 package com.chacha.create.controller.buyer.mypage;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,14 +24,16 @@ public class MyPageRestController {
 	private MypageService mypageService;
 
 	@PostMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
-	public int mypageupdate(@RequestBody MemberEntity memberEntity) {
-			int result = mypageService.memberupdate(memberEntity);
+	public int mypageupdate(HttpSession session) {
+		MemberEntity member= (MemberEntity) session.getAttribute("loginMember");
+			int result = mypageService.memberupdate(member);
 		return result;
 	}
 	
 	@PostMapping(value = "/delete", produces = MediaType.APPLICATION_JSON_VALUE)
-	public int mypagedelete(@RequestParam int memberId) {
-			int result = mypageService.memberdelete(memberId);
+	public int mypagedelete(HttpSession session) {
+		MemberEntity member= (MemberEntity) session.getAttribute("loginMember");
+			int result = mypageService.memberdelete(member.getMemberId());
 		return result;
 	}
 
