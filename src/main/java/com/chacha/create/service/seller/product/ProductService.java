@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.chacha.create.common.dto.ProductlistDTO;
+import com.chacha.create.common.dto.product.ProductlistDTO;
 import com.chacha.create.common.entity.product.PImgEntity;
 import com.chacha.create.common.entity.product.ProductEntity;
 import com.chacha.create.common.mapper.product.PImgMapper;

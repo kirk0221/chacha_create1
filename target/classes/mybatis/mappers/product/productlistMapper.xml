@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.chacha.create.common.mapper.product.ProductlistMapper">
 
 	<select id="selectAllByStoreUrl"
-	resultType="com.chacha.create.common.dto.ProductlistDTO">
+	resultType="com.chacha.create.common.dto.product.ProductlistDTO">
 	
 	SELECT 
     p_img.p_img_url, 
@@ -39,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    AND s.store_url = #{storeUrl}
 	</select>
 	
-	<update id="updateFlagship" parameterType="com.chacha.create.common.dto.ProductlistDTO">
+	<update id="updateFlagship" parameterType="com.chacha.create.common.dto.product.ProductlistDTO">
     UPDATE product
     SET flagship_check = #{flagshipCheck}
     WHERE product_id = #{productId}
