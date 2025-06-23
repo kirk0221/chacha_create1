@@ -1,4 +1,4 @@
-package com.chacha.create.controller.store.detail;
+package com.chacha.create.controller.seller.detail;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
