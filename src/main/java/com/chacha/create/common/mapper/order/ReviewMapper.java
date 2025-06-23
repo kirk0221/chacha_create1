@@ -61,4 +61,8 @@ public interface ReviewMapper {
      * @return 삭제된 행 수
      */
     int delete(int reviewId);
+    
+    List<ReviewEntity> selectByMemberId(int memberId);
+    
+    
 }

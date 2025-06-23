@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.chacha.create.common.entity.member.MemberEntity;
-import com.chacha.create.service.auth.mypage.MypageService;
+import com.chacha.create.service.store.mypage.MypageService;
 
 import lombok.extern.slf4j.Slf4j;
 
