@@ -1,4 +1,4 @@
-package com.chacha.create.service.store.detail;
+package com.chacha.create.service.seller.detail;
 
 import java.util.ArrayList;
 import java.util.List;

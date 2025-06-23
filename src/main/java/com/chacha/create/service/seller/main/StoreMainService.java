@@ -1,4 +1,4 @@
-package com.chacha.create.service.storemain;
+package com.chacha.create.service.seller.main;
 
 import java.util.List;
 

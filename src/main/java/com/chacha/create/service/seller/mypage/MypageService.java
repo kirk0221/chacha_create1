@@ -1,4 +1,4 @@
-package com.chacha.create.service.store.mypage;
+package com.chacha.create.service.seller.mypage;
 
 
 import org.springframework.beans.factory.annotation.Autowired;

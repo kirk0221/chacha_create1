@@ -1,4 +1,4 @@
-package com.chacha.create.service.mainhome.mypage;
+package com.chacha.create.service.buyer.mypage;
 
 import java.util.List;
 

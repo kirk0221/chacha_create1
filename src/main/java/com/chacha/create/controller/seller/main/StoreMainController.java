@@ -1,4 +1,4 @@
-package com.chacha.create.controller.storemain;
+package com.chacha.create.controller.seller.main;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.chacha.create.common.entity.product.ProductEntity;
-import com.chacha.create.service.storemain.StoreMainService;
+import com.chacha.create.service.seller.main.StoreMainService;
 
 import lombok.extern.slf4j.Slf4j;
 
