@@ -1,4 +1,4 @@
-package com.chacha.create.common.entity.chat;
+package com.chacha.create.common.dto.chat;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

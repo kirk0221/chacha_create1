@@ -1,4 +1,4 @@
-package com.chacha.create.controller.store.buyermain;
+package com.chacha.create.controller.buyer.main;
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.chacha.create.common.dto.product.StoreProductDTO;
-import com.chacha.create.service.store.buyermain.StoreMainService;
+import com.chacha.create.service.buyer.main.StoreMainService;
 
 import lombok.extern.slf4j.Slf4j;
 

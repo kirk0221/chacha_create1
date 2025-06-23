@@ -1,4 +1,4 @@
-package com.chacha.create.service.store.buyermain;
+package com.chacha.create.service.buyer.main;
 
 import java.util.List;
 
@@ -19,9 +19,6 @@ public class StoreMainService{
 	private StoreProductMapper storeProductMapper;
 	@Autowired
 	private StoreIdCheckMapper idCheckMapper;
-	
-	
-	
 	
 	// 해당 스토어URL의 스토어ID체크
 	public int selectByStoreIdCheck(String storeUrl) {
