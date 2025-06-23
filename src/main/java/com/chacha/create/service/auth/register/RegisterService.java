@@ -24,7 +24,13 @@ public class RegisterService {
     }
     
     public int memberinsert(MemberEntity memberEntity) {
-    	int result = memberMapper.insert(memberEntity);
+    	int result = 0;
+    	try{
+    		result = memberMapper.insert(memberEntity);
+    	}catch(Exception e) {
+    		log.info("아이디가 중복됨 : " + e.getMessage());
+    		return result;
+    	}
     	return result;
     }
     
@@ -32,4 +38,6 @@ public class RegisterService {
     	int result = sellerMapper.insert(sellerEntity);
     	return result;
     }
+    
+    
 }

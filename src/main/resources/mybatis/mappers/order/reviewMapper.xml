@@ -22,6 +22,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectByOrderDetailId" resultMap="reviewResultMap">
 		SELECT * FROM review WHERE order_detail_id = #{orderDetailId}
 	</select>
+	
+	<select id="selectByMemberId" resultMap="reviewResultMap">
+		SELECT
+			r.review_id,
+			r.order_detail_id,
+			r.review_date,
+			r.review_text
+		FROM
+			review r
+		JOIN order_detail od ON r.order_detail_id = od.order_detail_id
+		JOIN order_info o ON od.order_id = o.order_id
+		WHERE o.member_id = #{memberId}
+		ORDER BY r.review_date DESC
+	</select>
 
 	<insert id="insert" parameterType="reviewEntity">
 		INSERT INTO review (review_id, order_detail_id, review_date, review_text)

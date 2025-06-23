@@ -25,7 +25,7 @@ public interface UCategoryMapper {
      * @param uCategoryId 조회할 u_category의 ID
      * @return UCategoryEntity 객체 (없으면 null)
      */
-    UCategoryEntity selectByUCategoryId(int uCategoryId);
+    UCategoryEntity selectByUCategoryId(int ucategoryId);
 
     /**
      * type_category_id로 u_category 리스트를 조회합니다.
@@ -33,7 +33,7 @@ public interface UCategoryMapper {
      * @param typeCategoryId 조회할 상위 타입 카테고리 ID
      * @return 해당 typeCategoryId에 속하는 UCategoryEntity 리스트
      */
-    List<UCategoryEntity> selectByTypeCategoryId(int typeCategoryId);
+    List<UCategoryEntity> selectByTypeCategoryId(int typecategoryId);
 
     /**
      * 새로운 u_category 데이터를 삽입합니다.
@@ -58,5 +58,5 @@ public interface UCategoryMapper {
      * @param uCategoryId 삭제할 u_category의 ID
      * @return 삭제 성공 시 영향 받은 행 수
      */
-    int delete(int uCategoryId);
+    int delete(int ucategoryId);
 }
