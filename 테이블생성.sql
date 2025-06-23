@@ -1,10 +1,10 @@
 -- (주의)현재 사용자의 테이블을 모두 지우는 명령어
---BEGIN
---  FOR t IN (SELECT table_name FROM user_tables) LOOP
---    EXECUTE IMMEDIATE 'DROP TABLE "' || t.table_name || '" CASCADE CONSTRAINTS';
---  END LOOP;
---END;
---/
+BEGIN
+  FOR t IN (SELECT table_name FROM user_tables) LOOP
+    EXECUTE IMMEDIATE 'DROP TABLE "' || t.table_name || '" CASCADE CONSTRAINTS';
+  END LOOP;
+END;
+/
 
 -- 1. 회원
 CREATE TABLE member (
@@ -79,6 +79,7 @@ CREATE TABLE product (
     sale_cnt        NUMBER DEFAULT 0,
     view_cnt         NUMBER DEFAULT 0,
     flagship_check NUMBER(1) DEFAULT 0 NOT NULL CHECK ( flagship_check IN ( 0, 1 ) ),
+    delete_check NUMBER(1) DEFAULT 0 NOT NULL CHECK ( delete_check IN ( 0, 1 ) ),
     CONSTRAINT fk_prod_store FOREIGN KEY ( store_id )
         REFERENCES store ( store_id ),
     CONSTRAINT fk_prod_type_cat FOREIGN KEY ( type_category_id )
@@ -86,13 +87,6 @@ CREATE TABLE product (
     CONSTRAINT fk_prod_d_cat FOREIGN KEY ( d_category_id )
         REFERENCES d_category ( d_category_id )
 );
-
--- 7.1. flagship_check 추가
---ALTER TABLE product
---ADD (
---    flagship_check NUMBER(1) DEFAULT 0 NOT NULL
---        CHECK (flagship_check IN (0, 1))
---);
 
 -- 8. 상품이미지
 CREATE TABLE p_img (
@@ -204,9 +198,6 @@ CREATE TABLE question (
     CONSTRAINT fk_q_member FOREIGN KEY ( member_id )
         REFERENCES member ( member_id )
 );
-
-
-
 
 
 -- 17. 채팅방
