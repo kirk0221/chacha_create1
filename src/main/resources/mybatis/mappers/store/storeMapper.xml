@@ -9,6 +9,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="sellerId" column="seller_id" />
 		<result property="storeName" column="store_name" />
 		<result property="storeDetail" column="store_detail" />
+		<result property="storeUrl" column="store_url" />
+		<result property="saleCnt" column="sale_cnt" />
+		<result property="viewCnt" column="view_cnt" />
 	</resultMap>
 
 	<select id="selectAll" resultMap="storeResultMap">
@@ -24,13 +27,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<insert id="insert" parameterType="storeEntity">
-		INSERT INTO store (store_id, seller_id, store_name, store_detail)
-		VALUES (seq_store_id.NEXTVAL, #{sellerId}, #{storeName}, #{storeDetail})
+		INSERT INTO store (store_id, seller_id, logo_img, store_name, store_detail, store_url)
+		VALUES (seq_store_id.NEXTVAL, #{sellerId}, #{logoImg}, #{storeName}, #{storeDetail}, #{storeUrl})
 	</insert>
 
 	<update id="update" parameterType="storeEntity">
 		UPDATE store
 		SET seller_id = #{sellerId},
+		logo_img = {logoImg},
 		store_name = #{storeName},
 		store_detail = #{storeDetail}
 		WHERE store_id = #{storeId}
