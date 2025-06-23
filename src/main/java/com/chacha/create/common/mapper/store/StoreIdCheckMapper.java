@@ -17,6 +17,5 @@ public interface StoreIdCheckMapper {
      * @param storeUrl 스토어 URL
      * @return 스토어 엔티티 {@code StoreID}
      */
-    int selectBystoreUrl(String storeUrl);
-
+    int selectByStoreUrl(String storeUrl);
 }
