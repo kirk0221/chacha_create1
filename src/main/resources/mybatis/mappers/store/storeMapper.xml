@@ -25,6 +25,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		store_id = #{storeId}
 	</select>
 
+	<select id="selectByStoreUrl" resultMap="storeResultMap">
+		SELECT * FROM store WHERE
+		store_url = #{storeUrl}
+	</select>
+
 	<select id="selectBySellerId" resultMap="storeResultMap">
 		SELECT * FROM store
 		WHERE seller_id = #{sellerId}
@@ -38,9 +43,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="update" parameterType="storeEntity">
 		UPDATE store
 		SET seller_id = #{sellerId},
-		logo_img = {logoImg},
+		logo_img = #{logoImg},
 		store_name = #{storeName},
-		store_detail = #{storeDetail}
+		store_detail = #{storeDetail},
+		store_url = #{storeUrl},
+		sale_cnt = #{saleCnt},
+		view_cnt = #{viewCnt}
 		WHERE store_id = #{storeId}
 	</update>
 
