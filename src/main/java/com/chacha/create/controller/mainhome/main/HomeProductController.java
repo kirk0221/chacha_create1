@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.chacha.create.common.dto.product.StoreProductDTO;
-import com.chacha.create.common.entity.product.StoreProductEntity;
 import com.chacha.create.service.mainhome.product.MainHomeProductService;
 
 import lombok.extern.slf4j.Slf4j;
