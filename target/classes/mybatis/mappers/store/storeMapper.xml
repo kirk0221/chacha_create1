@@ -18,6 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="selectAll" resultMap="storeResultMap">
 		SELECT * FROM store
+		WHERE store_url IS NOT NULL
 	</select>
 
 	<select id="selectByStoreId" resultMap="storeResultMap">
