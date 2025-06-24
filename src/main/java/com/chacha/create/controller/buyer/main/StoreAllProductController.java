@@ -45,6 +45,7 @@ public class StoreAllProductController {
 				    Map<String, Object> paramMap = new HashMap<>();
 				    params.put("keyword", keyword);
 
+
 				    List<StoreProductDTO> result = storeMainService.selectByProductName(paramMap);
 				    log.info("사용자가 상품명 검색 조회 : " + params);
 				    return ResponseEntity.ok(result);
