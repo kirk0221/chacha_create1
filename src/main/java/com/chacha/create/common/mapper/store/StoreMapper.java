@@ -1,7 +1,6 @@
 package com.chacha.create.common.mapper.store;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -37,6 +36,14 @@ public interface StoreMapper {
      * @return 스토어 엔티티 {@code StoreEntity}
      */
     StoreEntity selectByStoreURL(String storeUrl);
+
+    /**
+     * 스토어 URL로 특정 스토어를 조회합니다.
+     *
+     * @param storeUrl 스토어 URL
+     * @return 스토어 엔티티 {@code StoreEntity}
+     */
+    StoreEntity selectByStoreUrl(String storeUrl);
 
     /**
      * 판매자 ID로 해당 판매자의 스토어를 조회합니다.

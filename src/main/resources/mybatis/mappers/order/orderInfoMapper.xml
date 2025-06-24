@@ -88,5 +88,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		GROUP BY TO_CHAR(order_info.order_date, 'YYYY-MM-DD')
 		ORDER BY saleDate
 	</select>
+	
+	<select id="selectForOrderStatus" resultType="com.chacha.create.common.enums.order.OrderStatusEnum" parameterType="String">
+		select DISTINCT oi.order_status
+		from store s
+		left outer join product p on(s.store_id = p.store_id)
+		join order_detail od on(p.product_id = od.product_id)
+		left outer join order_info oi on(od.order_id = oi.order_id)
+		where s.store_url = #{StoreUrl}
+	</select>
 
 </mapper>
