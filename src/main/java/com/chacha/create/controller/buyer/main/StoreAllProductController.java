@@ -1,4 +1,4 @@
-package com.chacha.create.controller.storemain;
+package com.chacha.create.controller.buyer.main;
 
 import java.util.HashMap;
 import java.util.List;
@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.chacha.create.common.entity.product.StoreProductEntity;
-import com.chacha.create.service.storemain.StoreMainService;
+import com.chacha.create.common.dto.product.StoreProductDTO;
+import com.chacha.create.service.buyer.main.StoreMainService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,7 +28,7 @@ public class StoreAllProductController {
 	
 	// 스토어 전체상품 조회(조건조회)
 		@GetMapping("/productlist")
-		public ResponseEntity<List<StoreProductEntity>> getProductList(
+		public ResponseEntity<List<StoreProductDTO>> getProductList(
 				@RequestParam int storeId,
 				@RequestParam(required = false) List<String> type,
 		        @RequestParam(required = false) List<String> d,
@@ -38,15 +38,18 @@ public class StoreAllProductController {
 				Model model) {
 			
 				Map<String, Object> params = new HashMap<>();
-				params.put("storeId", storeId);
+				params.put("storeId", storeId);		// 해당 스토어ID의 스토어 상품 조회
 				
+				// 사용자가 상품명 검색시 해당 로직 수행
 				if (keyword != null && !keyword.isEmpty()) {
 				    Map<String, Object> paramMap = new HashMap<>();
 				    params.put("keyword", keyword);
 
-				    List<StoreProductEntity> result = storeMainService.selectByProductName(paramMap);
+				    List<StoreProductDTO> result = storeMainService.selectByProductName(paramMap);
+				    log.info("사용자가 상품명 검색 조회 : " + params);
 				    return ResponseEntity.ok(result);
 				} else {
+				// 사용자가 카테고리별 조회시 수행
 			    if (type != null) {
 			    	params.put("type", type.stream().map(Integer::parseInt).collect(Collectors.toList()));
 			    }
@@ -60,7 +63,8 @@ public class StoreAllProductController {
 			    params.put("categoryMap", params);
 			    params.put("sort", sort);
 			    
-			    List<StoreProductEntity> result = storeMainService.selectForProductList(params);
+			    List<StoreProductDTO> result = storeMainService.selectForProductList(params);
+			    log.info("사용자가 카테고리별 조회 : " + params);
 			    return ResponseEntity.ok(result);
 				}
 		} 

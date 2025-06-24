@@ -38,15 +38,15 @@ public class StoreMainController {
 			storeId = Integer.parseInt(storeIdParam);
 		}else {	// 메인을 거치지 않고 바로 url로 스토어 접근 시 
 			// 스토어URL로 스토어ID 체크
-			storeId = storeMainService.selectByStoreIdCheck(storeUrl);
+			storeId = storeMainService.storeIdCheck(storeUrl);
 		}
 		
 		log.info("조회 대상 스토어 ID: {}", storeId);
 		
 		// 해당 스토어의 인기 상품 조회
-		List<StoreProductDTO> bestProduct = storeMainService.selectFofBestProduct(storeId);
+		List<StoreProductDTO> bestProduct = storeMainService.selectBestProduct(storeId);
 		// 해당 스토어의 대표 상품 조회
-		List<StoreProductDTO> mainProduect = storeMainService.selectForMainProduct(storeId);
+		List<StoreProductDTO> mainProduect = storeMainService.storeMainProduct(storeId);
 		
 		 Map<String, List<StoreProductDTO>> spData = new HashMap<>();
 			 spData.put("bestProduct", bestProduct);
