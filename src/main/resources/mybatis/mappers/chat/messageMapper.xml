@@ -17,22 +17,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="selectByMemberId"
-		resultMap="chatroomResultMap" parameterType="int">
+		resultMap="messageResultMap" parameterType="int">
 		SELECT room.chatroom_id, room.member_id, room.store_id, chat.chatting_text FROM chatroom room LEFT JOIN chatting chat ON(room.chatroom_id = chat.chatroom_id)WHERE room.member_id = #{memberId}
 	</select>
 
 	<select id="selectForMemberWithStoreAllMessage"
-		resultMap="chatroomResultMap" parameterType="messageDTO">
+		resultMap="messageResultMap" parameterType="messageDTO">
 		SELECT room.chatroom_id, room.member_id, room.store_id, chat.chatting_text FROM chatroom room LEFT JOIN chatting chat ON(room.chatroom_id = chat.chatroom_id)WHERE room.member_id = #{memberId} and room.store_id = #{storeId}
 	</select>
 
 	<select id="selectForMemberWithStoreURl"
-		resultMap="chatroomResultMap" parameterType="messageDTO">
+		resultMap="messageResultMap" parameterType="messageDTO">
 		SELECT room.chatroom_id, room.member_id, room.store_id, chat.chatting_text FROM chatroom room LEFT JOIN chatting chat ON(room.chatroom_id = chat.chatroom_id)WHERE room.member_id = #{memberId} and room.store_id = (select store_id from store where store_url = #{storeUrl})
 	</select>
 	
 	<select id="selectForGetChatRoomIdByStoreURl"
-		resultMap="chatroomResultMap" parameterType="messageDTO">
+		resultMap="messageResultMap" parameterType="messageDTO">
 		SELECT room.chatroom_id, room.member_id, room.store_id, chat.chatting_text FROM chatroom room WHERE room.member_id = #{memberId} and room.store_id = (select store_id from store where store_url = #{storeUrl})
 	</select>
 

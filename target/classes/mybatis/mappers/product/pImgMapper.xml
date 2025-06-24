@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <select id="selectByPImgId" parameterType="int" resultMap="pImgResultMap">
-        SELECT * FROM p_img WHERE p_img_id = #{pImgid}
+        SELECT * FROM p_img WHERE p_img_id = #{pimgId}
     </select>
 
     <select id="selectByProductId" parameterType="int" resultMap="pImgResultMap">
@@ -39,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
 
     <delete id="delete" parameterType="int">
-        DELETE FROM p_img WHERE p_img_id = #{pImgId}
+        DELETE FROM p_img WHERE p_img_id = #{pimgId}
     </delete>
 
 </mapper>

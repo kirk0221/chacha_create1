@@ -33,16 +33,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<insert id="insert" parameterType="productEntity">
-		INSERT INTO product (
-		product_id, store_id, type_category_id, d_category_id, product_name,
-		price, product_detail, stock, product_date, last_modified_date,
-		sale_cnt, view_cnt, flagship_check
-		) VALUES (
-		seq_product_id.NEXTVAL, #{storeId}, #{typeCategoryId}, #{dCategoryId}, #{productName},
-		#{price}, #{productDetail}, #{stock}, #{productDate},
-		sysdate,
-		#{saleCnt}, #{viewCnt}, #{flagshipCheck}
-		)
+	    <selectKey keyProperty="productId" resultType="int" order="BEFORE">
+	        SELECT seq_product_id.NEXTVAL FROM dual
+	    </selectKey>
+	    INSERT INTO product (
+	        product_id, store_id, type_category_id, d_category_id, product_name,
+	        price, product_detail, stock, product_date, last_modified_date,
+	        sale_cnt, view_cnt, flagship_check, delete_check
+	    ) VALUES (
+	        #{productId}, #{storeId}, #{typeCategoryId}, #{dCategoryId}, #{productName},
+	        #{price}, #{productDetail}, #{stock}, #{productDate},
+	        sysdate,
+	        #{saleCnt}, #{viewCnt}, 0, 0
+	    )
 	</insert>
 
 	<update id="update" parameterType="productEntity">

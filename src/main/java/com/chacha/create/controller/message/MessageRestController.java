@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.chacha.create.common.dto.chat.MessageDTO;
 import com.chacha.create.common.entity.chat.ChatroomEntity;
-import com.chacha.create.common.entity.chat.MessageDTO;
 import com.chacha.create.common.entity.member.MemberEntity;
 import com.chacha.create.service.message.MessageService;
 

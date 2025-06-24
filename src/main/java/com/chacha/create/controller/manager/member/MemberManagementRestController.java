@@ -15,12 +15,12 @@ public class MemberManagementRestController {
 	@Autowired
 	MemberManagementService memberManagementService;
 	
-	@GetMapping("manager/userlist")
+	@GetMapping("/manager/userlist")
 	public List<MemberEntity> userlist(){
 		return memberManagementService.selectAll();
 	}
 	
-	@GetMapping("manager/userinfo")
+	@GetMapping("/manager/userinfo")
 	public MemberEntity userinfo(int memberId) {
 		return memberManagementService.selectById(memberId);
 	}

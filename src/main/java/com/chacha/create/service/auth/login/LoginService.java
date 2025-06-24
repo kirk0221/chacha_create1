@@ -27,7 +27,7 @@ public class LoginService {
 		if(memberEntity == null) {
 			log.info("아이디가 틀림 : " + memberEmail);
 			return null;
-		}else if(memberEmail.equals(memberEntity.getMemberPwd())) {
+		}else if(memberPwd.equals(memberEntity.getMemberPwd())) {
 			log.info("로그인 성공");
 			return memberEntity;
 		}

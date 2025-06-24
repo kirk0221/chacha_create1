@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.chacha.create.common.entity.chat.MessageDTO;
+import com.chacha.create.common.dto.chat.MessageDTO;
 
 @Mapper
 public interface MessageMapper {
