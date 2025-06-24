@@ -20,7 +20,7 @@ public class ProductUpdateService {
     }
     
     public boolean updateProductDetail(String storeUrl, ProductUpdateDTO dto) {
-        int updatedProduct = productUpdateMapper.updateProduct(dto, storeUrl);
+        int updatedProduct = productUpdateMapper.updateProduct(dto);
         int img1 = productUpdateMapper.updateProductImage1(dto);
         int img2 = productUpdateMapper.updateProductImage2(dto);
         int img3 = productUpdateMapper.updateProductImage3(dto);
