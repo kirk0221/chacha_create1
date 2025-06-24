@@ -1,4 +1,4 @@
-package com.chacha.create.service.seller.detail;
+package com.chacha.create.service.buyer.detail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.chacha.create.common.dto.product.ProductDetailDTO;
-import com.chacha.create.common.dto.product.ProductDetailViewDTO;
 import com.chacha.create.common.entity.product.PImgEntity;
+import com.chacha.create.common.entity.product.ProductDetailEntity;
 import com.chacha.create.common.enums.image.ProductImageTypeEnum;
 import com.chacha.create.common.mapper.product.PImgMapper;
 import com.chacha.create.common.mapper.product.ProductDetailMapper;
@@ -26,8 +26,8 @@ public class ProductDetailService {
 	private ProductDetailMapper productDetailMapper;
 	
 	@Transactional
-	public ProductDetailViewDTO selectByProductId(int productId) {
-	    ProductDetailDTO productDetail = productDetailMapper.selectByProductId(productId);
+	public ProductDetailDTO getProductDetailWithImages(int productId) {
+	    ProductDetailEntity productDetail = productDetailMapper.selectByProductId(productId);
 	    List<PImgEntity> pImgList = pImgMapper.selectByProductId(productId);
 
 	    List<String> thumbnailUrls = new ArrayList<>();
@@ -47,13 +47,13 @@ public class ProductDetailService {
 	        }
 	    }
 	    
-	    ProductDetailViewDTO detailDTO = ProductDetailViewDTO.builder()
+	    ProductDetailDTO productDetailDTO = ProductDetailDTO.builder()
 	    		.productDetail(productDetail)
 	    	    .thumbnailImageUrls(thumbnailUrls)
 	    	    .descriptionImageUrls(descriptionUrls)
 	    	    .mainThumbnailUrl(mainThumbnailUrl)
 	    	    .build();
 
-	    return detailDTO;
+	    return productDetailDTO;
 	}
 }

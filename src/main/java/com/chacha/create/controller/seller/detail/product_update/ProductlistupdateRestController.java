@@ -1,4 +1,4 @@
-package com.chacha.create.controller.seller.detai.product_update;
+package com.chacha.create.controller.seller.detail.product_update;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
