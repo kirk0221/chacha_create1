@@ -28,7 +28,7 @@ public class SellerMainController {
 	    	Map<String, List<?>> result = new HashMap<>();
 	    	
 	    	List<Map<String, Object>> statusList = sell.selectByStatus(storeUrl);
-			List<Map<String, Object>> reviewList = sell.selectByReview(storeUrl);
+			List<Map<String, Object>> reviewList = sell.selectByStoreUrl(storeUrl);
 			List<OrderSumDTO> orderSumList = sell.selectByDayOrderSum(storeUrl);
 			
 			
