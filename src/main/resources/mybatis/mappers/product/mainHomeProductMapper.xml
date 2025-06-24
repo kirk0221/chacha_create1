@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chacha.create.common.mapper.product.MainHomeProductMapper">
+
+
+	<resultMap id="mainHomeProductResultMap" type="storeProductDTO">
+		<id property="productId" column="product_id" />
+		<result property="storeId" column="store_id" />
+		<result property="typeCategoryId" column="type_category_id" />
+		<result property="dCategoryId" column="d_category_id" />
+		<result property="productName" column="product_name" />
+		<result property="price" column="price" />
+		<result property="productDetail" column="product_detail" />
+		<result property="stock" column="stock" />
+		<result property="productDate" column="product_date" />
+		<result property="lastModifiedDate" column="last_modified_date" />
+		<result property="saleCnt" column="sale_cnt" />
+		<result property="viewCnt" column="view_cnt" />
+		
+		<result property="typeCategoryName" column="type_category_name"/>
+		<result property="dCategoryName" column="d_category_name"/>
+		<result property="uCategoryName" column="u_category_name"/>
+		<result property="pImgUrl" column="p_img_url"/>
+	</resultMap>
+	
+	<!-- 추가 쿼리문 -->
+	<!-- 사용자가 상품이름으로 검색했을때  -->
+	<select id="selectByProductName" resultMap="mainHomeProductResultMap" parameterType="map">
+	SELECT p.*, ca.type_category_name, dc.d_category_name, uc.u_category_name, img.p_img_url
+		FROM product p JOIN (
+								SELECT sto.store_id
+								FROM store sto
+								JOIN seller sel ON sto.seller_id = sel.seller_id
+								WHERE sel.personal_check = 0
+								) sid ON p.store_id = sid.store_id
+		LEFT JOIN type_category ca ON p.type_category_id = ca.type_category_id
+		LEFT JOIN d_category dc ON p.d_category_id = dc.d_category_id
+		LEFT JOIN u_category uc ON dc.u_category_id = uc.u_category_id
+		LEFT JOIN (
+					SELECT product_id, p_img_url
+					FROM (
+					SELECT product_id, p_img_url,
+					ROW_NUMBER() OVER (PARTITION BY product_id ORDER BY p_img_seq ASC) AS rn
+					FROM p_img
+					) sub
+					WHERE rn = 1
+		) img ON p.product_id = img.product_id
+	WHERE p.delete_check = 0
+	AND p.product_name LIKE '%' || #{keyword} || '%'
+	</select>
+	
+	<!-- 메인홈의 전체 상품 조회 -->
+	<select id="selectForProductList" resultMap="mainHomeProductResultMap" parameterType="map">
+		SELECT p.*, ca.type_category_name, dc.d_category_name, uc.u_category_name, img.p_img_url
+		FROM product p JOIN (
+								SELECT sto.store_id
+								FROM store sto
+								JOIN seller sel ON sto.seller_id = sel.seller_id
+								WHERE sel.personal_check = 0
+								) sid ON p.store_id = sid.store_id
+		LEFT JOIN type_category ca ON p.type_category_id = ca.type_category_id
+		LEFT JOIN d_category dc ON p.d_category_id = dc.d_category_id
+		LEFT JOIN u_category uc ON dc.u_category_id = uc.u_category_id
+		LEFT JOIN (
+					SELECT product_id, p_img_url
+					FROM (
+					SELECT product_id, p_img_url,
+					ROW_NUMBER() OVER (PARTITION BY product_id ORDER BY p_img_seq ASC) AS rn
+					FROM p_img
+					) sub
+					WHERE rn = 1
+		) img ON p.product_id = img.product_id
+		WHERE p.delete_check = 0
+
+		<!-- 카테고리 필터 -->
+		<if test="categoryMap != null and categoryMap.size() > 0">
+			AND (
+			<if test="categoryMap.type != null">
+				p.type_category_id IN
+				<foreach collection="categoryMap.type" item="id" open="("
+					separator="," close=")">
+					#{id}
+				</foreach>
+			</if>
+			<if test="categoryMap.d != null">
+				<if test="categoryMap.type != null">OR</if>
+				p.d_category_id IN
+				<foreach collection="categoryMap.d" item="id" open="("
+					separator="," close=")">
+					#{id}
+				</foreach>
+			</if>
+			<if test="categoryMap.u != null">
+				<if test="categoryMap.type != null or categoryMap.d != null">OR</if>
+				uc.u_category_id IS NOT NULL
+				AND uc.u_category_id IN
+				<foreach collection="categoryMap.u" item="id" open="("
+					separator="," close=")">
+					#{id}
+				</foreach>
+			</if>
+			)
+		</if>
+
+
+
+		<!-- 정렬 조건 -->
+		<choose>
+			<when test="sort == 'latest'">				<!-- 최신 -->
+				ORDER BY p.product_date DESC
+			</when>
+			<when test="sort == 'popular'">			<!-- 구매많은순 -->
+				ORDER BY p.sale_cnt DESC
+			</when>
+			<when test="sort == 'views'">				<!-- 조회순 -->
+				ORDER BY p.view_cnt DESC
+			</when>
+			<when test="sort == 'dprice'">				<!-- 낮은가격순 -->
+				ORDER BY p.price ASC
+			</when>
+			<when test="sort == 'uprice'">				<!-- 높은가격순 -->
+				ORDER BY p.price DESC
+			</when>
+			<otherwise>
+				ORDER BY p.product_date DESC
+			</otherwise>
+		</choose>
+	</select>
+	
+	</mapper>
+	
