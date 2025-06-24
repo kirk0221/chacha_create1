@@ -1,4 +1,4 @@
-package com.chacha.create.controller.storemain;
+package com.chacha.create.controller.buyer.main;
 
 import java.util.HashMap;
 import java.util.List;
