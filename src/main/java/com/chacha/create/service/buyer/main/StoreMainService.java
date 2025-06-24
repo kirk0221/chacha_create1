@@ -1,6 +1,7 @@
 package com.chacha.create.service.buyer.main;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,7 +37,12 @@ public class StoreMainService{
 	// 스토어의 대표상품 조회
 	public List<StoreProductDTO> selectForMainProduct(int storeId) {
 		log.info("스토어 ID로 대표 상품 조회 요청: {}", storeId);
-		return storeProductMapper.selectForMainProduct(storeId);
+		return storeProductMapper.selectForStoreMainProduct(storeId);
+	}
+
+	public List<StoreProductDTO> selectForProductList(Map<String, Object> params) {
+		log.info("스토어 ID로 상품 리스트 조회 요청: {}", params);
+		return storeProductMapper.selectForProductList(params);
 	}
 	
 	

@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.chacha.create.common.entity.product.StoreProductEntity;
+import com.chacha.create.common.dto.product.StoreProductDTO;
 
 /**
  * 스토어ID로 스토어의 인기상품을 조회
@@ -13,8 +13,8 @@ import com.chacha.create.common.entity.product.StoreProductEntity;
 @Mapper
 public interface StoreProductMapper {
 	
-	List<StoreProductEntity> selectBestProduct(int storeId);
-	List<StoreProductEntity> storemainProduct(int storeId);
-	List<StoreProductEntity> selectForProductList(Map<String, Object> params);
-	List<StoreProductEntity> selectByProductName(Map<String, Object> params);
+	List<StoreProductDTO> selectForBestProduct(int storeId);
+	List<StoreProductDTO> selectForStoreMainProduct(int storeId);
+	List<StoreProductDTO> selectForProductList(Map<String, Object> params);
+	List<StoreProductDTO> selectByProductName(Map<String, Object> params);
 }

@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.chacha.create.common.entity.product.StoreProductEntity;
-import com.chacha.create.service.storemain.StoreMainService;
+import com.chacha.create.common.dto.product.StoreProductDTO;
+import com.chacha.create.service.buyer.main.StoreMainService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,7 +28,7 @@ public class StoreAllProductController {
 	
 	// 스토어 전체상품 조회(조건조회)
 		@GetMapping("/productlist")
-		public ResponseEntity<List<StoreProductEntity>> getProductList(
+		public ResponseEntity<List<StoreProductDTO>> getProductList(
 				@RequestParam int storeId,
 				@RequestParam(required = false) List<String> type,
 		        @RequestParam(required = false) List<String> d,
@@ -44,7 +44,7 @@ public class StoreAllProductController {
 				    Map<String, Object> paramMap = new HashMap<>();
 				    params.put("keyword", keyword);
 
-				    List<StoreProductEntity> result = storeMainService.selectByProductName(paramMap);
+				    List<StoreProductDTO> result = storeMainService.selectForProductList(paramMap);
 				    return ResponseEntity.ok(result);
 				} else {
 			    if (type != null) {
@@ -60,7 +60,7 @@ public class StoreAllProductController {
 			    params.put("categoryMap", params);
 			    params.put("sort", sort);
 			    
-			    List<StoreProductEntity> result = storeMainService.selectForProductList(params);
+			    List<StoreProductDTO> result = storeMainService.selectForProductList(params);
 			    return ResponseEntity.ok(result);
 				}
 		} 

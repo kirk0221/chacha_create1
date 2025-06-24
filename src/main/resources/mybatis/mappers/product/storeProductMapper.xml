@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 추가 쿼리문 -->
 	<!-- 사용자가 상품이름으로 검색했을때  -->
-	<select id="selectByProductName" resultType="com.chacha.create.common.entity.product.StoreProductEntity" parameterType="map">
+	<select id="selectByProductName" resultType="storeProductDTO" parameterType="map">
 	SELECT p.*, ca.type_category_name, dc.d_category_name, uc.u_category_name, img.p_img_url
 	FROM product p
 	LEFT JOIN type_category ca ON p.type_category_id = ca.type_category_id
@@ -47,7 +47,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 특정 스토어의 전체 상품 조회 -->
-    <select id="selectForProductList" resultType="com.chacha.create.common.entity.product.StoreProductEntity" parameterType="map">
+    <select id="selectForProductList" resultType="storeProductDTO" parameterType="map">
         SELECT p.*, ca.type_category_name, dc.d_category_name, uc.u_category_name, img.p_img_url
         FROM product p
         LEFT JOIN type_category ca ON p.type_category_id = ca.type_category_id
@@ -115,7 +115,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<!-- 스토어ID로 해당 스토어의 대표상품 조회 -->
-	<select id="storemainProduct" resultMap="bestProductResultMap">
+	<select id="selectForStoreMainProduct" resultMap="bestProductResultMap">
 		<![CDATA[
 			select *
 			FROM product
@@ -125,7 +125,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 해당 스토어의 인기 상품 조회  -->
-	<select id="selectBestProduct" resultMap="bestProductResultMap">
+	<select id="selectForBestProduct" resultMap="bestProductResultMap">
 		<![CDATA[
 			SELECT p.*, ca.type_category_name, dc.d_category_name, uc.u_category_name, img.p_img_url
 			FROM product p
