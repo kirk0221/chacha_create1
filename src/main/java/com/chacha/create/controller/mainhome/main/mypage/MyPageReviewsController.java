@@ -18,26 +18,21 @@ import com.chacha.create.service.buyer.mypage.MainhomeMypageReviewService;
 
 import lombok.extern.slf4j.Slf4j;
 
-@RestController
 @Slf4j
+@RestController
 @RequestMapping("/main/mypage")
 public class MyPageReviewsController {
 
     @Autowired
     private MainhomeMypageReviewService mainhomeMypageService;
-
-    // 전체 리뷰 조회 (POST 방식)
-    @PostMapping(value = "/reviews", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<ReviewEntity> getAllReviews() {
-        return mainhomeMypageService.selectAllReviews();
-    }
     
-    // 리뷰 ID로 조회 (GET 방식)
+    // 리뷰 ID로 조회 (GET 방식) - 단건 조회
     @GetMapping(value = "/reviewById", produces = MediaType.APPLICATION_JSON_VALUE)
     public ReviewEntity getReviewById(@RequestParam int reviewId) {
         return mainhomeMypageService.selectReviewById(reviewId);
     }
     
+    // 회원 ID로 조회 - 내 리뷰 전체 조회
     @GetMapping(value = "/reviewmemberById", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<ReviewEntity> getmemberId(HttpSession session) {
     	MemberEntity member= (MemberEntity) session.getAttribute("loginMember");
