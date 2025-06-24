@@ -45,9 +45,9 @@ public class SellerMainService {
 		return result;
 	}
 	
-	public List<Map<String, Object>> selectByReview(String storeUrl) {
+	public List<Map<String, Object>> selectByStoreUrl(String storeUrl) {
 
-		List<Map<String, Object>> result =  reviewMapper.selectByReview(storeUrl);
+		List<Map<String, Object>> result =  reviewMapper.selectByStoreUrl(storeUrl);
 		return result;
 	}
 	
