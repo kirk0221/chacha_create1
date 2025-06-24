@@ -38,15 +38,19 @@ public class StoreAllProductController {
 				Model model) {
 			
 				Map<String, Object> params = new HashMap<>();
-				params.put("storeId", storeId);
+				params.put("storeId", storeId);		// 해당 스토어ID의 스토어 상품 조회
 				
+				// 사용자가 상품명 검색시 해당 로직 수행
 				if (keyword != null && !keyword.isEmpty()) {
 				    Map<String, Object> paramMap = new HashMap<>();
 				    params.put("keyword", keyword);
 
-				    List<StoreProductDTO> result = storeMainService.selectForProductList(paramMap);
+
+				    List<StoreProductDTO> result = storeMainService.selectByProductName(paramMap);
+				    log.info("사용자가 상품명 검색 조회 : " + params);
 				    return ResponseEntity.ok(result);
 				} else {
+				// 사용자가 카테고리별 조회시 수행
 			    if (type != null) {
 			    	params.put("type", type.stream().map(Integer::parseInt).collect(Collectors.toList()));
 			    }
@@ -61,6 +65,7 @@ public class StoreAllProductController {
 			    params.put("sort", sort);
 			    
 			    List<StoreProductDTO> result = storeMainService.selectForProductList(params);
+			    log.info("사용자가 카테고리별 조회 : " + params);
 			    return ResponseEntity.ok(result);
 				}
 		} 
