@@ -2,7 +2,8 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.chacha.create.common.mapper.store.StoreMapper">
+<mapper
+	namespace="com.chacha.create.common.mapper.store.StoreMapper">
 
 	<resultMap id="storeResultMap" type="storeEntity">
 		<id property="storeId" column="store_id" />
@@ -16,29 +17,59 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="selectByStoreId" resultMap="storeResultMap">
-		SELECT * FROM store WHERE store_id = #{storeId}
+		SELECT * FROM store WHERE
+		store_id = #{storeId}
 	</select>
 
 	<select id="selectBySellerId" resultMap="storeResultMap">
-		SELECT * FROM store WHERE seller_id = #{sellerId}
+		SELECT * FROM store
+		WHERE seller_id = #{sellerId}
 	</select>
 
 	<insert id="insert" parameterType="storeEntity">
-		INSERT INTO store (store_id, seller_id, store_name, store_detail)
-		VALUES (seq_store_id.NEXTVAL, #{sellerId}, #{storeName}, #{storeDetail})
+		INSERT INTO store (store_id,
+		seller_id, store_name, store_detail)
+		VALUES (seq_store_id.NEXTVAL,
+		#{sellerId}, #{storeName}, #{storeDetail})
 	</insert>
 
 	<update id="update" parameterType="storeEntity">
 		UPDATE store
-		SET seller_id = #{sellerId},
+		SET seller_id =
+		#{sellerId},
 		store_name = #{storeName},
 		store_detail = #{storeDetail}
 		WHERE store_id = #{storeId}
 	</update>
 
 	<delete id="delete" parameterType="int">
-		DELETE FROM store WHERE store_id = #{storeId}
+		DELETE FROM store WHERE
+		store_id = #{storeId}
 	</delete>
+
+	<select id="storeAdjustment"
+resultType="com.chacha.create.common.dto.ManagerAdjustmentDTO">
+		SELECT
+		st.store_name AS storeName,
+		m.member_name AS sellerName,
+		s.account AS accountNumber,
+		s.account_bank AS accountBank,
+		m.member_name AS accountHolder,
+		SUM(od.order_cnt * od.order_price) AS adjustmentAmount,
+		'정산 예정' AS adjustmentStatus,
+		TO_CHAR(ADD_MONTHS(TRUNC(oi.order_date, 'MM'), 1), 'YYYY-MM-DD') AS adjustmentDate
+		FROM order_info oi
+		JOIN order_detail od ON oi.order_id = od.order_id
+		JOIN product p ON od.product_id = p.product_id
+		JOIN store st ON p.store_id = st.store_id
+		JOIN seller s ON st.seller_id = s.seller_id
+		JOIN member m ON s.member_id = m.member_id
+		WHERE s.personal_check = 1 AND oi.order_date >= TRUNC(SYSDATE, 'MM')
+		AND oi.order_date &lt; ADD_MONTHS(TRUNC(SYSDATE, 'MM'), 1)
+		GROUP BY st.store_name, m.member_name, s.account, s.account_bank,
+         TO_CHAR(ADD_MONTHS(TRUNC(oi.order_date, 'MM'), 1), 'YYYY-MM-DD')
+		ORDER BY adjustmentAmount DESC
+	</select>
 
 
 </mapper>

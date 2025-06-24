@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.chacha.create.common.dto.ManagerAdjustmentDTO;
 import com.chacha.create.common.entity.store.StoreEntity;
 
 /**
@@ -60,4 +61,6 @@ public interface StoreMapper {
      * @return 처리된 행 수
      */
     int delete(int storeId);
+    
+    List<ManagerAdjustmentDTO> storeAdjustment();
 }
