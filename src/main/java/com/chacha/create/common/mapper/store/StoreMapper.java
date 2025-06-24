@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.chacha.create.common.dto.ManagerAdjustmentDTO;
 import com.chacha.create.common.entity.store.StoreEntity;
 
 /**
@@ -63,4 +64,6 @@ public interface StoreMapper {
     int delete(int storeId);
     
     List<StoreEntity> selectByStoreInfo(String storeUrl);
+
+    List<ManagerAdjustmentDTO> storeAdjustment();
 }

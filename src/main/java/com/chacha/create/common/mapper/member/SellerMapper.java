@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.chacha.create.common.dto.ManagerAdjustmentDTO;
 import com.chacha.create.common.entity.member.SellerEntity;
 import com.chacha.create.common.entity.member.SellerInfoDTO;
 
@@ -62,4 +63,6 @@ public interface SellerMapper {
     int delete(int sellerId);
     
     List<SellerInfoDTO> selectBySellerInfo(String storeUrl);
+
+    List<ManagerAdjustmentDTO> sellerAdjustment(); 
 }
