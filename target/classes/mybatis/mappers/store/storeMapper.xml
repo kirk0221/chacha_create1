@@ -56,7 +56,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<select id="storeAdjustment"
-resultType="com.chacha.create.common.dto.ManagerAdjustmentDTO">
+		resultType="com.chacha.create.common.dto.ManagerAdjustmentDTO">
 		SELECT
 		st.store_name AS storeName,
 		m.member_name AS sellerName,

@@ -8,22 +8,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.chacha.create.common.entity.order.OrderSumDTO;
+import com.chacha.create.common.mapper.member.SellerMapper;
 import com.chacha.create.common.mapper.order.OrderInfoMapper;
 import com.chacha.create.common.mapper.order.ReviewMapper;
 import com.chacha.create.common.mapper.store.StoreMapper;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class SellerMainService {
 
-	@Autowired
-	StoreMapper storeMapper;
-	@Autowired
-	OrderInfoMapper orderInfoMapper;
-	@Autowired
-	ReviewMapper reviewMapper;
+	 
+	final StoreMapper storeMapper;	 
+	final OrderInfoMapper orderInfoMapper;	 
+	final ReviewMapper reviewMapper;
+	final SellerMapper sellerMapper;
+	
 
 	public Map<String, Object> selectByUrlId() {
 
@@ -50,6 +53,19 @@ public class SellerMainService {
 		List<Map<String, Object>> result =  reviewMapper.selectByReview(storeUrl);
 		return result;
 	}
+	
+	public List<Map<String, Object>> sellManagement(int member_id) {
+
+		List<Map<String, Object>> result =  sellerMapper.sellManagement(member_id);
+		return result;
+	}
+	
+	public List<Map<String, Object>> daySellManagement(int member_id) {
+
+		List<Map<String, Object>> result =  sellerMapper.daySellManagement(member_id);
+		return result;
+	}
+		
 	
 	
 	
