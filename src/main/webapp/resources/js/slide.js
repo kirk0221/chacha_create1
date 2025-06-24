@@ -1,25 +1,32 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const slider = document.getElementById('store-slider');
-    const slideLeft = document.getElementById('slideLeft');
-    const slideRight = document.getElementById('slideRight');
 
-    let currentSlide = 0;
-    const itemWidth = 430; // 400px + 30px gap
-    const visibleItems = 3;
-    const totalItems = slider.children.length;
-    const maxSlide = totalItems - visibleItems;
+    function initSlider(sliderClass, leftBtnId, rightBtnId, itemWidth, gap, visibleItems) {
+        const slider = document.querySelector(sliderClass);
+        const slideLeft = document.getElementById(leftBtnId);
+        const slideRight = document.getElementById(rightBtnId);
+        const items = slider.querySelectorAll('.product-card');
+        const totalItems = items.length;
 
-    slideLeft.addEventListener('click', () => {
-        if (currentSlide > 0) {
-            currentSlide--;
-            slider.style.transform = `translateX(-${currentSlide * itemWidth}px)`;
-        }
-    });
+        let currentSlide = 0;
+        const maxSlide = totalItems - visibleItems;
+        const moveDistance = itemWidth + gap;
 
-    slideRight.addEventListener('click', () => {
-        if (currentSlide < maxSlide) {
-            currentSlide++;
-            slider.style.transform = `translateX(-${currentSlide * itemWidth}px)`;
-        }
-    });
+        slideLeft.addEventListener('click', () => {
+            if (currentSlide > 0) {
+                currentSlide--;
+                slider.style.transform = `translateX(-${currentSlide * moveDistance}px)`;
+            }
+        });
+
+        slideRight.addEventListener('click', () => {
+            if (currentSlide < maxSlide) {
+                currentSlide++;
+                slider.style.transform = `translateX(-${currentSlide * moveDistance}px)`;
+            }
+        });
+    }
+
+    // 상품 슬라이더 초기화
+    initSlider('#product-slider', 'productSlideLeft', 'productSlideRight', 300, 30, 3);
+
 });

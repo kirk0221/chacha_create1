@@ -12,40 +12,35 @@
 
 <div class="header-wrapper">
   <div class="header-inner">
-  <!-- 로그인 전 -->
-  <div class="header-content" id="header-guest">
-    <a href="${pageContext.request.contextPath}/views/member/login.jsp" class="header-btn">로그인</a>
-    <span class="divider">|</span>
-    <a href="${pageContext.request.contextPath}/views/member/signup.jsp" class="header-btn">회원가입</a>
-  </div>
-  </div>
-  </div>
+  <!-- 로그인 후 -->
+	<div class="header-content" id="header-user">
+	<span class="welcome-text"><span id="member-name">000</span>님 반갑습니다!</span>
+	<a href="#" class="header-btn">메시지</a>
+	<a href="#" class="header-btn">로그아웃</a>
+	</div>
+	</div>
+	</div>
 
-<div class="nav-wrapper">
-  <div class="nav-inner">
 
-    <!-- 로고 -->
-    <a href="${pageContext.request.contextPath}/views/main/main_allproducts.jsp" class="nav-logo">
-      <img src="${pageContext.request.contextPath}/resources/images/logo/logo_green.png" />
+  <div class="nav">
+    <a href="${pageContext.request.contextPath}/views/main/mian.jsp">
+        <img class="rectangle-458" src="${pageContext.request.contextPath}/resources/images/logo/logo_green.png" />
     </a>
-
-    <!-- 메뉴들 -->
-    <a href="${pageContext.request.contextPath}/views/main/main.jsp" class="nav-item">전체 상품</a>
-    <a href="#" class="nav-item">스토어</a>
-    <a href="#" class="nav-item">공지 / 소식</a>
-    <a href="#" class="nav-item">개인 판매</a>
-    <a href="#" class="nav-item">클래스</a>
-    <a href="#" class="nav-item">마이페이지</a>
-
-    <!-- 장바구니 -->
-    <a href="#" class="nav-cart">
-      <img class="cart-icon" src="${pageContext.request.contextPath}/resources/images/main/main_nav_shop.png" />
-      <span>장바구니</span>
+    <a href="${pageContext.request.contextPath}/views/main/main_allproducts.jsp" class="div7">전체 상품</a>
+    <a href="${pageContext.request.contextPath}/views/main/main_store.jsp" class="div7">스토어</a>
+    <a href="${pageContext.request.contextPath}/views/main/main_notice.jsp" class="div7">공지 / 소식</a>
+    <a href="${pageContext.request.contextPath}/views/main/main_personal_sale.jsp" class="div7">개인 판매</a>
+    <a href="${pageContext.request.contextPath}/views/main/main_class.jsp" class="div7">클래스</a>
+    <a href="${pageContext.request.contextPath}/views/main/main_mypage.jsp" class="div7">마이페이지</a>
+    <div>
+    <a href="${pageContext.request.contextPath}/views/main/cart.jsp" >
+        <div class="cart-flex">
+            <img class="group" src="${pageContext.request.contextPath}/resources/images/main/main_nav_shop.png" />
+            <span class="div7">장바구니</span>
+        </div>
     </a>
-
-  </div>
 </div>
-
+</div>
 
   <div class="widgets">
     <div class="widget">
@@ -112,60 +107,93 @@
     </div>
   </div>
 
-<!-- ------------------인기 스토어 영역------------------- -->
-<div class="div9">
-  <div class="fram">
-    <img class="line-md-star-filled" src="${pageContext.request.contextPath}/resources/images/main/main_contour_star.png" />
-    <div class="div10">인기 스토어</div>
+<!-- 인기 스토어 영역 -->
+ <div class="div9">
+    <div class="fram">
+      <img class="line-md-star-filled" src="${pageContext.request.contextPath}/resources/images/main/main_contour_star.png" />
+      <div class="div10">인기 스토어</div>
+    </div>
   </div>
-</div>
-
-<div class="div11">
+  
+  
+  <div class="div11">
   <button id="slideLeft" class="slide-btn">
     <img class="weui-arrow-filled" src="${pageContext.request.contextPath}/resources/images/main/main_slide_left.png" />
   </button>
 
-  <div class="slider-container">
-    <div class="frame-95" id="store-slider">
-      <%@ include file="popularStores.jspf" %>
-    </div>
+ <div class="slider-container">
+  <div class="frame-95" id="store-slider">
+    <%@ include file="popularStores.jspf" %>
+  </div>
   </div>
 
   <button id="slideRight" class="slide-btn">
     <img class="weui-arrow-filled" src="${pageContext.request.contextPath}/resources/images/main/main_slide_right.png" />
   </button>
 </div>
-
-<!-- ------------------인기 상품 영역------------------- -->
-
-<!-- 인기 상품 제목 -->
-<div class="div9">
-  <div class="fram">
-    <img class="line-md-star-filled" src="${pageContext.request.contextPath}/resources/images/main/main_contour_star.png" />
-    <div class="div10">인기 상품</div>
-  </div>
-</div>
-
-<!-- 슬라이더 본체 -->
-<div class="div11">
-  <button id="productSlideLeft" class="slide-btn">
-    <img class="weui-arrow-filled" src="${pageContext.request.contextPath}/resources/images/main/main_slide_left.png" />
-  </button>
-
-  <div class="slider-container">
-    <div class="product-slider" id="product-slider">
-      <%@ include file="popularProducts.jspf" %>
+  
+  
+   <div class="div9">
+    <div class="fram">
+      <img class="line-md-star-filled" src="${pageContext.request.contextPath}/resources/images/main/main_contour_star.png" />
+      <div class="div10">인기 상품</div>
     </div>
   </div>
-
-  <button id="productSlideRight" class="slide-btn">
-    <img class="weui-arrow-filled" src="${pageContext.request.contextPath}/resources/images/main/main_slide_right.png" />
-  </button>
-</div>
-
-
-
- <!-- ------------------금주신상 영역------------------- -->
+  
+  <div class="div17">
+    <div class="div12">
+       <img class="weui-arrow-filled" src="${pageContext.request.contextPath}/resources/images/main/main_slide_left.png" />
+    </div>
+    <div class="frame-95">
+      <div class="div18">
+        <img class="rectangle-4662" src="rectangle-4663.png" />
+        <div class="div19">
+          <div class="div14">상품명</div>
+          <div class="_12">카테고리1</div>
+          <div class="div20">
+            <div class="_10-000">10,000</div>
+            <div class="div10">원</div>
+          </div>
+        </div>
+      </div>
+      <div class="div18">
+        <img class="rectangle-4663" src="rectangle-4664.png" />
+        <div class="div19">
+          <div class="div14">상품명</div>
+          <div class="_12">카테고리1</div>
+          <div class="div20">
+            <div class="_10-000">10,000</div>
+            <div class="div10">원</div>
+          </div>
+        </div>
+      </div>
+      <div class="div18">
+        <img class="rectangle-4663" src="rectangle-4665.png" />
+        <div class="div19">
+          <div class="div14">상품명</div>
+          <div class="_12">카테고리1</div>
+          <div class="div20">
+            <div class="_10-000">10,000</div>
+            <div class="div10">원</div>
+          </div>
+        </div>
+      </div>
+      <div class="div18">
+        <img class="rectangle-4663" src="rectangle-4666.png" />
+        <div class="div19">
+          <div class="div14">상품명</div>
+          <div class="_12">카테고리1</div>
+          <div class="div20">
+            <div class="_10-000">10,000</div>
+            <div class="div10">원</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="div21">
+      <img class="weui-arrow-filled" src="${pageContext.request.contextPath}/resources/images/main/main_slide_right.png" />
+    </div>
+  </div>
    <div class="div9" style="background-color:#F5F2EB; ">
     <div class="fram">
       <img class="line-md-star-filled" src="${pageContext.request.contextPath}/resources/images/main/main_contour_star.png" />
