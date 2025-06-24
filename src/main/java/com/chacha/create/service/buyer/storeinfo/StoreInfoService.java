@@ -6,7 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.chacha.create.common.entity.member.SellerInfoDTO;
+import com.chacha.create.common.dto.member.SellerInfoDTO;
 import com.chacha.create.common.entity.store.StoreEntity;
 import com.chacha.create.common.mapper.member.SellerMapper;
 import com.chacha.create.common.mapper.store.StoreMapper;

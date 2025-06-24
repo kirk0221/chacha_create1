@@ -1,4 +1,4 @@
-package com.chacha.create.common.dto;
+package com.chacha.create.common.dto.manager;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

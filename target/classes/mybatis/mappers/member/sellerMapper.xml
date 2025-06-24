@@ -57,7 +57,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 
 	<select id="selectBySellerInfo"
-		resultType="com.chacha.create.common.entity.member.SellerInfoDTO"
+		resultType="sellerInfoDTO"
 		parameterType="string">
 		SELECT
 		m.member_name AS sellerName,
@@ -68,10 +68,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		JOIN seller s ON st.seller_id = s.seller_id
 		JOIN member m ON s.member_id = m.member_id
 		WHERE st.store_url = #{storeUrl}
-		</select>
-
+	</select>
+	
 	<select id="sellerAdjustment"
-		resultType="com.chacha.create.common.dto.ManagerAdjustmentDTO">
+		resultType="managerAdjustmentDTO">
 		SELECT
 		m.member_name AS
 		sellerName,

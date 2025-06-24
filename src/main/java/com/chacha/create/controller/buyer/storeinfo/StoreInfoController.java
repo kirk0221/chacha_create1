@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.chacha.create.common.entity.member.SellerInfoDTO;
+import com.chacha.create.common.dto.member.SellerInfoDTO;
 import com.chacha.create.common.entity.store.StoreEntity;
 import com.chacha.create.service.buyer.storeinfo.StoreInfoService;
 

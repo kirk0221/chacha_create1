@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.chacha.create.common.mapper.product.StoreProductMapper">
 
 
-	<resultMap id="bestProductResultMap" type="com.chacha.create.common.dto.product.StoreProductDTO">
+	<resultMap id="bestProductResultMap" type="storeProductDTO">
 		<id property="productId" column="product_id" />
 		<result property="storeId" column="store_id" />
 		<result property="typeCategoryId" column="type_category_id" />

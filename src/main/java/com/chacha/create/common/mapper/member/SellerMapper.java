@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.chacha.create.common.dto.ManagerAdjustmentDTO;
+import com.chacha.create.common.dto.manager.ManagerAdjustmentDTO;
+import com.chacha.create.common.dto.member.SellerInfoDTO;
 import com.chacha.create.common.entity.member.SellerEntity;
-import com.chacha.create.common.entity.member.SellerInfoDTO;
 
 /**
  * seller 테이블에 대한 CRUD 작업을 수행하는 MyBatis 매퍼 인터페이스입니다.

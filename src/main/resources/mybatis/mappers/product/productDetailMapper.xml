@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.chacha.create.common.mapper.product.ProductDetailMapper">
 
 	<select id="selectByProductId" 
-				resultType="com.chacha.create.common.dto.product.ProductDetailDTO"
+				resultType="productDetailDTO"
 	        	parameterType="int">
 	    SELECT
 	        p.*,

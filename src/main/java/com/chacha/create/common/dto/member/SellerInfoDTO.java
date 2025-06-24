@@ -1,4 +1,4 @@
-package com.chacha.create.common.entity.member;
+package com.chacha.create.common.dto.member;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

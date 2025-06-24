@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.chacha.create.common.dto.ManagerAdjustmentDTO;
+import com.chacha.create.common.dto.manager.ManagerAdjustmentDTO;
 import com.chacha.create.common.entity.store.StoreEntity;
 
 /**
@@ -29,6 +29,14 @@ public interface StoreMapper {
      * @return 스토어 엔티티 {@code StoreEntity}
      */
     StoreEntity selectByStoreId(int storeId);
+    
+    /**
+     * 스토어 URL로 특정 스토어를 조회합니다.
+     *
+     * @param storeUrl 스토어 URL
+     * @return 스토어 엔티티 {@code StoreEntity}
+     */
+    StoreEntity selectByStoreURL(String storeUrl);
 
     /**
      * 판매자 ID로 해당 판매자의 스토어를 조회합니다.
