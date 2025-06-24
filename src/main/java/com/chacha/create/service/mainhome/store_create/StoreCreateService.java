@@ -2,6 +2,7 @@ package com.chacha.create.service.mainhome.store_create;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.chacha.create.common.entity.member.MemberEntity;
 import com.chacha.create.common.entity.member.SellerEntity;
@@ -21,13 +22,17 @@ public class StoreCreateService {
 		this.sellerMapper = sellerMapper;
 	}
 	
-	public int storeInsert(StoreEntity storeEntity, MemberEntity memberEntity) {
+	@Transactional(rollbackFor = Exception.class)
+	public int storeUpdate(StoreEntity storeEntity, MemberEntity memberEntity) {
 		
-		SellerEntity sellerEntity = sellerMapper.selectByMemberId(memberEntity.getMemberId());
+		SellerEntity sellerEntity = sellerMapper.selectByMemberId(memberEntity.getMemberId()); // 로그인한 아이디로 seller를 가져옴
 		
-		storeEntity.setSellerId(sellerEntity.getSellerId());
+		int sellerId = sellerEntity.getSellerId();
 		
-		return storeMapper.insert(storeEntity);
+		storeEntity.setSellerId(sellerId); // seller 아이디로 스토어 정보를 추가 
+		storeEntity.setStoreId(storeMapper.selectBySellerId(sellerId).getStoreId()); // seller 아이디로 스토어 아이디를 찾기
+		
+		return storeMapper.update(storeEntity); // 정보 업데이트
 	}
 	
 }

@@ -27,7 +27,7 @@ public class StoreCreateRestController {
 		int result = 0;
 		MemberEntity memberEntity = (MemberEntity) session.getAttribute("loginMember");
 		log.info("로그인 사용자 : " + memberEntity.toString() + "입력받은 스토어 정보 : " + storeEntity.toString());
-		result = storeCreateService.storeInsert(storeEntity, memberEntity);
+		result = storeCreateService.storeUpdate(storeEntity, memberEntity);
 		return result;
 	}
 	
