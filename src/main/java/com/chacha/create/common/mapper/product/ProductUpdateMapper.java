@@ -10,8 +10,8 @@ public interface ProductUpdateMapper {
 	ProductUpdateDTO updateProductDetail(@Param("storeUrl") String storeUrl,
             @Param("productId") int productId);
 	
-	int updateProduct(@Param("dto") ProductUpdateDTO dto, @Param("storeUrl") String storeUrl);
-	int updateProductImage1(@Param("dto") ProductUpdateDTO dto);
-	int updateProductImage2(@Param("dto") ProductUpdateDTO dto);
-	int updateProductImage3(@Param("dto") ProductUpdateDTO dto);
+	int updateProduct(ProductUpdateDTO dto);
+	int updateProductImage1(ProductUpdateDTO dto);
+	int updateProductImage2(ProductUpdateDTO dto);
+	int updateProductImage3(ProductUpdateDTO dto);
 }
