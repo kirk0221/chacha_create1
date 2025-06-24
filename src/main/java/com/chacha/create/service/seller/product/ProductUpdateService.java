@@ -1,4 +1,4 @@
-package com.chacha.create.service.seller.update;
+package com.chacha.create.service.seller.product;
 
 import org.springframework.stereotype.Service;
 

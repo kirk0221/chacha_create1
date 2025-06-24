@@ -1,4 +1,4 @@
-package com.chacha.create.controller.seller.product_join;
+package com.chacha.create.controller.seller.product;
 
 import java.util.List;
 

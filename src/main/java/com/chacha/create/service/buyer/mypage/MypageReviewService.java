@@ -9,12 +9,12 @@ import com.chacha.create.common.entity.order.ReviewEntity;
 import com.chacha.create.common.mapper.order.ReviewMapper;
 
 @Service
-public class MainhomeMypageReviewService {
+public class MypageReviewService {
 	
 	private final ReviewMapper reviewMapper;
 	
 	@Autowired
-	public MainhomeMypageReviewService(ReviewMapper reviewMappepr) {
+	public MypageReviewService(ReviewMapper reviewMappepr) {
 		this.reviewMapper = reviewMappepr;
 	}
 	

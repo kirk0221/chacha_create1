@@ -1,4 +1,4 @@
-package com.chacha.create.controller.mainhome.main.mypage;
+package com.chacha.create.controller.buyer.mypage;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.chacha.create.common.entity.member.MemberEntity;
 import com.chacha.create.common.entity.order.ReviewEntity;
-import com.chacha.create.service.buyer.mypage.MainhomeMypageReviewService;
+import com.chacha.create.service.buyer.mypage.MypageReviewService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,7 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 public class MyPageReviewsController {
 
     @Autowired
-    private MainhomeMypageReviewService mainhomeMypageService;
+    private MypageReviewService mainhomeMypageService;
 
     // 전체 리뷰 조회 (POST 방식)
     @PostMapping(value = "/reviews", produces = MediaType.APPLICATION_JSON_VALUE)
