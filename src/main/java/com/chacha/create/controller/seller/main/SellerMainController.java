@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.chacha.create.common.entity.order.OrderSumDTO;
+import com.chacha.create.common.dto.order.OrderSumDTO;
 import com.chacha.create.service.seller.main.SellerMainService;
 
 

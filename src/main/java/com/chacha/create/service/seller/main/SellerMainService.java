@@ -7,7 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.chacha.create.common.entity.order.OrderSumDTO;
+import com.chacha.create.common.dto.order.OrderSumDTO;
 import com.chacha.create.common.mapper.order.OrderInfoMapper;
 import com.chacha.create.common.mapper.order.ReviewMapper;
 import com.chacha.create.common.mapper.store.StoreMapper;

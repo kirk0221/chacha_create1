@@ -1,4 +1,4 @@
-package com.chacha.create.common.entity.order;
+package com.chacha.create.common.dto.order;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
