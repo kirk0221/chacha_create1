@@ -1,6 +1,7 @@
 package com.chacha.create.common.mapper.member;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -65,4 +66,11 @@ public interface SellerMapper {
     List<SellerInfoDTO> selectBySellerInfo(String storeUrl);
 
     List<ManagerAdjustmentDTO> sellerAdjustment(); 
+    
+    List<Map<String, Object>> sellManagement(int member_id);
+
+    List<Map<String, Object>> daySellManagement(int member_id);
+    
+    
+    
 }
