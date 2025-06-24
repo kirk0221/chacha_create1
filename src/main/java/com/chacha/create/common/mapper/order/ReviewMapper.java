@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.chacha.create.common.entity.order.ReviewEntity;
 
@@ -14,20 +15,14 @@ import com.chacha.create.common.entity.order.ReviewEntity;
 @Mapper
 public interface ReviewMapper {
 
-    /**
-     * 모든 리뷰를 조회합니다.
-     *
-     * @return 전체 리뷰 목록 ({@code List<ReviewEntity>})
-     */
+    // 전체 리뷰 목록 조회
     List<ReviewEntity> selectAll();
 
-    /**
-     * 리뷰 ID로 단일 리뷰를 조회합니다.
-     *
-     * @param reviewId 리뷰 ID
-     * @return 해당 리뷰 ID의 리뷰 객체
-     */
-    ReviewEntity selectById(int reviewId);
+    // 리뷰ID를 통한 단일 리뷰 조회
+    ReviewEntity selectByReviewId(int reviewId);
+    
+    // 회원ID를 통한 회원의 전체 리뷰 조회
+    List<ReviewEntity> selectByMemberId(int memberId);
 
     /**
      * 주문 상세 ID로 리뷰를 조회합니다.
@@ -37,7 +32,15 @@ public interface ReviewMapper {
      * @return 해당 주문 상세에 대한 리뷰 객체
      */
     ReviewEntity selectByOrderDetailId(int orderDetailId);
+    
+    // 특정 상품에 대한 리뷰 전체 조회 + 내 리뷰 우선
+    List<ReviewEntity> selectByProductId(@Param("productId") int productId,
+                                         @Param("memberId") Integer memberId);
 
+    // 본인이 해당 주문 상세에 대해 리뷰 작성 가능한지 여부
+    int selectForCheckReview(@Param("orderDetailId") int orderDetailId,
+                      @Param("memberId") int memberId);
+    
     /**
      * 새로운 리뷰를 삽입합니다.
      * 리뷰 ID는 시퀀스(seq_review_id.NEXTVAL)로 생성됩니다.
@@ -53,7 +56,9 @@ public interface ReviewMapper {
      * @param reviewEntity 수정할 리뷰 객체
      * @return 수정된 행 수
      */
-    int update(ReviewEntity reviewEntity);
+    int update(@Param("review") ReviewEntity review,
+    				 @Param("memberId") int memberId);
+
 
     /**
      * 리뷰 ID로 리뷰를 삭제합니다.
@@ -61,9 +66,10 @@ public interface ReviewMapper {
      * @param reviewId 삭제할 리뷰 ID
      * @return 삭제된 행 수
      */
-    int delete(int reviewId);
+    int delete(@Param("reviewId") int reviewId,
+               		@Param("memberId") int memberId);
 
-    List<Map<String, Object>> selectByReview(String storeUrl);
-
-	List<ReviewEntity> selectByMemberId(int memberId);
+    // 판매자 기준 내 상품의 리뷰 모아 보기
+    List<Map<String, Object>> selectByStoreUrl(String storeUrl);
+    
 }
