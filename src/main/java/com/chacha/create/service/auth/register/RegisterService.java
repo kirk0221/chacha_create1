@@ -28,7 +28,7 @@ public class RegisterService {
         this.storeMapper = storeMapper;
     }
     
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public MemberEntity memberinsert(MemberEntity memberEntity) {
     	MemberEntity member = null;
     	try{
@@ -40,7 +40,7 @@ public class RegisterService {
     	return member;
     }
     
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public int sellerinsert(SellerEntity sellerEntity, MemberEntity memberEntity) {
     	int result = 0;
     	sellerEntity.setMemberId(memberEntity.getMemberId());
@@ -52,6 +52,4 @@ public class RegisterService {
     	result = storeMapper.insert(storeEntity);
     	return result;
     }
-    
-    
 }
