@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.chacha.create.common.dto.product.MainProductDTO;
 import com.chacha.create.common.entity.member.MemberEntity;
-import com.chacha.create.service.mainhome.store_create.MainProductService;
+import com.chacha.create.service.mainhome.store.MainProductService;
 
 import lombok.extern.slf4j.Slf4j;
 

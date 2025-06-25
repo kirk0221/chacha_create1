@@ -1,4 +1,4 @@
-package com.chacha.create.service.mainhome.store_create;
+package com.chacha.create.service.mainhome.store;
 
 import java.util.Collections;
 import java.util.List;

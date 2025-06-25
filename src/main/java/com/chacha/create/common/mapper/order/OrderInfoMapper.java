@@ -54,6 +54,14 @@ public interface OrderInfoMapper {
      * @return 영향 받은 행 수
      */
     int update(OrderInfoEntity orderInfo);
+    
+    /**
+     * 기존 주문 정보 중 OrderStatus만 수정합니다.
+     *
+     * @param orderInfo 수정할 {@code OrderInfoEntity} 객체
+     * @return 영향 받은 행 수
+     */
+    int updateForOrderStatus(OrderInfoEntity orderInfo);
 
     /**
      * 주어진 주문 ID에 해당하는 주문 정보를 삭제합니다.
@@ -62,13 +70,4 @@ public interface OrderInfoMapper {
      * @return 영향 받은 행 수
      */
     int delete(int orderId);
-    
-    
-    List<Map<String,Object>> selectByStatus(String  storeUrl);
-    
-    List<OrderSumDTO> selectByDayOrderSum(String  storeUrl);
-    
-    List<OrderStatusEnum> selectForOrderStatus(String storeUrl);
-    
-    
 }
