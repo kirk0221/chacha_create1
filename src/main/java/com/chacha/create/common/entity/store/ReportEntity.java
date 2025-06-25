@@ -47,4 +47,7 @@ public class ReportEntity {
 
     /** 신고 내용 (DB에서 CLOB 타입으로 저장됨) */
     private String reportText;
+    
+    /** 신고대상(판매자) ID 검증용*/
+    private Integer storeId;
 }
