@@ -9,9 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.chacha.create.common.dto.order.OrderRequestDTO;
 import com.chacha.create.common.entity.member.AddrEntity;
 import com.chacha.create.common.entity.member.MemberEntity;
+import com.chacha.create.common.entity.order.DeliveryEntity;
 import com.chacha.create.common.entity.order.OrderDetailEntity;
 import com.chacha.create.common.entity.order.OrderInfoEntity;
 import com.chacha.create.common.mapper.member.AddrMapper;
+import com.chacha.create.common.mapper.order.DeliveryMapper;
 import com.chacha.create.common.mapper.order.OrderDetailMapper;
 import com.chacha.create.common.mapper.order.OrderInfoMapper;
 
@@ -29,6 +31,9 @@ public class OrderService {
 	
 	@Autowired
     private OrderDetailMapper orderDetailMapper;
+	
+	@Autowired
+	private DeliveryMapper deliveryMapper;
 
     @Transactional
     public int placeOrder(OrderRequestDTO request, MemberEntity member) {
@@ -57,6 +62,13 @@ public class OrderService {
             detail.setOrderId(order.getOrderId());
             orderDetailMapper.insert(detail);
         }
+        
+        // 주문 직후 배송 테이블로 데이터 넘겨주기
+        DeliveryEntity delivery = new DeliveryEntity();
+        delivery.setOrderId(order.getOrderId());
+        delivery.setDeliveryCheck(0);
+
+        deliveryMapper.insert(delivery);
 
         return order.getOrderId();
     }
