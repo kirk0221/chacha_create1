@@ -3,6 +3,16 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.chacha.create.common.mapper.product.MainHomeProductMapper">
+	
+	<resultMap id="mainMainpageResultMap" type="com.chacha.create.common.dto.product.MainHomeDTO">
+		<result property="storeName" column="store_name" />
+		<result property="storeUrl" column="store_url" />
+		<result property="logoImg" column="logo_img" />
+		<result property="storeDetail" column="store_detail" />
+		<result property="categoryName" column="category_name" />
+		<result property="saleCnt" column="sale_cnt" />
+		<result property="Rnk" column="rnk" />
+	</resultMap>	
 
 
 	<resultMap id="mainHomeProductResultMap" type="storeProductDTO">
@@ -25,7 +35,103 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="pImgUrl" column="p_img_url"/>
 	</resultMap>
 	
-	<!-- 추가 쿼리문 -->
+	<!-- 메인 홈  인기스토어 리스트 -->
+	<select id="selectForBestStore" resultMap="mainMainpageResultMap" parameterType="map">
+	<![CDATA[
+	SELECT *
+	FROM (
+	    SELECT s.store_id, s.store_name, s.store_url, s.logo_img, s.store_detail, cat.category_name, s.sale_cnt,
+	        ROW_NUMBER() OVER (PARTITION BY s.store_id ORDER BY cat.cnt DESC) AS rnk
+	    FROM store s
+	    JOIN product p ON s.store_id = p.store_id
+	    JOIN (
+	        SELECT 
+	            p.store_id,
+	            tc.type_category_id AS category_id,
+	            tc.type_category_name AS category_name,
+	            'type_category' AS category_type,
+	            COUNT(*) AS cnt
+	        FROM product p
+	        JOIN type_category tc ON p.type_category_id = tc.type_category_id
+	        GROUP BY p.store_id, tc.type_category_id, tc.type_category_name
+	        UNION ALL
+	        SELECT 
+	            p.store_id,
+	            dc.d_category_id AS category_id,
+	            dc.d_category_name AS category_name,
+	            'd_category' AS category_type,
+	            COUNT(*) AS cnt
+	        FROM product p
+	        JOIN d_category dc ON p.d_category_id = dc.d_category_id
+	        GROUP BY p.store_id, dc.d_category_id, dc.d_category_name
+	        UNION ALL
+	        SELECT 
+	            p.store_id,
+	            uc.u_category_id AS category_id,
+	            uc.u_category_name AS category_name,
+	            'u_category' AS category_type,
+	            COUNT(*) AS cnt
+	        FROM product p
+	        JOIN d_category dc ON p.d_category_id = dc.d_category_id
+	        JOIN u_category uc ON dc.u_category_id = uc.u_category_id
+	        GROUP BY p.store_id, uc.u_category_id, uc.u_category_name
+	    ) cat ON s.store_id = cat.store_id
+	)
+	WHERE rnk = 1
+	AND SALE_CNT IS NOT NULL
+	AND ROWNUM <= 10
+	ORDER BY sale_cnt DESC
+	]]>
+	</select>
+	
+	
+	<!-- 메인 홈  인기 상품 리스트 -->
+	<select id="selectForBestProduct" resultMap="mainHomeProductResultMap" parameterType="map">
+	<![CDATA[
+	SELECT p.product_name, p.price, ca.type_category_name, dc.d_category_name, uc.u_category_name, img.p_img_url
+	FROM product p
+	LEFT JOIN type_category ca ON p.type_category_id = ca.type_category_id
+	LEFT JOIN d_category dc ON p.d_category_id = dc.d_category_id
+	LEFT JOIN u_category uc ON dc.u_category_id = uc.u_category_id
+	LEFT JOIN (
+	    SELECT product_id, p_img_url
+	    FROM (
+	        SELECT product_id, p_img_url,
+	               ROW_NUMBER() OVER (PARTITION BY product_id ORDER BY p_img_seq ASC) AS rn
+	        FROM p_img
+	    ) sub
+	    WHERE rn = 1    
+	) img ON p.product_id = img.product_id
+	WHERE p.delete_check = 0
+    AND ROWNUM <= 10
+	ORDER BY sale_cnt DESC
+	]]>
+	</select>
+	
+	
+	<!-- 메인 홈  최신 상품 리스트 -->
+	<select id="selectForNewProduct" resultMap="mainHomeProductResultMap" parameterType="map">
+	<![CDATA[
+	SELECT p.product_name, p.price, ca.type_category_name, dc.d_category_name, uc.u_category_name, img.p_img_url, p.product_date
+	FROM product p
+	LEFT JOIN type_category ca ON p.type_category_id = ca.type_category_id
+	LEFT JOIN d_category dc ON p.d_category_id = dc.d_category_id
+	LEFT JOIN u_category uc ON dc.u_category_id = uc.u_category_id
+	LEFT JOIN (
+	    SELECT product_id, p_img_url
+	    FROM (
+	        SELECT product_id, p_img_url,
+	               ROW_NUMBER() OVER (PARTITION BY product_id ORDER BY p_img_seq ASC) AS rn
+	        FROM p_img
+	    ) sub
+	    WHERE rn = 1    
+	) img ON p.product_id = img.product_id
+	WHERE p.delete_check = 0
+    AND ROWNUM <= 10
+	ORDER BY product_date DESC
+	]]>
+	</select>
+	
 	<!-- 사용자가 상품이름으로 검색했을때  -->
 	<select id="selectByProductName" resultMap="mainHomeProductResultMap" parameterType="map">
 	SELECT p.*, ca.type_category_name, dc.d_category_name, uc.u_category_name, img.p_img_url
