@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.chacha.create.common.dto.order.OrderDTO;
+import com.chacha.create.common.dto.order.OrderDetailDTO;
 import com.chacha.create.common.dto.order.OrderListDTO;
 import com.chacha.create.common.dto.order.OrderSumDTO;
 import com.chacha.create.common.enums.order.OrderStatusEnum;
@@ -20,8 +22,16 @@ public interface OrderMapper {
 	List<OrderDTO> selectForPersonalRefundAll(int memberId);
 	List<OrderDTO> selectForPersonalOrderStatus(Map<String, Object> param);
 	
-  List<Map<String,Object>> selectByStatus(String  storeUrl);
-  List<OrderSumDTO> selectByDayOrderSum(String  storeUrl);
-  List<OrderStatusEnum> selectForOrderStatusOnly(String storeUrl);
-  List<OrderListDTO> selectOrderListByMemberId(int memberId);
+	List<Map<String,Object>> selectByStatus(String  storeUrl);
+	List<OrderSumDTO> selectByDayOrderSum(String  storeUrl);
+	List<OrderStatusEnum> selectForOrderStatusOnly(String storeUrl);
+	
+	// 회원별 주문 내역
+	List<OrderListDTO> selectOrderListByMemberId(int memberId);
+
+	// 주문ID별 상세 정보
+	OrderDetailDTO selectOrderDetailByOrderId(@Param("orderId") int orderId, @Param("memberId") int memberId);
+
+	// 동일한 주문ID 내의 상품 목록
+	List<OrderListDTO> selectOrderListByOrderId(@Param("orderId") int orderId, @Param("memberId") int memberId);
 }
