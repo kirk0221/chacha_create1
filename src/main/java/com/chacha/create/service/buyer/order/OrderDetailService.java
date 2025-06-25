@@ -58,7 +58,8 @@ public class OrderDetailService {
 		}
 		dto.setTotalAmount(total);
 		
-		// 카드 번호 암호화 코드 구현 예정
+		String cardNum = orderMapper.selectCardNumByOrderId(orderId);
+	    dto.setMaskedCardNum(maskCardNumber(cardNum));
 
 		dto.setCanCancel(isCancelable(dto.getOrderStatus()));
 		dto.setCanRefund(isRefundable(dto.getOrderStatus()));
@@ -66,6 +67,12 @@ public class OrderDetailService {
 
         return dto;
     }
+    
+    // 카드 번호 보안(뒤 네 자리만 나오도록)
+    private String maskCardNumber(String cardNum) {
+        if (cardNum == null || cardNum.length() < 4) return "";
+        return "****-****-****-" + cardNum.substring(cardNum.length() - 4);
+	}
 
     // ORDER_OK일 때만 true 반환(취소 가능)
     private boolean isCancelable(OrderStatusEnum status) {

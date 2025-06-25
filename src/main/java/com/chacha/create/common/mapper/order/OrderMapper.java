@@ -34,4 +34,7 @@ public interface OrderMapper {
 
 	// 동일한 주문ID 내의 상품 목록
 	List<OrderListDTO> selectOrderListByOrderId(@Param("orderId") int orderId, @Param("memberId") int memberId);
+	
+	// 카드 번호 암호화를 위한 로직
+	String selectCardNumByOrderId(int orderId);
 }

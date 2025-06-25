@@ -5,6 +5,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper
 	namespace="com.chacha.create.common.mapper.order.OrderMapper">
 	
+	<select id="selectCardNumByOrderId" parameterType="int" resultType="string">
+	    SELECT c.card_num
+	    FROM order_info oi
+	    JOIN card c ON oi.card_id = c.card_id
+	    WHERE oi.order_id = #{orderId}
+	</select>
+	
 	<select id="selectByStatus" resultType="map"
 		parameterType="string">
 		SELECT order_info.order_status, COUNT(*)
