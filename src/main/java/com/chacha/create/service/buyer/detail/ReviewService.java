@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.chacha.create.common.dto.product.ReviewManagementDTO;
 import com.chacha.create.common.entity.order.OrderDetailEntity;
 import com.chacha.create.common.entity.order.OrderInfoEntity;
 import com.chacha.create.common.entity.order.ReviewEntity;
@@ -96,5 +97,10 @@ public class ReviewService {
     // 판매자별 리뷰 조회
     public List<Map<String, Object>> selectByStoreUrl(String storeUrl) {
         return reviewMapper.selectByStoreUrl(storeUrl);
+    }
+    
+    // 판매자 기준 리뷰 목록 (썸네일, 상품명, 작성자 포함)
+    public List<ReviewManagementDTO> selectAllMyReview(String storeUrl) {
+        return reviewMapper.selectAllmyReview(storeUrl);
     }
 }

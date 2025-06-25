@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import com.chacha.create.common.dto.product.ReviewManagementDTO;
 import com.chacha.create.common.entity.order.ReviewEntity;
 
 /**
@@ -72,4 +73,5 @@ public interface ReviewMapper {
     // 판매자 기준 내 상품의 리뷰 모아 보기
     List<Map<String, Object>> selectByStoreUrl(String storeUrl);
     
+    List<ReviewManagementDTO> selectAllmyReview(@Param("storeUrl") String storeUrl);
 }
