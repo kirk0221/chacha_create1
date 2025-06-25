@@ -75,6 +75,6 @@ public interface SellerMapper {
     
     List<Map<String, Object>> sellerSettlementManagement(String storeUrl);
     
-    
+    int updateSellerInfo(SellerEntity seller);
     
 }

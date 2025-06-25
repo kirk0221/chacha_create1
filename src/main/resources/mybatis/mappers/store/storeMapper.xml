@@ -87,6 +87,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          TO_CHAR(ADD_MONTHS(TRUNC(oi.order_date, 'MM'), 1), 'YYYY-MM-DD')
 		ORDER BY adjustmentAmount DESC
 	</select>
+	
+	<update id="updateStoreInfo" parameterType="storeEntity">
+		UPDATE store
+		SET
+		logo_img = #{logoImg},
+		store_name = #{storeName},
+		store_detail = #{storeDetail}
+		WHERE store_id = #{storeId}
+	</update>
 
 
 </mapper>

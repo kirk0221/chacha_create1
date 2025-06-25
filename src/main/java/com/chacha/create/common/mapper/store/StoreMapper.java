@@ -73,4 +73,6 @@ public interface StoreMapper {
     List<StoreEntity> selectByStoreInfo(String storeUrl);
 
     List<ManagerAdjustmentDTO> storeAdjustment();
+    
+    int updateStoreInfo(StoreEntity storeEntity);
 }

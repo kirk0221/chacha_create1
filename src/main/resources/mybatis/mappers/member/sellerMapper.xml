@@ -219,5 +219,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		GROUP BY m.member_name, s.account, s.account_bank
 		ORDER BY totalSales DESC
 	</select>
+	
+	<update id="updateSellerInfo" parameterType="sellerEntity">
+		UPDATE seller
+		SET 
+		account = #{account},
+		account_bank = #{accountBank},
+		profile_info = #{profileInfo}
+		WHERE seller_id = #{sellerId}
+	</update>
 
 </mapper>
