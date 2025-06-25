@@ -30,15 +30,64 @@ public class RegisterService {
     
     @Transactional(rollbackFor = Exception.class)
     public MemberEntity memberinsert(MemberEntity memberEntity) {
-    	MemberEntity member = null;
-    	try{
-    		memberMapper.insert(memberEntity);
-    		member = memberMapper.selectByMemberEmail(memberEntity.getMemberEmail());
-    	}catch(Exception e) {
-    		log.info("아이디가 중복됨 : " + e.getMessage());
-    	}
-    	return member;
+        MemberEntity member = null;
+        try {
+            String password = memberEntity.getMemberPwd();
+            String email = memberEntity.getMemberEmail();
+            String phone = memberEntity.getMemberPhone();
+            String regi = memberEntity.getMemberRegi();
+
+            // 유효성 검사
+            if (!isValidPassword(password)) {
+                log.warn("비밀번호 형식 오류");
+                return null;
+            }
+            if (!isValidEmail(email)) {
+                log.warn("이메일 형식 오류");
+                return null;
+            }
+            if (!isValidPhoneNumber(phone)) {
+                log.warn("전화번호 형식 오류");
+                return null;
+            }
+            if (!isValidRegi(regi)) {
+                log.warn("주민등록번호 형식 오류");
+                return null;
+            }
+
+            memberMapper.insert(memberEntity);
+            member = memberMapper.selectByMemberEmail(memberEntity.getMemberEmail());
+        } catch(Exception e) {
+            log.info("아이디가 중복됨 : " + e.getMessage());
+            return null;
+        }
+        return member;
     }
+
+
+    private boolean isValidPassword(String password) {
+        if (password == null || password.length() < 8) return false;
+
+        String specialChars = "!\"#$%&'()*+,-./:;<=>?@\\[₩\\]^_`{|}~";
+        boolean hasLetter = password.matches(".*[a-zA-Z].*");
+        boolean hasDigit = password.matches(".*\\d.*");
+        boolean hasSpecial = password.matches(".*[" + specialChars + "].*");
+
+        return hasLetter && hasDigit && hasSpecial;
+    }
+    
+    private boolean isValidEmail(String email) {
+        return email != null && email.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$");
+    }
+
+    private boolean isValidPhoneNumber(String phone) {
+        return phone != null && phone.matches("^01[016789]-\\d{3,4}-\\d{4}$");
+    }
+
+    private boolean isValidRegi(String regi) {
+        return regi != null && regi.matches("^\\d{6}-[1-4]{1}$");
+    }
+
     
     @Transactional(rollbackFor = Exception.class)
     public int sellerinsert(SellerEntity sellerEntity, MemberEntity memberEntity) {
