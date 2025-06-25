@@ -17,4 +17,8 @@ public class StoreNoticeService {
 	public List<Map<String, Object>> noticeList(String storeUrl){
 		return noticeMapper.noticeList(storeUrl);
 	}
+	
+	public List<Map<String, Object>> noticeDetailList(String storeUrl, int noticeId){ 
+		return noticeMapper.noticeDetailList(storeUrl, noticeId);
+	}
 }

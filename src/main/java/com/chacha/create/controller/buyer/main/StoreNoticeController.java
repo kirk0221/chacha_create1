@@ -22,5 +22,10 @@ public class StoreNoticeController {
 	List<Map<String, Object>> noticeList(@PathVariable String storeUrl){
 		return stService.noticeList(storeUrl);
 	}
+	
+	@GetMapping("/noticedetail/{noticeId}")
+	List<Map<String, Object>> noticeDetailList(@PathVariable String storeUrl, @PathVariable Integer noticeId){
+		return stService.noticeDetailList(storeUrl, noticeId);
+	}
 
 }
