@@ -71,6 +71,10 @@ public interface SellerMapper {
 
     List<Map<String, Object>> daySellManagement(int member_id);
     
+    List<Map<String, Object>> sellerDaySellManagement(String storeUrl);
+    
+    List<Map<String, Object>> sellerSettlementManagement(String storeUrl);
+    
     
     
 }
