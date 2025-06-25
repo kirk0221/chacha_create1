@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chacha.create.common.mapper.order.OrderMapper">
+
+    <select id="selectOrderListByMemberId" resultType="com.chacha.create.common.dto.order.OrderListDTO" parameterType="int">
+	    SELECT
+	        oi.order_date AS orderDate,
+	        p.product_id AS productId,
+	        p.product_name AS productName,
+	        img.p_img_url AS pImgUrl,
+	        od.order_cnt AS orderCnt,
+	        od.order_price AS orderPrice,
+	        d.delivery_check AS deliveryCheck
+	
+	    FROM order_info oi
+	    JOIN order_detail od ON oi.order_id = od.order_id
+	    JOIN product p ON od.product_id = p.product_id
+	    JOIN (
+	        SELECT * FROM p_img
+	        WHERE p_img_enum = 'THUMBNAIL' AND p_img_seq = 1
+	    ) img ON p.product_id = img.product_id
+	    LEFT JOIN delivery d ON oi.order_id = d.order_id
+	
+	    WHERE oi.member_id = #{memberId}
+	
+	    ORDER BY oi.order_date DESC, oi.order_id DESC, od.order_detail_id ASC
+    </select>
+
+</mapper>
