@@ -1,4 +1,4 @@
-package com.chacha.create.service.seller.order;
+package com.chacha.create.service.mainhome.personal;
 
 import java.util.HashMap;
 import java.util.List;
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.chacha.create.common.dto.order.OrderDTO;
+import com.chacha.create.common.entity.member.MemberEntity;
 import com.chacha.create.common.entity.order.OrderInfoEntity;
 import com.chacha.create.common.enums.order.OrderStatusEnum;
 import com.chacha.create.common.mapper.order.OrderInfoMapper;
@@ -17,29 +18,29 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-public class OrderManagementService {
+public class OrderManageService {
 
 	private final OrderMapper orderMapper;
 	private final OrderInfoMapper orderInfoMapper;
 	
-	public OrderManagementService(OrderMapper orderMapper, OrderInfoMapper orderInfoMapper) {
+	public OrderManageService(OrderMapper orderMapper, OrderInfoMapper orderInfoMapper) {
 		this.orderMapper = orderMapper;
 		this.orderInfoMapper = orderInfoMapper;
 	}
 	
-	public List<OrderDTO> selectOrderAll(String storeUrl) {
-		return orderMapper.selectAll(storeUrl);
+	public List<OrderDTO> selectOrderAll(MemberEntity memberEntity) {
+		return orderMapper.selectForPersonalAll(memberEntity.getMemberId());
 	}
 	
-	public List<OrderDTO> selectRefundAll(String storeUrl){
-		return orderMapper.selectForRefundAll(storeUrl);
+	public List<OrderDTO> selectRefundAll(MemberEntity memberEntity){
+		return orderMapper.selectForPersonalRefundAll(memberEntity.getMemberId());
 	}
 	
-	public List<OrderDTO> selectForOrderStatus(String storeUrl, OrderStatusEnum orderStatus){
+	public List<OrderDTO> selectForOrderStatus(MemberEntity memberEntity, OrderStatusEnum orderStatus){
 		Map<String, Object> paramMap = new HashMap<>();
-		paramMap.put("storeUrl", storeUrl);
+		paramMap.put("memberId", memberEntity.getMemberId());
 		paramMap.put("orderStatus", orderStatus);
-		return orderMapper.selectForOrderStatus(paramMap);
+		return orderMapper.selectForPersonalOrderStatus(paramMap);
 	}
 	
 	@Transactional(rollbackFor = Exception.class)

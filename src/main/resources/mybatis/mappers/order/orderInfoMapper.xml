@@ -46,14 +46,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<update id="update" parameterType="orderInfoEntity">
 		UPDATE order_info
-		SET member_id
-		= #{memberId},
+		SET member_id = #{memberId},
 		order_date = #{orderDate},
 		order_name = #{orderName},
 		order_phone = #{orderPhone},
 		address_id = #{addressId},
-		card_id =
-		#{cardId},
+		card_id = #{cardId},
+		order_status = #{orderStatus}
+		WHERE order_id = #{orderId}
+	</update>
+	
+	<update id="updateForOrderStatus" parameterType="orderInfoEntity">
+		UPDATE order_info
 		order_status = #{orderStatus}
 		WHERE order_id = #{orderId}
 	</update>
@@ -62,43 +66,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		DELETE FROM order_info WHERE
 		order_id = #{orderId}
 	</delete>
-
-
-	<select id="selectByStatus" resultType="map"
-		parameterType="string">
-		SELECT order_info.order_status, COUNT(*)
-		FROM order_info
-		JOIN order_detail ON order_info.order_id = order_detail.order_id
-		JOIN
-		product ON order_detail.product_id = product.product_id
-		JOIN store ON
-		product.store_id = store.store_id
-		WHERE store.store_Url = #{storeUrl}
-		GROUP BY order_info.order_status
-	</select>
-
-	<select id="selectByDayOrderSum"
-		resultType="orderSumDTO"
-		parameterType="string">
-		SELECT TO_CHAR(order_info.order_date, 'YYYY-MM-DD') AS
-		saleDate,
-		SUM(order_detail.order_cnt * order_detail.order_price) AS total
-		FROM order_info
-		JOIN order_detail ON order_info.order_id = order_detail.order_id
-		JOIN product ON order_detail.product_id = product.product_id
-		JOIN store ON product.store_id = store.store_id
-		WHERE store.store_Url = #{storeUrl} AND order_info.order_date >= SYSDATE - 7
-		GROUP BY TO_CHAR(order_info.order_date, 'YYYY-MM-DD')
-		ORDER BY saleDate
-	</select>
-	
-	<select id="selectForOrderStatus" resultType="com.chacha.create.common.enums.order.OrderStatusEnum" parameterType="String">
-		select DISTINCT oi.order_status
-		from store s
-		left outer join product p on(s.store_id = p.store_id)
-		join order_detail od on(p.product_id = od.product_id)
-		left outer join order_info oi on(od.order_id = oi.order_id)
-		where s.store_url = #{StoreUrl}
-	</select>
 
 </mapper>

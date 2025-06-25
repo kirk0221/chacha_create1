@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.chacha.create.common.entity.store.StoreEntity;
 import com.chacha.create.common.enums.order.OrderStatusEnum;
-import com.chacha.create.common.mapper.order.OrderInfoMapper;
+import com.chacha.create.common.mapper.order.OrderMapper;
 import com.chacha.create.common.mapper.store.StoreMapper;
 
 import lombok.extern.slf4j.Slf4j;
@@ -18,12 +18,12 @@ import lombok.extern.slf4j.Slf4j;
 public class ShutDownService {
 
 	private final StoreMapper storeMapper;
-	private final OrderInfoMapper orderInfoMapper;
+	private final OrderMapper orderMapper;
 	
 	@Autowired
-	public ShutDownService(StoreMapper storeMapper, OrderInfoMapper orderInfoMapper) {
+	public ShutDownService(StoreMapper storeMapper, OrderMapper orderMapper) {
 		this.storeMapper = storeMapper;
-		this.orderInfoMapper = orderInfoMapper;
+		this.orderMapper = orderMapper;
 	}
 	
 	@Transactional(rollbackFor = Exception.class)
@@ -40,7 +40,7 @@ public class ShutDownService {
 		.viewCnt(null)
 		.build();
 		
-		List<OrderStatusEnum> orderStatuses = orderInfoMapper.selectForOrderStatus(storeUrl);
+		List<OrderStatusEnum> orderStatuses = orderMapper.selectForOrderStatusOnly(storeUrl);
 		
 	    boolean hasOrderOk = orderStatuses.stream()
 	            .anyMatch(status -> status == OrderStatusEnum.ORDER_OK);

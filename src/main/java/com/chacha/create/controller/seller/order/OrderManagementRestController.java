@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.chacha.create.common.dto.order.OrderDTO;
+import com.chacha.create.common.entity.order.OrderInfoEntity;
 import com.chacha.create.common.enums.order.OrderStatusEnum;
 import com.chacha.create.service.seller.order.OrderManagementService;
 
@@ -39,5 +41,11 @@ public class OrderManagementRestController {
 		return orderManagementService.selectForOrderStatus(storeUrl, orderStatus);
 	}
 	
+	@PutMapping("/orderstatus")
+	public int updateOrderStatus(@RequestBody OrderInfoEntity orderInfoEntity){
+		int result = 0;
+		result = orderManagementService.updateForRefundStatus(orderInfoEntity);
+		return result;
+	}
 	
 }

@@ -2,6 +2,8 @@ package com.chacha.create.common.dto.product;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,6 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)		// 모든 필드를 사용하지 않고 필요한 필드만 출력
 public class StoreProductDTO {
 
     private Integer productId;
@@ -26,6 +29,14 @@ public class StoreProductDTO {
     private Integer viewCnt;
     private Date lastModifiedDate;
     private Integer flagshipCheck;
+    
+    // 메인홈 메인페이지에서 사용할 필드 추가
+    private String storeName;
+    private String storeUrl;
+    private String logoImg;
+    private String storeDetail;
+    private String categoryName;
+    private Integer Rnk;
 
     // 조회 시 조인용 필드
     private String typeCategoryName;   	// 대분류 카테고리명

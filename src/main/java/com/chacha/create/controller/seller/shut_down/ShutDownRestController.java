@@ -1,12 +1,10 @@
 package com.chacha.create.controller.seller.shut_down;
 
-import org.springframework.web.bind.annotation.RestController;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,7 +26,7 @@ public class ShutDownRestController {
 	@Autowired
 	LoginService loginService;
 	
-	@PostMapping("/close")
+	@PutMapping("/close")
 	public int colse(HttpSession session, @PathVariable String StoreUrl, @RequestBody MemberEntity memberEntity) {
 		
 		MemberEntity loginMember = (MemberEntity) session.getAttribute("loginMember");

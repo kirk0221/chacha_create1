@@ -60,4 +60,6 @@ public interface ProductMapper {
      * @return 영향 받은 행 수
      */
     int delete(int productId);
+
+	int selectStoreIdByStoreUrl(String storeUrl);
 }
