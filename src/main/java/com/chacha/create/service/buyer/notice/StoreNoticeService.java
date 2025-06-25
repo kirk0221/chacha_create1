@@ -1,4 +1,4 @@
-package com.chacha.create.service.buyer.main;
+package com.chacha.create.service.buyer.notice;
 
 import java.util.List;
 import java.util.Map;

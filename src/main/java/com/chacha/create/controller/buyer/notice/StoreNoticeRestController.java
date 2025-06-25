@@ -1,4 +1,4 @@
-package com.chacha.create.controller.buyer.main;
+package com.chacha.create.controller.buyer.notice;
 
 import java.util.List;
 import java.util.Map;
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.chacha.create.service.buyer.main.StoreNoticeService;
+import com.chacha.create.service.buyer.notice.StoreNoticeService;
 
 @RestController
 @RequestMapping("/api/{storeUrl}")

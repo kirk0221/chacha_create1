@@ -13,9 +13,9 @@ import com.chacha.create.common.dto.product.StoreProductDTO;
 @Mapper
 public interface StoreProductMapper {
 	// 스토어 인기상품 조회
-	List<StoreProductDTO> selectBestProduct(int storeId);
+	List<StoreProductDTO> selectForBestProduct(int storeId);
 	// 스토어 대표상품 조회
-	List<StoreProductDTO> storemainProduct(int storeId);
+	List<StoreProductDTO> selectForStoreMainProduct(int storeId);
 	// 스토어 전체상품 조회(조건정렬)
 	List<StoreProductDTO> selectForProductList(Map<String, Object> params);
 	// 상품명으로 검색시 상품 조회

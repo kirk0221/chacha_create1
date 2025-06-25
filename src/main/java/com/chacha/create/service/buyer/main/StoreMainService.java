@@ -45,13 +45,13 @@ public class StoreMainService{
 		// 스토어의 인기상품 조회
 		public List<StoreProductDTO> selectBestProduct(int storeId) {
 			log.info("스토어 ID로 인기 상품 조회 요청: {}", storeId);
-			return storeProductMapper.selectBestProduct(storeId);
+			return storeProductMapper.selectForBestProduct(storeId);
 		}
 
 		// 스토어의 대표상품 조회
 		public List<StoreProductDTO> storeMainProduct(int storeId) {
 			log.info("스토어 ID로 대표 상품 조회 요청: {}", storeId);
-			return storeProductMapper.storemainProduct(storeId);
+			return storeProductMapper.selectForStoreMainProduct(storeId);
 		}
 	
 

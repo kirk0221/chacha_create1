@@ -28,7 +28,9 @@ public class RegisterRestController {
 		MemberEntity member = null;
 		member = registerService.memberinsert(memberEntity); // 받아온 멤버 정보로 정보 입력
 		log.info("member 정보 입력 완료 : " + member.toString());
-		session.setAttribute("loginMember", member); // 바로 로그인
+		if(member != null) {
+			session.setAttribute("loginMember", member); // 바로 로그인
+		}
 		return member;
 	}
 	

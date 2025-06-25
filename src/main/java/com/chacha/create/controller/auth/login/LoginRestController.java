@@ -23,16 +23,16 @@ public class LoginRestController {
 	private LoginService loginService;
 	
 	@PostMapping(value = "/login" , produces = MediaType.APPLICATION_JSON_VALUE)
-	public String login(HttpSession session, @RequestBody MemberEntity member) {
+	public int login(HttpSession session, @RequestBody MemberEntity member) {
 		MemberEntity memberEntity = null;
 		
 		memberEntity = loginService.login(member.getMemberEmail(), member.getMemberPwd());
 		
-		if(memberEntity == null) return "로그인 실패";
+		if(memberEntity == null) return 0;
 		
 		session.setAttribute("loginMember", memberEntity);
 		
-		return "로그인 성공";
+		return 1;
 		
 	}
 }

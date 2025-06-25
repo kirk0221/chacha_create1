@@ -39,19 +39,19 @@ public class RegisterService {
 
             // 유효성 검사
             if (!isValidPassword(password)) {
-                log.warn("비밀번호 형식 오류");
+                log.info("비밀번호 형식 오류");
                 return null;
             }
             if (!isValidEmail(email)) {
-                log.warn("이메일 형식 오류");
+                log.info("이메일 형식 오류");
                 return null;
             }
             if (!isValidPhoneNumber(phone)) {
-                log.warn("전화번호 형식 오류");
+                log.info("전화번호 형식 오류");
                 return null;
             }
             if (!isValidRegi(regi)) {
-                log.warn("주민등록번호 형식 오류");
+                log.info("주민등록번호 형식 오류");
                 return null;
             }
 
@@ -63,7 +63,6 @@ public class RegisterService {
         }
         return member;
     }
-
 
     private boolean isValidPassword(String password) {
         if (password == null || password.length() < 8) return false;
@@ -88,7 +87,6 @@ public class RegisterService {
         return regi != null && regi.matches("^\\d{6}-[1-4]{1}$");
     }
 
-    
     @Transactional(rollbackFor = Exception.class)
     public int sellerinsert(SellerEntity sellerEntity, MemberEntity memberEntity) {
     	int result = 0;

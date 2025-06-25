@@ -42,5 +42,5 @@ public class StoreProductDTO {
     private String typeCategoryName;   	// 대분류 카테고리명
     private String dCategoryName;      	// 중분류 카테고리명
     private String uCategoryName;      	// 소분류 카테고리명
-    private String pImgUrl;            			// 대표 이미지 URL (P_IMG_SEQ = 1)
+    private String pImgUrl;            	// 대표 이미지 URL (P_IMG_SEQ = 1)
 }
