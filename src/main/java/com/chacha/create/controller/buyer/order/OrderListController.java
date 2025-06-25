@@ -26,7 +26,7 @@ public class OrderListController {
 	OrderListService orderListService;
 	
     @GetMapping("/orderlist")
-    public ResponseEntity<?> showOrderList(HttpSession session) {
+    public ResponseEntity<List<OrderListDTO>> showOrderList(HttpSession session) {
         MemberEntity loginMember = (MemberEntity) session.getAttribute("loginMember");
         int memberId = loginMember.getMemberId();
         List<OrderListDTO> orderList = orderListService.getOrderList(memberId);
