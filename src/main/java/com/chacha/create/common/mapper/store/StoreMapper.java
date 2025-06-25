@@ -28,14 +28,6 @@ public interface StoreMapper {
      * @return 스토어 엔티티 {@code StoreEntity}
      */
     StoreEntity selectByStoreId(int storeId);
-    
-    /**
-     * 스토어 URL로 특정 스토어를 조회합니다.
-     *
-     * @param storeUrl 스토어 URL
-     * @return 스토어 엔티티 {@code StoreEntity}
-     */
-    StoreEntity selectByStoreURL(String storeUrl);
 
     /**
      * 스토어 URL로 특정 스토어를 조회합니다.
