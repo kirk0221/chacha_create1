@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.chacha.create.common.entity.order.OrderDetailEntity;
 import com.chacha.create.common.entity.order.OrderInfoEntity;
@@ -59,6 +60,7 @@ public class ReviewService {
     }
 
     // 리뷰 등록
+    @Transactional
     public int insert(ReviewEntity review, int loginMemberId) {
         // 조건 1) 주문 내역이 없을 경우 리뷰 작성 불가
         Integer orderDetailId = review.getOrderDetailId();

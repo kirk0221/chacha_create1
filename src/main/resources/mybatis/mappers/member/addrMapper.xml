@@ -24,9 +24,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<insert id="insert" parameterType="addrEntity">
+		<selectKey keyProperty="addressId" resultType="int" order="BEFORE">
+	        SELECT seq_address_id.NEXTVAL FROM dual
+	    </selectKey>
 		INSERT INTO addr (address_id, member_id, post_num, address_road,
 		address_detail, address_extra, address_check)
-		VALUES (seq_address_id.NEXTVAL, #{memberId}, #{postNum}, #{addressRoad},
+		VALUES (#{addressId}, #{memberId}, #{postNum}, #{addressRoad},
 		#{addressDetail}, #{addressExtra}, #{addressCheck})
 	</insert>
 

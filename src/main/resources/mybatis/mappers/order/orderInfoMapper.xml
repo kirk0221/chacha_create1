@@ -31,11 +31,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<insert id="insert" parameterType="orderInfoEntity">
+		<selectKey keyProperty="orderId" resultType="int" order="BEFORE">
+	        SELECT seq_order_info_id.NEXTVAL FROM dual
+	    </selectKey>
 		INSERT INTO order_info
 		(order_id, member_id, order_date, order_name,
 		order_phone, address_id,
 		card_id, order_status)
-		VALUES (seq_order_info_id.NEXTVAL, #{memberId},
+		VALUES (#{orderId}, #{memberId},
 		#{orderDate}, #{orderName},
 		#{orderPhone}, #{addressId}, #{cardId},
 		#{orderStatus})
