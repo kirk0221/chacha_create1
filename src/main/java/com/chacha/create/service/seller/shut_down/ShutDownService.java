@@ -40,7 +40,7 @@ public class ShutDownService {
 		.viewCnt(null)
 		.build();
 		
-		List<OrderStatusEnum> orderStatuses = orderMapper.selectForOrderStatus(storeUrl);
+		List<OrderStatusEnum> orderStatuses = orderMapper.selectForOrderStatusOnly(storeUrl);
 		
 	    boolean hasOrderOk = orderStatuses.stream()
 	            .anyMatch(status -> status == OrderStatusEnum.ORDER_OK);

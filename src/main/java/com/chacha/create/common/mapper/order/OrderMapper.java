@@ -21,5 +21,5 @@ public interface OrderMapper {
 	
     List<Map<String,Object>> selectByStatus(String  storeUrl);
     List<OrderSumDTO> selectByDayOrderSum(String  storeUrl);
-    List<OrderStatusEnum> selectForOrderStatus(String storeUrl);
+    List<OrderStatusEnum> selectForOrderStatusOnly(String storeUrl);
 }

@@ -33,7 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER BY saleDate
 	</select>
 	
-	<select id="selectForOrderStatus" resultType="orderStatusEnum" parameterType="String">
+	<select id="selectForOrderStatusOnly" resultType="orderStatusEnum" parameterType="String">
 		select DISTINCT oi.order_status
 		from store s
 		left outer join product p on(s.store_id = p.store_id)
