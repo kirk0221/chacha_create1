@@ -27,38 +27,66 @@ public class MainProductController {
 	
 	@Autowired
 	private MainProductService mainproductService;
-	
+
 	@PostMapping(value = "/sellregister", consumes = "application/json", produces = "text/plain;charset=utf-8")
-    public String registerProduct(@RequestBody MainProductDTO dto, HttpSession session) {
+	public String registerProduct(@RequestBody MainProductDTO dto, HttpSession session) {
 		int result = mainproductService.insertMainProductWithImages(dto, session);
-		return result == 0 ? "개인판매자 상품 등록 성공" : "개인판매자 상품 등록 실패";
+
+		switch (result) {
+			case 1:
+				return "상품 등록 성공";
+			case -1:
+				return "로그인 정보 없음 - 등록 실패";
+			default:
+				return "상품 등록 실패";
+		}
 	}
-	
+
 	@GetMapping(value = "/productlist", produces = "application/json;charset=utf-8")
 	public List<MainProductDTO> getProductsBySeller(HttpSession session) {
+		Object loginMember = session.getAttribute("loginMember");
+		if (loginMember == null) {
+			log.warn("로그인 정보 없음 (session에 loginMember 없음)");
+			return Collections.emptyList();
+		}
 
-	    Object loginMember = session.getAttribute("loginMember");
-	    if (loginMember == null) {
-	        log.warn("로그인 정보 없음 (session에 loginMember 없음)");
-	        return Collections.emptyList();
-	    }
+		Integer memberId = ((MemberEntity) loginMember).getMemberId();
+		log.info("로그인된 memberId: {}", memberId);
 
-	    Integer memberId = ((MemberEntity) loginMember).getMemberId();
-	    log.info("로그인된 memberId: {}", memberId);
-
-	    return mainproductService.getProductsByMemberId(memberId);
+		return mainproductService.getProductsByMemberId(memberId);
 	}
-	
+
 	@PutMapping(value = "/sellregister/update", consumes = "application/json", produces = "text/plain;charset=utf-8")
 	public String updateProduct(@RequestBody MainProductDTO dto, HttpSession session) {
-	    int result = mainproductService.updateMainProductWithImages(dto, session);
-	    return result == 0 ? "상품 수정 성공" : "상품 수정 실패";
+		int result = mainproductService.updateMainProductWithImages(dto, session);
+
+		switch (result) {
+			case 1:
+				return "상품 수정 성공";
+			case -1:
+				return "로그인 정보 없음 - 수정 실패";
+			case -2:
+				return "권한 없음 - 수정 실패";
+			default:
+				return "상품 수정 실패";
+		}
 	}
-	
+
 	@PutMapping(value = "/sellregister/delete", consumes = "application/json", produces = "text/plain;charset=utf-8")
 	public String deleteProduct(@RequestBody Map<String, Integer> param, HttpSession session) {
-	    int productId = param.get("productId");
-	    int result = mainproductService.deleteMainProduct(productId, session);
-	    return result == 0 ? "상품 삭제 성공" : "상품 삭제 실패";
+		int productId = param.get("productId");
+		int result = mainproductService.deleteMainProduct(productId, session);
+
+		switch (result) {
+			case 1:
+				return "상품 삭제 성공";
+			case -1:
+				return "로그인 정보 없음 - 삭제 실패";
+			case -2:
+				return "권한 없음 - 삭제 실패";
+			default:
+				return "상품 삭제 실패";
+		}
 	}
 }
+

@@ -68,6 +68,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="delete" parameterType="int">
 		DELETE FROM product WHERE product_id = #{productId}
 	</delete>
-
+	
+	<select id="selectStoreIdByStoreUrl" resultType="int">
+    	SELECT store_id FROM store WHERE store_url = #{storeUrl}
+	</select>
 
 </mapper>

@@ -22,25 +22,27 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/{storeUrl}/seller")
 @Slf4j
 public class ProductlistjoinController {
-	
-	@Autowired
-	ProductService productService;
-	
-	@GetMapping(value="/productlist")
-	public List<ProductlistDTO> productlistjoin(@PathVariable String storeUrl) {
-		return productService.productAllListByStoreUrl(storeUrl);
-	}
-	
-	@PutMapping(value="/productlist", 
-            consumes = MediaType.APPLICATION_JSON_VALUE)
-	public String updateFlagship(@PathVariable String storeUrl, @RequestBody List<ProductlistDTO> dtoList) {
-		int result = productService.updateFlagship(storeUrl, dtoList);
-		return result == 0 ? "flagship 수정 성공" : "flagship 수정 실패";
-	}
+    
+    @Autowired
+    ProductService productService;
+    
+    // 상품 리스트 조회
+    @GetMapping(value="/productlist")
+    public List<ProductlistDTO> productlistjoin(@PathVariable String storeUrl) {
+        return productService.productAllListByStoreUrl(storeUrl);
+    }
 
-	@DeleteMapping(value = "/productlist", consumes = MediaType.APPLICATION_JSON_VALUE, produces = "text/plain;charset=utf-8")
-	public String deleteFlagshipBatch(@RequestBody List<ProductEntity> productList) {
-	    int result = productService.productDeleteByEntities(productList);
-	    return result == 0 ? "delete 성공" : "delete 실패";
-	}
+    // 대표 상품 수정
+    @PutMapping(value="/productlist", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public String updateFlagship(@PathVariable String storeUrl, @RequestBody List<ProductlistDTO> dtoList) {
+        int result = productService.updateFlagship(storeUrl, dtoList);
+        return "대표상품 수정 완료: " + result + "건이 반영되었습니다.";
+    }
+
+    // 상품 삭제 (논리 삭제)
+    @DeleteMapping(value = "/productlist", consumes = MediaType.APPLICATION_JSON_VALUE, produces = "text/plain;charset=utf-8")
+    public String deleteFlagshipBatch(@RequestBody List<ProductEntity> productList) {
+        int result = productService.productDeleteByEntities(productList);
+        return "상품 삭제 완료: " + result + "건이 반영되었습니다.";
+    }
 }
