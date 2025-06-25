@@ -37,7 +37,7 @@ public class ProductlistupdateController {
 	}
 	
 	@PutMapping("/{productId}")
-	public ResponseEntity<Void> updateProductDetail(
+	public String updateProductDetail(
 	        @PathVariable("storeUrl") String storeUrl,
 	        @PathVariable("productId") int productId,
 	        @RequestBody ProductUpdateDTO productUpdateDTO) {
@@ -49,7 +49,12 @@ public class ProductlistupdateController {
 	    if (productUpdateDTO.getPimgUrl3() == null) productUpdateDTO.setPimgUrl3("");
 
 	    boolean updated = productUpdateService.updateProductDetail(storeUrl, productUpdateDTO);
-	    return updated ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+
+	    if (updated) {
+	        return "update 성공";
+	    } else {
+	        return "update 실패";
+	    }
 	}
 	
 	
