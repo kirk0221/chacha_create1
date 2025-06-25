@@ -1,10 +1,10 @@
 -- (주의) 현재 사용자의 모든 시퀀스를 drop하는 명령어
---BEGIN
---  FOR seq IN (SELECT sequence_name FROM user_sequences) LOOP
---    EXECUTE IMMEDIATE 'DROP SEQUENCE "' || seq.sequence_name || '"';
---  END LOOP;
---END;
---/
+BEGIN
+  FOR seq IN (SELECT sequence_name FROM user_sequences) LOOP
+    EXECUTE IMMEDIATE 'DROP SEQUENCE "' || seq.sequence_name || '"';
+  END LOOP;
+END;
+/
 
 -- 회원 시퀀스 
 CREATE SEQUENCE seq_member_id
@@ -146,6 +146,12 @@ INCREMENT BY 1
 NOCACHE
 NOCYCLE;
 
+-- 알림 메시지 시퀀스 생성
+CREATE SEQUENCE seq_alter_message_id
+START WITH 1
+INCREMENT BY 1
+NOCACHE
+NOCYCLE;
 
 -- 카테고리 값 insert
 insert into type_category VALUES(seq_type_category_id.nextval, '뜨개질');

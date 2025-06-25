@@ -43,9 +43,9 @@ CREATE TABLE store (
     store_id     NUMBER PRIMARY KEY,
     seller_id    NUMBER NOT NULL,
     logo_img     VARCHAR2(500),
-    store_name   VARCHAR2(200) NOT NULL,
+    store_name   VARCHAR2(200),
     store_detail VARCHAR2(400),
-    store_url    VARCHAR2(100) NOT NULL UNIQUE,
+    store_url    VARCHAR2(100) UNIQUE,
     sale_cnt    NUMBER DEFAULT 0,
     view_cnt     NUMBER DEFAULT 0,
     CONSTRAINT fk_store_member FOREIGN KEY ( seller_id )
@@ -60,6 +60,7 @@ CREATE TABLE seller (
     account      VARCHAR2(50) NOT NULL,
     account_bank VARCHAR2(50) NOT NULL,
     profile_info VARCHAR2(1000),
+    personal_check NUMBER(1) DEFAULT 0 NOT NULL CHECK ( personal_check IN ( 0, 1 ) ),
     CONSTRAINT fk_seller_member FOREIGN KEY ( member_id )
         REFERENCES member ( member_id )
 );
@@ -171,9 +172,9 @@ CREATE TABLE order_detail (
 CREATE TABLE delivery (
     delivery_id       NUMBER PRIMARY KEY,
     order_id          NUMBER NOT NULL,
-    delivery_check    NUMBER(1) DEFAULT 0 NOT NULL CHECK ( delivery_check IN ( 0, 1 ) ),
-    delivery_date     DATE NOT NULL,
-    delivery_fin_date DATE NOT NULL,
+    delivery_check    NUMBER(1) DEFAULT 0 NOT NULL CHECK ( delivery_check IN ( 0, 1, 2) ),
+    delivery_date     DATE,
+    delivery_fin_date DATE,
     CONSTRAINT fk_delivery_order FOREIGN KEY ( order_id )
         REFERENCES order_info ( order_id )
 );
@@ -247,6 +248,15 @@ CREATE TABLE notice (
         REFERENCES store ( store_id )
 );
 
+-- 21. 알림 메시지
+CREATE TABLE alter_message(
+    alter_message_id NUMBER PRIMARY KEY,
+    member_id NUMBER NOT NULL,
+    message_title VARCHAR2(100),
+    message_content VARCHAR2(255),
+    CONSTRAINT fk_alter_message_member FOREIGN KEY ( member_id )
+        REFERENCES member ( member_id )
+);
 
 
 -- 프로시저+JOB
