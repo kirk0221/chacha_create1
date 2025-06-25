@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.chacha.create.common.mapper.order.OrderMapper">
+	<resultMap id="orderDTOResultMap" type="orderDTO">
+	    <!-- order_info -->
+	    <id property="orderId" column="order_id" />
+	    <result property="memberId" column="member_id" />
+	    <result property="orderDate" column="order_date" />
+	    <result property="orderName" column="order_name" />
+	    <result property="orderStatus" column="order_status" />
+	    
+	    <!-- order_detail -->
+	    <result property="orderDetailId" column="order_detail_id" />
+	    <result property="orderCnt" column="order_cnt" />
+	    <result property="orderPrice" column="order_price" />
+	
+	    <!-- product -->
+	    <result property="productId" column="product_id" />
+	    <result property="storeId" column="store_id" />
+	    <result property="productName" column="product_name" />
+	    <result property="price" column="price" />
+	
+	    <!-- addr -->
+	    <result property="addressId" column="address_id" />
+	    <result property="postNum" column="post_num" />
+	    <result property="addressRoad" column="address_road" />
+	    <result property="addressDetail" column="address_detail" />
+	    <result property="addressExtra" column="address_extra" />
+	    
+	    <!-- card -->
+	    	<result property="cardId" column="card_id" />
+	    	<result property="cardNum" column="card_num" />
+	    	<result property="cardCompany" column="card_company" />
+	</resultMap>
+	
+	<select id="selectAll" resultMap="orderDTOResultMap" parameterType="String">
+		SELECT
+		    oi.order_id,
+		    oi.member_id,
+		    oi.order_date,
+		    oi.order_name,
+		    oi.order_status,
+		
+		    od.order_detail_id,
+		    od.order_cnt,
+		    od.order_price,
+		
+		    p.product_id,
+		    p.store_id,
+		    p.product_name,
+		    p.price,
+		
+		    a.address_id,
+		    a.post_num,
+		    a.address_road,
+		    a.address_detail,
+		    a.address_extra,
+		    
+		    c.card_id,
+		    c.card_num,
+		    c.card_company
+		FROM order_info oi
+		JOIN order_detail od ON oi.order_id = od.order_id
+		JOIN product p ON od.product_id = p.product_id
+		JOIN addr a ON oi.address_id = a.address_id
+		JOIN card c ON oi.card_id = c.card_id
+		join store s ON p.store_id = s.store_id
+		WHERE s.store_url = #{storeUrl}
+		ORDER BY CASE oi.order_status
+		    WHEN 'ORDER_OK' THEN 1
+		    WHEN 'CONFIRM' THEN 2
+		    WHEN 'REFUND' THEN 3
+		    WHEN 'REFUND_OK' THEN 4
+		    ELSE 5
+		END
+	</select>
+
+	<select id="selectRefundAll" resultMap="orderDTOResultMap" parameterType="map">
+	SELECT
+	    oi.order_id,
+	    oi.member_id,
+	    oi.order_date,
+	    oi.order_name,
+	    oi.order_status,
+	
+	    od.order_detail_id,
+	    od.order_cnt,
+	    od.order_price,
+	
+	    p.product_id,
+	    p.store_id,
+	    p.product_name,
+	    p.price,
+	
+	    a.address_id,
+	    a.post_num,
+	    a.address_road,
+	    a.address_detail,
+	    a.address_extra,
+	    
+	    c.card_id,
+	    c.card_num,
+	    c.card_company
+	FROM order_info oi
+	JOIN order_detail od ON oi.order_id = od.order_id
+	JOIN product p ON od.product_id = p.product_id
+	JOIN addr a ON oi.address_id = a.address_id
+	JOIN card c ON oi.card_id = c.card_id
+	join store s ON p.store_id = s.store_id
+	WHERE s.store_url = #{storeUrl} 
+	AND oi.order_status IN ('REFUND', 'REFUND_OK')
+	ORDER BY CASE oi.order_status
+	    WHEN 'REFUND' THEN 1
+	    WHEN 'REFUND_OK' THEN 2
+	    ELSE 3
+	END
+	</select>
+	
+	<select id="selectForOrderStatus" resultMap="orderDTOResultMap" parameterType="map">
+	SELECT
+	    oi.order_id,
+	    oi.member_id,
+	    oi.order_date,
+	    oi.order_name,
+	    oi.order_status,
+	
+	    od.order_detail_id,
+	    od.order_cnt,
+	    od.order_price,
+	
+	    p.product_id,
+	    p.store_id,
+	    p.product_name,
+	    p.price,
+	
+	    a.address_id,
+	    a.post_num,
+	    a.address_road,
+	    a.address_detail,
+	    a.address_extra,
+	    
+	    c.card_id,
+	    c.card_num,
+	    c.card_company
+	FROM order_info oi
+	JOIN order_detail od ON oi.order_id = od.order_id
+	JOIN product p ON od.product_id = p.product_id
+	JOIN addr a ON oi.address_id = a.address_id
+	JOIN card c ON oi.card_id = c.card_id
+	join store s ON p.store_id = s.store_id
+	WHERE s.store_url = #{storeUrl} 
+	AND oi.order_status = #{orderStatus}
+	</select>
+
+</mapper>

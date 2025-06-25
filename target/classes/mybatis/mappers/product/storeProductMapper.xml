@@ -24,9 +24,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="pImgUrl" column="p_img_url"/>
 	</resultMap>
 	
-	<!-- 추가 쿼리문 -->
 	<!-- 사용자가 상품이름으로 검색했을때  -->
-	<select id="selectByProductName" resultType="storeProductDTO" parameterType="map">
+
+	<select id="selectByProductName" resultType="com.chacha.create.common.dto.product.StoreProductDTO" parameterType="map">
 	SELECT p.*, ca.type_category_name, dc.d_category_name, uc.u_category_name, img.p_img_url
 	FROM product p
 	LEFT JOIN type_category ca ON p.type_category_id = ca.type_category_id
@@ -47,7 +47,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 특정 스토어의 전체 상품 조회 -->
-    <select id="selectForProductList" resultType="storeProductDTO" parameterType="map">
+    <select id="selectForProductList" resultType="com.chacha.create.common.dto.product.StoreProductDTO" parameterType="map">
         SELECT p.*, ca.type_category_name, dc.d_category_name, uc.u_category_name, img.p_img_url
         FROM product p
         LEFT JOIN type_category ca ON p.type_category_id = ca.type_category_id
@@ -66,7 +66,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	  AND p.delete_check = 0
 	  
 	  <!-- 카테고리 필터 -->
-	  <if test="categoryMap != null and categoryMap.size() > 0">
+	  <if test="categoryMap != null 
+      and ((categoryMap.type != null and categoryMap.type.size() > 0) 
+        or (categoryMap.d != null and categoryMap.d.size() > 0) 
+        or (categoryMap.u != null and categoryMap.u.size() > 0))">
 			AND (
 			<if test="categoryMap.type != null">
 				p.type_category_id IN
