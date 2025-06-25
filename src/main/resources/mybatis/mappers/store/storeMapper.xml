@@ -25,11 +25,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM store WHERE
 		store_id = #{storeId}
 	</select>
-	
-	<select id="selectByStoreURL" resultMap="storeResultMap">
-		SELECT * FROM store WHERE
-		store_url = #{storeUrl}
-	</select>
 
 	<select id="selectByStoreUrl" resultMap="storeResultMap">
 		SELECT * FROM store WHERE
