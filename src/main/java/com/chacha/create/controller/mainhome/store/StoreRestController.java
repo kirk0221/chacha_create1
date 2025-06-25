@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,7 +31,7 @@ public class StoreRestController {
 		return storeCreateService.selectAll();
 	}
 	
-	@PostMapping("/openform")
+	@PutMapping("/openform")
 	public int storecreate(HttpSession session, @RequestBody StoreEntity storeEntity) {
 		int result = 0;
 		MemberEntity memberEntity = (MemberEntity) session.getAttribute("loginMember");

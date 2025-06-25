@@ -4,6 +4,44 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper
 	namespace="com.chacha.create.common.mapper.order.OrderMapper">
+	
+	<select id="selectByStatus" resultType="map"
+		parameterType="string">
+		SELECT order_info.order_status, COUNT(*)
+		FROM order_info
+		JOIN order_detail ON order_info.order_id = order_detail.order_id
+		JOIN
+		product ON order_detail.product_id = product.product_id
+		JOIN store ON
+		product.store_id = store.store_id
+		WHERE store.store_Url = #{storeUrl}
+		GROUP BY order_info.order_status
+	</select>
+	
+	<select id="selectByDayOrderSum"
+		resultType="orderSumDTO"
+		parameterType="string">
+		SELECT TO_CHAR(order_info.order_date, 'YYYY-MM-DD') AS
+		saleDate,
+		SUM(order_detail.order_cnt * order_detail.order_price) AS total
+		FROM order_info
+		JOIN order_detail ON order_info.order_id = order_detail.order_id
+		JOIN product ON order_detail.product_id = product.product_id
+		JOIN store ON product.store_id = store.store_id
+		WHERE store.store_Url = #{storeUrl} AND order_info.order_date >= SYSDATE - 7
+		GROUP BY TO_CHAR(order_info.order_date, 'YYYY-MM-DD')
+		ORDER BY saleDate
+	</select>
+	
+	<select id="selectForOrderStatus" resultType="orderStatusEnum" parameterType="String">
+		select DISTINCT oi.order_status
+		from store s
+		left outer join product p on(s.store_id = p.store_id)
+		join order_detail od on(p.product_id = od.product_id)
+		left outer join order_info oi on(od.order_id = oi.order_id)
+		where s.store_url = #{StoreUrl}
+	</select>
+	
 	<resultMap id="orderDTOResultMap" type="orderDTO">
 	    <!-- order_info -->
 	    <id property="orderId" column="order_id" />
@@ -67,7 +105,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		JOIN product p ON od.product_id = p.product_id
 		JOIN addr a ON oi.address_id = a.address_id
 		JOIN card c ON oi.card_id = c.card_id
-		join store s ON p.store_id = s.store_id
+		JOIN store s ON p.store_id = s.store_id
 		WHERE s.store_url = #{storeUrl}
 		ORDER BY CASE oi.order_status
 		    WHEN 'ORDER_OK' THEN 1
@@ -78,7 +116,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		END
 	</select>
 
-	<select id="selectRefundAll" resultMap="orderDTOResultMap" parameterType="map">
+	<select id="selectForRefundAll" resultMap="orderDTOResultMap" parameterType="String">
 	SELECT
 	    oi.order_id,
 	    oi.member_id,
@@ -109,7 +147,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	JOIN product p ON od.product_id = p.product_id
 	JOIN addr a ON oi.address_id = a.address_id
 	JOIN card c ON oi.card_id = c.card_id
-	join store s ON p.store_id = s.store_id
+	JOIN store s ON p.store_id = s.store_id
 	WHERE s.store_url = #{storeUrl} 
 	AND oi.order_status IN ('REFUND', 'REFUND_OK')
 	ORDER BY CASE oi.order_status
@@ -150,9 +188,135 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	JOIN product p ON od.product_id = p.product_id
 	JOIN addr a ON oi.address_id = a.address_id
 	JOIN card c ON oi.card_id = c.card_id
-	join store s ON p.store_id = s.store_id
+	JOIN store s ON p.store_id = s.store_id
 	WHERE s.store_url = #{storeUrl} 
 	AND oi.order_status = #{orderStatus}
 	</select>
+	
+	<select id="selectForPersonalAll" resultMap="orderDTOResultMap" parameterType="int">
+	SELECT
+	    oi.order_id,
+	    oi.member_id,
+	    oi.order_date,
+	    oi.order_name,
+	    oi.order_status,
+	
+	    od.order_detail_id,
+	    od.order_cnt,
+	    od.order_price,
+	
+	    p.product_id,
+	    p.store_id,
+	    p.product_name,
+	    p.price,
+	
+	    a.address_id,
+	    a.post_num,
+	    a.address_road,
+	    a.address_detail,
+	    a.address_extra,
+	    
+	    c.card_id,
+	    c.card_num,
+	    c.card_company
+	FROM order_info oi
+	JOIN order_detail od ON oi.order_id = od.order_id
+	JOIN product p ON od.product_id = p.product_id
+	JOIN addr a ON oi.address_id = a.address_id
+	JOIN card c ON oi.card_id = c.card_id
+	JOIN store s ON p.store_id = s.store_id
+	JOIN seller sel ON s.seller_id = sel.seller_id
+	JOIN member m ON sel.member_id = m.member_id
+	WHERE m.member_id = #{memberId} AND sel.personal_check = 0
+	ORDER BY CASE oi.order_status
+	    WHEN 'ORDER_OK' THEN 1
+	    WHEN 'CONFIRM' THEN 2
+	    WHEN 'REFUND' THEN 3
+	    WHEN 'REFUND_OK' THEN 4
+	    ELSE 5
+	END
+	</select>
+	
+		<select id="selectForPersonalRefundAll" resultMap="orderDTOResultMap" parameterType="int">
+	SELECT
+	    oi.order_id,
+	    oi.member_id,
+	    oi.order_date,
+	    oi.order_name,
+	    oi.order_status,
+	
+	    od.order_detail_id,
+	    od.order_cnt,
+	    od.order_price,
+	
+	    p.product_id,
+	    p.store_id,
+	    p.product_name,
+	    p.price,
+	
+	    a.address_id,
+	    a.post_num,
+	    a.address_road,
+	    a.address_detail,
+	    a.address_extra,
+	    
+	    c.card_id,
+	    c.card_num,
+	    c.card_company
+	FROM order_info oi
+	JOIN order_detail od ON oi.order_id = od.order_id
+	JOIN product p ON od.product_id = p.product_id
+	JOIN addr a ON oi.address_id = a.address_id
+	JOIN card c ON oi.card_id = c.card_id
+	JOIN store s ON p.store_id = s.store_id
+	JOIN seller sel ON s.seller_id = sel.seller_id
+	JOIN member m ON sel.member_id = m.member_id
+	WHERE m.member_id = #{memberId} AND sel.personal_check = 0
+	AND oi.order_status IN ('REFUND', 'REFUND_OK')
+	ORDER BY CASE oi.order_status
+	    WHEN 'REFUND' THEN 1
+	    WHEN 'REFUND_OK' THEN 2
+	    ELSE 3
+	END
+	</select>
+	
+	<select id="selectForPersonalOrderStatus" resultMap="orderDTOResultMap" parameterType="map">
+		SELECT
+	    oi.order_id,
+	    oi.member_id,
+	    oi.order_date,
+	    oi.order_name,
+	    oi.order_status,
+	
+	    od.order_detail_id,
+	    od.order_cnt,
+	    od.order_price,
+	
+	    p.product_id,
+	    p.store_id,
+	    p.product_name,
+	    p.price,
+	
+	    a.address_id,
+	    a.post_num,
+	    a.address_road,
+	    a.address_detail,
+	    a.address_extra,
+	    
+	    c.card_id,
+	    c.card_num,
+	    c.card_company
+	FROM order_info oi
+	JOIN order_detail od ON oi.order_id = od.order_id
+	JOIN product p ON od.product_id = p.product_id
+	JOIN addr a ON oi.address_id = a.address_id
+	JOIN card c ON oi.card_id = c.card_id
+	JOIN store s ON p.store_id = s.store_id
+	JOIN seller sel ON s.seller_id = sel.seller_id
+	JOIN member m ON sel.member_id = m.member_id
+	WHERE m.member_id = #{memberId} AND sel.personal_check = 0
+	AND oi.order_status = #{orderStatus}
+	</select>
+	
 
 </mapper>
