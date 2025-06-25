@@ -18,8 +18,8 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@RequestMapping("/")
-public class StoreMainController {
+@RequestMapping("/api")
+public class StoreMainRestController {
 	
 	@Autowired
 	private StoreMainService storeMainService;

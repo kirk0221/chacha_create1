@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.chacha.create.service.buyer.main.StoreNoticeService;
 
 @RestController
-@RequestMapping("/{storeUrl}")
-public class StoreNoticeController {
+@RequestMapping("/api/{storeUrl}")
+public class StoreNoticeRestController {
 	
 	@Autowired
 	StoreNoticeService stService;

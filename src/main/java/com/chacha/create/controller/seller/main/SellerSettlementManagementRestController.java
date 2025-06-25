@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.chacha.create.service.seller.main.SellerSettlementManagementService;
 
 @RestController
-@RequestMapping("/{storeUrl}")
-public class SellerSettlementManagementController {
+@RequestMapping("/api/{storeUrl}")
+public class SellerSettlementManagementRestController {
 
 	@Autowired
 	SellerSettlementManagementService ssmService;

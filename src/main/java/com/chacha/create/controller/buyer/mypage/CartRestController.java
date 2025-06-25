@@ -22,8 +22,8 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@RequestMapping("main/mypage/cart")
-public class CartController {
+@RequestMapping("/api/main/mypage/cart")
+public class CartRestController {
 
     @Autowired
     private CartService cartService;

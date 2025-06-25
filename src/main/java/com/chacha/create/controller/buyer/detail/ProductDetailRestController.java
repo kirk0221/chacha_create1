@@ -2,6 +2,7 @@ package com.chacha.create.controller.buyer.detail;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,13 +14,13 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@RequestMapping("/storeUrl")
-public class ProductDetailController {
+@RequestMapping("/api/{storeUrl}")
+public class ProductDetailRestController {
 	@Autowired
 	ProductDetailService productDetailService;
 	
-	@GetMapping("/productdetail")
-    public ProductDetailViewDTO getProductDetail(@RequestParam int productId) {
+	@GetMapping("/productdetail/{productId}")
+    public ProductDetailViewDTO getProductDetail(@PathVariable int productId) {
 		return productDetailService.getProductDetailWithImages(productId);
     }
 }

@@ -18,8 +18,8 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@RequestMapping(value = "/", method = RequestMethod.GET)
-public class HomeMainController {
+@RequestMapping(value = "/api", method = RequestMethod.GET)
+public class HomeMainRestController {
 	
 	@Autowired
 	MainHomeProductService mpService;

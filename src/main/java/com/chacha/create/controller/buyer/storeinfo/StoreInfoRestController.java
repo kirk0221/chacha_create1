@@ -15,8 +15,8 @@ import com.chacha.create.common.entity.store.StoreEntity;
 import com.chacha.create.service.buyer.storeinfo.StoreInfoService;
 
 @RestController // @Controller+@ResponseBody
-@RequestMapping("/{storeUrl}")
-public class StoreInfoController {
+@RequestMapping("/api/{storeUrl}")
+public class StoreInfoRestController {
 
 	@Autowired
 	StoreInfoService storeinfo;

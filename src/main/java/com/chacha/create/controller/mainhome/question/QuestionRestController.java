@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @Slf4j
-@RequestMapping("/main")
+@RequestMapping("/api/main")
 public class QuestionRestController {
 	
 	@Autowired

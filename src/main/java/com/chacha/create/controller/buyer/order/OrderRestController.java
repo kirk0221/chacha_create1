@@ -18,8 +18,8 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@RequestMapping("/main/order")
-public class OrderController {
+@RequestMapping("/api/main/order")
+public class OrderRestController {
 	
 	@Autowired
     private OrderService orderService;
@@ -28,10 +28,6 @@ public class OrderController {
     public ResponseEntity<String> getOrder(@RequestBody OrderRequestDTO orderRequest,
     																HttpSession session) {
         MemberEntity loginMember = (MemberEntity) session.getAttribute("loginMember");
-        if (loginMember == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인 필요");
-        }
-
         int resultOrderId = orderService.placeOrder(orderRequest, loginMember);
         return ResponseEntity.ok("주문이 완료되었습니다. 주문번호: " + resultOrderId);
     }

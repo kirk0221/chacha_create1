@@ -8,13 +8,15 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.chacha.create.common.entity.member.MemberEntity;
 import com.chacha.create.service.seller.main.SellerMainService;
 
 @RestController
-public class SellManagementController {
+@RequestMapping("/api")
+public class SellManagementRestController {
 	
 	@Autowired
 	SellerMainService sellerMainService;

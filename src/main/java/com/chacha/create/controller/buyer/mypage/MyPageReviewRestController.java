@@ -19,8 +19,8 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@RequestMapping("/main/mypage")
-public class MyPageReviewsController {
+@RequestMapping("/api/main/mypage")
+public class MyPageReviewRestController {
 
     @Autowired
     private ReviewService reviewService;

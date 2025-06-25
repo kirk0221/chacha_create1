@@ -11,7 +11,7 @@ import com.chacha.create.common.entity.store.StoreEntity;
 import com.chacha.create.service.manager.store.StoreManagementService;
 
 @RestController
-@RequestMapping("/manager")
+@RequestMapping("/api/manager")
 public class StoreManagementRestController {
 	
 	@Autowired

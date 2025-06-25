@@ -15,9 +15,9 @@ import com.chacha.create.service.seller.product.ProductUpdateService;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping("/{storeUrl}/seller/productupdate")
+@RequestMapping("/api/{storeUrl}/seller/productupdate")
 @Slf4j
-public class ProductlistupdateController {
+public class ProductlistupdateRestController {
 
 	@Autowired
 	ProductUpdateService productUpdateService;

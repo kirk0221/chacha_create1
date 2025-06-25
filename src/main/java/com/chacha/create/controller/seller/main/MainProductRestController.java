@@ -21,9 +21,9 @@ import com.chacha.create.service.mainhome.store.MainProductService;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping("/main/sell")
+@RequestMapping("/api/main/sell")
 @Slf4j
-public class MainProductController {
+public class MainProductRestController {
 	
 	@Autowired
 	private MainProductService mainproductService;

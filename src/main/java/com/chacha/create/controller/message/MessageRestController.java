@@ -20,7 +20,7 @@ import com.chacha.create.common.entity.member.MemberEntity;
 import com.chacha.create.service.message.MessageService;
 
 @RestController
-@RequestMapping("/{storeUrl}/message")
+@RequestMapping("/api/{storeUrl}/message")
 public class MessageRestController {
 	
 	@Autowired

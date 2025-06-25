@@ -17,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @Slf4j
-@RequestMapping("/{StoreUrl}/seller")
+@RequestMapping("/api/{StoreUrl}/seller")
 public class ShutDownRestController {
 
 	@Autowired

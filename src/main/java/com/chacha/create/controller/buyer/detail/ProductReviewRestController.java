@@ -23,8 +23,8 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@RequestMapping("/main/productdetail/{productId}/review")
-public class ProductReviewController {
+@RequestMapping("/api/main/productdetail/{productId}/review")
+public class ProductReviewRestController {
 	
 	@Autowired
     private ReviewService reviewService;
@@ -53,37 +53,28 @@ public class ProductReviewController {
     }
 
     @PostMapping
-    public String addReview(@RequestBody ReviewEntity review, HttpSession session) {
+    public int addReview(@RequestBody ReviewEntity review, HttpSession session) {
         MemberEntity loginMember = (MemberEntity) session.getAttribute("loginMember");
-        if (loginMember == null) {
-        	return "로그인이 필요";
-        }
         int result = reviewService.insert(review, loginMember.getMemberId());
         
-        return result > 0 ? "등록 성공" : "등록 실패";
+        return result;
     }
 
     @PutMapping
-    public String updateReview(@RequestBody ReviewEntity review, HttpSession session) {
+    public int updateReview(@RequestBody ReviewEntity review, HttpSession session) {
     	MemberEntity loginMember = (MemberEntity) session.getAttribute("loginMember");
-        if (loginMember == null) {
-        	return "로그인이 필요";
-        }
         int memberId = loginMember.getMemberId();
         int result = reviewService.update(review, memberId);
         
-        return result > 0 ? "수정 성공" : "수정 실패";
+        return result;
     }
 
     @DeleteMapping
-    public String deleteReview(@RequestParam int reviewId, HttpSession session) {
+    public int deleteReview(@RequestParam int reviewId, HttpSession session) {
     	MemberEntity loginMember = (MemberEntity) session.getAttribute("loginMember");
-        if (loginMember == null) {
-        	return "로그인이 필요";
-        }
         int memberId = loginMember.getMemberId();
         int result = reviewService.delete(reviewId, memberId);
 
-        return result > 0 ? "삭제 성공" : "삭제 실패";
+        return result;
     }
 }

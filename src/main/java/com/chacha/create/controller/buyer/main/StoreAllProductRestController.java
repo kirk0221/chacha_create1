@@ -20,8 +20,8 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@RequestMapping("/{storeUrl}")
-public class StoreAllProductController {
+@RequestMapping("/api/{storeUrl}")
+public class StoreAllProductRestController {
 	
 	@Autowired
 	StoreMainService storeMainService;
