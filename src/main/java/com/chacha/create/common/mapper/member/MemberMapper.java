@@ -59,4 +59,7 @@ public interface MemberMapper {
      * @return 삭제 성공 시 영향 받은 행 수
      */
     int delete(int memberId);
+    
+    int updateMemberInfo(MemberEntity member);
+    
 }
