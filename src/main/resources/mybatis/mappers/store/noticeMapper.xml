@@ -63,16 +63,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where st.store_url = #{aa}
 	</select>
 
-	<select id="noticeDetailList" parameterType="string"
-		resultType="map">
+	<select id="noticeDetailList" resultType="map">
 		SELECT n.notice_id AS noticeId, n.notice_title AS
-		noticeTitle, n.notice_text AS noticeText, m.member_name AS memberName,
+		noticeTitle, TO_CHAR(n.notice_text) AS noticeText, m.member_name AS memberName,
 		n.notice_date AS noticeDate
 		from notice n
 		JOIN store st ON n.store_id = st.store_id
 		JOIN seller se ON st.seller_id = se.seller_id
 		JOIN member m ON se.member_id = m.member_id
-		where st.store_url = #{aa}
+		where st.store_url = #{storeUrl} and n.notice_id= #{noticeId} 
 	</select>
 
 </mapper>
