@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.chacha.create.common.dto.product.HomeProductDTO;
-import com.chacha.create.service.buyer.main.MainService;
+import com.chacha.create.service.store_common.MainService;
 
 import lombok.extern.slf4j.Slf4j;
 

@@ -50,13 +50,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="delete" parameterType="int">
 		DELETE FROM report WHERE report_id = #{reportId}
 	</delete>
-	
-	<!-- 신고대상자인 판매자의 ID를 추출하기 위함 -->
-	<select id="findSellerIdByStoreId" parameterType="reportEntity" resultType="int">
-	    SELECT seller_id
-	    FROM store
-	    WHERE store_id = #{storeId}
-	</select>
-
 
 </mapper>

@@ -1,4 +1,4 @@
-package com.chacha.create.service.buyer.main;
+package com.chacha.create.service.store_common;
 
 import java.util.HashMap;
 import java.util.List;

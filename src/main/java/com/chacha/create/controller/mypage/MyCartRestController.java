@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.chacha.create.common.dto.member.CartViewDTO;
 import com.chacha.create.common.entity.member.CartEntity;
-import com.chacha.create.service.mypage.CartService;
+import com.chacha.create.service.store_common.mypage.CartService;
 
 import lombok.extern.slf4j.Slf4j;
 

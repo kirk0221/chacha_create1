@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.chacha.create.common.mapper.product.MainProductMapper">
+<mapper namespace="com.chacha.create.common.mapper.product.PersonalProductMapper">
 
-  <insert id="insertmainProduct" parameterType="com.chacha.create.common.dto.product.MainProductDTO">
+  <insert id="insertMainProduct" parameterType="persnonalProductDTO">
 	  INSERT INTO product (
 	    product_id, store_id, type_category_id, d_category_id, product_name,
 	    price, product_detail, stock, product_date, last_modified_date,
@@ -28,63 +28,46 @@
 	  )
 	</insert>
 
-  <insert id="insertMainProductImage1" parameterType="com.chacha.create.common.dto.product.ProductUpdateDTO">
-	  INSERT INTO p_img (
-	    p_img_id,         
-	    product_id,
-	    p_img_seq,
-	    p_img_enum,
-	    p_img_url
-	  )
-	  VALUES (
-	    seq_p_img_id.NEXTVAL,  
-	    seq_product_id.CURRVAL,
-	    1,
-	    'THUMBNAIL',
-	    #{pimgUrl1}
-	  )
-	</insert>
-
-  <insert id="insertMainProductImage2" parameterType="com.chacha.create.common.dto.product.ProductUpdateDTO">
+	<!-- 이미지 insert -->
+	<insert id="insertMainProductImage" parameterType="map">
 	  INSERT INTO p_img (
 	    p_img_id,
 	    product_id,
 	    p_img_seq,
 	    p_img_enum,
 	    p_img_url
-	  )
-	  VALUES (
+	  ) VALUES (
 	    seq_p_img_id.NEXTVAL,
-	    seq_product_id.CURRVAL,
-	    2,
+	    #{productId},
+	    #{seq},
 	    'THUMBNAIL',
-	    #{pimgUrl2}
-	  )
-	</insert>
-
-  <insert id="insertMainProductImage3" parameterType="com.chacha.create.common.dto.product.ProductUpdateDTO">
-	  INSERT INTO p_img (
-	    p_img_id,
-	    product_id,
-	    p_img_seq,
-	    p_img_enum,
-	    p_img_url
-	  )
-	  VALUES (
-	    seq_p_img_id.NEXTVAL,
-	    seq_product_id.CURRVAL,
-	    3,
-	    'THUMBNAIL',
-	    #{pimgUrl3}
+	    #{url}
 	  )
 	</insert>
 	
-	<select id="selectStoreIdBySellerId" resultType="int" parameterType="int">
-	    SELECT store_id FROM store WHERE seller_id = #{sellerId}
+	<!-- 이미지 update -->
+	<update id="updateMainProductImage" parameterType="map">
+	  UPDATE p_img
+	  SET p_img_url = #{url}
+	  WHERE product_id = #{productId}
+	    AND p_img_seq = #{seq}
+	    AND p_img_enum = 'THUMBNAIL'
+	</update>
+	
+	<select id="selectForSellerAndStoreByMemberId" resultType="map" parameterType="int">
+	    SELECT
+		    s.seller_id,
+		    st.store_id
+		FROM
+		    seller s
+		    LEFT JOIN store st ON s.seller_id = st.seller_id
+		WHERE
+		    s.member_id = #{memberId}
+		    AND s.personal_check = 1
 	</select>
 	
 	<!-- storeId에 해당하는 상품 리스트 조회 -->
-	<select id="selectProductsByStoreId" resultType="com.chacha.create.common.dto.product.MainProductDTO" parameterType="int">
+	<select id="selectProductsByStoreId" resultType="persnonalProductDTO" parameterType="int">
       SELECT 
 		    p.product_id,
 		    p.product_name,
@@ -104,7 +87,7 @@
 		  AND p.delete_check = 0
 		</select>
 		
-		<update id="updateMainProduct" parameterType="com.chacha.create.common.dto.product.MainProductDTO">
+		<update id="updateMainProduct" parameterType="persnonalProductDTO">
 		  UPDATE product
 		  SET
 		    product_name = #{productName},
@@ -117,30 +100,6 @@
 		  WHERE product_id = #{productId}
 		    AND store_id = #{storeId}  <!-- storeId와 일치하는 데이터만 수정 -->
 		</update>
-		
-		<update id="updateMainProductImage1" parameterType="com.chacha.create.common.dto.product.MainProductDTO">
-		  UPDATE p_img
-		  SET p_img_url = #{pimgUrl1}
-		  WHERE product_id = #{productId}
-		    AND p_img_seq = 1
-		    AND p_img_enum = 'THUMBNAIL'
-		</update>
-		
-		<update id="updateMainProductImage2" parameterType="com.chacha.create.common.dto.product.MainProductDTO">
-		  UPDATE p_img
-		  SET p_img_url = #{pimgUrl2}
-		  WHERE product_id = #{productId}
-		    AND p_img_seq = 2
-		    AND p_img_enum = 'THUMBNAIL'
-		</update>
-		
-		<update id="updateMainProductImage3" parameterType="com.chacha.create.common.dto.product.MainProductDTO">
-		  UPDATE p_img
-		  SET p_img_url = #{pimgUrl3}
-		  WHERE product_id = #{productId}
-		    AND p_img_seq = 3
-		    AND p_img_enum = 'THUMBNAIL'
-		</update>
 	
 		<select id="checkProductBelongsToSellerStore" resultType="int">
 		  SELECT COUNT(*) 
@@ -150,6 +109,7 @@
 		  WHERE p.product_id = #{productId}
 		    AND sel.seller_id = #{sellerId}
 		    AND s.store_id = #{storeId}
+		    AND sel.personal_check = 1
 		</select>
 		
 		<update id="deleteMainProductById" parameterType="int">

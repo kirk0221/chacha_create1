@@ -1,4 +1,4 @@
-package com.chacha.create.service.buyer.order;
+package com.chacha.create.service.store_common.order;
 
 import java.util.List;
 

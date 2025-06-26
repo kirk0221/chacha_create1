@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class MainProductDTO {
+public class PersonalProductDTO {
     private String productName;
     private String productDetail;
     private int price;

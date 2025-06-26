@@ -1,7 +1,5 @@
 package com.chacha.create.controller.buyer.report;
 
-import java.util.Date;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,21 +28,9 @@ public class ReportModalRestController {
 
 	    // 로그인 여부 확인
 	    MemberEntity loginMember = (MemberEntity) session.getAttribute("loginMember");
-	    // 로그인된 사용자 정보 등록
-	    reportEntity.setMemberId(loginMember.getMemberId());
 
-	    // 스토어 ID로 판매자 ID 조회
-	    Integer storeId = reportEntity.getStoreId();
-	    Integer sellerId = reportModalService.findSellerIdByStoreId(storeId);
-	    reportEntity.setSellerId(sellerId);
-	    log.info("storeID : {} sellserID : {}",storeId,sellerId);
-	    // 현재 날짜 저장
-	    reportEntity.setReportDate(new Date());
-
-	    log.info("최종 insert 데이터 : {}", reportEntity);
-	    
 	    // 신고 등록
-	    int result = reportModalService.insert(reportEntity);
+	    int result = reportModalService.insert(loginMember, reportEntity);
 	    log.info(result == 1 ? "신고 등록 성공" : "신고 등록 실패");
 
 	    return result;
