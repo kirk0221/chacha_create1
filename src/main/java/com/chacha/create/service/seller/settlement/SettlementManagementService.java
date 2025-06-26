@@ -1,4 +1,4 @@
-package com.chacha.create.service.seller.main;
+package com.chacha.create.service.seller.settlement;
 
 import java.util.List;
 import java.util.Map;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.chacha.create.common.mapper.manage.ManageMapper;
 
 @Service
-public class SellerSettlementManagementService {
+public class SettlementManagementService {
 	
 	@Autowired
 	ManageMapper manageMapper;

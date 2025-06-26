@@ -22,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @Slf4j
 @RequestMapping("/api/main/sell")
-public class OrderManageRestController {
+public class PersonalOrderManageRestController {
 	
 	@Autowired
 	OrderManageService orderManageService;

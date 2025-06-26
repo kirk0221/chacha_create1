@@ -61,5 +61,5 @@ public interface ProductMapper {
      */
     int delete(int productId);
 
-	int selectStoreIdByStoreUrl(String storeUrl);
+	int selectForStoreIdByStoreUrl(String storeUrl);
 }

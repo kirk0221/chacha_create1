@@ -1,4 +1,4 @@
-package com.chacha.create.controller.seller.main;
+package com.chacha.create.controller.mainhome.personal;
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,24 +12,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.chacha.create.common.entity.member.MemberEntity;
-import com.chacha.create.service.seller.main.SellerMainService;
+import com.chacha.create.service.mainhome.personal.PersonalSettlementService;
 
 @RestController
 @RequestMapping("/api")
-public class SellManagementRestController {
+public class PersonalSettlementRestController {
 	
 	@Autowired
-	SellerMainService sellerMainService;
+	PersonalSettlementService personalSettlementService;
 	
 	@GetMapping("/main/sell/management")
 	Map<String, List<?>> sellmanagement(HttpSession session) {
-		
-		MemberEntity member= (MemberEntity) session.getAttribute("loginMember");
-		
+		MemberEntity member = (MemberEntity) session.getAttribute("loginMember");
 		Map<String, List<?>> result = new HashMap<>();
-		
-		List<Map<String, Object>> sellmanageList = sellerMainService.sellManagement(5);
-		List<Map<String, Object>> daySellmanagelist = sellerMainService.daySellManagement(5);
+		List<Map<String, Object>> sellmanageList = personalSettlementService.sellManagement(member.getMemberId());
+		List<Map<String, Object>> daySellmanagelist = personalSettlementService.daySellManagement(member.getMemberId());
 		
 		result.put("sellmanageList", sellmanageList);
 		result.put("daySellmanagelist", daySellmanagelist);

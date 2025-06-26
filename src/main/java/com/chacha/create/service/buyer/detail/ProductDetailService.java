@@ -3,7 +3,6 @@ package com.chacha.create.service.buyer.detail;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,23 +11,18 @@ import com.chacha.create.common.dto.product.ProductDetailViewDTO;
 import com.chacha.create.common.entity.product.PImgEntity;
 import com.chacha.create.common.enums.image.ProductImageTypeEnum;
 import com.chacha.create.common.mapper.product.PImgMapper;
-import com.chacha.create.common.mapper.product.ProductDetailMapper;
+import com.chacha.create.common.mapper.product.ProductManageMapper;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class ProductDetailService {
 
 	private final PImgMapper pImgMapper;
-	
-	private final ProductDetailMapper productDetailMapper;
-	
-	@Autowired
-	public ProductDetailService(PImgMapper pImgMapper, ProductDetailMapper productDetailMapper) {
-		this.pImgMapper = pImgMapper;
-		this.productDetailMapper = productDetailMapper;
-	}
+	private final ProductManageMapper productDetailMapper;
 	
 	@Transactional
 	public ProductDetailViewDTO getProductDetailWithImages(int productId) {

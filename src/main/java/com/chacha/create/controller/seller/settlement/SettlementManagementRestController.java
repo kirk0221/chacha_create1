@@ -1,4 +1,4 @@
-package com.chacha.create.controller.seller.main;
+package com.chacha.create.controller.seller.settlement;
 
 import java.util.HashMap;
 import java.util.List;
@@ -10,16 +10,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.chacha.create.service.seller.main.SellerSettlementManagementService;
+import com.chacha.create.service.seller.settlement.SettlementManagementService;
 
 @RestController
 @RequestMapping("/api/{storeUrl}")
-public class SellerSettlementManagementRestController {
+public class SettlementManagementRestController {
 
 	@Autowired
-	SellerSettlementManagementService ssmService;
+	SettlementManagementService ssmService;
 	
-	@GetMapping("/seller/settlement/management")
+	@GetMapping("/seller/management/settlement")
 	Map<String, List<?>> sellerSettlementManagement(@PathVariable String storeUrl){
 		
 		Map<String, List<?>> result = new HashMap<>();

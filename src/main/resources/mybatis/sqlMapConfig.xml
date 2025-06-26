@@ -54,6 +54,7 @@
        <typeAlias type="com.chacha.create.common.dto.product.ProductDetailDTO" alias="productDetailDTO" />
        <typeAlias type="com.chacha.create.common.dto.product.PersonalProductDTO" alias="persnonalProductDTO" />
        <typeAlias type="com.chacha.create.common.dto.product.ProductUpdateDTO" alias="productUpdateDTO" />
+       <typeAlias type="com.chacha.create.common.dto.product.ProductlistDTO" alias="productlistDTO" />
        
        <typeAlias type="com.chacha.create.common.dto.manager.ManagerAdjustmentDTO" alias="managerAdjustmentDTO" />
        <typeAlias type="com.chacha.create.common.dto.member.SellerInfoDTO" alias="sellerInfoDTO" />

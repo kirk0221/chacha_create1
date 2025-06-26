@@ -25,14 +25,14 @@ import lombok.extern.slf4j.Slf4j;
 public class PersonalProductRestController {
 	
 	@Autowired
-	private PersonalProductService mainproductService;
+	private PersonalProductService personalProductService;
 
 	@PostMapping(value = "/sellregister", consumes = "application/json", produces = "text/plain;charset=utf-8")
 	public int registerProduct(@RequestBody PersonalProductDTO dto, HttpSession session) {
 		MemberEntity loginMember = (MemberEntity) session.getAttribute("loginMember");
 		Integer memberId = loginMember.getMemberId();
 		log.info("로그인된 memberId: {}", memberId);
-		int result = mainproductService.insertMainProductWithImages(dto, memberId);
+		int result = personalProductService.insertMainProductWithImages(dto, memberId);
 
 		return result;
 	}
@@ -42,7 +42,7 @@ public class PersonalProductRestController {
 		MemberEntity loginMember = (MemberEntity) session.getAttribute("loginMember");
 		Integer memberId = loginMember.getMemberId();
 		log.info("로그인된 memberId: {}", memberId);
-		return mainproductService.getProductsByMemberId(memberId);
+		return personalProductService.getProductsByMemberId(memberId);
 	}
 
 	@PutMapping(value = "/sellregister/update", consumes = "application/json", produces = "text/plain;charset=utf-8")
@@ -50,7 +50,7 @@ public class PersonalProductRestController {
 		MemberEntity loginMember = (MemberEntity) session.getAttribute("loginMember");
 		Integer memberId = loginMember.getMemberId();
 		log.info("로그인된 memberId: {}", memberId);
-		int result = mainproductService.updateMainProductWithImages(dto, memberId);
+		int result = personalProductService.updateMainProductWithImages(dto, memberId);
 		return result;
 	}
 
@@ -60,7 +60,7 @@ public class PersonalProductRestController {
 		MemberEntity loginMember = (MemberEntity) session.getAttribute("loginMember");
 		Integer memberId = loginMember.getMemberId();
 		log.info("로그인된 memberId: {}", memberId);
-		int result = mainproductService.deleteMainProduct(productId, memberId);
+		int result = personalProductService.deleteMainProduct(productId, memberId);
 
 		return result;
 	}

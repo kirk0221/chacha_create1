@@ -30,7 +30,4 @@ public class ProductUpdateDTO {
     private TypeCategoryEnum typeCategoryId;
 	private DCategoryEnum dcategoryId;
 	private UCategoryEnum ucategoryId;
-	private String typeCategoryName;
-	private String dcategoryName;
-	private String ucategoryName;
 }
