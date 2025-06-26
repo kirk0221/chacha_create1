@@ -3,7 +3,6 @@ package com.chacha.create.controller.mainhome.main;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,9 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.chacha.create.common.dto.product.MainHomeDTO;
-import com.chacha.create.common.dto.product.StoreProductDTO;
-import com.chacha.create.service.mainhome.product.MainHomeProductService;
+import com.chacha.create.common.dto.product.HomeDTO;
+import com.chacha.create.common.dto.product.HomeProductDTO;
+import com.chacha.create.service.buyer.main.MainService;
+import com.chacha.create.util.ControllerUtil;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,14 +25,14 @@ import lombok.extern.slf4j.Slf4j;
 public class HomeMainRestController {
 	
 	@Autowired
-	MainHomeProductService mpService;
+	MainService mainService;
 	
 	// 메인 홈 메인페이지에서 인기스토어,인기상품,최신상품조회
 	@GetMapping("/main")
 	public Map<String, Object> getProductList(){
-		List<MainHomeDTO> bestStore = mpService.selectForBestStore();
-		List<StoreProductDTO> bestProduct = mpService.selectForBestProduct();
-		List<StoreProductDTO> newProduct = mpService.selectForNewProduct();
+		List<HomeDTO> bestStore = mainService.selectForBestStore();
+		List<HomeProductDTO> bestProduct = mainService.selectForBestProduct(null);
+		List<HomeProductDTO> newProduct = mainService.selectForNewProduct();
 		
 		
 		Map<String, Object> mhData = new HashMap<>();
@@ -48,39 +48,30 @@ public class HomeMainRestController {
 
 	// 메인홈 전체상품 조회(조건조회)
 	@GetMapping("/main/productlist")
-	public ResponseEntity<List<StoreProductDTO>> getProductList(
+	public ResponseEntity<List<HomeProductDTO>> getProductList(
 	        @RequestParam(required = false) List<String> type,
 	        @RequestParam(required = false) List<String> d,
 	        @RequestParam(required = false) List<String> u,
-	        @RequestParam(value = "keyword", required = false)  String keyword,
+	        @RequestParam(value = "keyword", required = false) String keyword,
 	        @RequestParam(required = false) String sort) {
-		
-		Map<String, List<Integer>> parsedMap = new HashMap<>();
-		
-		if(keyword != null && !keyword.isEmpty()) {
-			List<StoreProductDTO> result = mpService.selectByProductName(keyword);
-			log.info("메인홈에서 상품명 검색 결과 : " + result);
-			return ResponseEntity.ok(result);
-		} else {
-	    
-	    if (type != null) {
-	        parsedMap.put("type", type.stream().map(Integer::parseInt).collect(Collectors.toList()));
-	    }
-	    if (d != null) {
-	        parsedMap.put("d", d.stream().map(Integer::parseInt).collect(Collectors.toList()));
-	    }
-	    if (u != null) {
-	        parsedMap.put("u", u.stream().map(Integer::parseInt).collect(Collectors.toList()));
-	    }
 
 	    Map<String, Object> paramMap = new HashMap<>();
-	    paramMap.put("categoryMap", parsedMap);
+
+	    if (keyword != null && !keyword.isEmpty()) {
+	        List<HomeProductDTO> result = mainService.selectByProductName(keyword);
+	        log.info("메인홈에서 상품명 검색 결과 : {}", result);
+	        return ResponseEntity.ok(result);
+	    }
+
+	    ControllerUtil.putParsedParam(paramMap, "type", type);
+	    ControllerUtil.putParsedParam(paramMap, "d", d);
+	    ControllerUtil.putParsedParam(paramMap, "u", u);
+
 	    paramMap.put("sort", sort);
-	    
-	    List<StoreProductDTO> result = mpService.selectForProductList(paramMap);
-	    log.info("메인홈에서 조건조회 결과 : " + result);
+
+	    List<HomeProductDTO> result = mainService.selectForProductList(paramMap);
+	    log.info("메인홈 조건조회 결과 : {}", result);
 	    return ResponseEntity.ok(result);
-		}
 	}
 		
 }

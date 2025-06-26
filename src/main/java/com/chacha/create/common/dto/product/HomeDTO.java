@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class MainHomeDTO {
+public class HomeDTO {
 	
 	 // 메인홈 메인페이지에서 사용할 필드 추가
 	private Integer storeId;

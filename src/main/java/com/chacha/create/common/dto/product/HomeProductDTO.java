@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)		// 모든 필드를 사용하지 않고 필요한 필드만 출력
-public class StoreProductDTO {
+public class HomeProductDTO {
 
     private Integer productId;
     private Integer typeCategoryId;
@@ -32,7 +32,7 @@ public class StoreProductDTO {
     
     // 메인홈 메인페이지에서 사용할 필드 추가
     @JsonUnwrapped
-    private MainHomeDTO mainHome;
+    private HomeDTO mainHome;
 
     // 조회 시 조인용 필드
     private String typeCategoryName;   	// 대분류 카테고리명

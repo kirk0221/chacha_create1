@@ -63,8 +63,7 @@ public class ProductReviewRestController {
     @PutMapping
     public int updateReview(@RequestBody ReviewEntity review, HttpSession session) {
     	MemberEntity loginMember = (MemberEntity) session.getAttribute("loginMember");
-        int memberId = loginMember.getMemberId();
-        int result = reviewService.update(review, memberId);
+        int result = reviewService.update(review, loginMember.getMemberId());
         
         return result;
     }
@@ -72,8 +71,7 @@ public class ProductReviewRestController {
     @DeleteMapping
     public int deleteReview(@RequestParam int reviewId, HttpSession session) {
     	MemberEntity loginMember = (MemberEntity) session.getAttribute("loginMember");
-        int memberId = loginMember.getMemberId();
-        int result = reviewService.delete(reviewId, memberId);
+        int result = reviewService.delete(reviewId, loginMember.getMemberId());
 
         return result;
     }
