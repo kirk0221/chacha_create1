@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.chacha.create.common.entity.member.MemberEntity;
-import com.chacha.create.service.auth.login.LoginService;
+import com.chacha.create.service.header.auth.LoginService;
 import com.chacha.create.service.seller.shut_down.ShutDownService;
 
 import lombok.extern.slf4j.Slf4j;

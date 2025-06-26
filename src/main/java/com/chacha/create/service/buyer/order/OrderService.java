@@ -2,38 +2,38 @@ package com.chacha.create.service.buyer.order;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.chacha.create.common.dto.order.OrderDetailDTO;
+import com.chacha.create.common.dto.order.OrderListDTO;
 import com.chacha.create.common.dto.order.OrderRequestDTO;
 import com.chacha.create.common.entity.member.AddrEntity;
 import com.chacha.create.common.entity.member.MemberEntity;
 import com.chacha.create.common.entity.order.DeliveryEntity;
 import com.chacha.create.common.entity.order.OrderDetailEntity;
 import com.chacha.create.common.entity.order.OrderInfoEntity;
+import com.chacha.create.common.enums.order.OrderStatusEnum;
 import com.chacha.create.common.mapper.member.AddrMapper;
 import com.chacha.create.common.mapper.order.DeliveryMapper;
 import com.chacha.create.common.mapper.order.OrderDetailMapper;
 import com.chacha.create.common.mapper.order.OrderInfoMapper;
+import com.chacha.create.common.mapper.order.OrderMapper;
+import com.chacha.create.util.ServiceUtil;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class OrderService {
-
-	@Autowired
-    private AddrMapper addrMapper;
 	
-	@Autowired
-    private OrderInfoMapper orderInfoMapper;
-	
-	@Autowired
-    private OrderDetailMapper orderDetailMapper;
-	
-	@Autowired
-	private DeliveryMapper deliveryMapper;
+    private final OrderMapper orderMapper;
+    private final AddrMapper addrMapper;
+    private final OrderInfoMapper orderInfoMapper;
+    private final OrderDetailMapper orderDetailMapper;
+	private final DeliveryMapper deliveryMapper;
 
     @Transactional
     public int placeOrder(OrderRequestDTO request, MemberEntity member) {
@@ -71,5 +71,76 @@ public class OrderService {
         deliveryMapper.insert(delivery);
 
         return order.getOrderId();
+    }
+    public List<OrderListDTO> getOrderList(int memberId) {
+        List<OrderListDTO> orderlist = orderMapper.selectOrderListByMemberId(memberId);
+        check_deliveryStatus(orderlist);
+        return orderlist;
+    }
+    
+    @Transactional
+    public OrderDetailDTO selectByOrderId(int orderId, MemberEntity member) {
+    	int memberId = member.getMemberId();
+        // 주문 상세 조회
+        OrderDetailDTO dto = orderMapper.selectOrderDetailByOrderId(orderId, memberId);
+
+		// 주문 상세 내 상품 목록 조회
+		List<OrderListDTO> orderlist = orderMapper.selectOrderListByOrderId(orderId, memberId);
+		dto.setOrderItems(orderlist);
+
+		// 배송 상태 체크
+		check_deliveryStatus(orderlist);
+
+        // 총 금액 계산 (상품 가격 총합)
+		int total = 0;
+		for (OrderListDTO item : orderlist) {
+		    total += item.getOrderPrice();
+		}
+		dto.setTotalAmount(total);
+		
+		String cardNum = orderMapper.selectCardNumByOrderId(orderId);
+	    dto.setMaskedCardNum(ServiceUtil.maskCardNumber(cardNum));
+
+		dto.setCanCancel(isCancelable(dto.getOrderStatus()));
+		dto.setCanRefund(isRefundable(dto.getOrderStatus()));
+		dto.setCanWriteReview(canWriteReview(dto.getOrderStatus()));
+
+        return dto;
+    }
+
+    // ORDER_OK일 때만 true 반환(취소 가능)
+    private boolean isCancelable(OrderStatusEnum status) {
+        return status == OrderStatusEnum.ORDER_OK;
+    }
+
+    // ORDER_OK일 때만 true 반환(환불 가능)
+    private boolean isRefundable(OrderStatusEnum status) {
+        return status == OrderStatusEnum.ORDER_OK;
+    }
+
+    // ORDER_OK거나 CONFIRM일 경우에만 true 반환(리뷰 작성 가능)
+    private boolean canWriteReview(OrderStatusEnum status) {
+        return status == OrderStatusEnum.ORDER_OK || status == OrderStatusEnum.CONFIRM;
+    }
+    
+    // 배송 상태 체크
+    private void check_deliveryStatus(List<OrderListDTO> orderlist) {
+		for (OrderListDTO dto : orderlist) {
+			Integer check = dto.getDeliveryCheck();
+
+			switch (check) {
+			case 0:
+				dto.setDeliveryStatus("배송 전");
+				break;
+			case 1:
+				dto.setDeliveryStatus("배송 중");
+				break;
+			case 2:
+				dto.setDeliveryStatus("배송 완료");
+				break;
+			default:
+				dto.setDeliveryStatus("정보 없음");
+			}
+		}
     }
 }

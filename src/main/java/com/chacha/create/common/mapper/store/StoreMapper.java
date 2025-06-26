@@ -71,8 +71,6 @@ public interface StoreMapper {
     int delete(int storeId);
     
     List<StoreEntity> selectByStoreInfo(String storeUrl);
-
-    List<ManagerAdjustmentDTO> storeAdjustment();
     
     int updateStoreInfo(StoreEntity storeEntity);
 }

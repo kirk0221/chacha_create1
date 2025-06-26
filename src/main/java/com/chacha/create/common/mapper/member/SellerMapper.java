@@ -63,18 +63,6 @@ public interface SellerMapper {
      */
     int delete(int sellerId);
     
-    List<SellerInfoDTO> selectBySellerInfo(String storeUrl);
-
-    List<ManagerAdjustmentDTO> sellerAdjustment(); 
-    
-    List<Map<String, Object>> sellManagement(int member_id);
-
-    List<Map<String, Object>> daySellManagement(int member_id);
-    
-    List<Map<String, Object>> sellerDaySellManagement(String storeUrl);
-    
-    List<Map<String, Object>> sellerSettlementManagement(String storeUrl);
-    
     int updateSellerInfo(SellerEntity seller);
     
 }

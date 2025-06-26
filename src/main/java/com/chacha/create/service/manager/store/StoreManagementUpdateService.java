@@ -3,7 +3,9 @@ package com.chacha.create.service.manager.store;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.chacha.create.common.dto.manager.StoreManagerUpdateDTO;
 import com.chacha.create.common.entity.member.MemberEntity;
 import com.chacha.create.common.entity.member.SellerEntity;
 import com.chacha.create.common.entity.store.StoreEntity;
@@ -28,18 +30,40 @@ public class StoreManagementUpdateService {
         this.sellerMapper = sellerMapper;
         this.memberMapper = memberMapper;
     }
+	
+    @Transactional(rollbackFor = Exception.class)
+	public int sellerInfoUpdate(MemberEntity loginMember, String storeUrl, StoreManagerUpdateDTO smuDTO) {
+		int result = 0;
+		StoreEntity userStore = storeMapper.selectByStoreUrl(storeUrl);
+		StoreEntity storeEntity = StoreEntity.builder()
+				.storeId(userStore.getStoreId())
+				.logoImg(smuDTO.getLogoImg())
+				.storeName(smuDTO.getStoreName())
+				.storeDetail(smuDTO.getStoreDetail())
+				.build();
 		
-	    public int storeupdate(StoreEntity storeEntity) {
-	    		log.info("store update 진입");
-	        return storeMapper.updateStoreInfo(storeEntity);
-		}
-		public int sellerupdate(SellerEntity sellerEntity) {
-			log.info("seller update 진입");
-			return sellerMapper.updateSellerInfo(sellerEntity);
-		}
-		public int memberupdate(MemberEntity memberEntity) {
-			log.info("member update 진입");
-			return memberMapper.updateMemberInfo(memberEntity);
-		}
+		SellerEntity sellerEntity = SellerEntity.builder()
+				.sellerId(userStore.getSellerId())
+				.account(smuDTO.getAccount())
+				.accountBank(smuDTO.getAccountBank())
+				.profileInfo(smuDTO.getProfileInfo())
+				.build();
+		
+		MemberEntity memberEntity = MemberEntity.builder()
+				.memberId(loginMember.getMemberId())
+				.memberPwd(smuDTO.getMemberPwd())
+				.memberPhone(smuDTO.getMemberPhone())
+				.build();
+		
+		log.info("최종값store : {}", memberEntity);
+		log.info("최종값seller : {}", storeEntity);
+		log.info("최종값member : {}", sellerEntity);
+		
+		result += storeMapper.updateStoreInfo(storeEntity);
+		result += sellerMapper.updateSellerInfo(sellerEntity);
+		result += memberMapper.updateMemberInfo(memberEntity);
+		
+		return result;
+	}
 
 }

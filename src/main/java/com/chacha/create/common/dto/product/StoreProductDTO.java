@@ -3,6 +3,7 @@ package com.chacha.create.common.dto.product;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,7 +18,6 @@ import lombok.NoArgsConstructor;
 public class StoreProductDTO {
 
     private Integer productId;
-    private Integer storeId;
     private Integer typeCategoryId;
     private Integer dCategoryId;
     private String productName;
@@ -31,12 +31,8 @@ public class StoreProductDTO {
     private Integer flagshipCheck;
     
     // 메인홈 메인페이지에서 사용할 필드 추가
-    private String storeName;
-    private String storeUrl;
-    private String logoImg;
-    private String storeDetail;
-    private String categoryName;
-    private Integer Rnk;
+    @JsonUnwrapped
+    private MainHomeDTO mainHome;
 
     // 조회 시 조인용 필드
     private String typeCategoryName;   	// 대분류 카테고리명

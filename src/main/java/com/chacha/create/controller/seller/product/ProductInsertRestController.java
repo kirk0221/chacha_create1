@@ -21,7 +21,7 @@ public class ProductInsertRestController {
     private ProductService productService;
 
     @PostMapping(value = "sell-register", consumes = "application/json", produces = "text/plain;charset=utf-8")
-    public String insertProductWithImages(@PathVariable("storeUrl") String storeUrl, @RequestBody ProductWithImagesDTO request) {
+    public int insertProductWithImages(@PathVariable("storeUrl") String storeUrl, @RequestBody ProductWithImagesDTO request) {
         ProductEntity product = request.getProduct();
         List<PImgEntity> images = request.getImages();
 
@@ -33,7 +33,8 @@ public class ProductInsertRestController {
         int productInsertResult = productService.productInsert(product); // insert 후 productId가 entity에 세팅됨
 
         if (productInsertResult <= 0) {
-            return "insert 실패 (상품 등록 실패)";
+        	log.info("insert 실패 (상품 등록 실패)");
+            return 1;
         }
 
         // 2. 이미지 등록
@@ -47,9 +48,11 @@ public class ProductInsertRestController {
         }
 
         if (imgInsertSuccessCount == images.size()) {
-            return "insert 성공";
+        	log.info("insert 성공");
+            return 1;
         } else {
-            return "insert 실패 (이미지 등록 일부 또는 전체 실패)";
+        	log.info("insert 실패 (이미지 등록 일부 또는 전체 실패)");
+            return 0;
         }
     }
 }

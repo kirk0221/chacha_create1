@@ -6,19 +6,19 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.chacha.create.common.mapper.member.SellerMapper;
+import com.chacha.create.common.mapper.manage.ManageMapper;
 
 @Service
 public class SellerSettlementManagementService {
 	
 	@Autowired
-	SellerMapper sellerMapper;
+	ManageMapper manageMapper;
 	
 	public List<Map<String, Object>> sellerSettlementManagement(String storeUrl){
-		return sellerMapper.sellerSettlementManagement(storeUrl);
+		return manageMapper.sellerSettlementManagement(storeUrl);
 	}
 	
 	public List<Map<String, Object>> sellerDaySellManagement(String storeUrl){
-		return sellerMapper.sellerDaySellManagement(storeUrl);
+		return manageMapper.sellerDaySellManagement(storeUrl);
 	}
 }

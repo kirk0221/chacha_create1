@@ -7,7 +7,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import com.chacha.create.common.dto.order.OrderSumDTO;
-import com.chacha.create.common.mapper.member.SellerMapper;
+import com.chacha.create.common.mapper.manage.ManageMapper;
 import com.chacha.create.common.mapper.order.OrderMapper;
 import com.chacha.create.common.mapper.order.ReviewMapper;
 import com.chacha.create.common.mapper.store.StoreMapper;
@@ -24,7 +24,7 @@ public class SellerMainService {
 	final StoreMapper storeMapper;	 
 	final OrderMapper orderMapper;	 
 	final ReviewMapper reviewMapper;
-	final SellerMapper sellerMapper;
+	final ManageMapper manageMapper;
 	
 
 	public Map<String, Object> selectByUrlId() {
@@ -55,13 +55,13 @@ public class SellerMainService {
 	
 	public List<Map<String, Object>> sellManagement(int member_id) {
 
-		List<Map<String, Object>> result =  sellerMapper.sellManagement(member_id);
+		List<Map<String, Object>> result =  manageMapper.sellManagement(member_id);
 		return result;
 	}
 	
 	public List<Map<String, Object>> daySellManagement(int member_id) {
 
-		List<Map<String, Object>> result =  sellerMapper.daySellManagement(member_id);
+		List<Map<String, Object>> result =  manageMapper.daySellManagement(member_id);
 		return result;
 	}
 		

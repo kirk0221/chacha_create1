@@ -19,11 +19,16 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class ProductDetailService {
-	@Autowired
-	private PImgMapper pImgMapper;
+
+	private final PImgMapper pImgMapper;
+	
+	private final ProductDetailMapper productDetailMapper;
 	
 	@Autowired
-	private ProductDetailMapper productDetailMapper;
+	public ProductDetailService(PImgMapper pImgMapper, ProductDetailMapper productDetailMapper) {
+		this.pImgMapper = pImgMapper;
+		this.productDetailMapper = productDetailMapper;
+	}
 	
 	@Transactional
 	public ProductDetailViewDTO getProductDetailWithImages(int productId) {
