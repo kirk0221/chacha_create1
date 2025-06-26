@@ -3,93 +3,96 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>뜨락상회 메인</title>
-    <link rel="stylesheet" href="resources/css/main_styletest.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>HandCraft Mall</title>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main_styletest.css">
 </head>
 <body>
 
-<!-- 상단 로그인 영역 -->
-<div class="top-header">
-  <div class="top-header-inner">
-    <div class="login-buttons">
-      <a href="${pageContext.request.contextPath}/views/member/login.jsp" class="login-btn">로그인</a>
-      <span class="divider">|</span>
-      <a href="${pageContext.request.contextPath}/views/member/signup.jsp" class="login-btn">회원가입</a>
-    </div>
-  </div>
-</div>
+    <!-- 상단 헤더 -->
+    <header>
+        <div class="top-header">
+            <div class="logo">HandCraft Mall</div>
+            <nav class="main-nav">
+                <a href="#">전체 카테고리</a>
+                <a href="#">선물추천</a>
+                <a href="#">실시간구매</a>
+                <a href="#">실시간후기</a>
+                <a href="#">인기작품</a>
+                <a href="#">소담상회</a>
+            </nav>
+            <div class="user-area">
+                <span>김지민 님</span> | <a href="#">알림</a> | <a href="#">장바구니</a>
+            </div>
+        </div>
+    </header>
 
-<!-- 네비게이션 영역 -->
-<div class="nav-wrapper">
-  <div class="nav-inner">
-    <div class="logo">뜨락상회</div>
-    <nav class="main-nav">
-        <a href="#">전체 상품</a>
-        <a href="#">스토어</a>
-        <a href="#">전입상품</a>
-        <a href="#">개인 판매</a>
-        <a href="#">클래스</a>
-        <a href="#">마이페이지</a>
-        <a href="#">장바구니</a>
-    </nav>
-  </div>
-</div>
+    <!-- 메인 슬라이드 배너 -->
+    <section class="main-banner">
+        <div class="banner-container">
+            <img src="${pageContext.request.contextPath}/resources/images/banner1.jpg" alt="이벤트 배너">
+            <img src="${pageContext.request.contextPath}/resources/images/banner2.jpg" alt="이벤트 배너">
+            <img src="${pageContext.request.contextPath}/resources/images/banner3.jpg" alt="이벤트 배너">
+        </div>
+    </section>
 
-<!-- 메인 배너 -->
-<section class="main-banner">
-    <button class="slide-btn left" id="bannerSlideLeft">&lt;</button>
-    <div class="banner-slider" id="banner-slider">
-        <%@ include file="bannerSlides.jspf" %>
-    </div>
-    <button class="slide-btn right" id="bannerSlideRight">&gt;</button>
-</section>
+    <!-- 카테고리 아이콘 바로가기 -->
+    <section class="category-shortcut">
+        <div class="category-container">
+            <div class="category-item">
+                <img src="${pageContext.request.contextPath}/resources/images/icon_gift.png" alt="선물추천">
+                <p>선물추천</p>
+            </div>
+            <div class="category-item">
+                <img src="${pageContext.request.contextPath}/resources/images/icon_sale.png" alt="특가">
+                <p>특가</p>
+            </div>
+            <div class="category-item">
+                <img src="${pageContext.request.contextPath}/resources/images/icon_new.png" alt="신상">
+                <p>신상</p>
+            </div>
+            <div class="category-item">
+                <img src="${pageContext.request.contextPath}/resources/images/icon_best.png" alt="인기">
+                <p>인기</p>
+            </div>
+            <div class="category-item">
+                <img src="${pageContext.request.contextPath}/resources/images/icon_event.png" alt="이벤트">
+                <p>이벤트</p>
+            </div>
+            <div class="category-item">
+                <img src="${pageContext.request.contextPath}/resources/images/icon_coupon.png" alt="쿠폰">
+                <p>쿠폰</p>
+            </div>
+        </div>
+    </section>
 
-<!-- 인기 스토어 -->
-<section class="section-wrapper">
-  <h2>★ 인기 스토어</h2>
-  <div class="slider-container">
-      <button class="slide-btn left" id="storeSlideLeft">&lt;</button>
-      <div class="store-slider" id="store-slider">
-          <%@ include file="popularStores_test.jspf" %>
-      </div>
-      <button class="slide-btn right" id="storeSlideRight">&gt;</button>
-  </div>
-</section>
+    <!-- 메인 콘텐츠 -->
+    <section class="main-content">
+        <h2>오늘의 추천 작품</h2>
+        <div class="product-list">
+            <div class="product-card">
+                <img src="${pageContext.request.contextPath}/resources/images/sample1.jpg" alt="상품1">
+                <div class="product-name">수제 원목 테이블</div>
+                <div class="product-price">₩350,000</div>
+            </div>
+            <div class="product-card">
+                <img src="${pageContext.request.contextPath}/resources/images/sample2.jpg" alt="상품2">
+                <div class="product-name">핸드메이드 머그컵</div>
+                <div class="product-price">₩45,000</div>
+            </div>
+            <div class="product-card">
+                <img src="${pageContext.request.contextPath}/resources/images/sample3.jpg" alt="상품3">
+                <div class="product-name">수제 비누 세트</div>
+                <div class="product-price">₩15,000</div>
+            </div>
+        </div>
+    </section>
 
-<!-- 인기 상품 -->
-<section class="section-wrapper">
-  <h2>★ 인기 상품</h2>
-  <div class="slider-container">
-      <button class="slide-btn left" id="productSlideLeft">&lt;</button>
-      <div class="product-slider" id="product-slider">
-          <%@ include file="popularProducts_test.jspf" %>
-      </div>
-      <button class="slide-btn right" id="productSlideRight">&gt;</button>
-  </div>
-</section>
+    <!-- 푸터 -->
+    <footer>
+        <div class="footer-inner">
+            <p>© 2025 HandCraft Mall. All rights reserved.</p>
+        </div>
+    </footer>
 
-<!-- 신규 상품 -->
-<section class="section-wrapper">
-  <h2>★ 신규 상품</h2>
-  <div class="new-product-grid">
-      <%@ include file="newProducts.jspf" %>
-  </div>
-</section>
-
-<!-- 푸터 -->
-<footer class="footer">
-    <div class="footer-logo">뜨락상회</div>
-    <div class="footer-text">
-        입점문의 : 뜨락상회 운영팀 <br>
-        123-45-67890 사업자등록번호 | 대표이사 김민건
-    </div>
-    <div class="footer-buttons">
-        <button>문의하기</button>
-        <button>입점신청</button>
-    </div>
-</footer>
-
-<script src="resources/js/slider.js"></script>
 </body>
 </html>

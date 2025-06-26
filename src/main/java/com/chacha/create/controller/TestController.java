@@ -9,7 +9,7 @@ public class TestController {
 	
 	@GetMapping("test")
 	public String test() {
-		return "mainauth/pages/Suggestionscontent";
+		return "main/main_mypage_review";
 	}
 	
 	

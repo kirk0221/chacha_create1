@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>뜨락상회 관리자 페이지 - 신고 관리</title>
 <link rel="stylesheet" type="text/css" href="resources/css/mainauth_style.css">
-<link rel="stylesheet" type="text/css" href="resources/css/declaration_style.css">
+<link rel="stylesheet" type="text/css" href="resources/css/suggestion_style.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -67,17 +67,17 @@
 						<% for (int i = 1; i <= 30; i++) { 
 						    String fullContent;
 						    String reportDate;
-						    if (i <= 10) {
-						        fullContent = "차자가 오기에 몰렸어요. 문제가 심각해요. 사람이 너무 몰려 위험했어요.";
-						        reportDate = "2025-06-24";
+						    if (i == 1) {
+						        fullContent = "차자가 오기에 몰렸어요. 문제가 심각해요. 추가로 긴 내용을 입력합니다. 사람이 너무 몰려 사고 날 뻔 했습니다.";
+						        reportDate = "2025-06-11";
 						    } else {
-						        fullContent = "혼잡 발생 신고입니다. 개선 요청드립니다.";
-						        reportDate = "2025-06-23";
+						        fullContent = "-";
+						        reportDate = "-";
 						    }
 						%>
 						<tr <%= i > 10 ? "class='extra-row' style='display:none;'" : "" %>>
-						    <td>신고자<%= i %></td>
-						    <td>스토어<%= i %></td>
+						    <td><%= i == 1 ? "김지민" : "-" %></td>
+						    <td><%= i == 1 ? "오기세요" : "-" %></td>
 						    <td>
 						        <div class="suggestion-content-box">
 						            <span class="preview-text"><%= fullContent.length() > 30 ? fullContent.substring(0, 30) + "..." : fullContent %></span>
@@ -86,7 +86,9 @@
 						        </div>
 						    </td>
 						    <td><%= reportDate %></td>
-						    <td><button class="status-btn">완료</button></td>
+						    <td>
+						        <button class="status-btn">완료</button>
+						    </td>
 						</tr>
 						<% } %>
 						</tbody>
@@ -136,6 +138,7 @@ $(document).ready(function() {
         $(this).toggleClass('completed');
     });
 });
+
 </script>
 
 </body>

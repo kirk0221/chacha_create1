@@ -1,302 +1,157 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Main Page</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/main_style.css">
+    <title>HandCraft Mall</title>
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper@9/swiper-bundle.min.css" />
+
+    <!-- 분리한 CSS -->
+    <link rel="stylesheet" type="text/css" href="resources/css/main.css">
+
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper@9/swiper-bundle.min.js"></script>
 </head>
+
 <body>
-<div class="div">
 
-<div class="header-wrapper">
-  <div class="header-inner">
-  <!-- 로그인 전 -->
-  <div class="header-content" id="header-guest">
-    <a href="${pageContext.request.contextPath}/views/member/login.jsp" class="header-btn">로그인</a>
-    <span class="divider">|</span>
-    <a href="${pageContext.request.contextPath}/views/member/signup.jsp" class="header-btn">회원가입</a>
-  </div>
-  </div>
-  </div>
+<header>
+    <div class="header-inner">
+        <div class="login-area">
+            <button>로그인</button>
+            <button>로그아웃</button>
+        </div>
+    </div>
+</header>
 
-<div class="nav-wrapper">
-  <div class="nav-inner">
+<nav>
+    <div class="nav-inner">
+        <div class="logo">HandCraft Mall</div>
+        <div class="menu">
+            <a href="#">전체상품</a>
+            <a href="#">스토어 공지/소식</a>
+            <a href="#">개인판매</a>
+            <a href="#">클래스</a>
+            <a href="#">마이페이지</a>
+            <a href="#">장바구니</a>
+        </div>
+    </div>
+</nav>
 
-    <!-- 로고 -->
-    <a href="${pageContext.request.contextPath}/views/main/main_allproducts.jsp" class="nav-logo">
-      <img src="${pageContext.request.contextPath}/resources/images/logo/logo_green.png" />
-    </a>
+<main>
 
-    <!-- 메뉴들 -->
-    <a href="${pageContext.request.contextPath}/views/main/main.jsp" class="nav-item">전체 상품</a>
-    <a href="#" class="nav-item">스토어</a>
-    <a href="#" class="nav-item">공지 / 소식</a>
-    <a href="#" class="nav-item">개인 판매</a>
-    <a href="#" class="nav-item">클래스</a>
-    <a href="#" class="nav-item">마이페이지</a>
+    <div class="banner">
+        <img src="resources/images/banner1.jpg" alt="배너1">
+    </div>
 
-    <!-- 장바구니 -->
-    <a href="#" class="nav-cart">
-      <img class="cart-icon" src="${pageContext.request.contextPath}/resources/images/main/main_nav_shop.png" />
-      <span>장바구니</span>
-    </a>
-
-  </div>
-</div>
-
-
-  <div class="widgets">
-    <div class="widget">
-      <div class="dot">
-        <div class="_03"></div>
-        <div class="_02"></div>
-        <div class="_01"></div>
-      </div>
-      <div class="content">
-        <div class="content2">
-          <div class="heading">
-            <div class="caption">
-              <div class="devider"></div>
-              <div class="the-best-place-to-play">THE BEST PLACE TO PLAY</div>
+    <!-- 인기 스토어 -->
+    <section>
+        <h2>인기 스토어</h2>
+        <div class="swiper store-swiper">
+            <div class="swiper-wrapper">
+                <% for(int i=1; i<=10; i++) { %>
+                <div class="swiper-slide">
+                    <div class="card">
+                        <img src="resources/images/store<%=i%>.jpg" alt="스토어<%=i%>">
+                        <p>스토어 이름 <%=i%></p>
+                    </div>
+                </div>
+                <% } %>
             </div>
-            <div class="xbox-consoles">Xbox Consoles</div>
-          </div>
-          <div class="save-up-to-50-on-select-xbox-games-get-3-months-of-pc-game-pass-for-2-usd">
-            Save up to 50% on select Xbox games. Get 3 months of PC Game Pass for $2 USD.
-          </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
         </div>
-        <div class="button">
-          <div class="label">Shop Now</div>
-          <img class="regular-arrow-right" src="${pageContext.request.contextPath}/images/regular-arrow-right0.svg" />
-        </div>
-      </div>
-      <img class="image" src="${pageContext.request.contextPath}/images/image0.png" />
-      <div class="price">
-        <div class="_299">$299</div>
-      </div>
-    </div>
+    </section>
 
-    <!-- Small widgets -->
-    <div class="small-widgets">
-      <div class="widget2">
-        <div class="badge">
-          <div class="_29-off">29% OFF</div>
+    <!-- 인기 상품 -->
+    <section>
+        <h2>인기 상품</h2>
+        <div class="swiper product-swiper">
+            <div class="swiper-wrapper">
+                <% for(int i=1; i<=10; i++) { %>
+                <div class="swiper-slide">
+                    <div class="card">
+                        <img src="resources/images/product<%=i%>.jpg" alt="상품<%=i%>">
+                        <p>상품명 <%=i%></p>
+                        <span>가격: 10,000원</span>
+                    </div>
+                </div>
+                <% } %>
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
         </div>
-        <div class="content3">
-          <div class="info">
-            <div class="summer-sales">Summer Sales</div>
-            <div class="new-google-pixel-6-pro">New Google Pixel 6 Pro</div>
-          </div>
-          <div class="button2">
-            <div class="label2">Shop Now</div>
-            <img class="regular-arrow-right2" src="${pageContext.request.contextPath}/images/regular-arrow-right1.svg" />
-          </div>
-        </div>
-      </div>
-      
-      <div class="widget3">
-        <img class="image-4" src="${pageContext.request.contextPath}/images/image-40.png" />
-        <div class="content4">
-          <div class="info2">
-            <div class="xiaomi-flip-buds-pro">Xiaomi FlipBuds Pro</div>
-            <div class="_299-usd">$299 USD</div>
-          </div>
-          <div class="button2">
-            <div class="label2">Shop Now</div>
-            <img class="regular-arrow-right3" src="${pageContext.request.contextPath}/images/regular-arrow-right2.svg" />
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+    </section>
 
-<!-- ------------------인기 스토어 영역------------------- -->
-<div class="div9">
-  <div class="fram">
-    <img class="line-md-star-filled" src="${pageContext.request.contextPath}/resources/images/main/main_contour_star.png" />
-    <div class="div10">인기 스토어</div>
-  </div>
-</div>
-
-<div class="div11">
-  <button id="slideLeft" class="slide-btn">
-    <img class="weui-arrow-filled" src="${pageContext.request.contextPath}/resources/images/main/main_slide_left.png" />
-  </button>
-
-  <div class="slider-container">
-    <div class="frame-95" id="store-slider">
-      <%@ include file="popularStores.jspf" %>
-    </div>
-  </div>
-
-  <button id="slideRight" class="slide-btn">
-    <img class="weui-arrow-filled" src="${pageContext.request.contextPath}/resources/images/main/main_slide_right.png" />
-  </button>
-</div>
-
-<!-- ------------------인기 상품 영역------------------- -->
-
-<!-- 인기 상품 제목 -->
-<div class="div9">
-  <div class="fram">
-    <img class="line-md-star-filled" src="${pageContext.request.contextPath}/resources/images/main/main_contour_star.png" />
-    <div class="div10">인기 상품</div>
-  </div>
-</div>
-
-<!-- 슬라이더 본체 -->
-<div class="div11">
-  <button id="productSlideLeft" class="slide-btn">
-    <img class="weui-arrow-filled" src="${pageContext.request.contextPath}/resources/images/main/main_slide_left.png" />
-  </button>
-
-  <div class="slider-container">
-    <div class="product-slider" id="product-slider">
-      <%@ include file="popularProducts.jspf" %>
-    </div>
-  </div>
-
-  <button id="productSlideRight" class="slide-btn">
-    <img class="weui-arrow-filled" src="${pageContext.request.contextPath}/resources/images/main/main_slide_right.png" />
-  </button>
-</div>
-
-
-
- <!-- ------------------금주신상 영역------------------- -->
-   <div class="div9" style="background-color:#F5F2EB; ">
-    <div class="fram">
-      <img class="line-md-star-filled" src="${pageContext.request.contextPath}/resources/images/main/main_contour_star.png" />
-      <div class="div10">금주 신상품</div>
-    
-  </div>
-  </div>
-  <div class="div22">
-    <div class="frame-953">
-      <div class="div23">금주 신상품 전체보기 →</div>
-    </div>
-    <div class="frame-954">
-      <div class="div18">
-        <img class="rectangle-4662" src="rectangle-4667.png" />
-        <div class="div19">
-          <div class="div14">상품명</div>
-          <div class="_12">카테고리1</div>
-          <div class="div20">
-            <div class="_10-000">10,000</div>
-            <div class="div10">원</div>
-          </div>
+    <!-- 신상품 -->
+    <section>
+        <div class="title-bar">
+            <h2>금주 신상품</h2>
+            <a href="#" class="view-all">전체보기</a>
         </div>
-      </div>
-      <div class="div18">
-        <img class="rectangle-4662" src="rectangle-4668.png" />
-        <div class="div19">
-          <div class="div14">상품명</div>
-          <div class="_12">카테고리1</div>
-          <div class="div20">
-            <div class="_10-000">10,000</div>
-            <div class="div10">원</div>
-          </div>
+        <div class="preview-grid">
+            <% for(int i=1; i<=8; i++) { %>
+            <div class="preview-card">
+                <img src="resources/images/new<%=i%>.jpg" alt="신상품<%=i%>">
+                <p>신상품 <%=i%></p>
+            </div>
+            <% } %>
         </div>
-      </div>
-      <div class="div18">
-        <img class="rectangle-4662" src="rectangle-4669.png" />
-        <div class="div19">
-          <div class="div14">상품명</div>
-          <div class="_12">카테고리1</div>
-          <div class="div20">
-            <div class="_10-000">10,000</div>
-            <div class="div10">원</div>
-          </div>
-        </div>
-      </div>
-      <div class="div18">
-        <img class="rectangle-4662" src="rectangle-46610.png" />
-        <div class="div19">
-          <div class="div14">상품명</div>
-          <div class="_12">카테고리1</div>
-          <div class="div20">
-            <div class="_10-000">10,000</div>
-            <div class="div10">원</div>
-          </div>
-        </div>
-      </div>
-      <div class="div18">
-        <img class="rectangle-4662" src="rectangle-46611.png" />
-        <div class="div19">
-          <div class="div14">상품명</div>
-          <div class="_12">카테고리1</div>
-          <div class="div20">
-            <div class="_10-000">10,000</div>
-            <div class="div10">원</div>
-          </div>
-        </div>
-      </div>
-      <div class="div18">
-        <img class="rectangle-4662" src="rectangle-46612.png" />
-        <div class="div19">
-          <div class="div14">상품명</div>
-          <div class="_12">카테고리1</div>
-          <div class="div20">
-            <div class="_10-000">10,000</div>
-            <div class="div10">원</div>
-          </div>
-        </div>
-      </div>
-      <div class="div18">
-        <img class="rectangle-4662" src="rectangle-46613.png" />
-        <div class="div19">
-          <div class="div14">상품명</div>
-          <div class="_12">카테고리1</div>
-          <div class="div20">
-            <div class="_10-000">10,000</div>
-            <div class="div10">원</div>
-          </div>
-        </div>
-      </div>
-      <div class="div18">
-        <img class="rectangle-4662" src="rectangle-46614.png" />
-        <div class="div19">
-          <div class="div14">상품명</div>
-          <div class="_12">카테고리1</div>
-          <div class="div20">
-            <div class="_10-000">10,000</div>
-            <div class="div10">원</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="footer">
-    <div class="frame-955">
-      <div class="frame-956">
-        <img class="rectangle-4582" src="rectangle-4581.svg" />
-        <div class="div24">뜨락상회</div>
-      </div>
-      <div class="div25">
-        이것은 뜨락 상회에 대해 설명하는
-        <br />
-        설명칸이로다 아아ㅏ아아아아아아아아ㅏㅇ
-        <br />
-        아ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ
-      </div>
-      <div class="frame-957">
-        <div class="frame-958">
-          <div class="rectangle-468"></div>
-        </div>
-        <div class="div26">연락처</div>
-      </div>
-      <div class="frame-1063">
-        <div class="frame-958">
-          <div class="rectangle-468"></div>
-        </div>
-        <div class="_22">연락처2</div>
-      </div>
-      </div>
-      </div>
-      
-</div>
-<script src="${pageContext.request.contextPath}/resources/js/slide.js"></script>
+    </section>
+
+</main>
+
+<footer>
+    &copy; 2025 HandCraft Mall. All Rights Reserved.
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    new Swiper('.store-swiper', {
+        slidesPerView: 3,
+        spaceBetween: 30,
+        loop: true,
+        autoplay: { delay: 3000 },
+        navigation: {
+            nextEl: '.store-swiper .swiper-button-next',
+            prevEl: '.store-swiper .swiper-button-prev',
+        },
+        pagination: {
+            el: '.store-swiper .swiper-pagination',
+            clickable: true,
+        },
+        breakpoints: {
+            1024: { slidesPerView: 3 },
+            768: { slidesPerView: 2 },
+            480: { slidesPerView: 1 }
+        }
+    });
+
+    new Swiper('.product-swiper', {
+        slidesPerView: 3,
+        spaceBetween: 30,
+        loop: true,
+        autoplay: { delay: 3000 },
+        navigation: {
+            nextEl: '.product-swiper .swiper-button-next',
+            prevEl: '.product-swiper .swiper-button-prev',
+        },
+        pagination: {
+            el: '.product-swiper .swiper-pagination',
+            clickable: true,
+        },
+        breakpoints: {
+            1024: { slidesPerView: 3 },
+            768: { slidesPerView: 2 },
+            480: { slidesPerView: 1 }
+        }
+    });
+});
+</script>
+
 </body>
 </html>
