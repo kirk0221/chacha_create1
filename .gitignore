@@ -1,16 +1,16 @@
-# Compiled class file
+# === Java 컴파일 결과 ===
 *.class
 
-# Log file
+# === 로그 파일 ===
 *.log
 
-# BlueJ files
+# === BlueJ 설정 파일 ===
 *.ctxt
 
-# Mobile Tools for Java (J2ME)
+# === J2ME 관련 임시 폴더 ===
 .mtj.tmp/
 
-# Package Files #
+# === 패키징 결과물 ===
 *.jar
 *.war
 *.nar
@@ -19,9 +19,28 @@
 *.tar.gz
 *.rar
 
-# virtual machine crash logs
+# === JVM 크래시 로그 ===
 hs_err_pid*
 replay_pid*
 
-# Build directory
+# === 빌드 디렉토리 ===
 /target/
+bin/
+
+# === Eclipse 설정 파일 ===
+.classpath
+.project
+.settings/
+
+# === IntelliJ 설정 파일 (사용 시) ===
+.idea/
+*.iml
+
+# === macOS 시스템 파일 ===
+.DS_Store
+
+# === Windows 썸네일 캐시 ===
+Thumbs.db
+
+# === 민감한 설정 파일 ===
+*.properties
