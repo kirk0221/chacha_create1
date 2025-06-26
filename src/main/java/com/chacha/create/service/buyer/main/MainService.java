@@ -1,75 +1,75 @@
 package com.chacha.create.service.buyer.main;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.chacha.create.common.dto.product.HomeDTO;
 import com.chacha.create.common.dto.product.HomeProductDTO;
 import com.chacha.create.common.mapper.product.MainPageMapper;
 import com.chacha.create.common.mapper.store.StoreIdCheckMapper;
+import com.chacha.create.util.ServiceUtil;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public class MainService{
-	
-	@Autowired
-	private MainPageMapper mainPageMapper;
-	@Autowired
-	private StoreIdCheckMapper idCheckMapper;
-	
-	// 스토어 전체 상품 조회(조건 정렬)
-	public List<HomeProductDTO> selectForProductList(Map<String,Object>params){
-		log.info("스토어에서 전체상품(조건조회) 조회 요청 : {}",params);
-		return mainPageMapper.selectForProductList(params);
-	}
-	
-	// 스토어에서 사용자가 상품명 검색시 조회
-	public List<HomeProductDTO> selectByProductName(String keyword){
-		log.info("상품명으로 검색 조회 요청 : {}", keyword);
-		return mainPageMapper.selectByProductName(keyword);
-	}
-	
-	// 인기상품 조회
-	public List<HomeProductDTO> selectForBestProduct(Integer storeId) {
-		log.info("인기 상품 조회 요청: {}", storeId);
-		return mainPageMapper.selectForBestProduct(storeId);
-	}
+public class MainService {
 
-	// 스토어
-	
-	// 스토어의 대표상품 조회
-	public List<HomeProductDTO> storeMainProduct(int storeId) {
-		log.info("스토어의 대표 상품 조회 요청: {}", storeId);
-		return mainPageMapper.selectForStoreMainProduct(storeId);
-	}
+    @Autowired
+    private MainPageMapper mainPageMapper;
 
-	
-	// 해당 스토어URL의 스토어ID체크
-	public int storeIdCheck(String storeUrl) {
-		Integer storeId = idCheckMapper.selectByStoreUrl(storeUrl);
-		log.info("스토어 URL로 스토어 ID 조회 요청 : {}",storeUrl);
-		return storeId;
-	}
-	
-	// 메인홈
-	
-	public  List<HomeDTO> selectForBestStore(){
-		log.info("메인홈에서 인기스토어 조회");
-		return mainPageMapper.selectForBestStore();
-	}
-	
-	public  List<HomeProductDTO> selectForNewProduct(){
-		log.info("메인홈에서 최신 상품 조회");
-		return mainPageMapper.selectForNewProduct();
-	}
+    @Autowired
+    private StoreIdCheckMapper idCheckMapper;
 
+    /** 🛍️ 스토어 메인 페이지 - 인기 + 대표 상품 묶음 */
+    public Map<String, List<HomeProductDTO>> getStoreMainProductMap(int storeId) {
+        return Map.of(
+            "bestProduct", mainPageMapper.selectForBestProduct(storeId),
+            "mainProduct", mainPageMapper.selectForStoreMainProduct(storeId)
+        );
+    }
 
-	
+    /** 🏠 메인 홈 - 인기 스토어 + 인기 상품 + 신상품 */
+    public Map<String, Object> getHomeMainProductMap() {
+        return Map.of(
+            "bestStore", mainPageMapper.selectForBestStore(),
+            "bestProduct", mainPageMapper.selectForBestProduct(null),
+            "newProduct", mainPageMapper.selectForNewProduct()
+        );
+    }
 
+    /** 🔍 필터/검색 조건 기반 상품 리스트 조회 */
+    public List<HomeProductDTO> getFilteredProductListWithParams(
+            Integer storeId,
+            List<String> type,
+            List<String> d,
+            List<String> u,
+            String keyword,
+            String sort) {
+
+        Map<String, Object> params = new HashMap<>();
+        if (storeId != null) params.put("storeId", storeId);
+        params.put("sort", (sort != null && !sort.isEmpty()) ? sort : "latest");
+        params.put("keyword", keyword);
+
+        ServiceUtil.putParsedParam(params, "type", type);
+        ServiceUtil.putParsedParam(params, "d", d);
+        ServiceUtil.putParsedParam(params, "u", u);
+
+        if (keyword != null && !keyword.isEmpty()) {
+            log.info("🔍 상품명 검색 요청: {}", keyword);
+            return mainPageMapper.selectByProductName(keyword);
+        }
+
+        log.info("🔍 조건 기반 상품 조회 요청: {}", params);
+        return mainPageMapper.selectForProductList(params);
+    }
+
+    /** 📌 스토어 URL → 스토어 ID 확인 */
+    public int storeIdCheck(String storeUrl) {
+        return idCheckMapper.selectByStoreUrl(storeUrl);
+    }
 }
-
