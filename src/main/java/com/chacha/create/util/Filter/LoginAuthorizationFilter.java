@@ -1,6 +1,9 @@
 package com.chacha.create.util.Filter;
 
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -11,8 +14,6 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.chacha.create.common.entity.member.MemberEntity;
 import com.chacha.create.common.entity.member.SellerEntity;
@@ -26,6 +27,12 @@ public class LoginAuthorizationFilter implements Filter {
     private SellerMapper sellerMapper;
     private StoreMapper storeMapper;
 
+    // ✅ 로그인/권한 검사에서 제외할 URI 목록
+    private static final Set<String> WHITELIST = new HashSet<>(Arrays.asList(
+        "/", "/auth/", "/main", // 추가 필요
+        "/css/", "/js/", "/images/" // 정적 자원
+    ));
+    
     public LoginAuthorizationFilter(SellerMapper sellerMapper, StoreMapper storeMapper) {
         this.sellerMapper = sellerMapper;
         this.storeMapper = storeMapper;
@@ -44,6 +51,11 @@ public class LoginAuthorizationFilter implements Filter {
         HttpSession session = req.getSession(false);
         MemberEntity loginMember = (session != null) ? (MemberEntity) session.getAttribute("loginMember") : null;
 
+        if (isWhitelisted(uri)) {
+            chain.doFilter(request, response);
+            return;
+        }
+        
         // 로그인 체크
         if (loginMember == null) {
             res.sendError(ResponseCode.UNAUTHORIZED.getStatus(), "로그인이 필요합니다.");
@@ -53,7 +65,7 @@ public class LoginAuthorizationFilter implements Filter {
         Integer memberId = loginMember.getMemberId();
 
         // /sell 하위 경로 - 개인 판매자만 접근
-        if (uri.startsWith("/sell")) {
+        if (uri.startsWith("/main/sell")) {
             SellerEntity seller = sellerMapper.selectByMemberId(memberId);
             if (seller == null || seller.getPersonalCheck() != 1) {
                 res.sendError(ResponseCode.FORBIDDEN.getStatus(), "개인 판매자만 접근 가능합니다.");
@@ -92,4 +104,10 @@ public class LoginAuthorizationFilter implements Filter {
 
     @Override
     public void destroy() { /* 필요시 사용 */ }
+    
+    // ✅ 화이트리스트 체크 (정확 매칭 또는 접두어)
+    private boolean isWhitelisted(String uri) {
+        return WHITELIST.stream().anyMatch(uri::equals) ||
+               WHITELIST.stream().anyMatch(uri::startsWith);
+    }
 }
