@@ -1,4 +1,4 @@
-package com.chacha.create.service.store_common.order;
+package com.chacha.create.service.store_common.mypage;
 
 import java.util.List;
 
@@ -27,7 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class OrderService {
+public class MyOrderService {
 	
     private final OrderMapper orderMapper;
     private final AddrMapper addrMapper;

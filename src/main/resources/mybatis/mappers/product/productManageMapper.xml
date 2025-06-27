@@ -91,7 +91,6 @@
 
 	<select id="selectAllByStoreUrl"
 		resultType="productlistDTO">
-
 		SELECT
 		p_img.p_img_url,
 		p.product_id,

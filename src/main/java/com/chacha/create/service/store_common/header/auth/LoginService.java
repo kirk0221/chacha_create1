@@ -1,9 +1,10 @@
-package com.chacha.create.service.header.auth;
+package com.chacha.create.service.store_common.header.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.chacha.create.common.entity.member.MemberEntity;
+import com.chacha.create.common.exception.LoginFailException;
 import com.chacha.create.common.mapper.member.MemberMapper;
 
 import lombok.extern.slf4j.Slf4j;
@@ -20,19 +21,18 @@ public class LoginService {
 	}
 	
 	public MemberEntity login(String memberEmail, String memberPwd) {
-		MemberEntity memberEntity = null;
-		
-		memberEntity = memberMapper.selectByMemberEmail(memberEmail);
-		
-		if(memberEntity == null) {
-			log.info("아이디가 틀림 : " + memberEmail);
-			return null;
-		}else if(memberPwd.equals(memberEntity.getMemberPwd())) {
-			log.info("로그인 성공");
-			return memberEntity;
-		}
-		log.info("비밀번호가 틀림");
-		return null;
+	    MemberEntity memberEntity = memberMapper.selectByMemberEmail(memberEmail);
+
+	    if (memberEntity == null) {
+	        throw new LoginFailException("아이디가 존재하지 않음");
+	    }
+	    if (!memberPwd.equals(memberEntity.getMemberPwd())) {
+	        throw new LoginFailException("비밀번호가 틀림");
+	    }
+
+	    log.info("로그인 성공");
+	    return memberEntity;
 	}
+
 	
 }

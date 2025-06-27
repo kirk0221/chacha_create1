@@ -1,4 +1,4 @@
-package com.chacha.create.service.manager.report;
+package com.chacha.create.service.buyer.report;
 
 import java.util.Date;
 

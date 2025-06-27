@@ -8,12 +8,12 @@ import com.chacha.create.common.entity.member.MemberEntity;
 import com.chacha.create.common.mapper.member.MemberMapper;
 
 @Service
-public class MypageService {
+public class MyInfoService {
 	
 	private final MemberMapper memberMapper;
 
 	@Autowired
-	public MypageService(MemberMapper memberMapper) {
+	public MyInfoService(MemberMapper memberMapper) {
 		this.memberMapper = memberMapper;
 	}
 	
