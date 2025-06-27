@@ -13,7 +13,7 @@
 			/WEB-INF/spring/root-context-oracle.xml
 		</param-value>
 	</context-param>
-	
+
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -29,30 +29,40 @@
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
-		
+
 	<servlet-mapping>
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	
+
 	<!-- Spring 제공한 filter 등록하기 : Post일때 한글 깨짐 방지 -->
-	<filter> 
-	    <filter-name>encodingFilter</filter-name> 
-	    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class> 
-	    <init-param> 
-	       <param-name>encoding</param-name> 
-	       <param-value>UTF-8</param-value> 
-	    </init-param> 
-	    <init-param> 
-	       <param-name>forceEncoding</param-name> 
-	       <param-value>true</param-value> 
-	    </init-param> 
-	 </filter> 
-	 
-	 <filter-mapping> 
-	    <filter-name>encodingFilter</filter-name> 
-	    <url-pattern>/*</url-pattern> 
-	 </filter-mapping>
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- 로그인 필터 나중에 걸기 -->
+<!-- 	<filter>
+		<filter-name>loginFilter</filter-name>
+		<filter-class>com.chacha.create.util.Filter.LoginAuthorizationFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>loginFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping> -->
 
 
 </web-app>
