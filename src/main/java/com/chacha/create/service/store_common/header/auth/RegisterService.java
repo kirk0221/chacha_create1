@@ -87,6 +87,7 @@ public class RegisterService {
     public int sellerinsert(SellerEntity sellerEntity, MemberEntity memberEntity) {
     	int result = 0;
     	sellerEntity.setMemberId(memberEntity.getMemberId());
+    	sellerEntity.setPersonalCheck(1);
     	sellerMapper.insert(sellerEntity);
     	SellerEntity seller = sellerMapper.selectByMemberId(memberEntity.getMemberId());
     	StoreEntity storeEntity = StoreEntity.builder()
