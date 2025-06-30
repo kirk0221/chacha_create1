@@ -28,6 +28,11 @@
 			<param-value>/WEB-INF/spring/appServlet/servlet-context-setting.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
+		<!-- 예외에 대한 처리가 되어있는 Handler가 없다면 강제로 예외를 발생 -->
+		<init-param>
+			<param-name>throwExceptionIfNoHandlerFound</param-name>
+			<param-value>true</param-value>
+		</init-param>
 	</servlet>
 
 	<servlet-mapping>
