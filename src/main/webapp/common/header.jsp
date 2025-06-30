@@ -1,12 +1,18 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions"%> 
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="cpath" value="${pageContext.servletContext.contextPath}" />
+
+
 <div class="header-wrapper">
   <div class="header-inner">
     <!-- 로그인 전 -->
     <div class="header-content" id="header-guest">
-      <a href="${pageContext.request.contextPath}/views/member/login.jsp" class="header-btn">로그인</a>
-      <span class="divider">|</span>
-      <a href="${pageContext.request.contextPath}/views/member/signup.jsp" class="header-btn">회원가입</a>
-    </div>
+	  <a href="${cpath}/main/login" class="header-btn">로그인</a>
+	  <span class="divider">|</span>
+	  <a href="${cpath}/main/signup" class="header-btn">회원가입</a>
+	</div>
 
     <!-- 로그인 후 -->
     <div class="header-content" id="header-user" style="display: none;">
@@ -18,6 +24,12 @@
 </div>
 
 <style>
+
+html, body {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 .header-wrapper {
   width: 100%;
   height: 50px;
