@@ -12,4 +12,5 @@ public class SettlementManagementController {
 	public String sellersettlement() {
 		return "/main/main_personal_adjustment";
 	}
+	
 }
