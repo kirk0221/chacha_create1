@@ -1,6 +1,7 @@
 package com.chacha.create.controller.controller.mainhome.main;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.extern.slf4j.Slf4j;
@@ -10,4 +11,32 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/main")
 public class HomeMainController {
 
+    // 메인 홈 페이지
+    @GetMapping("/home")
+    public String showMainHome() {
+        return "main/main"; // /WEB-INF/views/main/main_test.jsp
+    }
+
+    // 로그인 페이지 연결
+    @GetMapping("/login")
+    public String showLoginPage() {
+        return "login"; 
+    }
+
+    // 회원가입 페이지 연결
+    @GetMapping("/signup")
+    public String showSignupPage() {
+        return "signup"; 
+    }
+    
+    @GetMapping("/notice")
+    public String showNoticePage() {
+		return "main/main_notice";
+    	
+    }
+    
+    @GetMapping("/mypage")
+    public String showMyPage() {
+    	return "main/main_mypage_correction";
+    }
 }

@@ -1,12 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions"%> 
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="cpath" value="${pageContext.servletContext.contextPath}" />
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>회원가입</title>
-    <link rel="stylesheet" type="text/css" href="resources/css/signup_style.css">
-    <link rel="stylesheet" type="text/css" href="resources/css/signup_vars.css">
+    <link rel="stylesheet" type="text/css" href="${cpath}/resources/css/signup_style.css">
+    <link rel="stylesheet" type="text/css" href="${cpath}/resources/css/signup_vars.css">
 </head>
 <body>
 
@@ -15,10 +19,10 @@
   <div class="frame-765">
     <div class="frame-767">
       <div class="frame-766">
-        <img class="div10" src="resources/images/logo/logo_green.png" alt="로고"/>
+        <img class="div10" src="${cpath}/resources/images/logo/logo_green.png" alt="로고"/>
         <div class="div11">회원가입하기</div>
       </div>
-      <img class="_1" src="resources/images/signup/banner_img.png" alt="배너이미지"/>
+      <img class="_1" src="${cpath}/resources/images/signup/banner_img.png" alt="배너이미지"/>
     </div>
   </div>
 
@@ -29,9 +33,9 @@
       <div class="_01">
         <span class="_01-span">01<br/></span><span class="_01-span2">약관동의</span>
       </div>
-      <img class="icon-arrow-right" src="resources/images/signup/icon-arrow-right0.svg" />
+      <img class="icon-arrow-right" src="${cpath}/resources/images/signup/icon-arrow-right0.svg" />
       <div class="_02">02<br/>회원정보입력</div>
-      <img class="icon-arrow-right2" src="resources/images/signup/icon-arrow-right1.svg" />
+      <img class="icon-arrow-right2" src="${cpath}/resources/images/signup/icon-arrow-right1.svg" />
       <div class="_03">03<br/>완료</div>
     </div>
 

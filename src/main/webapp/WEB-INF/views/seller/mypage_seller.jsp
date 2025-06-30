@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@include file="../common/header.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
   <title>뜨락상회 판매자 메인페이지</title>
-  <link rel="stylesheet" type="text/css" href="resources/css/authmain.css">
-  <link rel="stylesheet" type="text/css" href="resources/css/mypage_seller_style.css">
+  <link rel="stylesheet" type="text/css" href="${cpath}/resources/css/authmain.css">
+  <link rel="stylesheet" type="text/css" href="${cpath}/resources/css/mypage_seller_style.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
 </head>

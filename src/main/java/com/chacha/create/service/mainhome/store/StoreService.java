@@ -32,6 +32,15 @@ public class StoreService {
     	}
 		SellerEntity sellerEntity = sellerMapper.selectByMemberId(memberEntity.getMemberId()); // 로그인한 아이디로 seller를 가져옴
 	
+		// storeUrl 형식 검증: 영문/숫자/언더바만 허용, 길이 3~20
+	    if (storeEntity.getStoreUrl() == null || !storeEntity.getStoreUrl().matches("^[a-zA-Z0-9_]{3,20}$")) {
+	        throw new InvalidRequestException("스토어 URL은 영문, 숫자, 언더바(_)만 사용 가능하며 3~20자 이내여야 합니다.");
+	    }
+	    
+	    StoreEntity existingStore = storeMapper.selectByStoreUrl(storeEntity.getStoreUrl());
+	    if (existingStore != null) {
+	        throw new InvalidRequestException("이미 사용 중인 스토어 URL입니다.");
+	    }
 		
 		int sellerId = sellerEntity.getSellerId();
 		
