@@ -235,26 +235,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 메인 홈  최신 상품 리스트 -->
-	<select id="selectForNewProduct" resultMap="homeResultMap" parameterType="map">
+	<select id="selectForNewProduct" resultMap="homeProductResultMap" parameterType="map">
 	<![CDATA[
-	SELECT p.product_name, p.price, ca.type_category_name, dc.d_category_name, uc.u_category_name, img.p_img_url, p.product_date
-	FROM product p
-	LEFT JOIN type_category ca ON p.type_category_id = ca.type_category_id
-	LEFT JOIN d_category dc ON p.d_category_id = dc.d_category_id
-	LEFT JOIN u_category uc ON dc.u_category_id = uc.u_category_id
-	LEFT JOIN (
-	    SELECT product_id, p_img_url
-	    FROM (
-	        SELECT product_id, p_img_url,
-	               ROW_NUMBER() OVER (PARTITION BY product_id ORDER BY p_img_seq ASC) AS rn
-	        FROM p_img
-	    ) sub
-	    WHERE rn = 1    
-	) img ON p.product_id = img.product_id
-	WHERE p.delete_check = 0
-    AND ROWNUM <= 10
-	ORDER BY product_date DESC
+	SELECT *
+	FROM (
+	    SELECT 
+	        p.product_name, 
+	        p.price, 
+	        ca.type_category_name, 
+	        dc.d_category_name, 
+	        uc.u_category_name, 
+	        img.p_img_url, 
+	        p.product_date
+	    FROM product p
+	    LEFT JOIN type_category ca ON p.type_category_id = ca.type_category_id
+	    LEFT JOIN d_category dc ON p.d_category_id = dc.d_category_id
+	    LEFT JOIN u_category uc ON dc.u_category_id = uc.u_category_id
+	    LEFT JOIN (
+	        SELECT product_id, p_img_url
+	        FROM (
+	            SELECT product_id, p_img_url,
+	                   ROW_NUMBER() OVER (PARTITION BY product_id ORDER BY p_img_seq ASC) AS rn
+	            FROM p_img
+	        ) sub
+	        WHERE rn = 1    
+	    ) img ON p.product_id = img.product_id
+	    WHERE p.delete_check = 0
+	    ORDER BY p.product_date DESC
+	)
+	WHERE ROWNUM <= 10
 	]]>
 	</select>
-	</mapper>
+</mapper>
 	
