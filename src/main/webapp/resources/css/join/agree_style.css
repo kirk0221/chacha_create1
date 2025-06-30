@@ -1,0 +1,197 @@
+/* 기본 설정 */
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0 auto;
+  font-family: 'Poppins', sans-serif;
+  background-color: #fff;
+  color: #1e2124;
+}
+
+/* 전체 wrapper */
+.container {
+  padding: 24px;
+  position: relative;
+}
+
+/* 상단 헤더 */
+.header-banner {
+  background: #ebfee1;
+  padding: 32px 40px;
+  display: flex;
+  justify-content: center;
+}
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  width: 1200px;
+}
+.logo-title-wrapper {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+.page-title {
+  font-size: 44px;
+  font-weight: 700;
+}
+
+/* 가입 단계 */
+.step-indicator {
+  display: flex;
+  gap: 56px;
+  justify-content: center;
+  align-items: center;
+  height: 204px;
+}
+/* ,는 or  .step.current는 AND */
+.step, .step.current, .step_label {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 700;
+	
+}
+.current{
+	color: #a3ab94;    
+}
+.step-num {
+  text-decoration: underline;
+  font-weight: 700;
+  color: #a3ab94;
+}
+.arrow {
+  width: 40px;
+  height: 40px;
+}
+
+/* 약관 영역 */
+.main-wrapper {
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+}
+.terms-section {
+  width: 1105px;
+  margin: 40px auto 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.section-title {
+  font-size: 32px;
+  font-weight: 700;
+}
+.all-agree {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.checkbox-wrapper .checkbox-item {
+  width: 24px;
+  height: 24px;
+  border: 1px solid #58616a;
+  border-radius: 4px;
+  background: #fff;
+}
+.checkbox-text .checkbox-title {
+  font-size: 19px;
+  font-weight: 700;
+  color: #131416;
+}
+.checkbox-text .checkbox-description {
+  font-size: 19px;
+  color: #464c53;
+}
+
+/* 개별 약관 */
+.terms-item {
+  background: #e6e8ea;
+  border-radius: 10px;
+  padding: 24px;
+  display: flex;
+}
+.terms-label {
+  flex: 1;
+  font-size: 17px;
+  font-weight: 700;
+}
+.label-required {
+  color: red;
+}
+.radio-group {
+  display: flex;
+  gap: 24px;
+}
+.radio-button {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.radio-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 1000px;
+  border: 1px solid #58616a;
+  background: #fff;
+}
+.radio-text {
+  font-size: 16px;
+}
+
+/* 약관 내용 박스 */
+.terms-box {
+  border: 1px solid #d1d1d1;
+  padding: 20px;
+}
+
+/* 버튼 */
+.button-group {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+}
+.btn {
+  width: 120px;
+  height: 48px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+}
+.btn.cancel {
+  border: 1px solid #58616a;
+  background: transparent;
+  color: #1e2124;
+}
+.btn.next {
+  background: #2a3e34;
+  color: #ffffff;
+}
+/* 숨겨진 라디오 버튼 */
+.radio-button input[type="radio"] {
+  display: none;
+}
+
+/* 선택됐을 때 원 안의 점 */
+.radio-button input[type="radio"]:checked + .radio-circle::after {
+  content: '';
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 10px;
+  height: 10px;
+  background-color: #58616a;
+  border-radius: 50%;
+}
+
+/* 점이 제대로 보이게 하기 위한 상대 위치 지정 */
+.radio-circle {
+  position: relative;
+}
+
+

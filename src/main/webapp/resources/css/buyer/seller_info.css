@@ -1,0 +1,94 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #fdfdfd;
+  color: #1e2124;
+}
+
+.seller-container {
+  max-width: 1440px;
+  padding: 60px 240px;
+  margin: 0 auto;
+}
+
+/* 프로필 */
+.profile-section {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.profile-img {
+  width: 200px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 80%;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  margin-bottom: 16px;
+}
+
+.profile-name {
+  font-size: 26px;
+  font-weight: 700;
+  color: #2a3e34;
+}
+
+/* 카드 공통 */
+.info-card {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 32px;
+  margin-bottom: 40px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1e2124;
+  margin-bottom: 20px;
+  border-left: 4px solid #a3ab94;
+  padding-left: 12px;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.label {
+  font-weight: 600;
+  color: #4a5568;
+}
+
+.value {
+  color: #2d3748;
+}
+
+/* 소개 & 이력 */
+.desc-box {
+  background-color: #f9fafb;
+  padding: 16px;
+  border-radius: 8px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #444;
+}
+
+.history-list {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin: 0;
+  color: #444;
+}
+
+.history-list li {
+  margin-bottom: 8px;
+  font-size: 15px;
+}
