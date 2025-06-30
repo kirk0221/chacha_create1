@@ -58,7 +58,8 @@ public class LoginAuthorizationFilter implements Filter {
         
         // 로그인 체크
         if (loginMember == null) {
-            res.sendError(ResponseCode.UNAUTHORIZED.getStatus(), "로그인이 필요합니다.");
+        	// res.sendError(ResponseCode.UNAUTHORIZED.getStatus(), "로그인이 필요합니다.");
+        	res.sendRedirect(req.getContextPath() + "/auth/login");
             return;
         }
 
@@ -73,11 +74,11 @@ public class LoginAuthorizationFilter implements Filter {
             }
         }
 
-        // /seller/{storeUrl} 하위 경로 - 해당 스토어 판매자만 접근
-        else if (uri.startsWith("/seller/")) {
+        // /{storeUrl}/seller 하위 경로 - 해당 스토어 판매자만 접근
+        else if (uri.matches("^/[^/]+/seller(/.*)?$")) {
             String[] parts = uri.split("/");
-            if (parts.length >= 3) {
-                String storeUrl = parts[2];
+            if (parts.length >= 2) {
+                String storeUrl = parts[1]; // /{storeUrl}/seller
                 StoreEntity store = storeMapper.selectByStoreUrl(storeUrl);
                 if (store == null || !isStoreOwner(store, memberId)) {
                     res.sendError(ResponseCode.FORBIDDEN.getStatus(), "해당 스토어의 판매자만 접근 가능합니다.");
@@ -85,6 +86,7 @@ public class LoginAuthorizationFilter implements Filter {
                 }
             }
         }
+
 
         // /admin 경로 - 관리자(memberId == 1)만 접근
         else if (uri.startsWith("/manager")) {
