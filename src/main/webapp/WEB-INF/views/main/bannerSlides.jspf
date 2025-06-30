@@ -1,0 +1,13 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
+
+<div class="banner-item">
+    <img src="resources/images/banner/banner1.jpg" alt="Xbox Console" />
+</div>
+<div class="banner-item">
+    <img src="resources/images/banner/banner2.jpg" alt="Pixel 8 Pro" />
+</div>
+<div class="banner-item">
+    <img src="resources/images/banner/banner3.jpg" alt="Xiaomi Earbuds" />
+</div>
