@@ -45,6 +45,15 @@ public interface StoreMapper {
      */
     StoreEntity selectBySellerId(int sellerId);
 
+    
+    /**
+     * 스토어ID로 판매자ID 조회 
+     *
+     * @param 조회하려는 판매자의 스토어ID
+     * @return 해당 스토어의 판매자ID
+     */
+    int selectForSellerIdByStoreId(int storeId);
+    
     /**
      * 새로운 스토어를 등록합니다.
      * 스토어 ID는 {@code seq_store_id.NEXTVAL}을 통해 자동 생성됩니다.
@@ -71,6 +80,6 @@ public interface StoreMapper {
     int delete(int storeId);
     
     List<StoreEntity> selectByStoreInfo(String storeUrl);
-
-    List<ManagerAdjustmentDTO> storeAdjustment();
+    
+    int updateStoreInfo(StoreEntity storeEntity);
 }

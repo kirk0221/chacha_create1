@@ -2,6 +2,8 @@ package com.chacha.create.common.dto.product;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

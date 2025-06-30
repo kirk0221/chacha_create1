@@ -68,13 +68,5 @@ public interface ReportMapper {
      * @return 처리된 행 수
      */
     int delete(int reportId);
-    
-    /**
-     * 스토어ID로 판매자ID 조회 
-     *
-     * @param 조회하려는 판매자의 스토어ID
-     * @return 해당 스토어의 판매자ID
-     */
-    int findSellerIdByStoreId(int storeId);
 
 }

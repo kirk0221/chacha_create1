@@ -7,10 +7,8 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import com.chacha.create.common.dto.order.OrderSumDTO;
-import com.chacha.create.common.mapper.member.SellerMapper;
 import com.chacha.create.common.mapper.order.OrderMapper;
 import com.chacha.create.common.mapper.order.ReviewMapper;
-import com.chacha.create.common.mapper.store.StoreMapper;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,12 +18,8 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class SellerMainService {
 
-	 
-	final StoreMapper storeMapper;	 
-	final OrderMapper orderMapper;	 
-	final ReviewMapper reviewMapper;
-	final SellerMapper sellerMapper;
-	
+	private final OrderMapper orderMapper;	 
+	private final ReviewMapper reviewMapper;
 
 	public Map<String, Object> selectByUrlId() {
 
@@ -36,37 +30,19 @@ public class SellerMainService {
 	}
 
 	public List<Map<String, Object>> selectByStatus(String storeUrl) {
-
 		List<Map<String, Object>> result =  orderMapper.selectByStatus(storeUrl);
 		return result;
 	}
 	
 	public List<OrderSumDTO> selectByDayOrderSum(String storeUrl) {
-
 		List<OrderSumDTO> result =  orderMapper.selectByDayOrderSum(storeUrl);
 		return result;
 	}
 	
 	public List<Map<String, Object>> selectByStoreUrl(String storeUrl) {
-
 		List<Map<String, Object>> result =  reviewMapper.selectByStoreUrl(storeUrl);
 		return result;
 	}
-	
-	public List<Map<String, Object>> sellManagement(int member_id) {
 
-		List<Map<String, Object>> result =  sellerMapper.sellManagement(member_id);
-		return result;
-	}
-	
-	public List<Map<String, Object>> daySellManagement(int member_id) {
-
-		List<Map<String, Object>> result =  sellerMapper.daySellManagement(member_id);
-		return result;
-	}
-		
-	
-	
-	
 
 }

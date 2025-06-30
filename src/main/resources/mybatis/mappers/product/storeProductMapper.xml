@@ -103,11 +103,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
           <when test="sort == 'latest'">				<!-- 최신 -->		
             ORDER BY p.product_date DESC
           </when>
-          <when test="sort == 'popular'">			<!-- 인기순 -->
+          <when test="sort == 'popular'">			<!-- 구매 많은 순 -->
             ORDER BY p.sale_cnt DESC
           </when>
-          <when test="sort == 'korasc'">			<!-- 가나다순 -->
-            ORDER BY p.product_name ASC
+          <when test="sort == 'lowprice'">			<!-- 낮은가격순 -->
+            ORDER BY p.price ASC
+          </when>
+          <when test="sort == 'highprice'">		<!-- 높은가격순 -->
+            ORDER BY p.price DESC
           </when>
           <otherwise>
             ORDER BY p.product_date DESC

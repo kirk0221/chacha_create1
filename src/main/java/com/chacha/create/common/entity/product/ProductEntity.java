@@ -40,7 +40,7 @@ public class ProductEntity{
     private Integer productId;
     private Integer storeId;
     private TypeCategoryEnum typeCategoryId;
-    private DCategoryEnum dCategoryId;
+    private DCategoryEnum dcategoryId;
     private String productName;
 
     private Integer price;
