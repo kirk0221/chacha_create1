@@ -56,8 +56,11 @@ public class SellerMainController {
 	        return "seller/main_personal_adjustment";
 		}
 	
-	// 판매 주문 목록
-	// 나중에 추가 예정
+	// 판매 주문 목록 --- 추가 필요
+//	@GetMapping("/management/order")
+//	public String showOrderPage() {
+//		return "";
+//	}
 	
 	// 판매 리뷰 관리
 	@GetMapping("/reviews")
@@ -70,6 +73,12 @@ public class SellerMainController {
 	public String showChatPage() {
 		return "seller/chat";
 	}
+	
+	// 스토어 관리 --- 추가 필요
+//	@GetMapping("/management/seller")
+//	public String storeManagement() {
+//		return "";
+//	}
 	
 	// 폐업
 	@GetMapping("/close")
