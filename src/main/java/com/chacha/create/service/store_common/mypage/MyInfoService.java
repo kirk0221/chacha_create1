@@ -1,28 +1,28 @@
 package com.chacha.create.service.store_common.mypage;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.chacha.create.common.entity.member.MemberEntity;
 import com.chacha.create.common.mapper.member.MemberMapper;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class MyInfoService {
 	
 	private final MemberMapper memberMapper;
-
-	@Autowired
-	public MyInfoService(MemberMapper memberMapper) {
-		this.memberMapper = memberMapper;
-	}
 	
+	@Transactional(rollbackFor = Exception.class)
 	public int memberupdate(MemberEntity memberEntity) {
 		int result = memberMapper.update(memberEntity);
 		return result;
 	}
 	
 
+	@Transactional(rollbackFor = Exception.class)
 	public int memberdelete(int memberId) {
 		int result = memberMapper.delete(memberId);
 		return result;

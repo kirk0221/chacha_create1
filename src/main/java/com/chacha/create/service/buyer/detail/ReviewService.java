@@ -3,32 +3,30 @@ package com.chacha.create.service.buyer.detail;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.chacha.create.common.dto.product.ReviewManagementDTO;
+import com.chacha.create.common.entity.member.MemberEntity;
 import com.chacha.create.common.entity.order.OrderDetailEntity;
 import com.chacha.create.common.entity.order.OrderInfoEntity;
 import com.chacha.create.common.entity.order.ReviewEntity;
+import com.chacha.create.common.exception.NeedLoginException;
 import com.chacha.create.common.mapper.order.OrderDetailMapper;
 import com.chacha.create.common.mapper.order.OrderInfoMapper;
 import com.chacha.create.common.mapper.order.ReviewMapper;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class ReviewService {
 	
-	@Autowired
-    private ReviewMapper reviewMapper;
-	
-	@Autowired
-	private OrderDetailMapper orderDetailMapper;
-	
-	@Autowired
-	private OrderInfoMapper orderInfoMapper;
+    private final ReviewMapper reviewMapper;
+	private final OrderDetailMapper orderDetailMapper;
+	private final OrderInfoMapper orderInfoMapper;
 
     // 전체 리뷰 조회(메인홈 관리자용)
     public List<ReviewEntity> selectAll() {
@@ -61,8 +59,12 @@ public class ReviewService {
     }
 
     // 리뷰 등록
-    @Transactional
-    public int insert(ReviewEntity review, int loginMemberId) {
+    @Transactional(rollbackFor = Exception.class)
+    public int insert(ReviewEntity review, MemberEntity loginMember) {
+    	if(loginMember == null) {
+    		throw new NeedLoginException("로그인이 필요합니다.");
+    	}
+    	int loginMemberId = loginMember.getMemberId();
         // 조건 1) 주문 내역이 없을 경우 리뷰 작성 불가
         Integer orderDetailId = review.getOrderDetailId();
         if (orderDetailId == null) {
@@ -83,15 +85,25 @@ public class ReviewService {
     }
 
     // 리뷰 수정
-    public int update(ReviewEntity review, int memberId) {
+    @Transactional(rollbackFor = Exception.class)
+    public int update(ReviewEntity review, MemberEntity loginMember) {
+    	if(loginMember == null) {
+    		throw new NeedLoginException("로그인이 필요합니다.");
+    	}
+    	int loginMemberId = loginMember.getMemberId();
     	// 현재 날짜로 세팅
     	review.setReviewDate(new java.sql.Date(System.currentTimeMillis()));
-        return reviewMapper.update(review, memberId);
+        return reviewMapper.update(review, loginMemberId);
     }
 
     // 리뷰 삭제
-    public int delete(int reviewId, int memberId) {
-        return reviewMapper.delete(reviewId, memberId);
+    @Transactional(rollbackFor = Exception.class)
+    public int delete(int reviewId, MemberEntity loginMember) {
+    	if(loginMember == null) {
+    		throw new NeedLoginException("로그인이 필요합니다.");
+    	}
+    	int loginMemberId = loginMember.getMemberId();
+        return reviewMapper.delete(reviewId, loginMemberId);
     }
 
     // 판매자별 리뷰 조회

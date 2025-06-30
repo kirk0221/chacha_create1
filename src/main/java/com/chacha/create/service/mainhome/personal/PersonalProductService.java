@@ -4,8 +4,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.chacha.create.common.dto.product.PersonalProductDTO;
+import com.chacha.create.common.entity.member.MemberEntity;
+import com.chacha.create.common.exception.NeedLoginException;
 import com.chacha.create.common.mapper.product.PersonalProductMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -18,6 +21,7 @@ public class PersonalProductService {
 
     private final PersonalProductMapper mainProductMapper;
 
+    @Transactional(rollbackFor = Exception.class)
     public int insertOrUpdateProductImages(PersonalProductDTO dto, boolean isInsert) {
         List<String> images = List.of(dto.getPimgUrl1(), dto.getPimgUrl2(), dto.getPimgUrl3());
         int result = 0;
@@ -35,8 +39,12 @@ public class PersonalProductService {
         return result;
     }
     
-    public int insertMainProductWithImages(PersonalProductDTO dto, Integer memberId) {
-        Map<String, Integer> idMap = mainProductMapper.selectForSellerAndStoreByMemberId(memberId);
+    @Transactional(rollbackFor = Exception.class)
+    public int insertMainProductWithImages(PersonalProductDTO dto, MemberEntity member) {
+    	if(member == null) {
+    		throw new NeedLoginException("로그인이 필요합니다.");
+    	}
+        Map<String, Integer> idMap = mainProductMapper.selectForSellerAndStoreByMemberId(member.getMemberId());
         dto.setSellerId(idMap.get("sellerId"));
         dto.setStoreId(idMap.get("storeId"));
 
@@ -46,14 +54,21 @@ public class PersonalProductService {
         return (result1 > 1) ? 1 : 0;
     }
 
-    public List<PersonalProductDTO> getProductsByMemberId(Integer memberId) {
-    	Map<String, Integer> idMap = mainProductMapper.selectForSellerAndStoreByMemberId(memberId);
+    public List<PersonalProductDTO> getProductsByMemberId(MemberEntity member) {
+    	if(member == null) {
+    		throw new NeedLoginException("로그인이 필요합니다.");
+    	}
+    	Map<String, Integer> idMap = mainProductMapper.selectForSellerAndStoreByMemberId(member.getMemberId());
 
         return mainProductMapper.selectProductsByStoreId(idMap.get("storeId"));
     }
 
-    public int updateMainProductWithImages(PersonalProductDTO dto, Integer memberId) {
-    	Map<String, Integer> idMap = mainProductMapper.selectForSellerAndStoreByMemberId(memberId);
+    @Transactional(rollbackFor = Exception.class)
+    public int updateMainProductWithImages(PersonalProductDTO dto, MemberEntity member) {
+    	if(member == null) {
+    		throw new NeedLoginException("로그인이 필요합니다.");
+    	}
+    	Map<String, Integer> idMap = mainProductMapper.selectForSellerAndStoreByMemberId(member.getMemberId());
         dto.setSellerId(idMap.get("sellerId"));
         dto.setStoreId(idMap.get("storeId"));
 
@@ -78,8 +93,12 @@ public class PersonalProductService {
         }
     }
 
-    public int deleteMainProduct(int productId, Integer memberId) {
-    	Map<String, Integer> idMap = mainProductMapper.selectForSellerAndStoreByMemberId(memberId);
+    @Transactional(rollbackFor = Exception.class)
+    public int deleteMainProduct(int productId, MemberEntity member) {
+    	if(member == null) {
+    		throw new NeedLoginException("로그인이 필요합니다.");
+    	}
+    	Map<String, Integer> idMap = mainProductMapper.selectForSellerAndStoreByMemberId(member.getMemberId());
         int sellerId = idMap.get("sellerId");
         int storeId = idMap.get("storeId");
 

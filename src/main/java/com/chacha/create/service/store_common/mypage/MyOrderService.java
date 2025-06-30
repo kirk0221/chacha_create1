@@ -14,6 +14,7 @@ import com.chacha.create.common.entity.order.DeliveryEntity;
 import com.chacha.create.common.entity.order.OrderDetailEntity;
 import com.chacha.create.common.entity.order.OrderInfoEntity;
 import com.chacha.create.common.enums.order.OrderStatusEnum;
+import com.chacha.create.common.exception.NeedLoginException;
 import com.chacha.create.common.mapper.member.AddrMapper;
 import com.chacha.create.common.mapper.order.DeliveryMapper;
 import com.chacha.create.common.mapper.order.OrderDetailMapper;
@@ -35,8 +36,11 @@ public class MyOrderService {
     private final OrderDetailMapper orderDetailMapper;
 	private final DeliveryMapper deliveryMapper;
 
-    @Transactional
+	@Transactional(rollbackFor = Exception.class)
     public int placeOrder(OrderRequestDTO request, MemberEntity member) {
+    	if(member == null) {
+    		throw new NeedLoginException("로그인이 필요합니다.");
+    	}
     	OrderInfoEntity order = request.getOrderInfo();
         List<OrderDetailEntity> detailList = request.getDetailList();
         AddrEntity addr = request.getAddr();
@@ -78,8 +82,11 @@ public class MyOrderService {
         return orderlist;
     }
     
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public OrderDetailDTO selectByOrderId(int orderId, MemberEntity member) {
+    	if(member == null) {
+    		throw new NeedLoginException("로그인이 필요합니다.");
+    	}
     	int memberId = member.getMemberId();
         // 주문 상세 조회
         OrderDetailDTO dto = orderMapper.selectOrderDetailByOrderId(orderId, memberId);

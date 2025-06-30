@@ -10,6 +10,7 @@ import com.chacha.create.common.dto.error.ApiResponse;
 import com.chacha.create.common.enums.error.ResponseCode;
 import com.chacha.create.common.exception.InvalidRequestException;
 import com.chacha.create.common.exception.LoginFailException;
+import com.chacha.create.common.exception.NeedLoginException;
 import com.chacha.create.common.exception.SessionExpiredException;
 
 @RestControllerAdvice
@@ -29,8 +30,16 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiResponse<Void>> handleLoginFail(LoginFailException e) {
         log.warn("Login failed: {}", e.getMessage());
         return ResponseEntity
-                .status(ResponseCode.LOGIN_FAIL.getStatus()) // LOGIN_FAIL 추가 필요
+                .status(ResponseCode.LOGIN_FAIL.getStatus())
                 .body(new ApiResponse<>(ResponseCode.LOGIN_FAIL, null));
+    }
+    
+    @ExceptionHandler(NeedLoginException.class)
+    public ResponseEntity<ApiResponse<Void>> handleNeedLogin(NeedLoginException e) {
+    	log.warn("Need Login: {}", e.getMessage());
+    	return ResponseEntity
+    			.status(ResponseCode.UNAUTHORIZED.getStatus())
+    			.body(new ApiResponse<>(ResponseCode.UNAUTHORIZED, null));
     }
 
     @ExceptionHandler(SessionExpiredException.class)

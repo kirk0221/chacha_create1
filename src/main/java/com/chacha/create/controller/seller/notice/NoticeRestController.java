@@ -40,10 +40,9 @@ public class NoticeRestController {
     public ResponseEntity<ApiResponse<List<NoticeEntity>>> noticelist(@PathVariable String storeUrl, HttpSession session) {
         MemberEntity member = getLoginMember(session);
         if (member == null) {
-            return ResponseEntity.status(401)
+            return ResponseEntity.status(ResponseCode.UNAUTHORIZED.getStatus())
                     .body(new ApiResponse<>(ResponseCode.UNAUTHORIZED, "로그인이 필요합니다."));
         }
-
         List<NoticeEntity> list = noticeService.selectForNoticeAll();
         return ResponseEntity.ok(new ApiResponse<>(ResponseCode.OK, "공지사항 목록 조회 성공", list));
     }
@@ -52,10 +51,9 @@ public class NoticeRestController {
     public ResponseEntity<ApiResponse<NoticeEntity>> noticedetail(@PathVariable String storeUrl, @PathVariable int noticeId, HttpSession session) {
         MemberEntity member = getLoginMember(session);
         if (member == null) {
-            return ResponseEntity.status(401)
+            return ResponseEntity.status(ResponseCode.UNAUTHORIZED.getStatus())
                     .body(new ApiResponse<>(ResponseCode.UNAUTHORIZED, "로그인이 필요합니다."));
         }
-
         NoticeEntity notice = noticeService.selectByNoticeId(noticeId);
         if (notice == null) {
             return ResponseEntity.status(ResponseCode.NOT_FOUND.getStatus())
@@ -68,7 +66,7 @@ public class NoticeRestController {
     public ResponseEntity<ApiResponse<Void>> insertNotice(@PathVariable String storeUrl, @RequestBody NoticeEntity noticeEntity, HttpSession session) {
         MemberEntity member = getLoginMember(session);
         if (member == null) {
-            return ResponseEntity.status(401)
+            return ResponseEntity.status(ResponseCode.UNAUTHORIZED.getStatus())
                     .body(new ApiResponse<>(ResponseCode.UNAUTHORIZED, "로그인이 필요합니다."));
         }
 
@@ -86,7 +84,7 @@ public class NoticeRestController {
     public ResponseEntity<ApiResponse<Void>> updateNotice(@PathVariable String storeUrl, @RequestBody NoticeEntity noticeEntity, HttpSession session) {
         MemberEntity member = getLoginMember(session);
         if (member == null) {
-            return ResponseEntity.status(401)
+            return ResponseEntity.status(ResponseCode.UNAUTHORIZED.getStatus())
                     .body(new ApiResponse<>(ResponseCode.UNAUTHORIZED, "로그인이 필요합니다."));
         }
 
@@ -103,7 +101,7 @@ public class NoticeRestController {
     public ResponseEntity<ApiResponse<Void>> deleteNotice(@PathVariable String storeUrl, @PathVariable int noticeId, HttpSession session) {
         MemberEntity member = getLoginMember(session);
         if (member == null) {
-            return ResponseEntity.status(401)
+            return ResponseEntity.status(ResponseCode.UNAUTHORIZED.getStatus())
                     .body(new ApiResponse<>(ResponseCode.UNAUTHORIZED, "로그인이 필요합니다."));
         }
 

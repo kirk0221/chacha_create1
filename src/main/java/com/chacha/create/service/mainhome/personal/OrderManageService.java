@@ -11,32 +11,41 @@ import com.chacha.create.common.dto.order.OrderDTO;
 import com.chacha.create.common.entity.member.MemberEntity;
 import com.chacha.create.common.entity.order.OrderInfoEntity;
 import com.chacha.create.common.enums.order.OrderStatusEnum;
+import com.chacha.create.common.exception.NeedLoginException;
 import com.chacha.create.common.mapper.order.OrderInfoMapper;
 import com.chacha.create.common.mapper.order.OrderMapper;
+import com.chacha.create.common.mapper.product.PImgMapper;
+import com.chacha.create.common.mapper.product.ProductManageMapper;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class OrderManageService {
 
 	private final OrderMapper orderMapper;
 	private final OrderInfoMapper orderInfoMapper;
 	
-	public OrderManageService(OrderMapper orderMapper, OrderInfoMapper orderInfoMapper) {
-		this.orderMapper = orderMapper;
-		this.orderInfoMapper = orderInfoMapper;
-	}
-	
 	public List<OrderDTO> selectOrderAll(MemberEntity memberEntity) {
+    	if(memberEntity == null) {
+    		throw new NeedLoginException("로그인이 필요합니다.");
+    	}
 		return orderMapper.selectForPersonalAll(memberEntity.getMemberId());
 	}
 	
 	public List<OrderDTO> selectRefundAll(MemberEntity memberEntity){
+    	if(memberEntity == null) {
+    		throw new NeedLoginException("로그인이 필요합니다.");
+    	}
 		return orderMapper.selectForPersonalRefundAll(memberEntity.getMemberId());
 	}
 	
 	public List<OrderDTO> selectForOrderStatus(MemberEntity memberEntity, OrderStatusEnum orderStatus){
+    	if(memberEntity == null) {
+    		throw new NeedLoginException("로그인이 필요합니다.");
+    	}
 		Map<String, Object> paramMap = new HashMap<>();
 		paramMap.put("memberId", memberEntity.getMemberId());
 		paramMap.put("orderStatus", orderStatus);

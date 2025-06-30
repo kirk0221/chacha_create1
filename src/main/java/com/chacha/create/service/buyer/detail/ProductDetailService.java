@@ -24,7 +24,7 @@ public class ProductDetailService {
 	private final PImgMapper pImgMapper;
 	private final ProductManageMapper productDetailMapper;
 	
-	@Transactional
+	@Transactional(rollbackFor = Exception.class)
 	public ProductDetailViewDTO getProductDetailWithImages(int productId) {
 	    ProductDetailDTO productDetail = productDetailMapper.selectByProductId(productId);
 	    List<PImgEntity> pImgList = pImgMapper.selectByProductId(productId);

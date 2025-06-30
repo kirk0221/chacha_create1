@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.chacha.create.common.dto.chat.MessageDTO;
 import com.chacha.create.common.entity.chat.ChatroomEntity;
@@ -24,6 +25,7 @@ public class MessageService {
 	}
 	
 	// 스토어에서 채팅을 열었을 때
+	@Transactional(rollbackFor = Exception.class)
 	public int makeChattingInStore(MemberEntity memberEntity, String url) {
 		int result = 0;
 		MessageDTO checkmessageDTO = null;
@@ -47,6 +49,7 @@ public class MessageService {
 	}
 	
 	// 메시지 칸에서 열었을 때
+	@Transactional(rollbackFor = Exception.class)
 	public int makeChattingInMyPage(MessageDTO messageDTO) {
 		int result = 0;
 		// messageDTO로 채팅방 id까지 받아 올 예정임

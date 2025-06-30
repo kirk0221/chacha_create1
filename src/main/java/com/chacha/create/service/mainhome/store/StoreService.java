@@ -10,24 +10,26 @@ import com.chacha.create.common.entity.member.MemberEntity;
 import com.chacha.create.common.entity.member.SellerEntity;
 import com.chacha.create.common.entity.store.StoreEntity;
 import com.chacha.create.common.exception.InvalidRequestException;
+import com.chacha.create.common.exception.NeedLoginException;
 import com.chacha.create.common.mapper.member.SellerMapper;
+import com.chacha.create.common.mapper.product.PImgMapper;
+import com.chacha.create.common.mapper.product.ProductManageMapper;
 import com.chacha.create.common.mapper.store.StoreMapper;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class StoreService {
 
-	private StoreMapper storeMapper;
-	private SellerMapper sellerMapper;
-	
-	@Autowired
-	public StoreService(StoreMapper storeMapper, SellerMapper sellerMapper){
-		this.storeMapper = storeMapper;
-		this.sellerMapper = sellerMapper;
-	}
+	private final StoreMapper storeMapper;
+	private final SellerMapper sellerMapper;
 	
 	@Transactional(rollbackFor = Exception.class)
 	public int storeUpdate(StoreEntity storeEntity, MemberEntity memberEntity) {
-		
+    	if(memberEntity == null) {
+    		throw new NeedLoginException("로그인이 필요합니다.");
+    	}
 		SellerEntity sellerEntity = sellerMapper.selectByMemberId(memberEntity.getMemberId()); // 로그인한 아이디로 seller를 가져옴
 	
 		

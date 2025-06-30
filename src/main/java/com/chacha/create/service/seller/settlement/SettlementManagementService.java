@@ -7,12 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.chacha.create.common.mapper.manage.ManageMapper;
+import com.chacha.create.common.mapper.product.PImgMapper;
+import com.chacha.create.common.mapper.product.ProductManageMapper;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class SettlementManagementService {
 	
-	@Autowired
-	ManageMapper manageMapper;
+	private final ManageMapper manageMapper;
 	
 	public List<Map<String, Object>> sellerSettlementManagement(String storeUrl){
 		return manageMapper.sellerSettlementManagement(storeUrl);

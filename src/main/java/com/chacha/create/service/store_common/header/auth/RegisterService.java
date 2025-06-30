@@ -1,8 +1,5 @@
 package com.chacha.create.service.store_common.header.auth;
 
-import java.util.IllegalFormatException;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,22 +11,17 @@ import com.chacha.create.common.mapper.member.MemberMapper;
 import com.chacha.create.common.mapper.member.SellerMapper;
 import com.chacha.create.common.mapper.store.StoreMapper;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class RegisterService {
 
 	private final MemberMapper memberMapper;
 	private final SellerMapper sellerMapper;
 	private final StoreMapper storeMapper;
-
-    @Autowired
-    public RegisterService(MemberMapper memberMapper, SellerMapper sellerMapper, StoreMapper storeMapper) {
-        this.memberMapper = memberMapper;
-        this.sellerMapper = sellerMapper;
-        this.storeMapper = storeMapper;
-    }
     
     @Transactional(rollbackFor = Exception.class)
     public MemberEntity memberinsert(MemberEntity memberEntity) {

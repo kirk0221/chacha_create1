@@ -33,10 +33,6 @@ public class PersonalOrderManageRestController {
     @GetMapping("/order/management")
     public ResponseEntity<ApiResponse<List<OrderDTO>>> orderManagement(HttpSession session) {
         MemberEntity memberEntity = (MemberEntity) session.getAttribute("loginMember");
-        if (memberEntity == null) {
-            return ResponseEntity.status(ResponseCode.UNAUTHORIZED.getStatus())
-                    .body(new ApiResponse<>(ResponseCode.UNAUTHORIZED, null));
-        }
         List<OrderDTO> orders = orderManageService.selectOrderAll(memberEntity);
         return ResponseEntity.ok(new ApiResponse<>(ResponseCode.OK, orders));
     }
@@ -44,10 +40,6 @@ public class PersonalOrderManageRestController {
     @GetMapping("/refunds")
     public ResponseEntity<ApiResponse<List<OrderDTO>>> refundlist(HttpSession session) {
         MemberEntity memberEntity = (MemberEntity) session.getAttribute("loginMember");
-        if (memberEntity == null) {
-            return ResponseEntity.status(ResponseCode.UNAUTHORIZED.getStatus())
-                    .body(new ApiResponse<>(ResponseCode.UNAUTHORIZED, null));
-        }
         List<OrderDTO> refunds = orderManageService.selectRefundAll(memberEntity);
         return ResponseEntity.ok(new ApiResponse<>(ResponseCode.OK, refunds));
     }
@@ -55,10 +47,6 @@ public class PersonalOrderManageRestController {
     @GetMapping("/orderstatus")
     public ResponseEntity<ApiResponse<List<OrderDTO>>> orderStatuslist(HttpSession session, OrderStatusEnum orderStatus) {
         MemberEntity memberEntity = (MemberEntity) session.getAttribute("loginMember");
-        if (memberEntity == null) {
-            return ResponseEntity.status(ResponseCode.UNAUTHORIZED.getStatus())
-                    .body(new ApiResponse<>(ResponseCode.UNAUTHORIZED, null));
-        }
         List<OrderDTO> filteredOrders = orderManageService.selectForOrderStatus(memberEntity, orderStatus);
         return ResponseEntity.ok(new ApiResponse<>(ResponseCode.OK, filteredOrders));
     }

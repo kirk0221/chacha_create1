@@ -31,11 +31,11 @@ public class PersonalSettlementRestController {
     public ResponseEntity<ApiResponse<Map<String, List<?>>>> getSellManagement(HttpSession session) {
         MemberEntity member = (MemberEntity) session.getAttribute("loginMember");
         
-        log.info("판매 정산 조회 요청 - memberId: {}", member.getMemberId());
+        log.info("판매 정산 조회 요청 - member: {}", member);
         
         Map<String, List<?>> result = new HashMap<>();
-        List<Map<String, Object>> sellmanageList = personalSettlementService.sellManagement(member.getMemberId());
-        List<Map<String, Object>> daySellmanagelist = personalSettlementService.daySellManagement(member.getMemberId());
+        List<Map<String, Object>> sellmanageList = personalSettlementService.sellManagement(member);
+        List<Map<String, Object>> daySellmanagelist = personalSettlementService.daySellManagement(member);
         
         result.put("sellmanageList", sellmanageList);
         result.put("daySellmanagelist", daySellmanagelist);

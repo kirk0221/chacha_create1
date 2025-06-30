@@ -9,20 +9,21 @@ import org.springframework.stereotype.Service;
 
 import com.chacha.create.common.dto.product.HomeProductDTO;
 import com.chacha.create.common.mapper.product.MainPageMapper;
+import com.chacha.create.common.mapper.product.PImgMapper;
+import com.chacha.create.common.mapper.product.ProductManageMapper;
 import com.chacha.create.common.mapper.store.StoreIdCheckMapper;
 import com.chacha.create.util.ServiceUtil;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class MainService {
 
-    @Autowired
-    private MainPageMapper mainPageMapper;
-
-    @Autowired
-    private StoreIdCheckMapper idCheckMapper;
+    private final MainPageMapper mainPageMapper;
+    private final StoreIdCheckMapper idCheckMapper;
 
     /** 🛍️ 스토어 메인 페이지 - 인기 + 대표 상품 묶음 */
     public Map<String, List<HomeProductDTO>> getStoreMainProductMap(int storeId) {

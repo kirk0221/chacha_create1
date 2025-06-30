@@ -20,4 +20,5 @@ public class ServiceUtil {
         if (cardNum == null || cardNum.length() < 4) return "";
         return "****-****-****-" + cardNum.substring(cardNum.length() - 4);
 	}
+    
 }

@@ -37,7 +37,7 @@ public class QuestionRestController {
     @PostMapping("/question")
     public ResponseEntity<ApiResponse<Integer>> insertQuestion(@RequestBody QuestionEntity questionEntity, HttpSession session) {
         MemberEntity memberEntity = (MemberEntity) session.getAttribute("loginMember");
-        log.info("질문 등록 요청 - memberId: {}, question: {}", memberEntity.getMemberId(), questionEntity);
+        log.info("질문 등록 요청 - member: {}, question: {}", memberEntity, questionEntity);
         int result = questionService.insertQuestion(memberEntity, questionEntity);
         return ResponseEntity.status(ResponseCode.CREATED.getStatus())
                              .body(new ApiResponse<>(ResponseCode.CREATED, result));

@@ -27,68 +27,63 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class PersonalProductRestController {
 
-    @Autowired
-    private PersonalProductService personalProductService;
+	@Autowired
+	private PersonalProductService personalProductService;
 
-    @PostMapping(value = "/sellregister", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<ApiResponse<Integer>> registerProduct(@RequestBody PersonalProductDTO dto, HttpSession session) {
-        MemberEntity loginMember = (MemberEntity) session.getAttribute("loginMember");
-        Integer memberId = loginMember.getMemberId();
+	@PostMapping(value = "/sellregister", consumes = "application/json", produces = "application/json")
+	public ResponseEntity<ApiResponse<Integer>> registerProduct(@RequestBody PersonalProductDTO dto,
+			HttpSession session) {
+		MemberEntity loginMember = (MemberEntity) session.getAttribute("loginMember");
+		Integer memberId = loginMember.getMemberId();
 
-        log.info("로그인된 memberId: {}", memberId);
-        int result = personalProductService.insertMainProductWithImages(dto, memberId);
+		log.info("로그인된 member: {}", loginMember);
+		int result = personalProductService.insertMainProductWithImages(dto, loginMember);
 
-        if (result > 0) {
-            return ResponseEntity.ok(new ApiResponse<>(ResponseCode.CREATED, result));
-        } else {
-            return ResponseEntity.status(ResponseCode.FAIL.getStatus())
-                    .body(new ApiResponse<>(ResponseCode.FAIL, 0));
-        }
-    }
+		if (result > 0) {
+			return ResponseEntity.ok(new ApiResponse<>(ResponseCode.CREATED, result));
+		} else {
+			return ResponseEntity.status(ResponseCode.FAIL.getStatus()).body(new ApiResponse<>(ResponseCode.FAIL, 0));
+		}
+	}
 
-    @GetMapping(value = "/products", produces = "application/json")
-    public ResponseEntity<ApiResponse<List<PersonalProductDTO>>> getProductsBySeller(HttpSession session) {
-        MemberEntity loginMember = (MemberEntity) session.getAttribute("loginMember");
-        Integer memberId = loginMember.getMemberId();
+	@GetMapping(value = "/products", produces = "application/json")
+	public ResponseEntity<ApiResponse<List<PersonalProductDTO>>> getProductsBySeller(HttpSession session) {
+		MemberEntity loginMember = (MemberEntity) session.getAttribute("loginMember");
 
-        log.info("로그인된 memberId: {}", memberId);
-        List<PersonalProductDTO> products = personalProductService.getProductsByMemberId(memberId);
+		log.info("로그인된 member: {}", loginMember);
+		List<PersonalProductDTO> products = personalProductService.getProductsByMemberId(loginMember);
 
-        return ResponseEntity.ok(new ApiResponse<>(ResponseCode.OK, products));
-    }
+		return ResponseEntity.ok(new ApiResponse<>(ResponseCode.OK, products));
+	}
 
-    @PutMapping(value = "/sellregister/update", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<ApiResponse<Integer>> updateProduct(@RequestBody PersonalProductDTO dto, HttpSession session) {
-        MemberEntity loginMember = (MemberEntity) session.getAttribute("loginMember");
-        Integer memberId = loginMember.getMemberId();
+	@PutMapping(value = "/sellregister/update", consumes = "application/json", produces = "application/json")
+	public ResponseEntity<ApiResponse<Integer>> updateProduct(@RequestBody PersonalProductDTO dto,
+			HttpSession session) {
+		MemberEntity loginMember = (MemberEntity) session.getAttribute("loginMember");
+		log.info("로그인된 member: {}", loginMember);
+		int result = personalProductService.updateMainProductWithImages(dto, loginMember);
 
-        log.info("로그인된 memberId: {}", memberId);
-        int result = personalProductService.updateMainProductWithImages(dto, memberId);
+		if (result > 0) {
+			return ResponseEntity.ok(new ApiResponse<>(ResponseCode.OK, result));
+		} else {
+			return ResponseEntity.status(ResponseCode.FAIL.getStatus()).body(new ApiResponse<>(ResponseCode.FAIL, 0));
+		}
+	}
 
-        if (result > 0) {
-            return ResponseEntity.ok(new ApiResponse<>(ResponseCode.OK, result));
-        } else {
-            return ResponseEntity.status(ResponseCode.FAIL.getStatus())
-                    .body(new ApiResponse<>(ResponseCode.FAIL, 0));
-        }
-    }
+	@PutMapping(value = "/sellregister/delete", consumes = "application/json", produces = "application/json")
+	public ResponseEntity<ApiResponse<Integer>> deleteProduct(@RequestBody Map<String, Integer> param,
+			HttpSession session) {
+		MemberEntity loginMember = (MemberEntity) session.getAttribute("loginMember");
+		int productId = param.get("productId");
 
-    @PutMapping(value = "/sellregister/delete", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<ApiResponse<Integer>> deleteProduct(@RequestBody Map<String, Integer> param, HttpSession session) {
-        MemberEntity loginMember = (MemberEntity) session.getAttribute("loginMember");
-        Integer memberId = loginMember.getMemberId();
-        int productId = param.get("productId");
+		log.info("로그인된 memberId: {}, 삭제 요청 productId: {}", loginMember, productId);
 
-        log.info("로그인된 memberId: {}, 삭제 요청 productId: {}", memberId, productId);
+		int result = personalProductService.deleteMainProduct(productId, loginMember);
 
-        int result = personalProductService.deleteMainProduct(productId, memberId);
-
-        if (result > 0) {
-            return ResponseEntity.ok(new ApiResponse<>(ResponseCode.OK, result));
-        } else {
-            return ResponseEntity.status(ResponseCode.FAIL.getStatus())
-                    .body(new ApiResponse<>(ResponseCode.FAIL, 0));
-        }
-    }
+		if (result > 0) {
+			return ResponseEntity.ok(new ApiResponse<>(ResponseCode.OK, result));
+		} else {
+			return ResponseEntity.status(ResponseCode.FAIL.getStatus()).body(new ApiResponse<>(ResponseCode.FAIL, 0));
+		}
+	}
 }
-

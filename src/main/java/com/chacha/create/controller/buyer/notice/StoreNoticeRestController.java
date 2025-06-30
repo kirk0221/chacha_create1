@@ -19,17 +19,17 @@ import com.chacha.create.service.buyer.notice.StoreNoticeService;
 public class StoreNoticeRestController {
 
     @Autowired
-    private StoreNoticeService stService;
+    private StoreNoticeService storeNoticeService;
 
     @GetMapping("/notices")
     public ResponseEntity<ApiResponse<List<Map<String, Object>>>> noticeList(@PathVariable String storeUrl) {
-        List<Map<String, Object>> list = stService.noticeList(storeUrl);
+        List<Map<String, Object>> list = storeNoticeService.noticeList(storeUrl);
         return ResponseEntity.ok(new ApiResponse<>(ResponseCode.OK, list));
     }
 
     @GetMapping("/noticedetail/{noticeId}")
     public ResponseEntity<ApiResponse<List<Map<String, Object>>>> noticeDetailList(@PathVariable String storeUrl, @PathVariable Integer noticeId) {
-        List<Map<String, Object>> detail = stService.noticeDetailList(storeUrl, noticeId);
+        List<Map<String, Object>> detail = storeNoticeService.noticeDetailList(storeUrl, noticeId);
         return ResponseEntity.ok(new ApiResponse<>(ResponseCode.OK, detail));
     }
 }

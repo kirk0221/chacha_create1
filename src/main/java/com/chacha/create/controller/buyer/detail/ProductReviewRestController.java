@@ -65,7 +65,7 @@ public class ProductReviewRestController {
 	@PostMapping
 	public ResponseEntity<ApiResponse<Integer>> addReview(@RequestBody ReviewEntity review, HttpSession session) {
 		MemberEntity loginMember = (MemberEntity) session.getAttribute("loginMember");
-		int result = reviewService.insert(review, loginMember.getMemberId());
+		int result = reviewService.insert(review, loginMember);
 		ResponseCode responseCode = result > 0 ? ResponseCode.CREATED : ResponseCode.BAD_REQUEST;
 		return ResponseEntity.status(responseCode.getStatus()).body(new ApiResponse<>(responseCode, result));
 	}
@@ -73,7 +73,7 @@ public class ProductReviewRestController {
 	@PutMapping
 	public ResponseEntity<ApiResponse<Integer>> updateReview(@RequestBody ReviewEntity review, HttpSession session) {
 		MemberEntity loginMember = (MemberEntity) session.getAttribute("loginMember");
-		int result = reviewService.update(review, loginMember.getMemberId());
+		int result = reviewService.update(review, loginMember);
 		ResponseCode responseCode = result > 0 ? ResponseCode.OK : ResponseCode.BAD_REQUEST;
 		return ResponseEntity.status(responseCode.getStatus()).body(new ApiResponse<>(responseCode, result));
 	}
@@ -81,7 +81,7 @@ public class ProductReviewRestController {
 	@DeleteMapping
     public ResponseEntity<ApiResponse<Integer>> deleteReview(@RequestParam int reviewId, HttpSession session) {
         MemberEntity loginMember = (MemberEntity) session.getAttribute("loginMember");
-        int result = reviewService.delete(reviewId, loginMember.getMemberId());
+        int result = reviewService.delete(reviewId, loginMember);
         ResponseCode responseCode = result > 0 ? ResponseCode.OK : ResponseCode.BAD_REQUEST;
         return ResponseEntity.status(responseCode.getStatus())
                 .body(new ApiResponse<>(responseCode, result));

@@ -7,22 +7,21 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.chacha.create.common.entity.member.MemberEntity;
 import com.chacha.create.common.entity.store.NoticeEntity;
+import com.chacha.create.common.mapper.product.PImgMapper;
+import com.chacha.create.common.mapper.product.ProductManageMapper;
 import com.chacha.create.common.mapper.store.NoticeMapper;
 import com.chacha.create.common.mapper.store.StoreMapper;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class NoticeService {
 
 	private final NoticeMapper noticeMapper;
 	private final StoreMapper storeMapper;
-	
-	public NoticeService(NoticeMapper noticeMapper, StoreMapper storeMapper) {
-		this.noticeMapper = noticeMapper;
-		this.storeMapper = storeMapper;
-	}
 	
 	public List<NoticeEntity> selectForNoticeAll(){
 		return noticeMapper.selectAll();
