@@ -40,7 +40,9 @@ public class StoreMainRestController {
 			storeId = mainService.storeIdCheck(storeUrl);
 		}
 		log.info("조회 대상 스토어 ID: {}", storeId);
+		
 		return mainService.getStoreMainProductMap(storeId);
+		
 	}
 	
 	// 스토어 전체상품 조회(조건조회)
