@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class SellerMainController {
 	
+	
 	final ProductService productService;
 	// 판매자 메인페이지
 	@GetMapping("/main")
@@ -52,7 +53,7 @@ public class SellerMainController {
 		@GetMapping("/management/settlement")
 	    public String showSellrSettlementPage(@PathVariable String storeUrl,
 	                                        Model model) {
-	        return "mainauth/pages/storeSettlementContent";
+	        return "seller/main_personal_adjustment";
 		}
 	
 	// 판매 주문 목록
