@@ -13,20 +13,20 @@
   <div class="nav-inner container-1440">
     <div class="logo">
       <!-- ✅ 로고 클릭 시 메인으로 이동 -->
-      <a href="${cpath}/views/main/main_test.jsp">
+      <a href="${cpath}/main/home">
         <img src="${cpath}/resources/images/logo/logohorizon_green.png" alt="뜨락상회 로고" style="height: 80px" />
       </a>
     </div>
     <div class="menu">
-      <a href="#" class="nav-item ">전체상품</a>
-      <a href="#" class="nav-item">스토어</a>
-      <a href="${cpath}/main/notice" class="nav-item ${fn:contains(uri, '/main/notice') ? 'active' : ''}">
+      <a href="${cpath}/main/products" class="nav-item">전체상품</a>
+      <a href="${cpath}/main/store/stores" class="nav-item">스토어</a>
+      <a href="${cpath}/main/question" class="nav-item ${fn:contains(uri, '/main/notice') ? 'active' : ''}">
 	   공지/소식
 	</a>
-      <a href="#" class="nav-item">개인판매</a>
+      <a href="${cpath}/main/sell/sellguide" class="nav-item">개인판매</a>
       <a href="#" class="nav-item">클래스</a>
       <a href="${cpath}/main/mypage" class="nav-item">마이페이지</a>
-      <a href="#" class="nav-item">장바구니</a>
+      <a href="${cpath}/main/mypage/cart" class="nav-item">장바구니</a>
     </div>
   </div>
 </nav>

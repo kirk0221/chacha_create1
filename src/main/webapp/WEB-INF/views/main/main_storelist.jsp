@@ -10,6 +10,10 @@
 </head>
 <body>
 
+<!-- ✅ Include Header & Nav -->
+<jsp:include page="/common/header.jsp" />
+<jsp:include page="/common/main_nav.jsp" />
+
 <!-- 검색창 -->
 <div id="product-search">
   <form id="search-form" action="/api/main/productlist" method="get">

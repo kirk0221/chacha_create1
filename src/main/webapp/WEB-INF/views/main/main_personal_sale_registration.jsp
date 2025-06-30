@@ -1,44 +1,23 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions"%> 
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="cpath" value="${pageContext.servletContext.contextPath}" />
 <!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
   <title>개인 판매 물품 등록</title>
-  <link rel="stylesheet" href="resources/css/personal_register.css">
+  <link rel="stylesheet" href="${cpath}/resources/css/personal_register.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-
-<header>
-  <div class="header-inner">
-    <div class="top-menu">
-      <span>일반인 복지서비스 만들겠습니다</span>
-      <div>
-        <a href="#">회원가입</a> | <a href="#">로그인</a>
-      </div>
-    </div>
-  </div>
-  <nav class="main-nav">
-    <div class="logo">뜨락상회</div>
-    <div class="nav-links">
-      <a href="#">전체상품</a>
-      <a href="#">스토어</a>
-      <a href="#">공지 / 소식</a>
-      <a class="active" href="#">개인 판매</a>
-      <a href="#">클래스</a>
-      <a href="#">마이페이지</a>
-      <a href="#">장바구니</a>
-    </div>
-  </nav>
-</header>
+  <!-- ✅ Include Header & Nav -->
+<jsp:include page="/common/header.jsp" />
+<jsp:include page="/common/main_nav.jsp" />
 
 <main class="register-container">
-  <div class="sub-menu">
-    <a href="#">개인 판매 설명</a>
-    <a class="active" href="#">개인 판매 물품 등록</a>
-    <a href="#">개인 판매 물품 주문 관리</a>
-    <a href="#">개인 판매 물품 정산 관리</a>
-  </div>
+<jsp:include page="/common/main_personal_subnav.jsp" />
 
   <div class="explanation-box">
     <p>여기에는 개인판매 물품 등록하고 어쩌고 저쩌고 하는 방법들을 설명해놓는 칸입니다.<br>아래에는 접거나 사진을 넣고 만들 예정입니다.</p>

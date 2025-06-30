@@ -21,14 +21,7 @@
     <!-- 메인 콘텐츠 영역 -->
     <main class="main-area">
       <!-- 왼쪽 사이드바 -->
-      <aside class="sidebar">
-        <ul>
-          <li><a href="#">대시보드</a></li>
-          <li><a href="#">내 정보</a></li>
-          <li><a href="#">판매 관리</a></li>
-          <li><a href="#">정산 내역</a></li>
-        </ul>
-      </aside>
+     <jsp:include page="/common/main_mypage_sidenav.jsp" />
 
       <!-- 오른쪽 콘텐츠 영역 -->
       <section class="page-content">

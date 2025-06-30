@@ -4,58 +4,42 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Poppins', sans-serif;
-  background-color: #f9f9f9;
-}
-
-/* 전체 wrapper */
-.cart-page {
-  display: flex;
-  justify-content: center;
-  padding: 50px;
-}
-
-/* 좌우 영역 구성 */
-.cart-layout {
-  display: flex;
-  gap: 40px;
-  width: 1200px;
-}
-
-/* 사이드 메뉴 영역*/
-.sidebar-menu {
-  width: 250px;
-  background-color: #cfd3c4;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.menu-item {
-  padding: 20px;
-  font-size: 16px;
-  border-bottom: 1px solid #bbb;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
+  font-family: 'Noto Sans KR', sans-serif;
+  background-color: #f7f6f2;
   color: #333;
 }
 
-.menu-item:hover {
-  background-color: #dfe3d9;
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-.menu-item.selected {
-  background-color: #ffffff;
-  font-weight: bold;
+/* ===== 메인 ===== */
+.page-content {
+  flex: 1;
+  margin-left: 30px;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.05);
+
+  /* ✅ 추가: 장바구니와 주문 요약을 나란히 배치 */
+  display: flex;
+  gap: 30px;
 }
 
-.arrow {
-  font-weight: bold;
+.main-area,
+.cart-layout {
+  max-width: 1440px;
+  width: 100%;
+  display: flex;
+  padding: 20px;
+  margin: 0 auto;
+  flex: 1;
 }
 
-
-/* 장바구니 상품 영역  */
+/* ===== 장바구니 콘텐츠 영역 ===== */
 .cart-section {
   flex: 1;
   display: flex;
@@ -81,7 +65,6 @@ body {
   background-color: #ccc;
 }
 
-
 .cart-item {
   display: flex;
   align-items: flex-start;
@@ -90,7 +73,7 @@ body {
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 12px;
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .item-checkbox {
@@ -164,10 +147,10 @@ body {
   font-weight: 600;
 }
 
-
 /* 주문 요약 영역 */
 .order-summary {
   width: 300px;
+  flex-shrink: 0; /* ✅ 크기 줄어드는 것 방지 */
   background-color: #ffffff;
   padding: 24px;
   border: 2px solid #2a3e34;
@@ -224,4 +207,19 @@ body {
 
 .checkout-btn:hover {
   background-color: #1f3027;
+}
+
+/* ===== 푸터 (공통) ===== */
+.site-footer {
+  background-color: #676f58;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 40px;
+}
+
+.footer-inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 20px;
 }

@@ -1,11 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions"%> 
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="cpath" value="${pageContext.servletContext.contextPath}" />
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>개인판매 물품 주문관리</title>
-<link rel="stylesheet" href="resources/css/main_personal_order_style.css">
+<link rel="stylesheet" href="${cpath}/resources/css/main_personal_order_style.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- Swiper CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
@@ -13,39 +17,15 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </head>
 <body>
-<!-- --------header+ nav ----- -->
-<header>
-  <div class="header-inner">
-    <div class="top-menu">
-      <span>일반인 복지서비스 만들겠습니다</span>
-      <div>
-        <a href="#">회원가입</a> | <a href="#">로그인</a>
-      </div>
-    </div>
-  </div>
-  <nav class="main-nav">
-    <div class="logo">뜨락상회</div>
-    <div class="nav-links">
-      <a href="#">전체상품</a>
-      <a href="#">스토어</a>
-      <a href="#">공지 / 소식</a>
-      <a class="active" href="#">개인 판매</a>
-      <a href="#">클래스</a>
-      <a href="#">마이페이지</a>
-      <a href="#">장바구니</a>
-    </div>
-  </nav>
-</header>
+<!-- ✅ Include Header & Nav -->
+<jsp:include page="/common/header.jsp" />
+<jsp:include page="/common/main_nav.jsp" />
+
 
 <!-- --------sub menu ----- -->
 <main class="order-container">
-  <div class="sub-menu">
-    <a href="#">개인 판매 설명</a>
-    <a href="#">개인 판매 물품 등록</a>
-    <a class="active" href="#">개인 판매 물품 주문 관리</a>
-    <a href="#">개인 판매 물품 정산 관리</a>
-  </div>
-
+<jsp:include page="/common/main_personal_subnav.jsp" />
+  
 <!-- Swiper 슬라이더 -->
 <!-- 버튼 -->
     <div class="swiper-button-next"></div>

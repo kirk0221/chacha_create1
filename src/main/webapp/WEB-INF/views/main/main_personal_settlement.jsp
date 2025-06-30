@@ -1,15 +1,28 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions"%> 
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="cpath" value="${pageContext.servletContext.contextPath}" />
 <!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
   <title>개인 판매 정산 관리</title>
-  <link rel="stylesheet" href="resources/css/main_personal_adjustment_style.css">
+  <link rel="stylesheet" href="${cpath}/resources/css/main_personal_settlement_style.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </head>
 <body>
+<!-- ✅ Include Header & Nav -->
+<jsp:include page="/common/header.jsp" />
+<jsp:include page="/common/main_nav.jsp" />
+
+<main class="settlement-container">
+<jsp:include page="/common/main_personal_subnav.jsp" />
+
+
+
   <div class="swiper-container-wrapper">
     <div class="swiper mySwiper">
       <div class="swiper-wrapper">
@@ -166,6 +179,7 @@
       <div class="swiper-button-prev"></div>
     </div>
   </div>
+  </main>
 
   <script>
   document.addEventListener("DOMContentLoaded", function () {
