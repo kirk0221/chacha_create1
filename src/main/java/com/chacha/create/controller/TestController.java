@@ -9,7 +9,7 @@ public class TestController {
 	
 	@GetMapping("test")
 	public String test() {
-		return "main_test";
+		return "main/main_test";
 	}
 	
 	
