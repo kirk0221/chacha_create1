@@ -1,0 +1,129 @@
+@charset "EUC-KR";
+
+.member-box {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.member-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.sidebar ul li a {
+    display: flex;                  /* ➤ 가로 정렬 */
+    justify-content: space-between;/* ➤ 양쪽 정렬 */
+    align-items: center;            /* ➤ 수직 정렬 */
+    padding: 10px;                  /* ➤ 좌우 위아래 10px */
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    font-size: 15px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.sidebar .arrow {
+    font-size: 16px;
+    color: #555;
+}
+
+.content-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px;
+  overflow-x: hidden;
+
+  display: flex;
+  flex-direction: column;
+  gap: 24px; /* ➤ 요소들 간의 간격 */
+}
+
+h2 {
+  font-size: 24px;
+  color: #2e2e2e;
+  margin: 0;
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* 공통 버튼 스타일 */
+.edit-button,
+.save-button {
+  width: 120px;
+  height: 48px;
+  padding: 0 16px;
+  font-size: 17px;
+  font-family: "PretendardGov-Regular", sans-serif;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s, box-shadow 0.2s;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+/* 수정 버튼 - 하얀 배경 + 초록 테두리 */
+.edit-button {
+  background-color: #ffffff;
+  color: #2e7d32;
+  border: 2px solid #2e7d32;
+}
+
+.edit-button:hover {
+  background-color: #e8f5e9;
+  box-shadow: 0 0 5px rgba(46, 125, 50, 0.3);
+}
+
+.save-button {
+  background-color: #2a3e34;
+  color: #ffffff;
+  border: none;
+}
+
+.save-button:hover {
+  background-color: #1f3028;
+  box-shadow: 0 0 5px rgba(42, 62, 52, 0.3);
+}
+
+/* 👇 스크롤이 있는 프레임 */
+.table-frame {
+  max-height: 500px;  /* 원하는 높이 조절 가능 */
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-top: 1px solid #ddd;
+  margin-top: 10px;
+}
+
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.product-table th,
+.product-table td {
+  padding: 12px 10px;
+  text-align: center;
+  font-size: 14px;
+  border-bottom: 1px solid #ddd;
+}
+
+.product-table img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+

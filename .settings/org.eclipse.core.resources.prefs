@@ -1,2 +1,11 @@
 eclipse.preferences.version=1
 encoding//src/main/webapp/WEB-INF/views/home.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/seller/product_select.jsp=UTF-8
+encoding//src/main/webapp/resources/css/authmain.css=UTF-8
+encoding//src/main/webapp/resources/css/closure.css=UTF-8
+encoding//src/main/webapp/resources/css/mainauth_style.css=UTF-8
+encoding//src/main/webapp/resources/css/product_insert.css=UTF-8
+encoding//src/main/webapp/resources/css/product_select.css=UTF-8
+encoding//src/main/webapp/resources/css/product_update.css=UTF-8
+encoding//src/main/webapp/resources/css/seller_join.css=UTF-8
+encoding/<project>=UTF-8
