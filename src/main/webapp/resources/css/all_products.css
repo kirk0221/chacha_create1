@@ -1,0 +1,304 @@
+@charset "UTF-8";
+
+/* ========== 공통 설정 ========== */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', 'Noto Sans KR', sans-serif;
+  background-color: #fff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/*상품명 검색 */
+#product-search {
+  width: 100%;
+  display: flex;
+  justify-content: center; /* 가운데 정렬 */
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+#search-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#search-input {
+  padding: 10px 14px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 240px;
+}
+
+#search-button {
+  background-color: #004225; /* 진한 녹색 */
+  color: #fff;
+  border: none;
+  border-radius: 10px; /* 더 둥글게 */
+  padding: 10px 14px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+
+
+/* ========== 상단 스토어명 (정렬 헤더) ========== */
+#sort-group {
+  margin-top: 40px;
+  text-align: center;
+}
+
+/* 스토어명 밑줄 */
+.store-underline {
+  width: 100%;
+  max-width: 1200px;
+  height: 2px;
+  background-color: #004225; 
+  margin: 10px auto 50px;
+  border: none;
+}
+
+#storename {
+  font-size: 2.5rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 50px;
+  position: relative;
+  color: #000;
+}
+
+
+/* 상세카테고리 제목 */
+.category-title {
+  font-size: 40px;
+  font-weight: 600;
+  text-align: left;
+  margin-left: calc((100% - 1000px) / 2);
+  padding-top: 40px; 
+  margin-bottom: 20px;
+}
+
+
+
+/* 카테고리 섹션 */
+#category-section {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  position: relative;
+}
+
+/* 각 대분류 블록 */
+.main-category-block {
+  margin-bottom: 12px;
+}
+
+/* 대분류 헤더: 한 줄 정렬 */
+.main-category-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* 전체 선택 체크박스 정렬 */
+.select-all {
+  margin-left: auto;  /* 우측 끝 정렬 */
+  font-weight: normal;
+  font-size: 14px;
+}
+
+/* 소분류 영역 */
+.subcategory-container {
+  display: block;  /* 테스트 시 기본 표시 */
+  margin-top: 8px;
+  margin-left: 28px;
+}
+
+.subcategory-container label {
+  margin-right: 14px;
+  font-size: 14px;
+}
+
+/* 검색 버튼 wrapper */
+.category-search-btn-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.category-search-btn {
+  background-color: #004225; /* 진한 녹색 */
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+
+/* 구분선 hr */
+.divider {
+  width: 100%;
+  max-width: 1200px; /* 스토어명 밑줄과 길이 맞춤 */
+  height: 2px; /* 조금 더 굵게 */
+  background-color: #888888; /* 진한 회색 */
+  border: none;
+  margin: 40px auto;
+}
+
+/* ========== 정렬 탭 ========== */
+
+/* 정렬 탭 전체 래퍼 */
+#sort-tabs {
+  display: flex;
+  justify-content: flex-start;
+  gap: 30px;
+  margin: 16px auto 40px;
+  padding: 0 20px;
+  max-width: 1200px;
+}
+
+/* 각 정렬 탭 버튼 */
+.sort-tab {
+  position: relative;
+  font-size: 16px;
+  font-weight: 600;
+  color: #777;
+  cursor: pointer;
+  padding: 8px 0;
+}
+
+/* 정렬 탭 hover 효과 */
+.sort-tab:hover {
+  color: #000;
+}
+
+/* 선택된 정렬 탭에 밑줄 강조 */
+.sort-tab.active {
+  color: #000;
+  font-weight: 700;
+}
+
+.sort-tab.active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 2px;
+  background-color: #fa8232; /* 강조 색상 (예: 오렌지) */
+}
+
+/* 상품 그리드 전체 레이아웃 */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* 상품 카드 개별 스타일 */
+.product-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 8px;
+  cursor: pointer;
+}
+
+
+/* 상품 이미지 */
+.product-img {
+  width: 100%;
+  aspect-ratio: 1 / 1; /* 정사각형 */
+  object-fit: cover;
+  border-radius: 4px;
+  background-color: #f5f5f5;
+}
+
+/* 카테고리 전체 묶음 (한 줄로 나열) */
+.product-category-list {
+  display: flex;
+  gap: 6px;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+/* 개별 카테고리 스타일 */
+.product-category {
+  background-color: #f0f0f0;
+  color: #666;
+  font-size: 13px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+
+/* 상품명 */
+.product-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #000;
+  margin-top: 6px;
+}
+
+/* 카테고리명 */
+.product-category {
+  font-size: 13px;
+  color: #888;
+}
+
+/* 가격 */
+.product-price {
+  font-size: 15px;
+  font-weight: 700;
+  color: #000;
+}
+
+
+/* 페이지네이션 컨테이너 */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  margin-bottom: 50px;
+  gap: 6px;
+}
+
+.pagination button {
+  padding: 6px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  background-color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: 0.2s ease;
+}
+
+.pagination button:hover {
+  background-color: #f2f2f2;
+}
+
+.pagination button.active {
+  background-color: #333;
+  color: white;
+  border-color: #333;
+}
+
+.pagination .page-nav {
+  font-weight: bold;
+  color: #333;
+}
