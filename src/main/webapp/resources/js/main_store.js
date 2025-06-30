@@ -1,43 +1,58 @@
-$(document).ready(function() {
-    // 인기 상품 불러오기
-    $.ajax({
-        url: '/api/main/popular-products',
-        method: 'GET',
-        success: function(products) {
-            let html = '';
-            products.forEach(p => {
-                html += `
-                <div class="card">
-                    <img src="${p.thumbnailUrl}" alt="${p.productName}">
-                    <h3>${p.productName}</h3>
-                    <p>❤️ ${p.likeCount} 좋아요</p>
-                </div>`;
-            });
-            $('#popular-products').html(html);
-        },
-        error: function() {
-            $('#popular-products').html('<p>인기 상품을 불러오지 못했습니다.</p>');
-        }
-    });
 
-    // 인기 스토어 불러오기
-    $.ajax({
-        url: '/api/main/popular-stores',
-        method: 'GET',
-        success: function(stores) {
-            let html = '';
-            stores.forEach(s => {
-                html += `
-                <div class="card">
-                    <img src="${s.profileImageUrl}" alt="${s.storeName}">
-                    <h3>${s.storeName}</h3>
-                    <p>⭐ ${s.rating.toFixed(1)} 평점</p>
-                </div>`;
-            });
-            $('#popular-stores').html(html);
-        },
-        error: function() {
-            $('#popular-stores').html('<p>인기 스토어를 불러오지 못했습니다.</p>');
-        }
+document.addEventListener("DOMContentLoaded", function () {
+  // 인기 스토어 Swiper
+  new Swiper('.store-swiper', {
+    slidesPerView: 3,
+    spaceBetween: 30,
+    loop: true,
+    autoplay: { delay: 3000 },
+    navigation: {
+      nextEl: '.store-swiper .swiper-button-next',
+      prevEl: '.store-swiper .swiper-button-prev',
+    },
+    pagination: {
+      el: '.store-swiper .swiper-pagination',
+      clickable: true,
+    },
+  });
+
+  // 인기 상품 Swiper
+  new Swiper('.product-swiper', {
+    slidesPerView: 3,
+    spaceBetween: 30,
+    loop: true,
+    autoplay: { delay: 3000 },
+    navigation: {
+      nextEl: '.product-swiper .swiper-button-next',
+      prevEl: '.product-swiper .swiper-button-prev',
+    },
+    pagination: {
+      el: '.product-swiper .swiper-pagination',
+      clickable: true,
+    },
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  // 광고 배너 swiper 초기화
+  new Swiper('.banner-swiper', {
+    loop: true,
+    autoplay: {
+      delay: 4000
+    },
+    pagination: {
+      el: '.banner-pagination',
+      clickable: true
+    }
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  const links = document.querySelectorAll(".product-icon a");
+  links.forEach(link => {
+    link.addEventListener("click", e => {
+      e.preventDefault();
+      alert("상품 상세 페이지로 이동 예정입니다.");
     });
+  });
 });
