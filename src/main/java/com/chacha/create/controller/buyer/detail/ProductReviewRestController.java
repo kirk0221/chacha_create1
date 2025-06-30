@@ -26,7 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/main/productdetail/{productId}/review")
+@RequestMapping("/api/{storeUrl}/productdetail/{productId}/review")
 public class ProductReviewRestController {
 
 	@Autowired

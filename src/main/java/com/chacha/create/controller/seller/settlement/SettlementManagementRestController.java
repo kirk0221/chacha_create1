@@ -19,13 +19,13 @@ import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @Slf4j
-@RequestMapping("/api/{storeUrl}")
+@RequestMapping("/api/{storeUrl}/seller")
 public class SettlementManagementRestController {
 
 	@Autowired
 	private SettlementManagementService ssmService;
 
-	@GetMapping(value = "/seller/management/settlement", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value = "/management/settlement", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ApiResponse<Map<String, List<?>>>> sellerSettlementManagement(@PathVariable String storeUrl) {
 		Map<String, List<?>> result = Map.of("settlementByDayList", ssmService.sellerDaySellManagement(storeUrl),
 				"settlementList", ssmService.sellerSettlementManagement(storeUrl));
