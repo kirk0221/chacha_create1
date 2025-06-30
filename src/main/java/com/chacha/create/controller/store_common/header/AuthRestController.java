@@ -31,10 +31,10 @@ public class AuthRestController {
     private RegisterService registerService;
 
     @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ApiResponse<Void>> login(HttpSession session, @RequestBody MemberEntity member) {
+    public ResponseEntity<ApiResponse<MemberEntity>> login(HttpSession session, @RequestBody MemberEntity member) {
         MemberEntity loginMember = loginService.login(member.getMemberEmail(), member.getMemberPwd());
         session.setAttribute("loginMember", loginMember);
-        return ResponseEntity.ok(new ApiResponse<>(ResponseCode.OK, null));
+        return ResponseEntity.ok(new ApiResponse<>(ResponseCode.OK, loginMember));
     }
 
     @PostMapping(value = "/join/userinfo", produces = MediaType.APPLICATION_JSON_VALUE)
