@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="../common/header.jsp"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
   <title>공지 / 소식</title>
-  <link rel="stylesheet" href="resources/css/main_notice.css" />
+  <link rel="stylesheet" href="${cpath }/resources/css/main_notice.css" />
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
