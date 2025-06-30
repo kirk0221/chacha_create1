@@ -1,0 +1,287 @@
+@charset "UTF-8";
+
+/* ========== 공통 설정 ========== */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', 'Noto Sans KR', sans-serif;
+  background-color: #fff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* 검색창*/
+#product-search {
+  display: flex;
+  justify-content: center;
+  margin-top: 80px; /* 상단 여백 */
+  margin-bottom: 80px; /* 하단 여백 */
+}
+
+#search-form {
+  display: flex;
+  align-items: center;
+  background-color: #f0f0f0; /* 배경색 (연회색) */
+  border: 1px solid #333;    /* 테두리 */
+  border-radius: 4px;
+  padding: 10px 15px;
+  width: 100%;
+  max-width: 600px; /* 최대 너비 제한 */
+  box-sizing: border-box;
+}
+
+#search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 16px;
+  margin-left: 8px;
+  color: #2c2c2c;
+}
+
+#search-button {
+  background: transparent;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: #2c2c2c;
+}
+
+/* 전체 페이지 컨테이너 설정 */
+.store-page-container {
+  max-width: 1000px;            /* 최대 너비 제한 (반응형) */
+  margin: 80px auto 0;          /* 위쪽 여백 80px, 좌우 자동 정렬 → 가운데 정렬 */
+  padding: 0 20px;              /* 좌우 내부 여백 */
+  font-family: 'Noto Sans KR', sans-serif; /* 한국어 웹폰트 지정 */
+}
+
+/* 상단 탭 메뉴(스토어 목록 / 스토어 개설 설명) 영역 */
+.tab-menu {
+  display: flex;                /* 가로 정렬 */
+  gap: 40px;                    /* 탭 사이 간격 */
+  font-size: 18px;              /* 탭 글자 크기 */
+  font-weight: 500;             /* 중간 굵기 */
+  margin-bottom: 30px;          /* 아래 요소와 간격 */
+}
+
+/* 탭 기본 스타일 */
+.tab {
+  cursor: pointer;              /* 마우스 올렸을 때 손가락 모양 */
+  color: #222;                  /* 글자 색상 */
+  position: relative;           /* 밑줄 커스텀 등에 활용 가능 */
+}
+
+/* 활성화된 탭 (밑줄과 굵은 글씨 적용) */
+.tab.active {
+  font-weight: bold;            /* 굵게 */
+  text-decoration: underline;   /* 밑줄 */
+}
+
+/* 스토어 제목 (예: 뜨락상회 입점 스토어) */
+.store-title {
+  font-size: 32px;              /* 큰 글씨 */
+  font-weight: 700;             /* 굵은 제목 */
+  margin-bottom: 30px;          /* 아래 요소와 여백 */
+  color: #111;                  /* 거의 검은색 */
+}
+
+/* 정렬 및 필터 버튼 컨테이너 */
+.filter-buttons {
+  display: flex;                /* 버튼들 가로 정렬 */
+  gap: 12px;                    /* 버튼 간 간격 */
+  flex-wrap: wrap;              /* 줄 바꿈 허용 (모바일 대응) */
+}
+
+/* 개별 필터 버튼 기본 스타일 */
+.filter-button {
+  padding: 8px 16px;            /* 버튼 내부 여백 */
+  border: 1px solid #ccc;       /* 테두리 색 연회색 */
+  background-color: #fff;       /* 배경색 흰색 */
+  border-radius: 20px;          /* 버튼 모서리 둥글게 */
+  font-size: 14px;              /* 글자 크기 */
+  cursor: pointer;              /* 마우스 커서 변경 */
+  transition: all 0.2s ease;    /* 호버 시 부드럽게 전환 */
+}
+
+/* 버튼에 마우스 올렸을 때 */
+.filter-button:hover {
+  background-color: #f5f5f5;    /* 살짝 회색 배경으로 강조 */
+}
+
+/* 선택된(활성) 필터 버튼 스타일 */
+.filter-button.active {
+  background-color: #222;       /* 배경 진한 회색/검정 */
+  color: white;                 /* 글자색 흰색 */
+  border-color: #222;           /* 테두리 색도 통일 */
+}
+
+/* 카테고리 섹션 */
+#category-section {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  position: relative;
+}
+
+/* 각 대분류 블록 */
+.main-category-block {
+  margin-bottom: 12px;
+}
+
+/* 대분류 헤더: 한 줄 정렬 */
+.main-category-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* 전체 선택 체크박스 정렬 */
+.select-all {
+  margin-left: auto;  /* 우측 끝 정렬 */
+  font-weight: normal;
+  font-size: 14px;
+}
+
+/* 소분류 영역 */
+.subcategory-container {
+  display: block;  /* 테스트 시 기본 표시 */
+  margin-top: 8px;
+  margin-left: 28px;
+}
+
+.subcategory-container label {
+  margin-right: 14px;
+  font-size: 14px;
+}
+
+/* 검색 버튼 wrapper */
+.category-search-btn-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.category-search-btn {
+  background-color: #004225; /* 진한 녹색 */
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 16px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* 전체 store 카드들을 감싸는 그리드 컨테이너 */
+.store-grid-container {
+  max-width: 1200px;            /* 최대 너비 지정 */
+  margin: 50px auto;            /* 가운데 정렬 + 상단 여백 */
+  display: grid;                /* CSS Grid 사용 */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+                                /* 가로 최대 3개, 최소 300px */
+  gap: 40px;                    /* 각 카드 사이 여백 */
+  padding: 0 20px;              /* 양옆 여백 */
+}
+
+/* 각각의 스토어 카드 스타일 */
+.store-card {
+  display: flex;
+  flex-direction: column;      /* 세로 정렬 */
+  align-items: flex-start;     /* 왼쪽 정렬 */
+}
+
+/* 스토어 대표 이미지 (더미 박스) */
+.store-image {
+  width: 100%;
+  aspect-ratio: 4 / 3;           /* 4:3 비율 유지 (최신 브라우저 지원) */
+  overflow: hidden;
+  border-radius: 4px;
+  background-color: #eae6dc;     /* 이미지 로딩 전 기본 배경 */
+}
+
+/* 상품 이미지 */
+.product-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;             /* 이미지 비율 유지하며 채움 */
+  display: block;
+}
+
+
+
+
+/* 스토어 내용 영역 */
+.store-content {
+  margin-top: 16px;
+}
+
+/* 스토어 이름 텍스트 */
+.store-name {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* 카테고리 배지 영역 */
+.store-categories {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+/* 개별 카테고리 배지 */
+.category {
+  background-color: #4b4b2d;
+  color: white;
+  font-size: 13px;
+  padding: 4px 12px;
+  border-radius: 16px;
+  white-space: nowrap;
+}
+
+/* 설명 텍스트 */
+.store-description {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #222;
+}
+
+
+/* 페이지네이션 컨테이너 */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  margin-bottom: 50px;
+  gap: 6px;
+}
+
+.pagination button {
+  padding: 6px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  background-color: white;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: 0.2s ease;
+}
+
+.pagination button:hover {
+  background-color: #f2f2f2;
+}
+
+.pagination button.active {
+  background-color: #333;
+  color: white;
+  border-color: #333;
+}
+
+.pagination .page-nav {
+  font-weight: bold;
+  color: #333;
+}
