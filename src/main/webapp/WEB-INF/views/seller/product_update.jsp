@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>¶ß¶ô»óÈ¸ ÆÇ¸ÅÀÚ »óÇ°¼öÁ¤</title>
-<link rel="stylesheet" type="text/css" href="resources/css/authmain.css">
-<link rel="stylesheet" type="text/css" href="resources/css/product_update.css">
+<meta charset="UTF-8">
+<title>ëœ¨ë½ìƒíšŒ íŒë§¤ìž ìƒí’ˆìˆ˜ì •</title>
+<%@ include file="../common/header.jsp" %>
+  <link rel="stylesheet" href="${cpath}/resources/css/authmain.css">
+  <link rel="stylesheet" href="${cpath}/resources/css/product_update.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
 </head>
@@ -15,8 +15,8 @@
   <header>
     <div class="header-inner">
       <div class="login-bar">
-        <span>¼öÁ¦´ëÃß°í´Ô ¹Ý°©½À´Ï´Ù.</span>
-        <button class="logout-btn">·Î±×¾Æ¿ô</button>
+        <span>ìˆ˜ì œëŒ€ì¶”ê³ ë‹˜ ë°˜ê°‘ìŠµë‹ˆë‹¤.</span>
+        <button class="logout-btn">ë¡œê·¸ì•„ì›ƒ</button>
       </div>
     </div>
   </header>
@@ -24,22 +24,22 @@
   <div class="main-area">
     <div class="content-wrapper">
       <nav class="sidebar">
-		  <div class="profile-section" onclick="#" role="button" tabindex="0" aria-label="½ºÅä¾î°ü¸® ÆäÀÌÁö·Î ÀÌµ¿">
+		  <div class="profile-section" onclick="#" role="button" tabindex="0" aria-label="ìŠ¤í† ì–´ê´€ë¦¬ íŽ˜ì´ì§€ë¡œ ì´ë™">
 		    <img src="_11.png" class="profile-img" />
-		    <div class="store-name">¼öÁ¦´ëÃß°í</div>
+		    <div class="store-name">ìˆ˜ì œëŒ€ì¶”ê³ </div>
 		  </div>
 		  <ul class="menu-list">
-		    <li><a href="#"><span class="menu-text">»óÇ°µî·Ï</span><span class="arrow">></span></a></li>
-		    <li><a href="#"><span class="menu-text">ÆÇ¸Å»óÇ°°ü¸®</span><span class="arrow">></span></a></li>
-		    <li><a href="#"><span class="menu-text">ÁÖ¹®/¹ß¼ÛÈ®ÀÎ(Ãë¼Ò/È¯ºÒ)</span><span class="arrow">></span></a></li>
-		    <li><a href="#"><span class="menu-text">È¯ºÒ°ü¸®</span><span class="arrow">></span></a></li>
-		    <li><a href="#"><span class="menu-text">Á¤»ê°ü¸®</span><span class="arrow">></span></a></li>
-		    <li><a href="#"><span class="menu-text">¹®ÀÇ¸Þ½ÃÁö</span><span class="arrow">></span></a></li>
-		    <li><a href="#"><span class="menu-text">¸®ºä°ü¸®</span><span class="arrow">></span></a></li>
-		    <li><a href="#"><span class="menu-text">½ºÅä¾î°ü¸®</span><span class="arrow">></span></a></li>
+		    <li><a href="#"><span class="menu-text">ìƒí’ˆë“±ë¡</span><span class="arrow">></span></a></li>
+		    <li><a href="#"><span class="menu-text">íŒë§¤ìƒí’ˆê´€ë¦¬</span><span class="arrow">></span></a></li>
+		    <li><a href="#"><span class="menu-text">ì£¼ë¬¸/ë°œì†¡í™•ì¸(ì·¨ì†Œ/í™˜ë¶ˆ)</span><span class="arrow">></span></a></li>
+		    <li><a href="#"><span class="menu-text">í™˜ë¶ˆê´€ë¦¬</span><span class="arrow">></span></a></li>
+		    <li><a href="#"><span class="menu-text">ì •ì‚°ê´€ë¦¬</span><span class="arrow">></span></a></li>
+		    <li><a href="#"><span class="menu-text">ë¬¸ì˜ë©”ì‹œì§€</span><span class="arrow">></span></a></li>
+		    <li><a href="#"><span class="menu-text">ë¦¬ë·°ê´€ë¦¬</span><span class="arrow">></span></a></li>
+		    <li><a href="#"><span class="menu-text">ìŠ¤í† ì–´ê´€ë¦¬</span><span class="arrow">></span></a></li>
 		  </ul>
 		  <div class="sidebar-footer">
-		    <button class="btn-go-buyer" onclick="#">±¸¸ÅÀÚÆäÀÌÁö ÀÌµ¿</button>
+		    <button class="btn-go-buyer" onclick="#">êµ¬ë§¤ìžíŽ˜ì´ì§€ ì´ë™</button>
 		  </div>
 		</nav>
 
@@ -47,7 +47,7 @@
         <div class="content-inner">
 			<div class="frame-1075">
 				<div class="top-bar">
-				  <h2>»óÇ° »ó¼¼º¸±â</h2>
+				  <h2>ìƒí’ˆ ìƒì„¸ë³´ê¸°</h2>
 				  <div class="top-action">
 				    <button class="icon-button2">
 				      <iconify-icon icon="mdi:plus" class="icon-plus"></iconify-icon>
@@ -56,16 +56,16 @@
 				</div>
 			 <div class="form-body-row">
 	          <div class="frame-1076">
-				  <!-- Ã¹ ¹øÂ° ¹öÆ°¿¡ 1.jpg -->
-				  <button class="frame-817-btn" type="button" aria-label="Ãß°¡ ¹öÆ°">
-				    <img src="resources/images/1.jpg" alt="1¹ø ÀÌ¹ÌÁö" style="width: 100%; height: 100%; object-fit: cover;" />
+				  <!-- ì²« ë²ˆì§¸ ë²„íŠ¼ì— 1.jpg -->
+				  <button class="frame-817-btn" type="button" aria-label="ì¶”ê°€ ë²„íŠ¼">
+				    <img src="${cpath}/resources/images/1.jpg" alt="1ë²ˆ ì´ë¯¸ì§€" style="width: 100%; height: 100%; object-fit: cover;" />
 				  </button>
 	             <div class="frame-1077">
 				    <button class="frame-8152-btn">
-				      <img src="resources/images/2.jpg" alt="2¹ø ÀÌ¹ÌÁö" style="width: 100%; height: 100%; object-fit: cover;" />
+				      <img src="${cpath}/resources/images/2.jpg" alt="2ë²ˆ ì´ë¯¸ì§€" style="width: 100%; height: 100%; object-fit: cover;" />
 				    </button>
 				    <button class="frame-8152-btn">
-				      <img src="resources/images/3.jpg" alt="3¹ø ÀÌ¹ÌÁö" style="width: 100%; height: 100%; object-fit: cover;" />
+				      <img src="${cpath}/resources/images/3.jpg" alt="3ë²ˆ ì´ë¯¸ì§€" style="width: 100%; height: 100%; object-fit: cover;" />
 				    </button>
 				  </div>
 				<div class="frame-1078">
@@ -80,25 +80,25 @@
 	          <div class="frame-1196">
 	            <div class="frame-1079">
 	              <div class="text-area">
-					  <div class="div17">»óÇ° ÀÌ¸§</div>
-					  <input type="text" class="box" value="Â¯±¸³× Å°¸µ"/>
+					  <div class="div17">ìƒí’ˆ ì´ë¦„</div>
+					  <input type="text" class="box" value="ì§±êµ¬ë„¤ í‚¤ë§"/>
 					  <div class="counter-low">
 					    <div class="_12">1</div>
 					    <div class="_100">/50</div>
 					  </div>
 					</div>
 	              <div class="text-input">
-					  <div class="div17">»óÇ° °¡°Ý</div>
+					  <div class="div17">ìƒí’ˆ ê°€ê²©</div>
 					  <input type="number" class="box2" value="999999"/>
 					</div>
 	              <div class="text-area2">
-				  <div class="div17">»óÇ° ¼³¸í</div>
+				  <div class="div17">ìƒí’ˆ ì„¤ëª…</div>
 <textarea class="box">
-¾È³çÇÏ¼¼¿ä 33 Â¯±¸³× Å°¸µÀÌ¿¹¿ä~~
-ÇöÀç ÀÖ´Â Àç°í:
-- Â¯±¸
-- ¸Í±¸
-- ÈòµÕÀÌ
+ì•ˆë…•í•˜ì„¸ìš” 33 ì§±êµ¬ë„¤ í‚¤ë§ì´ì˜ˆìš”~~
+í˜„ìž¬ ìžˆëŠ” ìž¬ê³ :
+- ì§±êµ¬
+- ë§¹êµ¬
+- í°ë‘¥ì´
 </textarea>
 				  <div class="counter-low">
 				    <div class="_12">1</div>
@@ -106,58 +106,58 @@
 				  </div>
 				</div>
 	              <div class="group-90">
-	                <div class="div20">»óÇ° Ä«Å×°í¸®</div>
+	                <div class="div20">ìƒí’ˆ ì¹´í…Œê³ ë¦¬</div>
 						<div class="frame-10772">
 						  <div class="frame-8153">
 						    <select class="category-select">
-						      <option selected disabled>´ëºÐ·ù ¼±ÅÃ</option>
-						      <option selected>±Ý¼Ó°ø¿¹</option>
-						      <option>¸ñ°ø¿¹</option>
-						      <option>µµÀÚ±â°ø¿¹</option>
-						      <option>À¯¸®°ø¿¹</option>
-						      <option>°¡Á×°ø¿¹</option>
-						      <option>·¹Áø°ø¿¹</option>
-						      <option>½Ä¹°°ø¿¹</option>
-						      <option>¶ß°³Áú°ø¿¹</option>
-						      <option>¾çÀç°ø¿¹</option>
-						      <option>±âÅ¸</option>
+						      <option selected disabled>ëŒ€ë¶„ë¥˜ ì„ íƒ</option>
+						      <option selected>ê¸ˆì†ê³µì˜ˆ</option>
+						      <option>ëª©ê³µì˜ˆ</option>
+						      <option>ë„ìžê¸°ê³µì˜ˆ</option>
+						      <option>ìœ ë¦¬ê³µì˜ˆ</option>
+						      <option>ê°€ì£½ê³µì˜ˆ</option>
+						      <option>ë ˆì§„ê³µì˜ˆ</option>
+						      <option>ì‹ë¬¼ê³µì˜ˆ</option>
+						      <option>ëœ¨ê°œì§ˆê³µì˜ˆ</option>
+						      <option>ì–‘ìž¬ê³µì˜ˆ</option>
+						      <option>ê¸°íƒ€</option>
 						    </select>
 						  </div>
 						  <div class="frame-816">
 						    <select class="category-select">
-						      <option selected disabled>ÁßºÐ·ù ¼±ÅÃ</option>
-						      <option selected>°ø¿¹</option>
-						      <option>ÆÐ¼ÇÀâÈ­</option>
-						      <option>ÀÎÅ×¸®¾î ¼ÒÇ°</option>
-						      <option>¾Ç¼¼¼­¸®</option>
-						      <option>»ýÈ°ÀâÈ­</option>
-						      <option>±âÅ¸</option>
+						      <option selected disabled>ì¤‘ë¶„ë¥˜ ì„ íƒ</option>
+						      <option selected>ê³µì˜ˆ</option>
+						      <option>íŒ¨ì…˜ìž¡í™”</option>
+						      <option>ì¸í…Œë¦¬ì–´ ì†Œí’ˆ</option>
+						      <option>ì•…ì„¸ì„œë¦¬</option>
+						      <option>ìƒí™œìž¡í™”</option>
+						      <option>ê¸°íƒ€</option>
 						    </select>
 						  </div>
 						  <div class="frame-8172">
 						    <select class="category-select">
-						      <option selected disabled>¼ÒºÐ·ù ¼±ÅÃ</option>
-						      <option selected>»óÀÇ</option>
-						      <option>ÇÏÀÇ</option>
-						      <option>°¡¹æ</option>
-						      <option>Áö°©</option>
-						      <option>±âÅ¸(¸ñµµ¸®, ¸ðÀÚ, º§Æ® µî)</option>
+						      <option selected disabled>ì†Œë¶„ë¥˜ ì„ íƒ</option>
+						      <option selected>ìƒì˜</option>
+						      <option>í•˜ì˜</option>
+						      <option>ê°€ë°©</option>
+						      <option>ì§€ê°‘</option>
+						      <option>ê¸°íƒ€(ëª©ë„ë¦¬, ëª¨ìž, ë²¨íŠ¸ ë“±)</option>
 						    </select>
 						  </div>
 						</div>
 	                </div>
 	              <div class="text-input">
-					  <div class="div17">»óÇ° Àç°í¼ö·®</div>
+					  <div class="div17">ìƒí’ˆ ìž¬ê³ ìˆ˜ëŸ‰</div>
 					  <input type="number" class="box2" value="5"/>
 					</div>
 	              </div>
 	              <div class="frame-774">
 				  <div class="button2-wrapper">
-				    <!-- ¼öÁ¤ ¹öÆ° -->
-				    <button class="edit-button">¼öÁ¤</button>
+				    <!-- ìˆ˜ì • ë²„íŠ¼ -->
+				    <button class="edit-button">ìˆ˜ì •</button>
 				
-				    <!-- ÀúÀå ¹öÆ° -->
-				    <button class="save-button">ÀúÀå</button>
+				    <!-- ì €ìž¥ ë²„íŠ¼ -->
+				    <button class="save-button">ì €ìž¥</button>
 				  </div>
 				</div>
         	</div>
@@ -165,7 +165,7 @@
     </div>
   </div>
 
-  <footer>&copy; 2025 ¶ß¶ô»óÈ¸</footer>
+  <footer>&copy; 2025 ëœ¨ë½ìƒíšŒ</footer>
 </div>
 </body>
 </html>

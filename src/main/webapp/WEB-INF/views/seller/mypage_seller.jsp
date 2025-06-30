@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
   <title>뜨락상회 판매자 메인페이지</title>
-  <link rel="stylesheet" type="text/css" href="resources/css/authmain.css">
-  <link rel="stylesheet" type="text/css" href="resources/css/mypage_seller_style.css">
+  <%@ include file="../common/header.jsp" %>
+  <link rel="stylesheet" href="${cpath}/resources/css/authmain.css">
+  <link rel="stylesheet" href="${cpath}/resources/css/mypage_seller_style.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
 </head>
@@ -25,7 +27,7 @@
     <div class="content-wrapper">
       <nav class="sidebar">
 		  <div class="profile-section" onclick="#" role="button" tabindex="0" aria-label="스토어관리 페이지로 이동">
-		    <img src="_11.png" class="profile-img" />
+		    <img src="#" class="profile-img" />
 		    <div class="store-name">수제대추고</div>
 		  </div>
 		  <ul class="menu-list">

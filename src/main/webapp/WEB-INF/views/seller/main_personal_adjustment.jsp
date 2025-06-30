@@ -4,7 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <title>개인 판매 정산 관리</title>
-  <link rel="stylesheet" href="resources/css/main_personal_adjustment_style.css">
+  <%@ include file="../common/header.jsp" %>
+  <link rel="stylesheet" href="${cpath}/resources/css/main_personal_adjustment_style.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>

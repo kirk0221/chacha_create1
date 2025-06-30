@@ -4,8 +4,9 @@
 <head>
 <meta charset="UTF-8">
 <title>뜨락상회 스토어폐업</title>
-<link rel="stylesheet" type="text/css" href="resources/css/authmain.css">
-<link rel="stylesheet" type="text/css" href="resources/css/closure.css">
+<%@ include file="../common/header.jsp" %>
+  <link rel="stylesheet" href="${cpath}/resources/css/authmain.css">
+  <link rel="stylesheet" href="${cpath}/resources/css/closure.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
 </head>

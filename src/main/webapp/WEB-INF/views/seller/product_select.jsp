@@ -2,10 +2,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>뜨락상회 판매자 상품조회</title>
-<link rel="stylesheet" type="text/css" href="resources/css/authmain.css">
-<link rel="stylesheet" type="text/css" href="resources/css/product_select.css">
+<%@ include file="../common/header.jsp" %>
+  <link rel="stylesheet" href="${cpath}/resources/css/authmain.css">
+  <link rel="stylesheet" href="${cpath}/resources/css/product_select.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://code.iconify.design/iconify-icon/1.0.8/iconify-icon.min.js"></script>
 </head>
@@ -24,7 +25,7 @@
     <div class="content-wrapper">
       <nav class="sidebar">
 		  <div class="profile-section" onclick="#" role="button" tabindex="0" aria-label="스토어관리 페이지로 이동">
-		    <img src="_11.png" class="profile-img" />
+		    <img src="#" class="profile-img" />
 		    <div class="store-name">수제대추고</div>
 		  </div>
 		  <ul class="menu-list">
@@ -71,7 +72,7 @@
 		        </thead>
 		        <tbody>
 		          <tr>
-		            <td><img src="resources/images/1.jpg" alt="대표이미지" /></td>
+		            <td><img src="${cpath}/resources/images/1.jpg" alt="대표이미지" /></td>
 		            <td>짱구네 키링</td>
 		            <td>999999</td>
 		            <td>5</td>
@@ -84,7 +85,7 @@
 		            <td><input type="checkbox" /></td>
 		          </tr>
 		          <tr>
-		            <td><img src="resources/images/1.jpg" alt="대표이미지" /></td>
+		            <td><img src="${cpath}/resources/images/1.jpg" alt="대표이미지" /></td>
 		            <td>짱구네 키링</td>
 		            <td>999999</td>
 		            <td>5</td>
@@ -97,7 +98,7 @@
 		            <td><input type="checkbox" /></td>
 		          </tr>
 		          <tr>
-		            <td><img src="resources/images/1.jpg" alt="대표이미지" /></td>
+		            <td><img src="${cpath}/resources/images/1.jpg" alt="대표이미지" /></td>
 		            <td>짱구네 키링</td>
 		            <td>999999</td>
 		            <td>5</td>
@@ -110,7 +111,7 @@
 		            <td><input type="checkbox" /></td>
 		          </tr>
 		          <tr>
-		            <td><img src="resources/images/1.jpg" alt="대표이미지" /></td>
+		            <td><img src="${cpath}/resources/images/1.jpg" alt="대표이미지" /></td>
 		            <td>짱구네 키링</td>
 		            <td>999999</td>
 		            <td>5</td>
@@ -123,7 +124,7 @@
 		            <td><input type="checkbox" /></td>
 		          </tr>
 		          <tr>
-		            <td><img src="resources/images/1.jpg" alt="대표이미지" /></td>
+		            <td><img src="${cpath}/resources/images/1.jpg" alt="대표이미지" /></td>
 		            <td>짱구네 키링</td>
 		            <td>999999</td>
 		            <td>5</td>
@@ -136,7 +137,7 @@
 		            <td><input type="checkbox" /></td>
 		          </tr>
 		          <tr>
-		            <td><img src="resources/images/2.jpg" alt="대표이미지" /></td>
+		            <td><img src="${cpath}/resources/images/2.jpg" alt="대표이미지" /></td>
 		            <td>맹구네 키링</td>
 		            <td>33,000</td>
 		            <td>5</td>
@@ -149,7 +150,7 @@
 		            <td><input type="checkbox" /></td>
 		          </tr>
 		          <tr>
-		            <td><img src="resources/images/2.jpg" alt="대표이미지" /></td>
+		            <td><img src="${cpath}/resources/images/2.jpg" alt="대표이미지" /></td>
 		            <td>맹구네 키링</td>
 		            <td>33,000</td>
 		            <td>5</td>
@@ -162,7 +163,7 @@
 		            <td><input type="checkbox" /></td>
 		          </tr>
 		          <tr>
-		            <td><img src="resources/images/2.jpg" alt="대표이미지" /></td>
+		            <td><img src="${cpath}/resources/images/2.jpg" alt="대표이미지" /></td>
 		            <td>맹구네 키링</td>
 		            <td>33,000</td>
 		            <td>5</td>
@@ -175,7 +176,7 @@
 		            <td><input type="checkbox" /></td>
 		          </tr>
 		          <tr>
-		            <td><img src="resources/images/2.jpg" alt="대표이미지" /></td>
+		            <td><img src="${cpath}/resources/images/2.jpg" alt="대표이미지" /></td>
 		            <td>맹구네 키링</td>
 		            <td>33,000</td>
 		            <td>5</td>
@@ -188,7 +189,7 @@
 		            <td><input type="checkbox" /></td>
 		          </tr>
 		          <tr>
-		            <td><img src="resources/images/2.jpg" alt="대표이미지" /></td>
+		            <td><img src="${cpath}/resources/images/2.jpg" alt="대표이미지" /></td>
 		            <td>맹구네 키링</td>
 		            <td>33,000</td>
 		            <td>5</td>
@@ -201,7 +202,7 @@
 		            <td><input type="checkbox" /></td>
 		          </tr>
 		          <tr>
-		            <td><img src="resources/images/3.jpg" alt="대표이미지" /></td>
+		            <td><img src="${cpath}/resources/images/3.jpg" alt="대표이미지" /></td>
 		            <td>흰둥이네 키링</td>
 		            <td>33,000</td>
 		            <td>5</td>
@@ -214,7 +215,7 @@
 		            <td><input type="checkbox" /></td>
 		          </tr>
 		          <tr>
-		            <td><img src="resources/images/3.jpg" alt="대표이미지" /></td>
+		            <td><img src="${cpath}/resources/images/3.jpg" alt="대표이미지" /></td>
 		            <td>흰둥이네 키링</td>
 		            <td>33,000</td>
 		            <td>5</td>
@@ -227,7 +228,7 @@
 		            <td><input type="checkbox" /></td>
 		          </tr>
 		          <tr>
-		            <td><img src="resources/images/3.jpg" alt="대표이미지" /></td>
+		            <td><img src="${cpath}/resources/images/3.jpg" alt="대표이미지" /></td>
 		            <td>흰둥이네 키링</td>
 		            <td>33,000</td>
 		            <td>5</td>
@@ -240,7 +241,7 @@
 		            <td><input type="checkbox" /></td>
 		          </tr>
 		          <tr>
-		            <td><img src="resources/images/3.jpg" alt="대표이미지" /></td>
+		            <td><img src="${cpath}/resources/images/3.jpg" alt="대표이미지" /></td>
 		            <td>흰둥이네 키링</td>
 		            <td>33,000</td>
 		            <td>5</td>
@@ -253,7 +254,7 @@
 		            <td><input type="checkbox" /></td>
 		          </tr>
 		          <tr>
-		            <td><img src="resources/images/3.jpg" alt="대표이미지" /></td>
+		            <td><img src="${cpath}/resources/images/3.jpg" alt="대표이미지" /></td>
 		            <td>흰둥이네 키링</td>
 		            <td>33,000</td>
 		            <td>5</td>
