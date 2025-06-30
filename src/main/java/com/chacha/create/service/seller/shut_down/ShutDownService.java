@@ -9,22 +9,20 @@ import org.springframework.transaction.annotation.Transactional;
 import com.chacha.create.common.entity.store.StoreEntity;
 import com.chacha.create.common.enums.order.OrderStatusEnum;
 import com.chacha.create.common.mapper.order.OrderMapper;
+import com.chacha.create.common.mapper.product.PImgMapper;
+import com.chacha.create.common.mapper.product.ProductManageMapper;
 import com.chacha.create.common.mapper.store.StoreMapper;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class ShutDownService {
 
 	private final StoreMapper storeMapper;
 	private final OrderMapper orderMapper;
-	
-	@Autowired
-	public ShutDownService(StoreMapper storeMapper, OrderMapper orderMapper) {
-		this.storeMapper = storeMapper;
-		this.orderMapper = orderMapper;
-	}
 	
 	@Transactional(rollbackFor = Exception.class)
 	public int shutdown(String storeUrl) {

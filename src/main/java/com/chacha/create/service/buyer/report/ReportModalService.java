@@ -1,12 +1,14 @@
-package com.chacha.create.service.manager.report;
+package com.chacha.create.service.buyer.report;
 
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.chacha.create.common.entity.member.MemberEntity;
 import com.chacha.create.common.entity.store.ReportEntity;
+import com.chacha.create.common.exception.NeedLoginException;
 import com.chacha.create.common.mapper.store.ReportMapper;
 import com.chacha.create.common.mapper.store.StoreMapper;
 import com.chacha.create.controller.buyer.report.ReportModalRestController;
@@ -22,7 +24,11 @@ public class ReportModalService {
 	private final ReportMapper reportMapper;
 	private final StoreMapper storeMapper;
 	
+	@Transactional(rollbackFor = Exception.class)
 	public int insert(MemberEntity loginMember, ReportEntity reportEntity) {
+    	if(loginMember == null) {
+    		throw new NeedLoginException("로그인이 필요합니다.");
+    	}
 		// 로그인된 사용자 정보 등록
 	    reportEntity.setMemberId(loginMember.getMemberId());
 

@@ -12,6 +12,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="account" column="account" />
 		<result property="accountBank" column="account_bank" />
 		<result property="profileInfo" column="profile_info" />
+		<result property="personalCheck" column="personal_check" />
 	</resultMap>
 
 	<select id="selectAll" resultMap="sellerResultMap">
@@ -31,11 +32,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insert" parameterType="sellerEntity">
 		INSERT INTO seller (
 		seller_id, member_id, opening_date, account, account_bank,
-		profile_info
+		profile_info, personal_check
 		) VALUES (
 		seq_seller_id.NEXTVAL, #{memberId},
 		#{openingDate}, #{account}, #{accountBank},
-		#{profileInfo}
+		#{profileInfo}, #{personalCheck}
 		)
 	</insert>
 
@@ -47,6 +48,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		account = #{account},
 		account_bank = #{accountBank},
 		profile_info = #{profileInfo}
+		WHERE
+		seller_id = #{sellerId}
+	</update>
+
+	<update id="updateBypersonalCheck" parameterType="map">
+		UPDATE seller
+		SET personal_check = #{personalCheck}
 		WHERE
 		seller_id = #{sellerId}
 	</update>

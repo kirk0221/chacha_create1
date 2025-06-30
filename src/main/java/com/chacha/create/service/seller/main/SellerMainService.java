@@ -44,5 +44,4 @@ public class SellerMainService {
 		return result;
 	}
 
-
 }

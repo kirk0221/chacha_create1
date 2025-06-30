@@ -1,7 +1,6 @@
 package com.chacha.create.service.manager.store;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,23 +12,17 @@ import com.chacha.create.common.mapper.member.MemberMapper;
 import com.chacha.create.common.mapper.member.SellerMapper;
 import com.chacha.create.common.mapper.store.StoreMapper;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class StoreManagementUpdateService {
 	
 	private StoreMapper storeMapper;
     private SellerMapper sellerMapper;
     private MemberMapper memberMapper;
-
-    @Autowired
-    public StoreManagementUpdateService(StoreMapper storeMapper, 
-                                  SellerMapper sellerMapper, MemberMapper memberMapper) {
-        this.storeMapper = storeMapper;
-        this.sellerMapper = sellerMapper;
-        this.memberMapper = memberMapper;
-    }
 	
     @Transactional(rollbackFor = Exception.class)
 	public int sellerInfoUpdate(MemberEntity loginMember, String storeUrl, StoreManagerUpdateDTO smuDTO) {

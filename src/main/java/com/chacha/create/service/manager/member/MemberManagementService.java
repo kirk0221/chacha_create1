@@ -7,16 +7,16 @@ import org.springframework.stereotype.Service;
 
 import com.chacha.create.common.entity.member.MemberEntity;
 import com.chacha.create.common.mapper.member.MemberMapper;
+import com.chacha.create.common.mapper.product.PImgMapper;
+import com.chacha.create.common.mapper.product.ProductManageMapper;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class MemberManagementService {
 
-	private MemberMapper memberMapper;
-
-	@Autowired
-	public MemberManagementService(MemberMapper memberMapper) {
-		this.memberMapper = memberMapper;
-	}
+	private final MemberMapper memberMapper;
 
 	public List<MemberEntity> selectAll() {
 		return memberMapper.selectAll();

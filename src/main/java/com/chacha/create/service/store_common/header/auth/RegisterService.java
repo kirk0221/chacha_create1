@@ -1,67 +1,55 @@
-package com.chacha.create.service.header.auth;
+package com.chacha.create.service.store_common.header.auth;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.chacha.create.common.entity.member.MemberEntity;
 import com.chacha.create.common.entity.member.SellerEntity;
 import com.chacha.create.common.entity.store.StoreEntity;
+import com.chacha.create.common.exception.InvalidRequestException;
 import com.chacha.create.common.mapper.member.MemberMapper;
 import com.chacha.create.common.mapper.member.SellerMapper;
 import com.chacha.create.common.mapper.store.StoreMapper;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class RegisterService {
 
 	private final MemberMapper memberMapper;
 	private final SellerMapper sellerMapper;
 	private final StoreMapper storeMapper;
-
-    @Autowired
-    public RegisterService(MemberMapper memberMapper, SellerMapper sellerMapper, StoreMapper storeMapper) {
-        this.memberMapper = memberMapper;
-        this.sellerMapper = sellerMapper;
-        this.storeMapper = storeMapper;
-    }
     
     @Transactional(rollbackFor = Exception.class)
     public MemberEntity memberinsert(MemberEntity memberEntity) {
-        MemberEntity member = null;
-        try {
-            String password = memberEntity.getMemberPwd();
-            String email = memberEntity.getMemberEmail();
-            String phone = memberEntity.getMemberPhone();
-            String regi = memberEntity.getMemberRegi();
+        String password = memberEntity.getMemberPwd();
+        String email = memberEntity.getMemberEmail();
+        String phone = memberEntity.getMemberPhone();
+        String regi = memberEntity.getMemberRegi();
 
-            // 유효성 검사
-            if (!isValidPassword(password)) {
-                log.info("비밀번호 형식 오류");
-                return null;
-            }
-            if (!isValidEmail(email)) {
-                log.info("이메일 형식 오류");
-                return null;
-            }
-            if (!isValidPhoneNumber(phone)) {
-                log.info("전화번호 형식 오류");
-                return null;
-            }
-            if (!isValidRegi(regi)) {
-                log.info("주민등록번호 형식 오류");
-                return null;
-            }
-
-            memberMapper.insert(memberEntity);
-            member = memberMapper.selectByMemberEmail(memberEntity.getMemberEmail());
-        } catch(Exception e) {
-            log.info("아이디가 중복됨 : " + e.getMessage());
-            return null;
+        if (!isValidPassword(password)) {
+            throw new InvalidRequestException("비밀번호 형식 오류");
         }
-        return member;
+        if (!isValidEmail(email)) {
+            throw new InvalidRequestException("이메일 형식 오류");
+        }
+        if (!isValidPhoneNumber(phone)) {
+            throw new InvalidRequestException("전화번호 형식 오류");
+        }
+        if (!isValidRegi(regi)) {
+            throw new InvalidRequestException("주민등록번호 형식 오류");
+        }
+
+        try {
+            memberMapper.insert(memberEntity);
+            return memberMapper.selectByMemberEmail(memberEntity.getMemberEmail());
+        } catch (Exception e) {
+            log.info("아이디가 중복됨 : {}", e.getMessage());
+            throw new InvalidRequestException("이미 존재하는 이메일입니다.");
+        }
     }
 
     private boolean isValidPassword(String password) {
@@ -91,6 +79,7 @@ public class RegisterService {
     public int sellerinsert(SellerEntity sellerEntity, MemberEntity memberEntity) {
     	int result = 0;
     	sellerEntity.setMemberId(memberEntity.getMemberId());
+    	sellerEntity.setPersonalCheck(1);
     	sellerMapper.insert(sellerEntity);
     	SellerEntity seller = sellerMapper.selectByMemberId(memberEntity.getMemberId());
     	StoreEntity storeEntity = StoreEntity.builder()

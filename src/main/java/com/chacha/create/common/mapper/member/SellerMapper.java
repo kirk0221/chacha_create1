@@ -1,12 +1,10 @@
 package com.chacha.create.common.mapper.member;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
-import com.chacha.create.common.dto.manager.ManagerAdjustmentDTO;
-import com.chacha.create.common.dto.member.SellerInfoDTO;
 import com.chacha.create.common.entity.member.SellerEntity;
 
 /**
@@ -64,5 +62,7 @@ public interface SellerMapper {
     int delete(int sellerId);
     
     int updateSellerInfo(SellerEntity seller);
+    
+    int updateBypersonalCheck(@Param("sellerId") int sellerId, @Param("personalCheck") int personalCheck);
     
 }
