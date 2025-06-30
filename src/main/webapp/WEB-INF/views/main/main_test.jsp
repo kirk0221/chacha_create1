@@ -1,4 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions"%> 
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="cpath" value="${pageContext.servletContext.contextPath}" />
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -9,19 +14,10 @@
   <link rel="stylesheet" href="https://unpkg.com/swiper@9/swiper-bundle.min.css" />
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" type="text/css" href="resources/css/main_store.css">
+  <link rel="stylesheet" type="text/css" href="${cpath}/resources/css/main_store.css">
   
-  <style>
-    body {
-      font-family: 'Jua', sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-  </style>
-  
-  
-</head>
 
+</head>
 <body>
   
   <!-- ✅ Include Header & Nav -->
@@ -164,6 +160,6 @@
 
   <!-- JS -->
   <script src="https://unpkg.com/swiper@9/swiper-bundle.min.js"></script>
-  <script src="resources/js/main_store.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/main_store.js"></script>
 </body>
 </html>
