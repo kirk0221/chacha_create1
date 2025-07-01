@@ -12,7 +12,11 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/main")
 public class HomeMainController {
-
+	
+	@GetMapping("/test")
+	public String showTestPage() {
+		return"seller_management_order";
+	}
     // 메인 홈 페이지
     @GetMapping("/home")
     public String showMainHome() {
