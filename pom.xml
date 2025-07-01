@@ -20,6 +20,13 @@
 	<!-- 이유 : Maven Repository에서 local 저장소로 다운로드 받을 때 네트워크에서 에러가 나와 파일이 깨진채로 
 		받아질 수 있음 -->
 	<dependencies>
+		
+		<!-- Gson 라이브러리 -->
+		<dependency>
+		  <groupId>com.google.code.gson</groupId>
+		  <artifactId>gson</artifactId>
+		  <version>2.10.1</version>
+		</dependency>
 	  <!-- 이메일 인증 -->
 		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
 		<dependency>

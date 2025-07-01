@@ -203,6 +203,11 @@ input[type="text"], input[type="email"], input[type="password"] {
 	background-color: #2a3e34;
 	color: white;
 }
+
+.type-button.active {
+	background-color: #2a3e34;
+	color: white;
+}
 /* 하단 버튼 */
 .form-buttons {
 	display: flex;

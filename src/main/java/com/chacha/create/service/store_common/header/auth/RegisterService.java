@@ -86,12 +86,15 @@ public class RegisterService {
     	int result = 0;
     	sellerEntity.setMemberId(memberEntity.getMemberId());
     	sellerEntity.setPersonalCheck(1);
-    	sellerMapper.insert(sellerEntity);
-    	SellerEntity seller = sellerMapper.selectByMemberId(memberEntity.getMemberId());
-    	StoreEntity storeEntity = StoreEntity.builder()
-    			.sellerId(seller.getSellerId())
-    			.build();
-    	result = storeMapper.insert(storeEntity);
+    	int inserted = sellerMapper.insert(sellerEntity); // insert 후 sellerId가 sellerEntity에 세팅됨
+    	log.info("Inserted Seller Rows = {}", inserted); // 1이 나와야 정상
+    	log.info(sellerEntity.toString());
+        
+        StoreEntity storeEntity = StoreEntity.builder()
+                .sellerId(sellerEntity.getSellerId())  // 바로 사용
+                .build();
+        log.info(storeEntity.toString());
+        result = storeMapper.insert(storeEntity);
     	return result;
     }
 }
