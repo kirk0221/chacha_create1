@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="cpath" value="${pageContext.servletContext.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>뜨락상회 관리자 페이지 - 신고 관리</title>
-<link rel="stylesheet" type="text/css" href="resources/css/mainauth_style.css">
-<link rel="stylesheet" type="text/css" href="resources/css/suggestion_style.css">
+<link rel="stylesheet" type="text/css" href="${cpath }/resources/css/mainauth_style.css"> 
+<link rel="stylesheet" type="text/css" href="${cpath }/resources/css/suggestion_style.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>

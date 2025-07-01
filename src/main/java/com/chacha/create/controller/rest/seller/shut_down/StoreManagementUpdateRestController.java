@@ -21,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestController
 @RequestMapping("/api/{storeUrl}/seller")
-public class StoreManagementUpdateController {
+public class StoreManagementUpdateRestController {
 
     @Autowired
     private StoreManagementUpdateService storeService;
