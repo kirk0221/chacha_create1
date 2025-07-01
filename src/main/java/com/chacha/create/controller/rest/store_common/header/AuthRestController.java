@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.chacha.create.common.dto.error.ApiResponse;
+import com.chacha.create.common.dto.member.RegisterDTO;
+import com.chacha.create.common.entity.member.AddrEntity;
 import com.chacha.create.common.entity.member.MemberEntity;
 import com.chacha.create.common.entity.member.SellerEntity;
 import com.chacha.create.common.enums.error.ResponseCode;
@@ -33,16 +35,20 @@ public class AuthRestController {
     @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ApiResponse<MemberEntity>> login(HttpSession session, @RequestBody MemberEntity member) {
         MemberEntity loginMember = loginService.login(member.getMemberEmail(), member.getMemberPwd());
+        log.info(loginMember.toString());
         session.setAttribute("loginMember", loginMember);
         return ResponseEntity.ok(new ApiResponse<>(ResponseCode.OK, loginMember));
     }
 
     @PostMapping(value = "/join/userinfo", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ApiResponse<MemberEntity>> userinfo(HttpSession session, @RequestBody MemberEntity memberEntity) {
-        MemberEntity member = registerService.memberinsert(memberEntity);
-        session.setAttribute("loginMember", member); // 바로 로그인
+    public ResponseEntity<ApiResponse<MemberEntity>> userinfo(HttpSession session, @RequestBody RegisterDTO registerDTO) {
+    	log.info(registerDTO.toString());
+    	MemberEntity member = registerDTO.getMember();
+    	AddrEntity addr = registerDTO.getAddr();
+        MemberEntity loginMember = registerService.memberinsert(member, addr);
+        session.setAttribute("loginMember", loginMember); // 바로 로그인
         return ResponseEntity.status(ResponseCode.CREATED.getStatus())
-                             .body(new ApiResponse<>(ResponseCode.CREATED, member));
+                             .body(new ApiResponse<>(ResponseCode.CREATED, loginMember));
     }
 
     @PostMapping(value = "/join/seller", produces = MediaType.APPLICATION_JSON_VALUE)

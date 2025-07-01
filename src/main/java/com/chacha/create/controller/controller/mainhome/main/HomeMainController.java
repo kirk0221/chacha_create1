@@ -11,21 +11,16 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/main")
 public class HomeMainController {
 	
+	// 변경해주세요
 	@GetMapping("/test")
 	public String showTestPage() {
 		return "store/seller/sellerOrderManage";
 	}
 	
     // 메인 홈 페이지
-    @GetMapping("/home")
+    @GetMapping
     public String showMainHome() {
         return "main/main"; // /WEB-INF/views/main/main_test.jsp
-    }
-
-    // 회원가입 페이지 연결
-    @GetMapping("/signup")
-    public String showSignupPage() {
-        return "auth/signUp"; 
     }
     
     

@@ -10,11 +10,12 @@
     <title>로그인 페이지</title>
     <%-- <link rel="stylesheet" type="text/css" href="${cpath}/resources/css/login_vars.css"> --%>
     <link rel="stylesheet" type="text/css" href="${cpath}/resources/css/auth/login.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <div class="login-page">
     <div class="login-container">
-        <form action="${cpath}/login" method="post">
+        <form id="login-form">
             <img class="logo_frame" src="${cpath}/resources/images/logo/logo_green.png" alt="Logo"/>
             <div class="form-wrapper">
                 <div class="form-inner">
@@ -37,12 +38,12 @@
                         </div>
                     </div>
                     <div class="login-button-group">
-                    <a href="${cpath}/login" class="component_login">
+                    <button type="submit" class="component_login">
                         <div class="login-text">로그인</div>
-                    </a>
+                    </button>
                         <div class="login-bottom-links">
                             <div class="link-text">비밀번호를 잊으셨나요?</div>
-                            <a href="${pageContext.request.contextPath}/signup" class="link-text">회원가입</a>
+                            <a href="${cpath}/auth/join/agree" class="link-text">회원가입</a>
                         </div>
                     </div>
                 </div>
@@ -67,5 +68,56 @@
         </form>
     </div>
 </div>
+<!-- login.jsp 내부에 script 추가 -->
+<script>
+$(document).ready(function() {
+	const contextpath = '${cpath}';
+  // 페이지 로드 시 로컬스토리지에 저장된 아이디 있으면 자동 입력
+  const savedEmail = localStorage.getItem('rememberedEmail');
+  if (savedEmail) {
+    $('input[name="email"]').val(savedEmail);
+    $('#rememberId').prop('checked', true);
+  }
+
+  // 로그인 버튼 클릭 이벤트
+  $('#login-form').on('submit', function(e) {
+    e.preventDefault(); // form 동작 막기
+
+    const email = $('input[name="email"]').val();
+    const password = $('input[name="password"]').val();
+    const rememberId = $('#rememberId').is(':checked');
+
+    // 아이디 기억하기 처리
+    if (rememberId) {
+      localStorage.setItem('rememberedEmail', email);
+    } else {
+      localStorage.removeItem('rememberedEmail');
+    }
+
+    // AJAX 로그인 요청
+    $.ajax({
+      url: '${cpath}/api/auth/login',
+      type: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify({
+        memberEmail: email,
+        memberPwd: password
+      }),
+      success: function(response, textStatus, xhr) {
+        if (xhr.status === 200 && response?.status === 200) {
+          alert('로그인 성공');
+          window.location.href = contextpath +  '/main';
+        } else {
+          alert(response?.message || '로그인 실패');
+        }
+      },
+      error: function(xhr, status, error) {
+        alert('서버 오류: ' + (xhr.responseText || error));
+      }
+    });
+  });
+});
+</script>
+
 </body>
 </html>

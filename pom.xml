@@ -20,7 +20,22 @@
 	<!-- 이유 : Maven Repository에서 local 저장소로 다운로드 받을 때 네트워크에서 에러가 나와 파일이 깨진채로 
 		받아질 수 있음 -->
 	<dependencies>
-				<!-- Mockito + JUnit5 연동: MockitoExtension 포함 -->
+	  <!-- 이메일 인증 -->
+		<!-- https://mvnrepository.com/artifact/javax.mail/mail -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.7</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+	
+		<!-- Mockito + JUnit5 연동: MockitoExtension 포함 -->
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-junit-jupiter</artifactId>
