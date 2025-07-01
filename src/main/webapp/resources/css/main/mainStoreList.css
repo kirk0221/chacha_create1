@@ -1,264 +1,232 @@
-@charset "UTF-8";
+/* ✅ 실용적이고 세련된 스토어 페이지 리디자인 CSS */
 
-/* ========== 공통 설정 ========== */
 body {
+  font-family: 'Noto Sans KR', sans-serif;
   margin: 0;
   padding: 0;
-  font-family: 'Inter', 'Noto Sans KR', sans-serif;
-  background-color: #fff;
+  background-color: #ffffff;
+  color: #333;
 }
 
-* {
+.store-page-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 60px 0px;
   box-sizing: border-box;
 }
 
-/* 검색창*/
+
+/* 🔍 검색바 */
 #product-search {
   display: flex;
   justify-content: center;
-  margin-top: 80px; /* 상단 여백 */
-  margin-bottom: 80px; /* 하단 여백 */
+  margin-top: 20px;
+  margin-bottom: 40px;
 }
 
 #search-form {
   display: flex;
   align-items: center;
-  background-color: #f0f0f0; /* 배경색 (연회색) */
-  border: 1px solid #333;    /* 테두리 */
-  border-radius: 4px;
-  padding: 10px 15px;
   width: 100%;
-  max-width: 600px; /* 최대 너비 제한 */
-  box-sizing: border-box;
+  max-width: 600px;
+  background-color: #fff;
+  border: 2px solid #dcd2b1;
+  border-radius: 30px;
+  padding: 10px 20px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
 }
 
 #search-input {
   flex: 1;
   border: none;
   outline: none;
-  background: transparent;
-  font-size: 16px;
-  margin-left: 8px;
-  color: #2c2c2c;
+  font-size: 15px;
+  padding-left: 10px;
+  color: #4b4b2d;
 }
 
 #search-button {
-  background: transparent;
+  background-color: #4b4b2d;
   border: none;
-  font-size: 16px;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 14px;
   cursor: pointer;
-  color: #2c2c2c;
+  transition: background-color 0.2s;
 }
 
-/* 전체 페이지 컨테이너 설정 */
-.store-page-container {
-  max-width: 1000px;            /* 최대 너비 제한 (반응형) */
-  margin: 80px auto 0;          /* 위쪽 여백 80px, 좌우 자동 정렬 → 가운데 정렬 */
-  padding: 0 20px;              /* 좌우 내부 여백 */
-  font-family: 'Noto Sans KR', sans-serif; /* 한국어 웹폰트 지정 */
+#search-button:hover {
+  background-color: #222;
 }
 
-/* 상단 탭 메뉴(스토어 목록 / 스토어 개설 설명) 영역 */
-.tab-menu {
-  display: flex;                /* 가로 정렬 */
-  gap: 40px;                    /* 탭 사이 간격 */
-  font-size: 18px;              /* 탭 글자 크기 */
-  font-weight: 500;             /* 중간 굵기 */
-  margin-bottom: 30px;          /* 아래 요소와 간격 */
-}
 
-/* 탭 기본 스타일 */
-.tab {
-  cursor: pointer;              /* 마우스 올렸을 때 손가락 모양 */
-  color: #222;                  /* 글자 색상 */
-  position: relative;           /* 밑줄 커스텀 등에 활용 가능 */
-}
-
-/* 활성화된 탭 (밑줄과 굵은 글씨 적용) */
-.tab.active {
-  font-weight: bold;            /* 굵게 */
-  text-decoration: underline;   /* 밑줄 */
-}
-
-/* 스토어 제목 (예: 뜨락상회 입점 스토어) */
-.store-title {
-  font-size: 32px;              /* 큰 글씨 */
-  font-weight: 700;             /* 굵은 제목 */
-  margin-bottom: 30px;          /* 아래 요소와 여백 */
-  color: #111;                  /* 거의 검은색 */
-}
-
-/* 정렬 및 필터 버튼 컨테이너 */
-.filter-buttons {
-  display: flex;                /* 버튼들 가로 정렬 */
-  gap: 12px;                    /* 버튼 간 간격 */
-  flex-wrap: wrap;              /* 줄 바꿈 허용 (모바일 대응) */
-}
-
-/* 개별 필터 버튼 기본 스타일 */
-.filter-button {
-  padding: 8px 16px;            /* 버튼 내부 여백 */
-  border: 1px solid #ccc;       /* 테두리 색 연회색 */
-  background-color: #fff;       /* 배경색 흰색 */
-  border-radius: 20px;          /* 버튼 모서리 둥글게 */
-  font-size: 14px;              /* 글자 크기 */
-  cursor: pointer;              /* 마우스 커서 변경 */
-  transition: all 0.2s ease;    /* 호버 시 부드럽게 전환 */
-}
-
-/* 버튼에 마우스 올렸을 때 */
-.filter-button:hover {
-  background-color: #f5f5f5;    /* 살짝 회색 배경으로 강조 */
-}
-
-/* 선택된(활성) 필터 버튼 스타일 */
-.filter-button.active {
-  background-color: #222;       /* 배경 진한 회색/검정 */
-  color: white;                 /* 글자색 흰색 */
-  border-color: #222;           /* 테두리 색도 통일 */
-}
-
-/* 카테고리 섹션 */
+/* 전체 필터 영역 */
 #category-section {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 20px;
-  position: relative;
+  background-color: #f9f9fb;
+  border-radius: 16px;
+  padding: 30px;
+  margin: 40px 0;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  font-family: 'Noto Sans KR', sans-serif;
 }
 
-/* 각 대분류 블록 */
-.main-category-block {
+/* 각 필터 그룹 (카테고리/브랜드 등) */
+.filter-group {
+  margin-bottom: 20px;
+}
+
+/* 필터 그룹 제목 */
+.filter-group-title {
+  font-weight: 600;
+  font-size: 15px;
   margin-bottom: 12px;
+  color: #111;
 }
 
-/* 대분류 헤더: 한 줄 정렬 */
-.main-category-header {
+/* 필터 버튼 묶음 */
+.filter-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* 기본 필터 버튼 스타일 */
+.filter-btn {
+  padding: 6px 16px;
+  border: 1.8px solid #d4d9e1;
+  border-radius: 999px;
+  background-color: white;
+  color: #333;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+/* 선택된 필터 버튼 */
+.filter-btn.selected {
+  background-color: #e0f0ff;
+  border-color: #5aa3f2;
+  color: #2186eb;
+  font-weight: 600;
+}
+
+/* 선택된 필터 리스트 영역 */
+.selected-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+  align-items: center;
+  font-size: 14px;
+}
+
+/* 선택 태그 (X 아이콘 포함) */
+.selected-tag {
+  background-color: #edf1f7;
+  border-radius: 20px;
+  padding: 6px 12px;
   display: flex;
   align-items: center;
-  gap: 14px;
-  font-weight: 600;
-  font-size: 16px;
-  cursor: pointer;
+  gap: 6px;
 }
 
-/* 전체 선택 체크박스 정렬 */
-.select-all {
-  margin-left: auto;  /* 우측 끝 정렬 */
-  font-weight: normal;
-  font-size: 14px;
-}
-
-/* 소분류 영역 */
-.subcategory-container {
-  display: block;  /* 테스트 시 기본 표시 */
-  margin-top: 8px;
-  margin-left: 28px;
-}
-
-.subcategory-container label {
-  margin-right: 14px;
-  font-size: 14px;
-}
-
-/* 검색 버튼 wrapper */
-.category-search-btn-wrapper {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 20px;
-}
-
-.category-search-btn {
-  background-color: #004225; /* 진한 녹색 */
-  color: white;
+.selected-tag .remove-tag {
+  background: none;
   border: none;
-  border-radius: 12px;
-  padding: 10px 16px;
-  font-size: 14px;
+  color: #666;
   cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
 }
 
-/* 전체 store 카드들을 감싸는 그리드 컨테이너 */
+/* 전체 초기화 버튼 */
+.reset-btn {
+  background-color: transparent;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  margin-right: 10px;
+  color: #666;
+}
+
+
+
+/* 📦 스토어 카드 */
 .store-grid-container {
-  max-width: 1200px;            /* 최대 너비 지정 */
-  margin: 50px auto;            /* 가운데 정렬 + 상단 여백 */
-  display: grid;                /* CSS Grid 사용 */
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-                                /* 가로 최대 3개, 최소 300px */
-  gap: 40px;                    /* 각 카드 사이 여백 */
-  padding: 0 20px;              /* 양옆 여백 */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+  margin-top: 40px;
 }
 
-/* 각각의 스토어 카드 스타일 */
 .store-card {
-  display: flex;
-  flex-direction: column;      /* 세로 정렬 */
-  align-items: flex-start;     /* 왼쪽 정렬 */
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* 스토어 대표 이미지 (더미 박스) */
+.store-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
 .store-image {
   width: 100%;
-  aspect-ratio: 4 / 3;           /* 4:3 비율 유지 (최신 브라우저 지원) */
-  overflow: hidden;
-  border-radius: 4px;
-  background-color: #eae6dc;     /* 이미지 로딩 전 기본 배경 */
+  height: 0;
+  padding-top: 75%;
+  position: relative;
+  background-color: #eae6dc;
 }
 
-/* 상품 이미지 */
 .product-img {
+  position: absolute;
+  top: 0; left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;             /* 이미지 비율 유지하며 채움 */
-  display: block;
+  object-fit: cover;
 }
 
-
-
-
-/* 스토어 내용 영역 */
 .store-content {
-  margin-top: 16px;
+  padding: 20px;
 }
 
-/* 스토어 이름 텍스트 */
 .store-name {
   font-size: 18px;
   font-weight: bold;
   margin-bottom: 10px;
 }
 
-/* 카테고리 배지 영역 */
 .store-categories {
   display: flex;
   gap: 8px;
+  flex-wrap: wrap;
   margin-bottom: 10px;
 }
 
-/* 개별 카테고리 배지 */
 .category {
   background-color: #4b4b2d;
   color: white;
-  font-size: 13px;
-  padding: 4px 12px;
-  border-radius: 16px;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 12px;
   white-space: nowrap;
 }
 
-/* 설명 텍스트 */
 .store-description {
   font-size: 14px;
   line-height: 1.6;
-  color: #222;
+  color: #555;
 }
 
-
-/* 페이지네이션 컨테이너 */
+/* ⏩ 페이지네이션 */
 .pagination {
   display: flex;
   justify-content: center;
-  margin-top: 30px;
-  margin-bottom: 50px;
-  gap: 6px;
+  margin: 40px 0;
+  gap: 8px;
 }
 
 .pagination button {
@@ -276,12 +244,45 @@ body {
 }
 
 .pagination button.active {
-  background-color: #333;
+  background-color: #4b4b2d;
   color: white;
-  border-color: #333;
+  border-color: #4b4b2d;
 }
 
 .pagination .page-nav {
   font-weight: bold;
   color: #333;
+}
+
+🧮 필터 버튼
+.filter-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+
+.filter-button {
+  padding: 8px 16px;
+  background-color: #fff8e7;
+  border: 1px solid #cfc8b5;
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-button:hover {
+  background-color: #f1ecdb;
+}
+
+.filter-button.active {
+  background-color: #4b4b2d;
+  color: white;
+  border-color: #4b4b2d;
+}
+
+.category-hidden {
+  display: none;
 }
