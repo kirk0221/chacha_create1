@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.extern.slf4j.Slf4j;
 
-// signup 크기 오류, products, mypage 오류
-
 @Slf4j
 @Controller
 @RequestMapping("/main")
@@ -15,8 +13,9 @@ public class HomeMainController {
 	
 	@GetMapping("/test")
 	public String showTestPage() {
-		return"seller_management_order";
+		return "store/seller/sellerOrderManage";
 	}
+	
     // 메인 홈 페이지
     @GetMapping("/home")
     public String showMainHome() {

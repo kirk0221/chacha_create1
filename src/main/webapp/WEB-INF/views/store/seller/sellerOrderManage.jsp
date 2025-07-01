@@ -7,8 +7,8 @@
 <head>
   <meta charset="UTF-8">
   <title>주문/발송관리</title>
-  <link rel="stylesheet" type="text/css" href="${cpath}/resources/css/mainauth_style.css">
-  <link rel="stylesheet" type="text/css" href="${cpath}/resources/css/seller_management_order_style.css">
+  <link rel="stylesheet" type="text/css" href="${cpath}/resources/css/admin/authMain.css">
+  <link rel="stylesheet" type="text/css" href="${cpath}/resources/css/store/seller/sellerOrderManage.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>

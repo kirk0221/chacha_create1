@@ -12,7 +12,6 @@
 </head>
 <body>
   <div class="wrapper">
-
      <!-- ✅ Include Header & Nav -->
 <jsp:include page="/common/header.jsp" />
 <jsp:include page="/common/main_nav.jsp" />
