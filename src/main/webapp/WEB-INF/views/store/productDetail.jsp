@@ -43,8 +43,8 @@
         <div class="product-price">500,000 원</div>
       </div>
       <div class="action-buttons">
-      <button class="cart-button">장바구니 담기</button>
-        <button class="buy-button">결제하기</button>
+        <button class="cart-button" type="button" onclick="location.href='${cpath}/main/mypage/cart'">장바구니 담기</button>
+      <button class="buy-button" type="button" onclick="location.href='${cpath}/{storeUrl}/order'">결제하기</button>
       </div>
     </div>
   </div>
