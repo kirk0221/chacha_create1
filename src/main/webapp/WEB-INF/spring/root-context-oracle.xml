@@ -8,6 +8,7 @@
       <property name="locations">
          <list>
            <value>/WEB-INF/spring/oracleDB.properties</value> <!-- 본인 PC로 연결하고싶으면 oracleDB-localhost.properties로 변경하여 사용 -->
+         	<value>/WEB-INF/spring/email.properties</value>
          </list>
       </property>
       <property name="fileEncoding" value="UTF-8" />
@@ -40,10 +41,10 @@
 	<bean id="sqlSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
-		<!-- <property name="configLocation"
-			value="classpath:mybatis/sqlMapConfig.xml" /> -->
-<!-- 		<property name="mapperLocations"
-			value="classpath:mybatis/mappers/**/*.xml" /> -->
+		<property name="configLocation"
+			value="classpath:mybatis/sqlMapConfig.xml" />
+ 		<property name="mapperLocations"
+			value="classpath:mybatis/mappers/**/*.xml" />
 	</bean>
 
 	<!-- Mapper의 SQL구문을 실행할 수 있다. SQL문은 session단위로 실행 -->
