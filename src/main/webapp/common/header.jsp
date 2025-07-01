@@ -18,10 +18,10 @@
 
     <!-- 로그인 후 -->
     <c:if test="${not empty sessionScope.loginMember}">
-	    <div class="header-content" id="header-user" style="display: none;">
+	    <div class="header-content" id="header-user">
 	      <span class="welcome-text"><span id="member-name">${sessionScope.loginMember.memberName}</span>님 반갑습니다!</span>
 	      <a href="#" class="header-btn">메시지</a>
-	      <a href="#" class="header-btn">로그아웃</a>
+	      <a href="${cpath}/auth/logout" class="header-btn" onclick="alert('로그아웃');">로그아웃</a>
 	    </div>
     </c:if>
   </div>

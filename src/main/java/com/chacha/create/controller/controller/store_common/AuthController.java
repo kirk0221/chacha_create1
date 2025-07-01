@@ -38,6 +38,6 @@ public class AuthController {
 	@GetMapping("/logout")
 	public String logout_page(HttpSession session) {
 		session.invalidate();
-		return "redirect:main";
+		return "redirect:/main";
 	}
 }
