@@ -9,6 +9,9 @@
 <link rel="stylesheet" href="${cpath}/resources/css/all_products.css">
 </head>
 <body>
+<!-- ✅ Include Header & Nav -->
+<jsp:include page="/common/header.jsp" />
+<jsp:include page="/common/main_nav.jsp" />
 
 <h3 class="category-title">상세카테고리</h3>
 

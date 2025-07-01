@@ -24,37 +24,6 @@ body {
   flex: 1;
 }
 
-/* 사이드바 */
-.sidebar {
-  width: 240px;
-  background-color: #CFD3C4;
-  padding-top: 20px;
-  flex-shrink: 0;
-  border-radius: 8px;
-  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-  height: auto;
-}
-
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.sidebar ul li a {
-  display: block;
-  padding: 15px 20px;
-  text-decoration: none;
-  color: #333;
-  font-weight: 600;
-  font-size: 15px;
-  border-radius: 4px;
-  transition: background-color 0.2s;
-}
-
-.sidebar ul li a:hover {
-  background-color: #bfc4b2;
-}
 
 /* 콘텐츠 */
 .page-content {

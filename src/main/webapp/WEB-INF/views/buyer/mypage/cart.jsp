@@ -1,41 +1,32 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions"%> 
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="cpath" value="${pageContext.servletContext.contextPath}" />
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>장바구니</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/cart.css" />
+<link rel="stylesheet" href="${cpath}/resources/css/cart.css" />
 </head>
 <body>
+
+<!-- ✅ Include Header & Nav -->
+<jsp:include page="/common/header.jsp" />
+<jsp:include page="/common/main_nav.jsp" />
+
 <div class="cart-page">
 
   <!-- 메인 레이아웃 -->
   <div class="cart-layout">
 
-    <!-- 사이드 메뉴 -->
-    <aside class="sidebar-menu">
-      <div class="menu-item">
-        <span>마이정보수정</span>
-        <span class="arrow">&gt;</span>
-      </div>
-      <div class="menu-item selected">
-        <span>장바구니</span>
-        <span class="arrow">&gt;</span>
-      </div>
-      <div class="menu-item">
-        <span>주문내역</span>
-        <span class="arrow">&gt;</span>
-      </div>
-      <div class="menu-item">
-        <span>관심사 선택</span>
-        <span class="arrow">&gt;</span>
-      </div>
-      <div class="menu-item">
-        <span>작성 리뷰 확인</span>
-        <span class="arrow">&gt;</span>
-      </div>
-    </aside>
+      <!-- 왼쪽 사이드바 -->
+     <jsp:include page="/common/main_mypage_sidenav.jsp" />
 
+
+	<section class="page-content">
     <!-- 장바구니 목록 영역 -->
     <section class="cart-section">
 
@@ -48,7 +39,7 @@
 
         <div class="cart-item">
           <input type="checkbox" class="item-checkbox" />
-          <img class="item-image" src="${pageContext.request.contextPath}/resources/img/home.jpg" alt="상품 이미지" />
+          <img class="item-image" src="${cpath}/resources/img/home.jpg" alt="상품 이미지" />
           <div class="item-details">
             <div class="store-name">000 스토어</div>
             <div class="product-name">상품명 1</div>
@@ -73,7 +64,7 @@
         <!-- 반복 상품 -->
         <div class="cart-item">
           <input type="checkbox" class="item-checkbox" />
-          <img class="item-image" src="${pageContext.request.contextPath}/resources/img/home.jpg" alt="상품 이미지" />
+          <img class="item-image" src="${cpath}/resources/img/home.jpg" alt="상품 이미지" />
           <div class="item-details">
             <div class="store-name">000 스토어</div>
             <div class="product-name">상품명 2</div>
@@ -89,7 +80,7 @@
 
         <div class="cart-item">
           <input type="checkbox" class="item-checkbox" />
-          <img class="item-image" src="${pageContext.request.contextPath}/resources/img/home.jpg" alt="상품 이미지" />
+          <img class="item-image" src="${cpath}/resources/img/home.jpg" alt="상품 이미지" />
           <div class="item-details">
             <div class="store-name">000 스토어</div>
             <div class="product-name">상품명 3</div>
@@ -138,9 +129,10 @@
         <button class="checkout-btn">결제하기</button>
       </div>
     </aside>
-
+</section>
   </div>
 </div>
+
 </body>
 
 </html>

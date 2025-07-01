@@ -17,26 +17,29 @@ public class HomeMainController {
         return "main/main"; // /WEB-INF/views/main/main_test.jsp
     }
 
-    // 로그인 페이지 연결
-    @GetMapping("/login")
-    public String showLoginPage() {
-        return "login"; 
-    }
-
     // 회원가입 페이지 연결
     @GetMapping("/signup")
     public String showSignupPage() {
         return "signup"; 
     }
     
-    @GetMapping("/notice")
+    
+    @GetMapping("/products")
+    public String showAllproductsPage() {
+		return "main/main_all_products";
+    }
+    
+    
+    @GetMapping("/question")
     public String showNoticePage() {
 		return "main/main_notice";
-    	
     }
+    
     
     @GetMapping("/mypage")
     public String showMyPage() {
     	return "main/main_mypage_correction";
     }
+    
+ 
 }

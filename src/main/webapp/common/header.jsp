@@ -9,7 +9,7 @@
   <div class="header-inner">
     <!-- 로그인 전 -->
     <div class="header-content" id="header-guest">
-	  <a href="${cpath}/main/login" class="header-btn">로그인</a>
+	  <a href="${cpath}/auth/login" class="header-btn">로그인</a>
 	  <span class="divider">|</span>
 	  <a href="${cpath}/main/signup" class="header-btn">회원가입</a>
 	</div>
