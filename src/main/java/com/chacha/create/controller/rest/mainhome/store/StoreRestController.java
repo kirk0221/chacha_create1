@@ -39,7 +39,7 @@ public class StoreRestController {
         MemberEntity memberEntity = (MemberEntity) session.getAttribute("loginMember");
         log.info("로그인 사용자 : {} 입력받은 스토어 정보 : {}", memberEntity, storeEntity);
         
-        int result = storeCreateService.storeUpdate(storeEntity, memberEntity);
+        int result = storeCreateService.storeUpdate(storeEntity, memberEntity, true);
         return ResponseEntity.status(ResponseCode.OK.getStatus())
                              .body(new ApiResponse<>(ResponseCode.OK, result));
     }

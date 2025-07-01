@@ -17,7 +17,9 @@ import com.chacha.create.common.mapper.product.ProductManageMapper;
 import com.chacha.create.common.mapper.store.StoreMapper;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class StoreService {
@@ -26,7 +28,7 @@ public class StoreService {
 	private final SellerMapper sellerMapper;
 	
 	@Transactional(rollbackFor = Exception.class)
-	public int storeUpdate(StoreEntity storeEntity, MemberEntity memberEntity) {
+	public int storeUpdate(StoreEntity storeEntity, MemberEntity memberEntity, boolean firstChk) {
     	if(memberEntity == null) {
     		throw new NeedLoginException("로그인이 필요합니다.");
     	}
@@ -46,6 +48,11 @@ public class StoreService {
 		
 		storeEntity.setSellerId(sellerId); // seller 아이디로 스토어 정보를 추가 
 		storeEntity.setStoreId(storeMapper.selectBySellerId(sellerId).getStoreId()); // seller 아이디로 스토어 아이디를 찾기
+		log.info("store: {}", storeEntity);
+		if(firstChk) {
+			storeEntity.setSaleCnt(0);
+			storeEntity.setViewCnt(0);
+		}
 		
 		if(sellerEntity.getPersonalCheck() == 0 && storeEntity.getStoreUrl()!=null) {
 			throw new InvalidRequestException("판매자는 스토어를 하나만 생성할 수 있습니다.");

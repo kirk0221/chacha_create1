@@ -21,6 +21,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(InvalidRequestException.class)
     public ResponseEntity<ApiResponse<Void>> handleInvalidRequest(InvalidRequestException e) {
         log.warn("Invalid request: {}", e.getMessage());
+        e.printStackTrace();
         return ResponseEntity
                 .status(ResponseCode.BAD_REQUEST.getStatus())
                 .body(new ApiResponse<>(ResponseCode.BAD_REQUEST, null));
@@ -29,6 +30,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(LoginFailException.class)
     public ResponseEntity<ApiResponse<Void>> handleLoginFail(LoginFailException e) {
         log.warn("Login failed: {}", e.getMessage());
+        e.printStackTrace();
         return ResponseEntity
                 .status(ResponseCode.LOGIN_FAIL.getStatus())
                 .body(new ApiResponse<>(ResponseCode.LOGIN_FAIL, null));
@@ -37,6 +39,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(NeedLoginException.class)
     public ResponseEntity<ApiResponse<Void>> handleNeedLogin(NeedLoginException e) {
     	log.warn("Need Login: {}", e.getMessage());
+    	e.printStackTrace();
     	return ResponseEntity
     			.status(ResponseCode.UNAUTHORIZED.getStatus())
     			.body(new ApiResponse<>(ResponseCode.UNAUTHORIZED, null));
@@ -45,22 +48,25 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(SessionExpiredException.class)
     public ResponseEntity<ApiResponse<Void>> handleSessionExpired(SessionExpiredException e) {
         log.info("Session expired: {}", e.getMessage());
+        e.printStackTrace();
         return ResponseEntity
                 .status(ResponseCode.SESSION_EXPIRED.getStatus())
                 .body(new ApiResponse<>(ResponseCode.SESSION_EXPIRED, null));
     }
 
     @ExceptionHandler(IllegalStateException.class)
-    public ResponseEntity<ApiResponse<Void>> handleIllegalState(IllegalStateException ex) {
-        log.error("IllegalStateException: {}", ex.getMessage(), ex);
+    public ResponseEntity<ApiResponse<Void>> handleIllegalState(IllegalStateException e) {
+        log.error("IllegalStateException: {}", e.getMessage(), e);
+        e.printStackTrace();
         return ResponseEntity
                 .status(ResponseCode.BAD_REQUEST.getStatus())
                 .body(new ApiResponse<>(ResponseCode.BAD_REQUEST, null));
     }
 
     @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<ApiResponse<Void>> handleRuntime(RuntimeException ex) {
-        log.error("RuntimeException: {}", ex.getMessage(), ex);
+    public ResponseEntity<ApiResponse<Void>> handleRuntime(RuntimeException e) {
+        log.error("RuntimeException: {}", e.getMessage(), e);
+        e.printStackTrace();
         return ResponseEntity
                 .status(ResponseCode.INTERNAL_SERVER_ERROR.getStatus())
                 .body(new ApiResponse<>(ResponseCode.INTERNAL_SERVER_ERROR, null));
@@ -76,13 +82,15 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<ApiResponse<String>> handleIllegalArgument(IllegalArgumentException ex) {
+    public ResponseEntity<ApiResponse<String>> handleIllegalArgument(IllegalArgumentException e) {
+    	e.printStackTrace();
         return ResponseEntity.badRequest()
-            .body(new ApiResponse<>(ResponseCode.BAD_REQUEST, ex.getMessage()));
+            .body(new ApiResponse<>(ResponseCode.BAD_REQUEST, e.getMessage()));
     }
 
     @ExceptionHandler(NullPointerException.class)
-    public ResponseEntity<ApiResponse<String>> handleNullPointer(NullPointerException ex) {
+    public ResponseEntity<ApiResponse<String>> handleNullPointer(NullPointerException e) {
+    	e.printStackTrace();
         return ResponseEntity.status(ResponseCode.INTERNAL_SERVER_ERROR.getStatus())
             .body(new ApiResponse<>(ResponseCode.INTERNAL_SERVER_ERROR, "널 포인터 예외 발생"));
     }

@@ -26,7 +26,7 @@ public class ReportModalRestController {
     private ReportModalService reportModalService;
     
     @PostMapping("/reportinsert")
-    public ResponseEntity<ApiResponse<Integer>> insertReport(@RequestBody ReportEntity reportEntity, HttpSession session) {
+    public ResponseEntity<ApiResponse<String>> insertReport(@RequestBody ReportEntity reportEntity, HttpSession session) {
         log.info("신고 요청 데이터 : {}", reportEntity);
 
         MemberEntity loginMember = (MemberEntity) session.getAttribute("loginMember");
@@ -34,10 +34,11 @@ public class ReportModalRestController {
         int result = reportModalService.insert(loginMember, reportEntity);
         
         ResponseCode responseCode = result > 0 ? ResponseCode.CREATED : ResponseCode.BAD_REQUEST;
-        log.info(result == 1 ? "신고 등록 성공" : "신고 등록 실패");
+        String message = result == 1 ? "신고 등록 성공" : "신고 등록 실패";
+        log.info(message);
 
         return ResponseEntity
                 .status(responseCode.getStatus())
-                .body(new ApiResponse<>(responseCode, result));
+                .body(new ApiResponse<>(responseCode, message));
     }
 }

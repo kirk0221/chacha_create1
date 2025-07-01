@@ -39,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		JOIN store st ON p.store_id = st.store_id
 		JOIN seller s ON st.seller_id = s.seller_id
 		JOIN member m ON s.member_id = m.member_id
-		WHERE s.personal_check = 1 AND oi.order_date >= TRUNC(SYSDATE, 'MM')
+		WHERE s.personal_check = 0 AND oi.order_date >= TRUNC(SYSDATE, 'MM')
 		AND oi.order_date &lt; ADD_MONTHS(TRUNC(SYSDATE, 'MM'), 1)
 		GROUP BY st.store_name, m.member_name, s.account, s.account_bank,
          TO_CHAR(ADD_MONTHS(TRUNC(oi.order_date, 'MM'), 1), 'YYYY-MM-DD')
