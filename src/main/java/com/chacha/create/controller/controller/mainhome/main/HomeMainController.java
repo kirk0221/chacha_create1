@@ -15,8 +15,9 @@ public class HomeMainController {
 	
 	@GetMapping("/test")
 	public String showTestPage() {
-		return"seller_management_order";
+		return "store/seller/sellerOrderManage";
 	}
+	
     // 메인 홈 페이지
     @GetMapping("/home")
     public String showMainHome() {
