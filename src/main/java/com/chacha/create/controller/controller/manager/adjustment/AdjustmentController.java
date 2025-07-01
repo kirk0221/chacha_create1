@@ -10,11 +10,11 @@ public class AdjustmentController {
 
 	@GetMapping("/store")
 	public String storeadjustment() {
-		return "/mainauth/pages/storeSettlementContent";
+		return "admin/storeSettlementManage";
 	}
 	
 	@GetMapping("/seller")
 	public String selleradjustment() {
-		return "/mainauth/pages/personalSettlementContent";
+		return "admin/personalSettlementManage";
 	}
 }

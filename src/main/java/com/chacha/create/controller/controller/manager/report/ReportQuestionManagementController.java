@@ -5,11 +5,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("manager")
+@RequestMapping("/manager")
 public class ReportQuestionManagementController {
 
 	@GetMapping("/reports")
 	public String reportmanager() {
-		return "/mainauth/pages/declarationContent";
+		return "admin/declarationManage";
 	}
 }

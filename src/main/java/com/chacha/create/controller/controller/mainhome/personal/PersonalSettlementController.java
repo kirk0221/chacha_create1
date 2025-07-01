@@ -10,6 +10,6 @@ public class PersonalSettlementController {
 
 	@GetMapping("/manage")
 	public String sellmanage() {
-		return "/main/main_personal_adjustment";
+		return "/main/personal/storeInfo";
 	}
 }

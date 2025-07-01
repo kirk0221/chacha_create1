@@ -10,10 +10,9 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("main/store")
 public class StoreController {
-
     
 	@GetMapping("/stores")
     public String showAllStoresPage() {
-		return "main/main_storelist";
+		return "main/mainStoreList";
     }
 }

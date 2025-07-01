@@ -14,7 +14,7 @@
   <link rel="stylesheet" href="https://unpkg.com/swiper@9/swiper-bundle.min.css" />
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" type="text/css" href="${cpath}/resources/css/main_style.css">
+  <link rel="stylesheet" type="text/css" href="${cpath}/resources/css/main/main.css">
   
 
 </head>
