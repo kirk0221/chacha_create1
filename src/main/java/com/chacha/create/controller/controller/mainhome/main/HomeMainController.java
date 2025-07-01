@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.extern.slf4j.Slf4j;
 
-// signup 크기 오류, products, mypage 오류
-
 @Slf4j
 @Controller
 @RequestMapping("/main")
