@@ -10,7 +10,7 @@ public class StoreManageController {
 	
 	@GetMapping("/stores")
 	public String storemanage() {
-		return "mainauth/pages/storemanagementContent";
+		return "admin/storeManage";
 	}
 
 }

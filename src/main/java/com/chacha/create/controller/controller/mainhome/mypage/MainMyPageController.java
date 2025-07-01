@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.extern.slf4j.Slf4j;
 
+// 리뷰 오류
+
 @Slf4j
 @Controller
 @RequestMapping("main/mypage")
@@ -14,12 +16,12 @@ public class MainMyPageController {
     
     @GetMapping("/cart")
     public String showCartPage() {
-		return "buyer/mypage/cart";
+		return "store/buyer/mypage/cart";
     }
     
     @GetMapping("/orders")
     public String showOrdersPage() {
-		return "main/main_mypage_order_detail";
+		return "store/buyer/mypage/orderList";
     }
     
     @GetMapping("/favorite")
@@ -29,7 +31,7 @@ public class MainMyPageController {
     
     @GetMapping("/myreview")
     public String showReviewPage() {
-		return "main/main_mypage_review";
+		return "main/mypage/mainMyPageReview";
     }
     
     

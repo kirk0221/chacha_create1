@@ -15,24 +15,24 @@ public class MainPageSellController {
 	// 개인 판매 홈 ( /main/sell )
     @GetMapping("sellguide")
     public String personalSellHome() {
-        return "main/main_personal_sale";
+        return "main/personal/storeInfo";
     }
 
     // 개인 판매 상품 등록 ( /main/personalsell/register )
     @GetMapping("/sellregister")
     public String productRegister() {
-        return "main/main_personal_sale_registration";
+        return "main/personal/saleRegistration";
     }
 
     // 개인 판매 상품 목록 ( /main/personalsell/products )
     @GetMapping("/products")
     public String productList() {
-        return "main/main_personal_order";
+        return "main/personal/orderManage";
     }
 
     // 개인 판매 정산 페이지 ( /main/personalsell/settlement )
     @GetMapping("/management")
     public String settlementPage() {
-        return "main/main_personal_settlement";
+        return "main/personal/personalSettlement";
     }
 }

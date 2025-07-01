@@ -5,27 +5,32 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("auth")
+@RequestMapping("/auth")
 public class AuthController {
 	
 	@GetMapping("/login")
-	public String loginagree() {
-		return "join/join_agree";
+	public String login() {
+		return "auth/login";
+	}
+	
+	@GetMapping("/join/agree")
+	public String joinAgree() {
+		return "auth/join/joinAgree";
 	}
 	
 	@GetMapping("/join/userinfo")
-	public String joininfo() {
-		return "join/join_info";
+	public String joinInfo() {
+		return "auth/join/joinInfo";
 	}
 	
 	@GetMapping("/join/complete")
-	public String joincomplete() {
-		return "join/join_complete";
+	public String joinComplete() {
+		return "auth/join/joinComplete";
 	}
 	
 	@GetMapping("/join/seller")
-	public String logininfo() {
-		return "join/join_seller";
+	public String loginInfo() {
+		return "auth/join/joinSeller";
 	}
 	
 }

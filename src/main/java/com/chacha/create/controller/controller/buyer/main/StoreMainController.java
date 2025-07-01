@@ -23,77 +23,77 @@ public class StoreMainController {
 	// 구매자 마이페이지(구매자)
 	@GetMapping("/mypage")
 	public String ShowMypage() {
-		return "buyer/store_allproducts";
+		return "main/mypage/mainMyPage";
 	}
 	
 	// 상세페이지
 	@GetMapping("/productdetail/{productId}")
 	public String ShowProductdetail() {
-		return "buyer/productdetail";
+		return "store/productDetail";
 	}
 	
 	// 결제 페이지
 	@GetMapping("/order")
 	public String ShowOrder() {
-		return "buyer/mypage/order";
+		return "store/buyer/order";
 	}
 	
 	// 결제 완료페이지
 	@GetMapping("/order/complete")
 	public String ShowOrderComplete() {
-		return "buyer/mypage/ordercomplete";
+		return "store/buyer/orderComplete";
 	}
 	
 	// 주문 내역 페이지
 	@GetMapping("/mypage/orders")
 	public String ShowMyOrders() {
-		return "buyer/mypage/orderlist";
+		return "store/buyer/mypage/orderList";
 	}
 	
 	
 	// 주문 상세 페이지
 	@GetMapping("/mypage/orderdetail/{orderId}")
 	public String ShowOrderDetail() {
-		return "buyer/mypage/orderdetail";
+		return "store/buyer/mypage/orderDetail";
 	}
 	
 	// 전체 상품
 	@GetMapping("/products")
 	public String ShowstoreAllProduct(@PathVariable String storeUrl, Model model) {
 		model.addAttribute("storeUrl",storeUrl);
-		return "buyer/store_allproducts";
+		return "store/storeAllProducts";
 	}
 	
 	// 문의 메시지
 	@GetMapping("/message")
 	public String ShowMessage() {
-		return "buyer/mypage/chat";
+		return "store/chat";
 	}
 	
 	// 작성한 리뷰 확인
 	@GetMapping("/mypage/myreview")
 	public String ShowMyReview(@RequestParam int productId, Model model) {
 		model.addAttribute("productId",productId);
-		return "buyer/productdetail";
+		return "store/productDetail";
 	}
 	
 	// 스토어 소개/판매자 정보
 	@GetMapping("/info")
 	public String ShowSeller_info() {
-		return "buyer/seller_info";
+		return "store/sellerInfo";
 	}
 	
 	// 공지사항
 	@GetMapping("/notices")
 	public String ShowNotices() {
-		return "buyer/mypage/notice";
+		return "main/mainNotice";
 	}
 	
 	// 공지사항 상세
 	@GetMapping("/noticedetail")
 	public String ShowNoticedetail(@RequestParam int noticeId, Model model) {
 		model.addAttribute("noticeId",noticeId);
-		return "buyer/mypage/notice";
+		return "main/mainNotice";
 	}
 	
 	
