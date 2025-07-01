@@ -137,8 +137,8 @@
 							가능합니다.
 						</p>
 						<div class="user-types">
-							<button type="button" class="type-button">구매자</button>
-							<button type="button" class="type-button">판매자</button>
+							<button type="button" class="type-button active" data-type="buyer">구매자</button>
+							<button type="button" class="type-button" data-type="seller">판매자</button>
 						</div>
 					</div>
 
@@ -162,6 +162,21 @@
 	      "memberRegi": false
 	    , "authKey" : false
 	}
+	//----------------------------구매자 판매자 버튼 토글-----------------
+	
+	const buttons = document.querySelectorAll('.type-button');
+
+	buttons.forEach(button => {
+	  button.addEventListener('click', () => {
+		  event.preventDefault();
+	    // 모든 버튼에서 active 제거
+	    buttons.forEach(btn => btn.classList.remove('active'));
+	    // 클릭한 버튼에만 active 추가
+	    button.classList.add('active');
+	  });
+	});
+	
+	
 	//----------------------------주소 api 사용----------------------
 	$(()=>{
 		$('#postcodeBtn').click(function() {
@@ -301,7 +316,7 @@
 	    }
 	});
 	
-	// 유효성 검사
+	//----------------------------------------------- 유효성 검사------------------------------
 	$(function() {
 	  // 이메일 검사
 	  $('#memberEmail').on('input', function() {
@@ -412,6 +427,10 @@
    		    	addressExtra: addressExtra,
    		    	addressCheck:1
 	    		});
+	    // 버튼이 active 된 것의 값을 찾음
+	    const selectedType = document.querySelector('.type-button.active');
+	    const userType = selectedType?.dataset.type;
+	    
 	    // AJAX POST 요청
 	    $.ajax({
 	    	  url: contextPath + '/api/auth/join/userinfo',
@@ -421,7 +440,11 @@
 	    	  success: function(response, textStatus, xhr) {
 	    	    if (xhr.status === 201 || response?.status === 201) {
 	    	      alert(response?.message);
-	    	      window.location.href = contextPath + '/auth/join/complete';
+	    	      if (userType === 'buyer') {
+	    	    	  window.location.href = contextPath + '/auth/join/complete';
+	    	    	} else if (userType === 'seller') {
+	    	    	  window.location.href = contextPath + '/auth/join/seller';
+	    	    	}
 	    	    } else {
 	    	      // API 응답 형식은 맞지만 실패한 경우
 	    	      alert('전송 실패: ' + (response?.message || '알 수 없는 오류'));

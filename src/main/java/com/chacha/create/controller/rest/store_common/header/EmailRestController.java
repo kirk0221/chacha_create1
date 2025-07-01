@@ -14,7 +14,7 @@ import com.chacha.create.service.store_common.header.auth.EmailService;
 @RestController
 @RequestMapping("/sendEmail")
 @SessionAttributes("authKey")
-public class EmailController {
+public class EmailRestController {
     
     @Autowired
     private EmailService service;

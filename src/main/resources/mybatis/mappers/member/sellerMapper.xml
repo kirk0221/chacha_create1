@@ -29,16 +29,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE member_id = #{memberId}
 	</select>
 
-	<insert id="insert" parameterType="sellerEntity">
-		INSERT INTO seller (
-		seller_id, member_id, opening_date, account, account_bank,
-		profile_info, personal_check
-		) VALUES (
-		seq_seller_id.NEXTVAL, #{memberId},
-		sysdate, #{account}, #{accountBank},
-		#{profileInfo}, #{personalCheck}
-		)
+	<insert id="insert" parameterType="sellerEntity" keyProperty="sellerId">
+	    <selectKey keyProperty="sellerId" resultType="int" order="BEFORE">
+	        SELECT seq_seller_id.NEXTVAL FROM dual
+	    </selectKey>
+	    INSERT INTO seller (
+	        seller_id, member_id, opening_date, account, account_bank,
+	        profile_info, personal_check
+	    ) VALUES (
+	        #{sellerId}, #{memberId}, sysdate, #{account}, #{accountBank},
+	        #{profileInfo}, #{personalCheck}
+	    )
 	</insert>
+
+
 
 	<update id="update" parameterType="sellerEntity">
 		UPDATE seller

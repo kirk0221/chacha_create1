@@ -9,6 +9,8 @@
 <title>회원가입 완료</title>
 <link rel="stylesheet" type="text/css"
 	href="${cpath}/resources/css/auth/join/joinSeller.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
 	<div class="container">
@@ -47,7 +49,7 @@
 			</div>
 
 		</div>
-		<div class="seller-container">
+		<form id="sellerinfo" class="seller-container">
 			<h2 class="main-title">판매자님의 추가 정보를 입력해주세요</h2>
 
 			<!-- ✅ 계좌 등록 -->
@@ -58,13 +60,25 @@
 				<p class="section-desc">판매수익금으로 입금 받을 계좌를 등록해주세요</p>
 
 				<label for="account-owner">이름</label> <input type="text"
-					id="account-owner" class="input-box" placeholder="내용을 입력하세요" /> <label
-					for="bank">은행을 선택해 주세요.</label> <select id="bank" class="input-box">
-					<option>선택해주세요.</option>
-					<option>국민은행</option>
-					<option>신한은행</option>
-					<option>하나은행</option>
-					<!-- 필요한 은행 추가 -->
+					id="account-owner" class="input-box" placeholder="로그인 사용자 이름" readonly value="${sessionScope.loginMember.memberName}"/> <label
+					for="bank">은행을 선택해 주세요.</label> <select id="bankselect" class="input-box">
+					<option value="">은행선택</option>
+					<option value="004">국민은행</option>
+					<option value="020">우리은행</option>
+					<option value="088">신한은행</option>
+					<option value="003">기업은행</option>
+					<option value="023">SC제일은행</option>
+					<option value="011">농협은행</option>
+					<option value="005">외환은행</option>
+					<option value="090">카카오뱅크</option>
+					<option value="032">부산은행</option>
+					<option value="071">우체국</option>
+					<option value="031">대구은행</option>
+					<option value="037">전북은행</option>
+					<option value="035">제주은행</option>
+					<option value="007">수협은행</option>
+					<option value="027">씨티은행</option>
+					<option value="039">경남은행</option>
 				</select> <label for="account-number">계좌번호를 입력해 주세요.</label>
 				<!-- 계좌번호 입력 안내 박스 -->
 				<div class="account-warning-box">
@@ -81,9 +95,10 @@
 
 
 				<div class="account-input">
-					<input type="text" id="account-number" class="input-box2"
+					<input type="text" id="accountnum" class="input-box2"
 						placeholder="-없이 계좌번호 입력" />
-					<button class="account-button">계좌 등록하기</button>
+					<input type="text" id="accountname" class="input-box2" placeholder="예금주명" readonly>
+					<button type="button" class="account-button" id="accountSubmit">계좌 등록하기</button>
 				</div>
 			</section>
 
@@ -109,9 +124,104 @@
 				<button type="button" class="btn-outline" onclick="history.back()">돌아가기</button>
 				<button type="submit" class="btn-primary">등록하기</button>
 			</div>
-		</div>
+		</form>
 	</div>
 
+
+	<script>
+	const checkObj = {
+			"accountname": false
+		}
+	
+		$(function() {
+			function checkmyinfo() {
+				const bank_code = $('#bankselect').val();
+				const bank_num = $('#accountnum').val();
+
+				if (!bank_code || !bank_num) {
+					alert('은행과 계좌번호를 모두 입력해주세요.');
+					return;
+				}
+
+				$.ajax({
+					url : '${cpath}/api/checkAccount',
+					method : 'GET',
+					data : {
+						bank_code : bank_code,
+						bank_num : bank_num
+					},
+					success : function(res) {
+						if (res.bankHolderInfo) {
+		                    $('#accountname').val(res.bankHolderInfo);// 예금주명 입력
+
+		                    // account-owner와 비교
+		                    const accountOwner = $('#account-owner').val();
+		                    if (accountOwner === res.bankHolderInfo) {
+		                        checkObj.accountname = true;
+								// 은행 선택 비활성화
+						        $('#bankselect').prop('disabled', true);
+						        // 계좌번호 입력 비활성화
+						        $('#accountnum').prop('disabled', true);
+		                    } else {
+		                        checkObj.accountname = false;
+		                        alert('예금주명이 로그인 사용자와 다릅니다.');
+		                    }
+						} else {
+							alert('예금주 정보를 찾을 수 없습니다.');
+						}
+					},
+					error : function(xhr, status, error) {
+						console.error('요청 실패:', error);
+						alert('예금주 조회 중 오류가 발생했습니다.');
+					}
+				});
+			}
+
+			// 버튼 클릭 시 실행
+			$('#accountSubmit').on('click', checkmyinfo);
+		});
+	
+	$(function() {
+	    $('#sellerinfo').on('submit', function(e) {
+	        e.preventDefault(); // 폼 제출 기본 동작 막기
+	        if (!checkObj.accountname) {
+	            alert('예금주명이 로그인 사용자 이름과 일치해야 제출할 수 있습니다.');
+	        } else {
+		        // 폼에서 필요한 데이터 수집
+		        // (예: account, accountBank, profileInfo, personalCheck 등)
+		        // 여기서는 계좌 정보와 프로필 정보 예시로 작성
+	
+		        const sellerData = {
+		            account: $('#accountnum').val(),
+		            accountBank: $('#bankselect option:selected').text(),
+		            profileInfo: $('.profile-info-textarea').val() || ''  // 예시, 프로필 텍스트영역 필요 시
+		        };
+	
+		        // 유효성 체크 (예: 계좌번호, 은행명 체크)
+		        if (!sellerData.account || !sellerData.accountBank) {
+		            alert('계좌번호와 은행명을 입력해 주세요.');
+		            return;
+		        }
+	
+		        $.ajax({
+		            url: '${cpath}/api/auth/join/seller',
+		            method: 'POST',
+		            contentType: 'application/json',
+		            data: JSON.stringify(sellerData),
+		            success: function(res) {
+		                alert('판매자 정보가 성공적으로 등록되었습니다.');
+		                console.log(res);
+		                window.location.href = '${cpath}/auth/join/complete';
+		            },
+		            error: function(xhr, status, error) {
+		                alert('판매자 정보 등록에 실패했습니다: ' + error);
+		            }
+		        });
+	        }
+       });
+	});
+
+	</script>
 
 </body>
 </html>
