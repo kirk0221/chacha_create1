@@ -35,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		profile_info, personal_check
 		) VALUES (
 		seq_seller_id.NEXTVAL, #{memberId},
-		#{openingDate}, #{account}, #{accountBank},
+		sysdate, #{account}, #{accountBank},
 		#{profileInfo}, #{personalCheck}
 		)
 	</insert>

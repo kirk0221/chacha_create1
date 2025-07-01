@@ -34,7 +34,6 @@ public class PersonalProductRestController {
 	public ResponseEntity<ApiResponse<Integer>> registerProduct(@RequestBody PersonalProductDTO dto,
 			HttpSession session) {
 		MemberEntity loginMember = (MemberEntity) session.getAttribute("loginMember");
-		Integer memberId = loginMember.getMemberId();
 
 		log.info("로그인된 member: {}", loginMember);
 		int result = personalProductService.insertMainProductWithImages(dto, loginMember);
