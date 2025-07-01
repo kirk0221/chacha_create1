@@ -28,5 +28,4 @@ public class AuthController {
 		return "join/join_seller";
 	}
 	
-	
 }

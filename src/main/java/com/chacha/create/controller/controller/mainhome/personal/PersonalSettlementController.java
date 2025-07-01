@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("main/sell")
+@RequestMapping("/main/sell")
 public class PersonalSettlementController {
 
-	@GetMapping("manage")
+	@GetMapping("/manage")
 	public String sellmanage() {
 		return "/main/main_personal_adjustment";
 	}
