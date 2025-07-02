@@ -20,7 +20,7 @@ import com.chacha.create.service.seller.main.SellerMainService;
 @RestController
 @RequestMapping("/api/{storeUrl}/seller")
 public class SellerMainRestController {
-
+ 
 	@Autowired
 	SellerMainService sell;
 

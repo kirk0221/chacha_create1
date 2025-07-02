@@ -1,31 +1,18 @@
 package com.chacha.create.controller.controller.seller.main;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
-import java.util.stream.Collectors;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
-import com.chacha.create.common.dto.product.ProductWithImagesDTO;
-import com.chacha.create.common.entity.product.ProductEntity;
-import com.chacha.create.common.enums.category.DCategoryEnum;
-import com.chacha.create.common.enums.category.TypeCategoryEnum;
-import com.chacha.create.common.enums.category.UCategoryEnum;
+
+import com.chacha.create.common.dto.order.OrderSumDTO;
+import com.chacha.create.service.seller.main.SellerMainService;
 import com.chacha.create.service.seller.product.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -40,9 +27,29 @@ public class SellerMainController {
 	
 	
 	final ProductService productService;
+	 
+	final SellerMainService sell;
+	
+	
 	// 판매자 메인페이지
 	@GetMapping("/main")
 	public String showMainPage(@PathVariable String storeUrl, Model model) {
+		 
+
+		List<Map<String, Object>> statusList = sell.selectByStatus(storeUrl);
+		List<Map<String, Object>> reviewList = sell.selectByStoreUrl(storeUrl);
+		List<OrderSumDTO> orderSumList = sell.selectByDayOrderSum(storeUrl);
+		
+		int reviewCount = reviewList.size();
+		
+		
+		model.addAttribute("reviewCount", reviewCount);
+		model.addAttribute("storeUrl", storeUrl);
+		model.addAttribute("statusList", statusList);
+		model.addAttribute("reviewList", reviewList);
+		model.addAttribute("orderSumList", orderSumList);
+		
+		 
 		return "store/seller/sellerMyPage";
 	 }
 	
