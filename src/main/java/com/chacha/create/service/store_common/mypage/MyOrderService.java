@@ -35,6 +35,11 @@ public class MyOrderService {
     private final OrderInfoMapper orderInfoMapper;
     private final OrderDetailMapper orderDetailMapper;
 	private final DeliveryMapper deliveryMapper;
+	
+	
+	public Integer selectForOrderDetailId(int memberId, int productId) {
+        return orderMapper.selectForOrderDetailId(memberId, productId);
+    }
 
 	@Transactional(rollbackFor = Exception.class)
     public int placeOrder(OrderRequestDTO request, MemberEntity member) {

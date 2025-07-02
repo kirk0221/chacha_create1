@@ -5,6 +5,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper
 	namespace="com.chacha.create.common.mapper.order.OrderMapper">
 	
+	<select id="selectForOrderDetailId" resultType="int" parameterType="map">
+	  SELECT order_detail_id
+	  FROM (
+	    SELECT od.order_detail_id
+	    FROM order_detail od
+	    JOIN order_info oi ON od.order_id = oi.order_id
+	    WHERE oi.member_id = #{memberId}
+	      AND od.product_id = #{productId}
+	    ORDER BY od.order_detail_id DESC
+	  )
+	  WHERE ROWNUM = 1
+	</select>
+
+	
 	<select id="selectCardNumByOrderId" parameterType="int" resultType="string">
 	    SELECT c.card_num
 	    FROM order_info oi

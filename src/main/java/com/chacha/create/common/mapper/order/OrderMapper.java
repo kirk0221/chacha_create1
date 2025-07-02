@@ -37,4 +37,7 @@ public interface OrderMapper {
 	
 	// 카드 번호 암호화를 위한 로직
 	String selectCardNumByOrderId(int orderId);
+	
+	// 회원이 가진 주문 상세 ID 반환
+	Integer selectForOrderDetailId(@Param("memberId") int memberId, @Param("productId") int productId);
 }
