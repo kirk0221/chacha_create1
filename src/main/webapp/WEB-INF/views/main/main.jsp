@@ -38,7 +38,7 @@
           <p class="banner-desc">최대 50% 할인, 무료 체험권 제공!</p>
           <a href="#" class="banner-btn">바로 구매</a>
         </div>
-        <img src="resources/images/banner1.jpg" alt="광고1">
+        <img src="${cpath}/resources/images/main/main_banner1.png" alt="광고1">
         
       </div>
       <div class="swiper-slide banner-card">

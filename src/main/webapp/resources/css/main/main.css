@@ -26,6 +26,63 @@ main {
 }
 
 /* Banner Section */
+
+/* 이미지와 텍스트 겹치기 위한 컨테이너 */
+.banner-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.banner-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* 이미지 위 텍스트 */
+.banner-info {
+  position: absolute;
+  top: 20%;
+  left: 10%;
+  color: white;
+  z-index: 10;
+  max-width: 480px;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
+}
+
+.banner-tag {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.banner-title {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.banner-desc {
+  font-size: 18px;
+  margin-bottom: 16px;
+}
+
+.banner-btn {
+  display: inline-block;
+  background-color: #2d4739;
+  color: white;
+  padding: 10px 24px;
+  border-radius: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.banner-btn:hover {
+  background-color: #3c5d49;
+}
 .banner-section {
   display: grid;
   grid-template-columns: 2fr 1fr;
