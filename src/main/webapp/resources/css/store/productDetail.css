@@ -81,6 +81,18 @@ body {
   color: #666;
 }
 
+#storeNameLink {
+  color: black;       /* 글자 색 검정으로 */
+  text-decoration: none; /* 밑줄 제거 */
+  cursor: pointer;    /* 클릭 가능 커서 */
+}
+
+/* 마우스 올렸을 때도 검정 유지 */
+#storeNameLink:hover {
+  color: black;
+  text-decoration: none;
+}
+
 .product-title-row {
   display: flex;
   justify-content: space-between;
@@ -162,10 +174,30 @@ body {
   color: #333;
 }
 
+/* category-badges */
 .product-category {
-  font-size: 14px;
   color: #999;
-  margin-bottom: 100px;
+  margin-bottom: 120px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+// category-badges
+.category-badges {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+.badge {
+  background-color: #D3B19A;
+  color: #282828;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 8px;
+  text-transform: uppercase;
 }
 
 /* 구분선 및 디테일 섹션 */
