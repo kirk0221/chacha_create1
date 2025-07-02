@@ -324,8 +324,9 @@
     			        data: JSON.stringify(orderRequestDTO),
     			        success: function(response) {
    			        	if (response?.status === 201) {
-    			          alert(response.message);
-    			          location.href = "${cpath}/main/order/complete"; // 성공 페이지로 이동
+   			        	const orderid = parseInt(response.data);
+    			          alert("주문이 완료되었습니다. 주문번호 : " + orderid);
+    			          location.href = `${pageContext.request.contextPath}/main/order/complete/\${orderid}`; // 성공 페이지로 이동
    			        	}
     			        },
     			        error: function(xhr) {

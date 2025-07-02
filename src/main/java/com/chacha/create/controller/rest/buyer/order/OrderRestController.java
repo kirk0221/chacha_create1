@@ -29,7 +29,7 @@ public class OrderRestController {
     private MyOrderService orderService;
 
     @PostMapping
-    public ResponseEntity<ApiResponse<String>> placeOrder(@RequestBody OrderRequestDTO orderRequest,
+    public ResponseEntity<ApiResponse<Integer>> placeOrder(@RequestBody OrderRequestDTO orderRequest,
                                                           HttpSession session) {
         MemberEntity loginMember = (MemberEntity) session.getAttribute("loginMember");
         log.info("주문 요청 - 사용자ID: {}, 주문정보: {}", loginMember.getMemberId(), orderRequest);
@@ -39,7 +39,7 @@ public class OrderRestController {
         if (resultOrderId > 0) {
             String message = "주문이 완료되었습니다. 주문번호: " + resultOrderId;
             return ResponseEntity.status(ResponseCode.CREATED.getStatus())
-                    .body(new ApiResponse<>(ResponseCode.CREATED, message));
+                    .body(new ApiResponse<>(ResponseCode.CREATED, resultOrderId));
         } else {
             String errorMessage = "주문 처리에 실패했습니다.";
             return ResponseEntity.status(ResponseCode.BAD_REQUEST.getStatus())

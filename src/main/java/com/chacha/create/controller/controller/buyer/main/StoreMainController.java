@@ -39,8 +39,9 @@ public class StoreMainController {
 	}
 	
 	// 결제 완료페이지
-	@GetMapping("/order/complete")
-	public String ShowOrderComplete() {
+	@GetMapping("/order/complete/{orderId}")
+	public String ShowOrderComplete(@PathVariable int orderId, Model model) {
+		model.addAttribute("orderId", orderId);
 		return "store/buyer/orderComplete";
 	}
 	
