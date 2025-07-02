@@ -113,6 +113,8 @@
             $('#addrId').val(addr.addressId); 
 
             $('#checkAddrVal').val("1");
+         // 우편번호 찾기 버튼 비활성화
+            $('input[type=button][onclick="sample6_execDaumPostcode()"]').prop('disabled', true);
           } else {
             alert("기본 배송지를 불러오지 못했습니다.");
           }
@@ -130,6 +132,8 @@
       $('#addrId').val('');
 
       $('#checkAddrVal').val("0");
+   // 우편번호 찾기 버튼 활성화
+      $('input[type=button][onclick="sample6_execDaumPostcode()"]').prop('disabled', false);
     }
   });
 });
