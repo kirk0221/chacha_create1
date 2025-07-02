@@ -1,15 +1,23 @@
 package com.chacha.create.service.seller.product;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.chacha.create.common.dto.product.ProductUpdateDTO;
 import com.chacha.create.common.dto.product.ProductWithImagesDTO;
 import com.chacha.create.common.dto.product.ProductlistDTO;
 import com.chacha.create.common.entity.product.PImgEntity;
 import com.chacha.create.common.entity.product.ProductEntity;
+import com.chacha.create.common.enums.image.ProductImageTypeEnum;
 import com.chacha.create.common.mapper.product.PImgMapper;
 import com.chacha.create.common.mapper.product.ProductManageMapper;
 import com.chacha.create.common.mapper.product.ProductMapper;
@@ -103,40 +111,92 @@ public class ProductService {
         return updatedProduct > 0 || img1 > 0;
     }
 	
+    private final String imageSavePath = "C:/shinhan/install/springFramework/workSpace2/chacha_create1/src/main/webapp/resources/productImages";
+    private final String imageWebPath = "/resources/productImages/";
+
     @Transactional(rollbackFor = Exception.class)
-    public int registerProductWithImages(String storeUrl, ProductWithImagesDTO request) {
-        ProductEntity product = request.getProduct();
-        List<PImgEntity> images = request.getImages();
+    public int registerMultipleProductsWithImages(String storeUrl, List<ProductWithImagesDTO> requestList) {
+        int successCount = 0;
 
-        // Store_Url → store_id 조회
-        product.setStoreId(productMapper.selectForStoreIdByStoreUrl(storeUrl));
+        for (ProductWithImagesDTO request : requestList) {
+            ProductEntity product = request.getProduct();
+            List<MultipartFile> images = request.getImages();
 
-        // 1. 상품 등록
-        int productInsertResult = productInsert(product);
-        if (productInsertResult <= 0) {
-            log.info("insert 실패 (상품 등록 실패)");
-            return 0;
-        }
+            // 1. store_url → store_id 설정
+            product.setStoreId(productMapper.selectForStoreIdByStoreUrl(storeUrl));
 
-        // 2. 이미지 등록
-        int imgInsertSuccessCount = 0;
-        int seq = 1;
-        for (PImgEntity image : images) {
-            image.setProductId(product.getProductId()); // FK 설정
-            image.setPimgSeq(seq++); // 이미지 시퀀스가 자동으로 증가
-            int imgInsertResult = productimgInsert(image);
-            if (imgInsertResult > 0) {
-                imgInsertSuccessCount++;
+            // 2. 상품 등록
+            int productInsertResult = productInsert(product);
+            if (productInsertResult <= 0) {
+                log.warn("❌ 상품 등록 실패: {}", product.getProductName());
+                continue;
+            }
+
+            // 3. 이미지 저장 + DB 등록
+            int seq = 1;
+            int imgInsertCount = 0;
+
+            for (MultipartFile file : images) {
+                if (file.isEmpty()) continue;
+
+                try {
+                    String savedFileName = saveImageFile(file);
+                    String imageUrl = imageWebPath + savedFileName;
+
+                    PImgEntity image = PImgEntity.builder()
+                            .productId(product.getProductId())
+                            .pimgUrl(imageUrl)
+                            .pimgEnum(ProductImageTypeEnum.THUMBNAIL) // 전부 THUMBNAIL로
+                            .pimgSeq(seq++) // 1부터 순차 증가
+                            .build();
+
+                    int result = productimgInsert(image);
+                    if (result > 0) imgInsertCount++;
+
+                } catch (IOException e) {
+                    log.error("❌ 이미지 저장 실패: {}", file.getOriginalFilename(), e);
+                }
+            }
+
+            if (imgInsertCount == images.size()) {
+                successCount++;
+                log.info("✅ 상품 및 이미지 등록 성공: {}", product.getProductName());
+            } else {
+                log.warn("⚠️ 일부 이미지 등록 실패: {}", product.getProductName());
             }
         }
 
-        if (imgInsertSuccessCount == images.size()) {
-            log.info("insert 성공");
-            return 1;
-        } else {
-            log.info("insert 실패 (이미지 등록 일부 또는 전체 실패)");
-            return 0;
+        return successCount;
+    }
+
+    private String saveImageFile(MultipartFile file) throws IOException {
+        String originalFileName = file.getOriginalFilename();
+        String extension = "";
+
+        if (originalFileName != null && originalFileName.contains(".")) {
+            extension = originalFileName.substring(originalFileName.lastIndexOf("."));
         }
+
+        String newFileName = UUID.randomUUID().toString() + extension;
+
+        Path uploadPath = Paths.get(imageSavePath);
+        if (!Files.exists(uploadPath)) {
+            Files.createDirectories(uploadPath);
+        }
+
+        Path filePath = uploadPath.resolve(newFileName);
+        file.transferTo(filePath.toFile());
+
+        return newFileName;
+    }
+    
+    public List<ProductEntity> getProductsByStore(String storeUrl) {
+        int storeId = productMapper.selectForStoreIdByStoreUrl(storeUrl);
+        if (storeId == 0) {
+            log.warn("storeId가 0입니다. storeUrl: {}", storeUrl);
+            return new ArrayList<>();
+        }
+        return productMapper.selectByStoreId(storeId);
     }
     
 }

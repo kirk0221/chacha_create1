@@ -30,17 +30,19 @@
 		    <div class="store-name">수제대추고</div>
 		  </div>
 		  <ul class="menu-list">
-		    <li><a href="#"><span class="menu-text">상품등록</span><span class="arrow">></span></a></li>
-		    <li><a href="#"><span class="menu-text">판매상품관리</span><span class="arrow">></span></a></li>
+		    <li><a href="${cpath}/store1/seller/productinsert"><span class="menu-text">상품등록</span><span class="arrow">></span></a></li>
+		    <li><a href="${cpath}/store1/seller/products"><span class="menu-text">판매상품관리</span><span class="arrow">></span></a></li>
 		    <li><a href="#"><span class="menu-text">주문/발송확인(취소/환불)</span><span class="arrow">></span></a></li>
-		    <li><a href="#"><span class="menu-text">환불관리</span><span class="arrow">></span></a></li>
-		    <li><a href="#"><span class="menu-text">정산관리</span><span class="arrow">></span></a></li>
-		    <li><a href="#"><span class="menu-text">문의메시지</span><span class="arrow">></span></a></li>
-		    <li><a href="#"><span class="menu-text">리뷰관리</span><span class="arrow">></span></a></li>
+		    <li><a href="${cpath}/store1/seller/management/settlement"><span class="menu-text">정산관리</span><span class="arrow">></span></a></li>
+		    <li><a href="${cpath}/store1/seller/chat"><span class="menu-text">문의메시지</span><span class="arrow">></span></a></li>
+		    <li><a href="${cpath}/store1/seller/reviews"><span class="menu-text">리뷰관리</span><span class="arrow">></span></a></li>
+		    <li><a href="#"><span class="menu-text">공지사항목록</span><span class="arrow">></span></a></li>
 		    <li><a href="#"><span class="menu-text">스토어관리</span><span class="arrow">></span></a></li>
 		  </ul>
 		  <div class="sidebar-footer">
-		    <button class="btn-go-buyer" onclick="#">구매자페이지 이동</button>
+		    <button class="btn-go-buyer" onclick="location.href='${cpath}/store1/mypage'">
+		  		구매자페이지 이동
+			</button>
 		  </div>
 		</nav>
 
@@ -110,7 +112,7 @@
           </a>
 
           <!-- 정산관리 -->
-          <a href="#" style="text-decoration: none; color: inherit;">
+          <a href="${cpath}/store1/seller/management/settlement" style="text-decoration: none; color: inherit;">
             <div class="member-box scroll-box">
               <div class="member-header">
                 <div class="title-with-info">
@@ -137,7 +139,7 @@
               </div>
               <div class="member-body">
                 <div class="review-content-row">
-                  <a href="#" class="frame-1035 link-box fixed-width">
+                  <a href="${cpath}/store1/seller/reviews" class="frame-1035 link-box fixed-width">
                     <div class="ellipse-1">
                       <iconify-icon icon="mdi:pencil-box-outline" class="icon-inner"></iconify-icon>
                     </div>
