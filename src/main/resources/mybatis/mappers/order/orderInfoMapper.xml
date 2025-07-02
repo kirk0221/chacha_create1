@@ -40,7 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		card_id, order_status)
 		VALUES (#{orderId}, #{memberId},
 		#{orderDate}, #{orderName},
-		#{orderPhone}, #{addressId}, #{cardId},
+		#{orderPhone}, #{addressId}, null,
 		#{orderStatus})
 	</insert>
 
