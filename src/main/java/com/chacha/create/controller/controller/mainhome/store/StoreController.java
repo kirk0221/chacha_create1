@@ -15,4 +15,9 @@ public class StoreController {
     public String showAllStoresPage() {
 		return "main/mainStoreList";
     }
+	
+	@GetMapping("/description")
+    public String showStoreInfoPage() {
+		return "main/mainStoreInfo";
+    }
 }

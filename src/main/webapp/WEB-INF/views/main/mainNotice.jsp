@@ -11,7 +11,6 @@
 <body>
 
   <!-- ✅ Include Header & Nav -->
-<jsp:include page="/common/header.jsp" />
 <jsp:include page="/common/main_nav.jsp" />
 
 <main class="notice-container">

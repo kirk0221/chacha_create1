@@ -9,6 +9,7 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
 			/WEB-INF/spring/root-context.xml
+			/WEB-INF/spring/root-context-email.xml
 			/WEB-INF/spring/root-context-tx.xml
 			/WEB-INF/spring/root-context-oracle.xml
 		</param-value>

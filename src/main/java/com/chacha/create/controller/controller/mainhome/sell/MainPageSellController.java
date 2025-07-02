@@ -15,7 +15,7 @@ public class MainPageSellController {
 	// 개인 판매 홈 ( /main/sell )
     @GetMapping("sellguide")
     public String personalSellHome() {
-        return "main/personal/storeInfo";
+        return "main/personal/personalSellInfo";
     }
 
     // 개인 판매 상품 등록 ( /main/personalsell/register )

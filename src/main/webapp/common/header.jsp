@@ -4,22 +4,28 @@
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="cpath" value="${pageContext.servletContext.contextPath}" />
 
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 <div class="header-wrapper">
   <div class="header-inner">
     <!-- 로그인 전 -->
-    <div class="header-content" id="header-guest">
-	  <a href="${cpath}/auth/login" class="header-btn">로그인</a>
-	  <span class="divider">|</span>
-	  <a href="${cpath}/main/signup" class="header-btn">회원가입</a>
-	</div>
+	<c:if test="${empty sessionScope.loginMember}">
+	    <div class="header-content" id="header-guest">
+		  <a href="${cpath}/auth/login" class="header-btn">로그인</a>
+		  <span class="divider">|</span>
+		  <a href="${cpath}/auth/join/agree" class="header-btn">회원가입</a>
+		</div>
+	</c:if>
 
     <!-- 로그인 후 -->
-    <div class="header-content" id="header-user" style="display: none;">
-      <span class="welcome-text"><span id="member-name">000</span>님 반갑습니다!</span>
-      <a href="#" class="header-btn">메시지</a>
-      <a href="#" class="header-btn">로그아웃</a>
-    </div>
+    <c:if test="${not empty sessionScope.loginMember}">
+	    <div class="header-content" id="header-user">
+	      <span class="welcome-text"><span id="member-name">${sessionScope.loginMember.memberName}</span>님 반갑습니다!</span>
+	      <a href="#" class="header-btn">메시지</a>
+	      <a href="${cpath}/auth/logout" class="header-btn" onclick="alert('로그아웃');">로그아웃</a>
+	    </div>
+    </c:if>
   </div>
 </div>
 

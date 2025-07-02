@@ -133,8 +133,8 @@
 
         <!-- 버튼 영역 -->
         <div class="button-group">
-          <a href="#" class="btn cancel">취소</a>
-          <a href="#" class="btn next">다음</a>
+          <a href="${cpath}/main" class="btn cancel">취소</a>
+          <a href="${cpath}/auth/join/userinfo" id="nextBtn" class="btn next">다음</a>
         </div>
       </div>
     </div>
@@ -142,17 +142,32 @@
 
   <!-- 스크립트: 모두 동의 시 각 항목 자동 체크 -->
   <script>
-    document.getElementById("agreeAll").addEventListener("change", function () {
-      const checked = this.checked;
-      const termsRadios = [
-        document.querySelector('input[name="terms1"][value="yes"]'),
-        document.querySelector('input[name="terms2"][value="yes"]'),
-        document.querySelector('input[name="terms3"][value="yes"]')
-      ];
-      termsRadios.forEach(radio => {
-        if (checked) radio.checked = true;
-      });
+  // agreeAll 체크 시 각 항목 자동 체크
+  document.getElementById("agreeAll").addEventListener("change", function () {
+    const checked = this.checked;
+    const termsRadios = [
+      document.querySelector('input[name="terms1"][value="yes"]'),
+      document.querySelector('input[name="terms2"][value="yes"]'),
+      document.querySelector('input[name="terms3"][value="yes"]')
+    ];
+    termsRadios.forEach(radio => {
+      if (checked) radio.checked = true;
+      else radio.checked = false; // 모두 체크 해제도 추가 권장
     });
-  </script>
+  });
+
+  // 다음 버튼 클릭 시 필수 약관 동의 확인
+  document.getElementById("nextBtn").addEventListener("click", function(event) {
+    const terms1 = document.querySelector('input[name="terms1"][value="yes"]').checked;
+    const terms2 = document.querySelector('input[name="terms2"][value="yes"]').checked;
+    const terms3 = document.querySelector('input[name="terms3"][value="yes"]').checked;
+
+    if (!(terms1 && terms2 && terms3)) {
+      event.preventDefault(); // 링크 이동 막기
+      alert("모든 약관에 동의하셔야 다음 단계로 진행할 수 있습니다.");
+    }
+  });
+</script>
+
 </body>
 </html>
