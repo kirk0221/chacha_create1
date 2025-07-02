@@ -11,6 +11,7 @@ public enum ResponseCode {
     CREATED(201, "리소스가 성공적으로 생성되었습니다."),
     ACCEPTED(202, "요청이 수락되었습니다."),
     NO_CONTENT(204, "응답할 콘텐츠가 없습니다."),
+    PARTIAL_CONTENT(206, "Partial Content"),
 
     // 3xx: Redirection
     MOVED_PERMANENTLY(301, "요청한 리소스가 영구적으로 이동되었습니다."),

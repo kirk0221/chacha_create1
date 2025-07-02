@@ -34,7 +34,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum UCategoryEnum {
 
-    CRAFT(1, "공예"),
+    //CRAFT(1, "공예"),
     FASHION(2, "패션잡화"),
     INTERIOR(3, "인테리어 소품"),
     ACCESSORY(4, "악세서리"),
