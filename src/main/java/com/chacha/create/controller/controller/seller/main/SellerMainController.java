@@ -1,9 +1,17 @@
 package com.chacha.create.controller.controller.seller.main;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.chacha.create.common.dto.order.OrderSumDTO;
+import com.chacha.create.service.seller.main.SellerMainService;
 import com.chacha.create.service.seller.product.ProductService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,9 +26,29 @@ public class SellerMainController {
 	
 	
 	final ProductService productService;
+	 
+	final SellerMainService sell;
+	
+	
 	// 판매자 메인페이지
 	@GetMapping("/main")
 	public String showMainPage(@PathVariable String storeUrl, Model model) {
+		 
+
+		List<Map<String, Object>> statusList = sell.selectByStatus(storeUrl);
+		List<Map<String, Object>> reviewList = sell.selectByStoreUrl(storeUrl);
+		List<OrderSumDTO> orderSumList = sell.selectByDayOrderSum(storeUrl);
+		
+		int reviewCount = reviewList.size();
+		
+		
+		model.addAttribute("reviewCount", reviewCount);
+		model.addAttribute("storeUrl", storeUrl);
+		model.addAttribute("statusList", statusList);
+		model.addAttribute("reviewList", reviewList);
+		model.addAttribute("orderSumList", orderSumList);
+		
+		 
 		return "store/seller/sellerMyPage";
 	 }
 	

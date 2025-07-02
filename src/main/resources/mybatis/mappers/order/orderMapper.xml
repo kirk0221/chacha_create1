@@ -4,7 +4,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper
 	namespace="com.chacha.create.common.mapper.order.OrderMapper">
-	
 	<select id="selectCardNumByOrderId" parameterType="int" resultType="string">
 	    SELECT c.card_num
 	    FROM order_info oi
@@ -14,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="selectByStatus" resultType="map"
 		parameterType="string">
-		SELECT order_info.order_status, COUNT(*)
+		SELECT order_info.order_status, COUNT(*) cnt 
 		FROM order_info
 		JOIN order_detail ON order_info.order_id = order_detail.order_id
 		JOIN
