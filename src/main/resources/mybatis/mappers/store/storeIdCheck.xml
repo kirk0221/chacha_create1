@@ -5,10 +5,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.chacha.create.common.mapper.store.StoreIdCheckMapper">
 
 	<!-- 메인을 거치지 않고 바로 url로 스토어 접근 시 url로 스토어 id조회 -->
-	<select id="selectByStoreUrl" resultType="int">
-		SELECT store_id
-		FROM store
-		WHERE store_url = #{storeUrl}
+	<select id="selectByStoreUrl" parameterType="java.lang.String" resultType="int">
+	    SELECT store_id
+	    FROM store
+	    WHERE store_url = #{storeUrl}
 	</select>
+
 
 </mapper>
