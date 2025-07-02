@@ -54,10 +54,14 @@ public class ProductReviewRestController {
 		}
 		return ResponseEntity.ok(new ApiResponse<>(ResponseCode.OK, review));
 	}
-
+	
+	// 상품별 리뷰 조회(자신의 리뷰가 먼저 보이도록)
 	@GetMapping
 	public ResponseEntity<ApiResponse<List<ReviewEntity>>> getReviewsByProduct(@PathVariable int productId,
-			@RequestParam(required = false) Integer memberId) {
+																																HttpSession session) {
+		MemberEntity loginMember = (MemberEntity) session.getAttribute("loginMember");
+	    Integer memberId = (loginMember != null) ? loginMember.getMemberId() : null;
+		
 		List<ReviewEntity> reviews = reviewService.selectByProductId(productId, memberId);
 		return ResponseEntity.ok(new ApiResponse<>(ResponseCode.OK, reviews));
 	}

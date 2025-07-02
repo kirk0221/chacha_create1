@@ -3,33 +3,78 @@ document.addEventListener("DOMContentLoaded", () => {
   const storeUrl = pathSegments[2];
   const productId = pathSegments[4];
   const cpath = document.body.getAttribute("data-cpath") || "";
-  const apiUrl = `${cpath}/api/${storeUrl}/productdetail/${productId}`;
 
-  // 리뷰 목록 불러오기
-  loadReviews(storeUrl, productId, cpath);
-
-  // 등록 버튼 이벤트 연결
-  document.getElementById("review-submit-btn").addEventListener("click", () => {
-    const content = document.getElementById("review-input").value.trim();
-    if (!content) {
-      alert("리뷰 내용을 입력하세요.");
-      return;
-    }
-
-    addReview(storeUrl, productId, cpath, content, 123); // orderDetailId는 임시
-    document.getElementById("review-input").value = "";
-  });
-
+  let orderDetailId = null;
   const loggedInMemberId = window.loggedInMemberId || null;
 
-  function loadReviews(storeUrl, productId, cpath) {
+  // 1. 로그인 여부 관계없이 리뷰 목록 먼저 로딩
+  loadReviews();
+
+  // 2. 로그인 안 된 경우: 리뷰 작성 폼 숨기고 종료
+  if (!loggedInMemberId) {
+    document.querySelector(".review-form").style.display = "none";
+    return;
+  }
+
+  // 3. 로그인된 경우: 주문상세ID 조회 후 작성 가능 여부 확인
+  const finalUrl = `${cpath}/api/${storeUrl}/order/${loggedInMemberId}/products/${productId}/orderdetail`;
+
+  $.ajax({
+    url: finalUrl,
+    method: "GET",
+    dataType: "json",
+    success: function (res) {
+      if (res.status === 200 && res.data != null) {
+        orderDetailId = res.data;
+        checkReviewWritable(orderDetailId);
+        bindSubmit();
+      } else {
+        document.querySelector(".review-form").style.display = "none";
+        console.warn("리뷰 작성 가능한 주문상세ID가 없습니다.");
+      }
+    },
+    error: function () {
+      document.querySelector(".review-form").style.display = "none";
+      console.error("주문상세ID 조회 실패");
+    }
+  });
+
+  function checkReviewWritable(orderDetailId) {
+    $.ajax({
+      url: `${cpath}/api/${storeUrl}/productdetail/${productId}/review/check`,
+      method: "GET",
+      data: { orderDetailId },
+      dataType: "json",
+      success: function (res) {
+        if (res.status === 200 && res.data === true) {
+          document.querySelector(".review-form").style.display = "block";
+        } else {
+          document.querySelector(".review-form").style.display = "none";
+        }
+      },
+      error: function () {
+        console.error("리뷰 작성 가능 여부 확인 실패");
+        document.querySelector(".review-form").style.display = "none";
+      }
+    });
+  }
+
+  function loadReviews() {
     $.ajax({
       url: `${cpath}/api/${storeUrl}/productdetail/${productId}/review`,
       method: "GET",
       dataType: "json",
       success: function (data) {
         const reviewList = document.querySelector(".review-list");
+        const noReviewMessage = document.querySelector(".no-review-message");
         reviewList.innerHTML = "";
+
+        if (!data.data || data.data.length === 0) {
+          noReviewMessage.style.display = "block";
+          return;
+        } else {
+          noReviewMessage.style.display = "none";
+        }
 
         data.data.forEach(review => {
           const isMyReview = loggedInMemberId && review.memberId === loggedInMemberId;
@@ -77,66 +122,46 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  function addReview(storeUrl, productId, cpath, content, orderDetailId) {
-	  $.ajax({
-	    url: `${cpath}/api/${storeUrl}/productdetail/${productId}/review`,
-	    method: "POST",
-	    contentType: "application/json",
-	    data: JSON.stringify({
-	      reviewContent: content,
-	      orderDetailId: orderDetailId
-	    }),
-	    success: function (res) {
-	      if (res.result === "success") {
-	        loadReviews(storeUrl, productId, cpath);
-	        alert("리뷰가 등록되었습니다.");
-	      } else {
-	        alert(res.message || "리뷰 등록 실패");
-	      }
-	    },
-	    error: function (xhr) {
-	      console.error(xhr);
-	      alert("리뷰 등록 실패 (서버 오류)");
-	    }
-	  });
-	}
+  function bindSubmit() {
+    document.getElementById("review-submit-btn").addEventListener("click", () => {
+      const content = document.getElementById("review-input").value.trim();
+      if (!content) {
+        alert("리뷰 내용을 입력하세요.");
+        return;
+      }
+      addReview(content);
+      document.getElementById("review-input").value = "";
+    });
+  }
 
-  function updateReview(storeUrl, productId, cpath, reviewId, content) {
+// 리뷰 등록
+  function addReview(reviewText) {
     $.ajax({
       url: `${cpath}/api/${storeUrl}/productdetail/${productId}/review`,
-      method: "PUT",
+      method: "POST",
       contentType: "application/json",
       data: JSON.stringify({
-        reviewId: reviewId,
-        reviewContent: content
+        reviewText,
+        orderDetailId
       }),
-      success: function () {
-        loadReviews(storeUrl, productId, cpath);
-        alert("리뷰가 수정되었습니다.");
+      xhrFields: { withCredentials: true },
+      success: function (res) {
+        if (res.status === 201 && res.data > 0) {
+          loadReviews();
+          alert("리뷰가 등록되었습니다.");
+          document.querySelector(".review-form").style.display = "none";
+        } else {
+          alert(res.message || "리뷰 등록 실패");
+        }
       },
       error: function (xhr) {
-        console.error(xhr);
-        alert("리뷰 수정 실패");
+        console.error("등록 실패 응답:", xhr.responseText);
+        alert("리뷰 등록 실패 (서버 오류)");
       }
     });
   }
 
-  function deleteReview(storeUrl, productId, cpath, reviewId) {
-    $.ajax({
-      url: `${cpath}/api/${storeUrl}/productdetail/${productId}/review`,
-      method: "DELETE",
-      data: { reviewId: reviewId },
-      success: function () {
-        loadReviews(storeUrl, productId, cpath);
-        alert("리뷰가 삭제되었습니다.");
-      },
-      error: function (xhr) {
-        console.error(xhr);
-        alert("리뷰 삭제 실패");
-      }
-    });
-  }
-
+// 리뷰 수정, 삭제 버튼 바인딩
   function bindReviewEvents(container) {
     const editBtn = container.querySelector(".review-edit-btn");
     const deleteBtn = container.querySelector(".review-delete-btn");
@@ -164,7 +189,7 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("리뷰 내용을 입력하세요.");
             return;
           }
-          updateReview(storeUrl, productId, cpath, container.dataset.reviewId, newContent);
+          updateReview(container.dataset.reviewId, newContent);
           textarea.remove();
           contentEl.style.display = "block";
           restoreButtons(container);
@@ -181,12 +206,13 @@ document.addEventListener("DOMContentLoaded", () => {
     if (deleteBtn) {
       deleteBtn.addEventListener("click", () => {
         if (confirm("리뷰를 삭제하시겠습니까?")) {
-          deleteReview(storeUrl, productId, cpath, container.dataset.reviewId);
+          deleteReview(container.dataset.reviewId);
         }
       });
     }
   }
 
+// 수정 완료 or 취소 시 버튼 상태 되돌리기
   function restoreButtons(container) {
     const buttonsDiv = container.querySelector(".review-buttons");
     buttonsDiv.innerHTML = `
@@ -194,5 +220,41 @@ document.addEventListener("DOMContentLoaded", () => {
       <button class="review-delete-btn">삭제</button>
     `;
     bindReviewEvents(container);
+  }
+
+
+// 리뷰 수정
+  function updateReview(reviewId, reviewText) {
+    $.ajax({
+      url: `${cpath}/api/${storeUrl}/productdetail/${productId}/review`,
+      method: "PUT",
+      contentType: "application/json",
+      data: JSON.stringify({ reviewId, reviewText }),
+      success: function () {
+        loadReviews();
+        alert("리뷰가 수정되었습니다.");
+      },
+      error: function (xhr) {
+        console.error(xhr);
+        alert("리뷰 수정 실패");
+      }
+    });
+  }
+
+// 리뷰 삭제
+  function deleteReview(reviewId) {
+    $.ajax({
+      url: `${cpath}/api/${storeUrl}/productdetail/${productId}/review?reviewId=${reviewId}`,
+      method: "DELETE",
+      success: function () {
+        loadReviews();
+        alert("리뷰가 삭제되었습니다.");
+        document.querySelector(".review-form").style.display = "block";
+      },
+      error: function (xhr) {
+        console.error(xhr);
+        alert("리뷰 삭제 실패");
+      }
+    });
   }
 });
