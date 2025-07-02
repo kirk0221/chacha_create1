@@ -22,6 +22,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		parameterType="int">
 		SELECT * FROM addr WHERE address_id = #{addressId}
 	</select>
+	
+	<select id="selectByMemberId" resultMap="addrResultMap"
+		parameterType="int">
+		SELECT * FROM addr WHERE member_id = #{memberId}
+	</select>
+
+	<select id="selectForBaseAddr" resultMap="addrResultMap"
+		parameterType="int">
+		SELECT * FROM addr WHERE member_id = #{memberId} and address_check = 1 AND ROWNUM = 1
+	</select>
 
 	<insert id="insert" parameterType="addrEntity">
 		<selectKey keyProperty="addressId" resultType="int" order="BEFORE">

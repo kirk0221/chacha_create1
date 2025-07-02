@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.chacha.create.common.dto.error.ApiResponse;
 import com.chacha.create.common.dto.order.OrderDetailDTO;
 import com.chacha.create.common.dto.order.OrderListDTO;
+import com.chacha.create.common.entity.member.AddrEntity;
 import com.chacha.create.common.entity.member.MemberEntity;
 import com.chacha.create.common.enums.error.ResponseCode;
 import com.chacha.create.service.store_common.mypage.MyOrderService;
@@ -42,6 +43,18 @@ public class MyOrderRestController {
 
         return ResponseEntity.ok(new ApiResponse<>(ResponseCode.OK, orderList));
     }
+	
+	// 기본배송지 설정
+	@GetMapping("/order/addr")
+	public ResponseEntity<ApiResponse<AddrEntity>> getDefaultAddr(HttpSession session){
+		MemberEntity loginMember = (MemberEntity) session.getAttribute("loginMember");
+		AddrEntity addrEntity = myOrderService.baseAddr(loginMember);
+		log.info(addrEntity.toString());
+		if(addrEntity != null) {
+			return ResponseEntity.ok(new ApiResponse<>(ResponseCode.OK, addrEntity));
+		}
+		return ResponseEntity.ok(new ApiResponse<>(ResponseCode.OK, null));
+	}
 
     // 주문 상세 조회
     @GetMapping("/orderdetail/{orderId}")
