@@ -180,7 +180,7 @@
     $(document).ready(function () {
 
       $.ajax({
-        url: '${pageContext.request.contextPath}/api/main/mypage/orderdetail/12',
+        url: '${pageContext.request.contextPath}/api/main/mypage/orderdetail/${orderId}',
         type: 'GET',
         contentType: 'application/json',
         success: function (res) {
