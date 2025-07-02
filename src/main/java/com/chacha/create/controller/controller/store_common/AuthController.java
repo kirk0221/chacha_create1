@@ -1,5 +1,7 @@
 package com.chacha.create.controller.controller.store_common;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,4 +35,9 @@ public class AuthController {
 		return "auth/join/joinSeller";
 	}
 	
+	@GetMapping("/logout")
+	public String logout_page(HttpSession session) {
+		session.invalidate();
+		return "redirect:/main";
+	}
 }

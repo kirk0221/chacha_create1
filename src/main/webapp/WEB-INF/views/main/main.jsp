@@ -9,7 +9,7 @@
 <head>
   <meta charset="UTF-8">
   <title>HandCraft Mall</title>
-
+	 <%@ include file="/common/header.jsp" %>
   <!-- Swiper CSS -->
   <link rel="stylesheet" href="https://unpkg.com/swiper@9/swiper-bundle.min.css" />
 
@@ -19,11 +19,9 @@
 
 </head>
 <body>
-  
-  <!-- ✅ Include Header & Nav -->
-<jsp:include page="/common/header.jsp" />
-<jsp:include page="/common/main_nav.jsp" />
 
+  <jsp:include page="/common/main_nav.jsp" />
+  
   <!-- MAIN CONTENT -->
   <main class="container-1440">
 

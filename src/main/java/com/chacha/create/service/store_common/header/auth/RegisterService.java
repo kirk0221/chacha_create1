@@ -3,10 +3,12 @@ package com.chacha.create.service.store_common.header.auth;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.chacha.create.common.entity.member.AddrEntity;
 import com.chacha.create.common.entity.member.MemberEntity;
 import com.chacha.create.common.entity.member.SellerEntity;
 import com.chacha.create.common.entity.store.StoreEntity;
 import com.chacha.create.common.exception.InvalidRequestException;
+import com.chacha.create.common.mapper.member.AddrMapper;
 import com.chacha.create.common.mapper.member.MemberMapper;
 import com.chacha.create.common.mapper.member.SellerMapper;
 import com.chacha.create.common.mapper.store.StoreMapper;
@@ -22,9 +24,10 @@ public class RegisterService {
 	private final MemberMapper memberMapper;
 	private final SellerMapper sellerMapper;
 	private final StoreMapper storeMapper;
+	private final AddrMapper addrMapper;
     
     @Transactional(rollbackFor = Exception.class)
-    public MemberEntity memberinsert(MemberEntity memberEntity) {
+    public MemberEntity memberinsert(MemberEntity memberEntity, AddrEntity addrEntity) {
         String password = memberEntity.getMemberPwd();
         String email = memberEntity.getMemberEmail();
         String phone = memberEntity.getMemberPhone();
@@ -42,12 +45,15 @@ public class RegisterService {
         if (!isValidRegi(regi)) {
             throw new InvalidRequestException("주민등록번호 형식 오류");
         }
-
+        log.info(memberEntity.toString());
+        log.info("addrEntity : " + addrEntity);
         try {
             memberMapper.insert(memberEntity);
+            addrEntity.setMemberId(memberMapper.selectByMemberEmail(email).getMemberId());
+        	addrMapper.insert(addrEntity);
             return memberMapper.selectByMemberEmail(memberEntity.getMemberEmail());
         } catch (Exception e) {
-            log.info("아이디가 중복됨 : {}", e.getMessage());
+            log.info("아이디가 중복됨 : {}", email);
             throw new InvalidRequestException("이미 존재하는 이메일입니다.");
         }
     }
@@ -80,12 +86,15 @@ public class RegisterService {
     	int result = 0;
     	sellerEntity.setMemberId(memberEntity.getMemberId());
     	sellerEntity.setPersonalCheck(1);
-    	sellerMapper.insert(sellerEntity);
-    	SellerEntity seller = sellerMapper.selectByMemberId(memberEntity.getMemberId());
-    	StoreEntity storeEntity = StoreEntity.builder()
-    			.sellerId(seller.getSellerId())
-    			.build();
-    	result = storeMapper.insert(storeEntity);
+    	int inserted = sellerMapper.insert(sellerEntity); // insert 후 sellerId가 sellerEntity에 세팅됨
+    	log.info("Inserted Seller Rows = {}", inserted); // 1이 나와야 정상
+    	log.info(sellerEntity.toString());
+        
+        StoreEntity storeEntity = StoreEntity.builder()
+                .sellerId(sellerEntity.getSellerId())  // 바로 사용
+                .build();
+        log.info(storeEntity.toString());
+        result = storeMapper.insert(storeEntity);
     	return result;
     }
 }

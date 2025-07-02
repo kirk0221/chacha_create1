@@ -50,8 +50,8 @@
 			<div class="complete-box">
 				<div class="check-icon">✔</div>
 				<div class="complete-title">회원가입 완료</div>
-				<div class="complete-msg">차차님! 반갑습니다.</div>
-				<button class="btn-move" onclick="location.href='${cpath}/home'">
+				<div class="complete-msg">${sessionScope.loginMember.memberName}님! 반갑습니다.</div>
+				<button class="btn-move" onclick="location.href='${cpath}/main'">
 					쇼핑몰 이동하기</button>
 			</div>
 		</div>

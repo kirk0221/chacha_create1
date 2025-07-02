@@ -3,117 +3,183 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>메인홈 전체상품 페이지</title>
-<%@ include file="/common/header.jsp"%>
-<link rel="stylesheet" href="${cpath}/resources/css/main/mainAllProducts.css">
+  <meta charset="UTF-8">
+  <title>전체 상품 목록</title>
+  <%@ include file="/common/header.jsp" %>
+  <link rel="stylesheet" href="${cpath}/resources/css/main/mainAllProducts.css">
 </head>
 <body>
-<!-- ✅ Include Header & Nav -->
-<jsp:include page="/common/header.jsp" />
-<jsp:include page="/common/main_nav.jsp" />
+  <jsp:include page="/common/main_nav.jsp" />
+<!-- ✅ 전체 페이지 컨테이너 -->
+<div class="store-page-container">
 
-<h3 class="category-title">상세카테고리</h3>
+  <!-- ✅ 검색창 -->
+  <div id="product-search">
+    <form id="search-form" action="/api/main/productlist" method="get">
+      <input type="text" name="query" placeholder="Search" id="search-input" />
+      <button type="submit" id="search-button">🔍</button>
+    </form>
+  </div>
 
-<div id="category-section">
-  <!-- 이 안에 JS로 <div class="main-category-block"> 들이 들어갈 예정 -->
-  
-  <!-- 테스트용 -->
-  <!-- <div class="main-category-block" data-category-id="furniture">
-  <div class="main-category-header">
-    <span class="category-name">가구</span>
-    <span class="toggle-arrow">🔽</span>
-    <label class="select-all"><input type="checkbox" class="check-all"> 전체 선택</label>
+  <!-- 전체 상품 제목 -->
+  <h1 class="store-title">전체 상품</h1>
+
+  <!-- 정렬 필터 버튼 -->
+  <div class="filter-buttons">
+    <button class="filter-button active">최신순</button>
+    <button class="filter-button">인기순</button>
+    <button class="filter-button">낮은 가격순</button>
+    <button class="filter-button">높은 가격순</button>
+    <button class="filter-button" id="toggle-category">카테고리별 ▼</button>
   </div>
-  <div class="subcategory-container">
-    <label><input type="checkbox" name="subcategory" value="101"> 의자</label>
-    <label><input type="checkbox" name="subcategory" value="102"> 테이블</label>
-    <label><input type="checkbox" name="subcategory" value="103"> 수납장</label>
+
+  <!-- 카테고리 필터 영역 -->
+  <div id="category-section" class="category-hidden">
+    <div class="filter-group">
+      <div class="filter-group-title">카테고리</div>
+      <div class="filter-options">
+        <button class="filter-btn">문구</button>
+        <button class="filter-btn selected">리빙</button>
+        <button class="filter-btn">패션</button>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <div class="filter-group-title">브랜드</div>
+      <div class="filter-options">
+        <button class="filter-btn selected">나이키</button>
+        <button class="filter-btn">커버낫</button>
+        <button class="filter-btn">아디다스</button>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <div class="filter-group-title">가격</div>
+      <div class="filter-options">
+        <button class="filter-btn">5천원 이하</button>
+        <button class="filter-btn selected">5천원~1만원</button>
+        <button class="filter-btn">1만원 이상</button>
+      </div>
+    </div>
+
+    <div class="selected-filters">
+      <button class="reset-btn">↻</button>
+      <div class="selected-tag">리빙 <button class="remove-tag">✕</button></div>
+      <div class="selected-tag">나이키 <button class="remove-tag">✕</button></div>
+      <div class="selected-tag">5천원~1만원 <button class="remove-tag">✕</button></div>
+    </div>
   </div>
+
+  <!-- 상품 목록 -->
+  <div class="product-grid-container">
+    <div class="product-card">
+      <div class="product-image"><img class="product-img" src="${cpath}/resources/images/chat_bg1.jpg" /></div>
+      <div class="product-content">
+        <h2 class="product-name">상품명</h2>
+        <div class="product-price">10,000 원</div>
+      </div>
+    </div>
+    
+    <div class="product-card">
+      <div class="product-image"><img class="product-img" src="${cpath}/resources/images/chat_bg1.jpg" /></div>
+      <div class="product-content">
+        <h2 class="product-name">상품명</h2>
+        <div class="product-price">10,000 원</div>
+      </div>
+    </div>
+    
+    <div class="product-card">
+      <div class="product-image"><img class="product-img" src="${cpath}/resources/images/chat_bg1.jpg" /></div>
+      <div class="product-content">
+        <h2 class="product-name">상품명</h2>
+        <div class="product-price">10,000 원</div>
+      </div>
+    </div>
+    
+    <div class="product-card">
+      <div class="product-image"><img class="product-img" src="${cpath}/resources/images/chat_bg1.jpg" /></div>
+      <div class="product-content">
+        <h2 class="product-name">상품명</h2>
+        <div class="product-price">10,000 원</div>
+      </div>
+    </div>
+    
+    <div class="product-card">
+      <div class="product-image"><img class="product-img" src="${cpath}/resources/images/chat_bg1.jpg" /></div>
+      <div class="product-content">
+        <h2 class="product-name">상품명</h2>
+        <div class="product-price">10,000 원</div>
+      </div>
+    </div>
+    <!-- 추가 상품 반복 -->
+  </div>
+
+  <!-- 페이지네이션 -->
+  <div id="pagination" class="pagination">
+    <button class="active">1</button>
+    <button>2</button>
+    <button>3</button>
+    <button>4</button>
+    <button>5</button>
+  </div>
+
 </div>
 
-<div class="main-category-block" data-category-id="lighting">
-  <div class="main-category-header">
-    <span class="category-name">조명1</span>
-    <span class="toggle-arrow">🔽</span>
-    <label class="select-all"><input type="checkbox" class="check-all"> 전체 선택</label>
-  </div>
-</div>-->
-  
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const selectedFiltersContainer = document.querySelector('.selected-filters');
 
-  <!-- 검색 버튼 -->
-  <div class="category-search-btn-wrapper">
-    <button type="button" class="category-search-btn">검색하기</button>
-  </div>
-</div>
-  
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const value = btn.textContent.trim();
+      const alreadySelected = btn.classList.contains('selected');
 
+      btn.classList.toggle('selected');
 
-<hr class="divider">
+      if (!alreadySelected) {
+        const tag = document.createElement('div');
+        tag.className = 'selected-tag';
+        tag.setAttribute('data-value', value);
+        tag.innerHTML = `${value} <button class="remove-tag">✕</button>`;
+        selectedFiltersContainer.appendChild(tag);
+        attachRemoveEvent(tag.querySelector('.remove-tag'));
+      } else {
+        const tagToRemove = selectedFiltersContainer.querySelector(`.selected-tag[data-value="${value}"]`);
+        if (tagToRemove) tagToRemove.remove();
+      }
+    });
+  });
 
-<div id="sort-tabs">
-  <div class="sort-tab active" data-sort="latest">전체상품</div>
-  <div class="sort-tab" data-sort="popular">구매많은 순</div>
-  <div class="sort-tab" data-sort="views">조회 순</div>
-  <div class="sort-tab" data-sort="lowprice">낮은 가격 순</div>
-  <div class="sort-tab" data-sort="highprice">높은 가격 순</div>
-</div>
+  function attachRemoveEvent(button) {
+    button.addEventListener('click', (e) => {
+      const tag = e.target.closest('.selected-tag');
+      const value = tag.getAttribute('data-value');
+      tag.remove();
 
+      filterButtons.forEach(btn => {
+        if (btn.textContent.trim() === value) {
+          btn.classList.remove('selected');
+        }
+      });
+    });
+  }
 
-<div id="product-list" class="product-grid">
-  <!-- 결과 상품들이 동적으로 들어가는 공간 -->
-  <!-- 예시 상품 카드 반복 (보통 JSTL로 forEach 돌릴 부분) -->
-  <!-- 필요한 만큼 카드 복제 -->
-  
-  <!-- 테스트로 보여지는 용도  -->
-  <!-- <div class="product-card">
-    <img class="product-img" src="${cpath}/resources/images/chat_bg15.jpg" />
-    <div class="product-name">상품명</div>
-    <div class="product-category-list">
-    <span class="product-category">소품</span>
-    <span class="product-category">조명</span>
-    <span class="product-category">가구</span>
-  </div>
-    <div class="product-price">10,000 원</div>
-  </div>
-  <div class="product-card">
-    <img class="product-img" src="${cpath}/resources/images/chat_bg2.jpg" />
-    <div class="product-name">상품명</div>
-     <div class="product-category-list">
-    <span class="product-category">소품</span>
-    <span class="product-category">조명</span>
-    <span class="product-category">가구</span>
-  </div>
-    <div class="product-price">10,000 원</div>
-  </div>
-  <div class="product-card">
-    <img class="product-img" src="${cpath}/resources/images/chat_bg3.jpg" />
-    <div class="product-name">상품명</div>
-     <div class="product-category-list">
-    <span class="product-category">소품</span>
-    <span class="product-category">조명</span>
-    <span class="product-category">가구</span>
-  </div>
-    <div class="product-price">10,000 원</div>
-  </div>-->
-</div>
+  const resetBtn = document.querySelector('.reset-btn');
+  if (resetBtn) {
+    resetBtn.addEventListener('click', () => {
+      selectedFiltersContainer.querySelectorAll('.selected-tag').forEach(tag => tag.remove());
+      filterButtons.forEach(btn => btn.classList.remove('selected'));
+    });
+  }
 
-<!-- 페이지네이션 영역 -->
-<div id="pagination" class="pagination"></div>
-	  <!-- 페이지 번호가 동적으로 들어갈 자리 -->
-	  <!-- 한페이지에 상품 가로3개 세로 4개 총 12개, 
-	  그 이상이면 페이지 이동하는 버튼 동적으로 생성 -->
-	  
-	  <!-- 테스트 용도 -->
-	  <div id="pagination" class="pagination">
-		  <button class="active">1</button>
-		  <button>2</button>
-		  <button>3</button>
-		  <button>4</button>
-		  <button>5</button>
-		</div>
-	  
+  const toggleCategoryBtn = document.getElementById('toggle-category');
+  const categorySection = document.getElementById('category-section');
 
-
+  toggleCategoryBtn.addEventListener('click', () => {
+    categorySection.classList.toggle('category-hidden');
+  });
+});
+</script>
 </body>
 </html>

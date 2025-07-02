@@ -8,31 +8,36 @@
 <head>
   <meta charset="UTF-8">
   <title>개인 판매 등록 안내</title>
-  <link rel="stylesheet" href="${cpath}/resources/css/main/personal/storeInfo.css">
+  <link rel="stylesheet" href="${cpath}/resources/css/main/storeInfo.css">
 </head>
 <body>
-  <!-- ✅ Include Header & Nav -->
-<jsp:include page="/common/header.jsp" />
-<jsp:include page="/common/main_nav.jsp" />
+  <!-- ✅ 헤더와 내비게이션 -->
+  <jsp:include page="/common/header.jsp" />
+  <jsp:include page="/common/main_nav.jsp" />
 
-  <main class="sale-container">
-   <jsp:include page="/common/main_personal_subnav.jsp" />
+  <!-- ✅ 전체를 감싸는 중앙 정렬용 wrapper -->
+  <div class="page-wrapper">
+    <main class="sale-container">
+    
+      <!-- ✅ 서브 네비게이션 -->
+      <jsp:include page="/common/main_stores_subnav.jsp" />
 
-    <!-- 설명 영역 -->
-    <section class="intro-section">
-      <h2>🏠 나만의 스토어를 런칭하세요</h2>
-      <p>간단한 절차만 거치면 누구나 자신의 상품을 판매할 수 있습니다!</p>
-      <ul>
-        <li>수수료 0원 (한시적)</li>
-        <li>한 번 등록하면, 별도 검수 없이 1일 이내 등록 가능</li>
-        <li>정산 및 배송 시스템은 플랫폼이 책임</li>
-      </ul>
-      <div class="tip-box">
-        ※ 판매자는 상품의 내용과 배송 정보를 성실히 기재해야 하며, 허위 정보 등록 시 제재를 받을 수 있습니다.
-      </div>
-    </section>
+      <!-- ✅ 본문 콘텐츠 -->
+      <section class="intro-section">
+        <h2>🏠 나만의 스토어를 런칭하세요</h2>
+        <p>간단한 절차만 거치면 누구나 자신의 상품을 판매할 수 있습니다!</p>
+        <ul>
+          <li>수수료 0원 (한시적)</li>
+          <li>한 번 등록하면, 별도 검수 없이 1일 이내 등록 가능</li>
+          <li>정산 및 배송 시스템은 플랫폼이 책임</li>
+        </ul>
+        <div class="tip-box">
+          ※ 판매자는 상품의 내용과 배송 정보를 성실히 기재해야 하며, 허위 정보 등록 시 제재를 받을 수 있습니다.
+        </div>
+      </section>
 
-    <!-- 단계별 안내 -->
+      <!-- ✅ 단계별 안내 -->
+      <!-- 단계별 안내 -->
     <section class="step-section">
       <div class="step">
         <h3>STEP 1</h3>
@@ -60,9 +65,10 @@
         <img src="resources/images/step5.jpg" alt="step5">
       </div>
     </section>
-  </main>
+    </main>
+  </div>
 
-  <!-- 푸터 -->
+  <!-- ✅ 푸터 -->
   <footer>
     <div class="footer-inner">
       <div class="footer-logo">뜨락상회</div>
@@ -74,4 +80,5 @@
     </div>
   </footer>
 </body>
+
 </html>
