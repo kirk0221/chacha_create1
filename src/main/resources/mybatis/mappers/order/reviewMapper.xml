@@ -41,14 +41,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<!-- 상품에 대한 전체 리뷰 조회 + 내 리뷰 우선 -->
-	<select id="selectByProductId" resultType="ReviewEntity">
+	<select id="selectByProductId" resultType="reviewDTO">
 	    SELECT r.review_id,
-	           r.order_detail_id,
-	           r.review_date,
-	           r.review_text
+		            r.order_detail_id,
+		            r.review_date,
+		            r.review_text,
+		            oi.member_id,
+		            m.member_name
 	    FROM review r
 	    JOIN order_detail od ON r.order_detail_id = od.order_detail_id
 	    JOIN order_info oi ON od.order_id = oi.order_id
+	    JOIN member m ON oi.member_id = m.member_id
 	    WHERE od.product_id = #{productId}
 	    ORDER BY
 	        <choose>
