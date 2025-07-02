@@ -49,7 +49,7 @@ public class OrderRestController {
     
     
    
-    @GetMapping("/{memberId}/products/{productId}/order-detail")
+    @GetMapping("/{memberId}/products/{productId}/orderdetail")
     public ResponseEntity<ApiResponse<Integer>> getOrderDetailId(@PathVariable("storeUrl") String storeUrl,
             							@PathVariable("memberId") int memberId, @PathVariable("productId") int productId) {
 
