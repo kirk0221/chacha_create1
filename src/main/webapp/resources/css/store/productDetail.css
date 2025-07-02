@@ -183,13 +183,6 @@ body {
   flex-wrap: wrap;
 }
 
-// category-badges
-.category-badges {
-  display: flex;
-  gap: 8px;
-  margin-top: 8px;
-  flex-wrap: wrap;
-}
 .badge {
   background-color: #D3B19A;
   color: #282828;
@@ -279,6 +272,7 @@ body {
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  width: auto;
 }
 
 .review-list {

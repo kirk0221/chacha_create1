@@ -50,7 +50,7 @@
           <div class="quantity-display">1</div>
           <button class="quantity-btn plus">+</button>
         </div>
-        <div class="product-price" id="productPrice">500,000 원</div>
+        <div class="product-price" id="productPrice">&nbsp;</div>
       </div>
       <div class="action-buttons">
         <button class="cart-button" type="button" >장바구니 담기</button>
@@ -85,36 +85,8 @@
 	  </div>
 	
 	  <!-- 리뷰 목록 -->
-	  <div class="review-list">
-<!-- 	    예시 리뷰
-		<div class="review-item">
-		  <div class="review-header">
-		    <div class="review-meta">
-		      <span class="review-writer">재희</span>
-		      <span class="review-date">2025-06-27</span>
-		    </div>
-		    <div class="review-buttons">
-		      <button class="review-edit-btn">수정</button>
-		      <button class="review-delete-btn">삭제</button>
-		    </div>
-		  </div>
-		  <div class="review-content">에바네요..</div>
-		</div>
-		
-		<div class="review-item">
-		  <div class="review-header">
-		    <div class="review-meta">
-		      <span class="review-writer">윤정</span>
-		      <span class="review-date">2025-06-26</span>
-		    </div>
-		    <div class="review-buttons">
-		      <button class="review-report-btn">신고</button>
-		    </div>
-		  </div>
-		  <div class="review-content">이거 완전 좋음! 강추함!!</div>
-		</div> -->
-
-	  </div>
+	  <div class="review-list"></div>
+	  <div class="no-review-message" style="display: none; color: #888;">해당 상품에는 리뷰가 없습니다.</div>
 	</div>
 
   

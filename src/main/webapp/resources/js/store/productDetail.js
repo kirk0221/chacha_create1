@@ -5,12 +5,16 @@ document.addEventListener("DOMContentLoaded", function () {
   const cpath = document.body.getAttribute("data-cpath") || "";
   const apiUrl = `${cpath}/api/${storeUrl}/productdetail/${productId}`;
 
+  // 이미지 경로를 절대 경로로 변환(추후 변경 필요할 수도)
   function getImageUrl(imgPath) {
     if (!imgPath) return "";
     if (imgPath.startsWith("http://") || imgPath.startsWith("https://")) {
       return imgPath;
     }
-    return `${cpath}/resources/productImages/${imgPath}`;gi
+    if (imgPath.includes("resources/productImages")) {
+      return `${cpath}/${imgPath}`;
+    }
+    return `${cpath}/resources/productImages/${imgPath}`;
   }
 
   $.ajax({
@@ -21,6 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const detail = res.data;
       const product = detail.productDetail;
 
+      // 기본 정보 세팅
       document.getElementById("productTitle").textContent = product.productName;
       document.getElementById("productTypeCategory").textContent = product.typeCategoryName;
       document.getElementById("productUCategory").textContent = product.ucategoryName;
@@ -32,6 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
         storeLink.textContent = product.storeName;
       }
 
+      // 가격 및 수량 관련 로직
       const priceElement = document.getElementById("productPrice");
       const unitPrice = product.price;
       let quantity = 1;
@@ -41,6 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
         priceElement.textContent = `${(unitPrice * quantity).toLocaleString()} 원`;
       };
 
+      // 메인 이미지 및 썸네일 설정
       const mainImg = document.querySelector(".main-image img");
       const thumbRow = document.getElementById("thumbnailRow");
       mainImg.src = getImageUrl(detail.mainThumbnailUrl);
@@ -54,6 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
         thumbRow.appendChild(img);
       });
 
+      // 상세 설명 이미지 출력
       const detailImgContainer = document.querySelector(".img-ex");
       detailImgContainer.innerHTML = "";
       detail.descriptionImageUrls.forEach(imgName => {
@@ -65,6 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       document.querySelector(".detail-text-middle").innerHTML = `<b>${product.productDetail}</b>`;
 
+      // 수량 조절 버튼
       const minusBtn = document.querySelector(".quantity-btn.minus");
       const plusBtn = document.querySelector(".quantity-btn.plus");
       const display = document.querySelector(".quantity-display");
@@ -90,12 +99,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
       updateDisplay();
 
+      // 썸네일 클릭 시 메인 이미지 변경
       document.addEventListener("click", function (e) {
         if (e.target.classList.contains("thumbnail")) {
           mainImg.src = e.target.src;
         }
       });
 
+      // 장바구니 버튼 클릭 시 이동
       const cartBtn = document.querySelector(".cart-button");
       cartBtn.addEventListener("click", function () {
         const totalPrice = unitPrice * quantity;
