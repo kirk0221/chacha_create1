@@ -40,10 +40,10 @@
 	<bean id="sqlSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
-		<!-- <property name="configLocation"
-			value="classpath:mybatis/sqlMapConfig.xml" /> -->
-<!-- 		<property name="mapperLocations"
-			value="classpath:mybatis/mappers/**/*.xml" /> -->
+		<property name="configLocation"
+			value="classpath:mybatis/sqlMapConfig.xml" />
+ 		<property name="mapperLocations"
+			value="classpath:mybatis/mappers/**/*.xml" />
 	</bean>
 
 	<!-- Mapper의 SQL구문을 실행할 수 있다. SQL문은 session단위로 실행 -->
