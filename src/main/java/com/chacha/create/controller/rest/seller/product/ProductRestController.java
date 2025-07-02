@@ -63,13 +63,20 @@ public class ProductRestController {
 	// 상품 입력
 	@PostMapping(value = "/productinsert", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ApiResponse<Void>> insertProductWithImages(@PathVariable String storeUrl,
-			@RequestBody ProductWithImagesDTO request) {
-		int result = productService.registerProductWithImages(storeUrl, request);
-		if (result > 0) {
-			return ResponseEntity.status(ResponseCode.CREATED.getStatus())
-					.body(new ApiResponse<>(ResponseCode.CREATED, "상품 등록 성공"));
-		}
-		return ResponseEntity.badRequest().body(new ApiResponse<>(ResponseCode.BAD_REQUEST, "상품 등록 실패"));
+	        @RequestBody List<ProductWithImagesDTO> requestList) {
+
+	    int successCount = productService.registerMultipleProductsWithImages(storeUrl, requestList);
+
+	    if (successCount == requestList.size()) {
+	        return ResponseEntity.status(ResponseCode.CREATED.getStatus())
+	                .body(new ApiResponse<>(ResponseCode.CREATED, "모든 상품 등록 성공"));
+	    } else if (successCount > 0) {
+	        return ResponseEntity.status(ResponseCode.CREATED.getStatus())
+	                .body(new ApiResponse<>(ResponseCode.CREATED, successCount + "개의 상품 등록 성공, 일부 실패"));
+	    } else {
+	        return ResponseEntity.badRequest()
+	                .body(new ApiResponse<>(ResponseCode.BAD_REQUEST, "상품 등록 실패"));
+	    }
 	}
 
 	@GetMapping("/productupdate/{productId}")

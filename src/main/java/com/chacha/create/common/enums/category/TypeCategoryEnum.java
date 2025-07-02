@@ -73,13 +73,26 @@ public enum TypeCategoryEnum {
     }
     
     @JsonCreator
-    public static TypeCategoryEnum fromName(@JsonProperty("typeCategoryId") String input) {
-        for (TypeCategoryEnum type : values()) {
-            if (type.name().equalsIgnoreCase(input) || type.name.equals(input)) {
-                return type;
+    public static TypeCategoryEnum fromJson(Object input) {
+        if (input instanceof Integer) {
+            return fromId((Integer) input);
+        }
+        if (input instanceof String) {
+            String str = (String) input;
+            // 숫자 문자열이면 숫자로 변환 시도
+            try {
+                int id = Integer.parseInt(str);
+                return fromId(id);
+            } catch (NumberFormatException e) {
+                // 숫자가 아니면 이름으로 처리
+                for (TypeCategoryEnum type : values()) {
+                    if (type.name().equalsIgnoreCase(str) || type.name.equals(str)) {
+                        return type;
+                    }
+                }
             }
         }
-        throw new IllegalArgumentException("Invalid TypeCategory name: " + input);
+        throw new IllegalArgumentException("Invalid TypeCategory input: " + input);
     }
 
     @Override

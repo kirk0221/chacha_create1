@@ -87,6 +87,10 @@ public class MyOrderService {
         return orderlist;
     }
     
+    public AddrEntity baseAddr(MemberEntity member) {
+    	return addrMapper.selectForBaseAddr(member.getMemberId());
+    }
+    
     @Transactional(rollbackFor = Exception.class)
     public OrderDetailDTO selectByOrderId(int orderId, MemberEntity member) {
     	if(member == null) {

@@ -1,5 +1,16 @@
-
 document.addEventListener("DOMContentLoaded", function () {
+  // 광고 배너 Swiper
+  new Swiper('.banner-swiper', {
+    loop: true,
+    autoplay: {
+      delay: 4000
+    },
+    pagination: {
+      el: '.banner-swiper .banner-pagination',  // ✅ 범위 명확히
+      clickable: true
+    }
+  });
+
   // 인기 스토어 Swiper
   new Swiper('.store-swiper', {
     slidesPerView: 3,
@@ -31,23 +42,8 @@ document.addEventListener("DOMContentLoaded", function () {
       clickable: true,
     },
   });
-});
 
-document.addEventListener("DOMContentLoaded", function () {
-  // 광고 배너 swiper 초기화
-  new Swiper('.banner-swiper', {
-    loop: true,
-    autoplay: {
-      delay: 4000
-    },
-    pagination: {
-      el: '.banner-pagination',
-      clickable: true
-    }
-  });
-});
-
-document.addEventListener("DOMContentLoaded", function () {
+  // 임시 상품 링크 클릭 이벤트
   const links = document.querySelectorAll(".product-icon a");
   links.forEach(link => {
     link.addEventListener("click", e => {
