@@ -1,4 +1,4 @@
-@charset "EUC-KR";
+@charset "UTF-8";
 
 .member-box {
     padding: 20px;
@@ -15,10 +15,10 @@
 }
 
 .sidebar ul li a {
-    display: flex;                  /* ➤ 가로 정렬 */
-    justify-content: space-between;/* ➤ 양쪽 정렬 */
-    align-items: center;            /* ➤ 수직 정렬 */
-    padding: 10px;                  /* ➤ 좌우 위아래 10px */
+    display: flex;                  /* �� 媛�濡� ���� */
+    justify-content: space-between;/* �� ��履� ���� */
+    align-items: center;            /* �� ��吏� ���� */
+    padding: 10px;                  /* �� 醫��� ������ 10px */
     text-decoration: none;
     color: #333;
     font-weight: 600;
@@ -40,7 +40,7 @@
 
   display: flex;
   flex-direction: column;
-  gap: 24px; /* ➤ 요소들 간의 간격 */
+  gap: 24px; /* �� ������ 媛��� 媛�寃� */
 }
 
 h2 {
@@ -55,7 +55,7 @@ h2 {
   gap: 10px;
 }
 
-/* 공통 버튼 스타일 */
+/* 怨듯�� 踰��� �ㅽ���� */
 .edit-button,
 .save-button {
   width: 120px;
@@ -74,7 +74,7 @@ h2 {
   box-sizing: border-box;
 }
 
-/* 수정 버튼 - 하얀 배경 + 초록 테두리 */
+/* ���� 踰��� - ���� 諛곌꼍 + 珥�濡� ����由� */
 .edit-button {
   background-color: #ffffff;
   color: #2e7d32;
@@ -97,9 +97,9 @@ h2 {
   box-shadow: 0 0 5px rgba(42, 62, 52, 0.3);
 }
 
-/* 👇 스크롤이 있는 프레임 */
+/* ��� �ㅽ�щ·�� ���� ������ */
 .table-frame {
-  max-height: 500px;  /* 원하는 높이 조절 가능 */
+  max-height: 500px;  /* ������ ���� 議곗�� 媛��� */
   overflow-y: auto;
   overflow-x: hidden;
   border-top: 1px solid #ddd;
@@ -124,6 +124,10 @@ h2 {
   height: 60px;
   object-fit: cover;
   border-radius: 6px;
+}
+
+.product-row {
+  cursor: pointer;
 }
 
 
