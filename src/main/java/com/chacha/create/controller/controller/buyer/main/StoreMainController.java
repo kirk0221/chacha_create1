@@ -1,7 +1,6 @@
 package com.chacha.create.controller.controller.buyer.main;
 
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +61,7 @@ public class StoreMainController {
 	}
 	
 	// 결제 완료페이지
-	@GetMapping("/order/complete")
+	@GetMapping("/order/complete/{orderId}")
 	public String ShowOrderComplete(@PathVariable String storeUrl, Model model) {
 		model.addAttribute("storeUrl",storeUrl);
 		return "store/buyer/orderComplete";

@@ -184,8 +184,8 @@
     finalTotal = 0;
     productName = "";
     productCount = 1;
-    let products = [];
-    newAddr = false; */
+    let products = []; */
+    newAddr = false; 
     
     //--------------------------상품 등록--------------------------
 
