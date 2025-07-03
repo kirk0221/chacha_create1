@@ -14,21 +14,27 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.chacha.create.common.dto.error.ApiResponse;
 import com.chacha.create.common.dto.order.OrderSumDTO;
 import com.chacha.create.common.dto.product.ProductWithImagesDTO;
+import com.chacha.create.common.dto.product.ProductlistDTO;
 import com.chacha.create.common.entity.product.ProductEntity;
 import com.chacha.create.common.enums.category.DCategoryEnum;
 import com.chacha.create.common.enums.category.TypeCategoryEnum;
 import com.chacha.create.common.enums.category.UCategoryEnum;
+import com.chacha.create.common.enums.error.ResponseCode;
 import com.chacha.create.service.seller.main.SellerMainService;
 import com.chacha.create.service.seller.product.ProductService;
 
@@ -71,6 +77,7 @@ public class SellerMainController {
 		return "store/seller/sellerMyPage";
 	 }
 	
+	// 판매자 상품 등록 페이지
 	@GetMapping("/productinsert")
 	public String showProductInsertForm(@PathVariable String storeUrl, Model model) {
 	    model.addAttribute("typeCategories", TypeCategoryEnum.values());
@@ -94,6 +101,7 @@ public class SellerMainController {
 	    return "store/seller/productInsert";
 	}
 	
+	// 판매자 페이지 상품 등록 기능
 	@PostMapping(value = "productinsert", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
 	@ResponseBody
 	public ResponseEntity<?> upload(
@@ -121,14 +129,38 @@ public class SellerMainController {
 	    }
 	}
 
-	
+	// 판매자 페이지 상품 리스트 조회
 	@GetMapping("/products")
 	public String showProductListPage(@PathVariable String storeUrl, Model model) {
-	    // DB에서 해당 스토어 상품 리스트 조회 서비스 호출
-	    List<ProductEntity> productList = productService.getProductsByStore(storeUrl);
+	    List<ProductlistDTO> productList = productService.productAllListByStoreUrl(storeUrl);
 	    model.addAttribute("productList", productList);
 	    model.addAttribute("storeUrl", storeUrl);
-	    return "store/seller/productSelect";  // 이 JSP에서 productList를 화면에 뿌림
+	    return "store/seller/productSelect";
+	}
+	
+	// 판매자 페이지 대표 상품 체크 리스트 수정
+	@PutMapping(value = "/products", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public ResponseEntity<ApiResponse<Void>> updateFlagship(
+	        @PathVariable String storeUrl,
+	        @RequestBody List<ProductlistDTO> dtoList) {
+
+	    int result = productService.updateFlagship(storeUrl, dtoList);
+
+	    if (result > 0) {
+	        return ResponseEntity.ok(new ApiResponse<>(ResponseCode.OK, "대표 상품 수정 성공"));
+	    }
+	    return ResponseEntity.badRequest().body(new ApiResponse<>(ResponseCode.BAD_REQUEST, "대표 상품 수정 실패"));
+	}
+	
+	// 판매자 페이지 상품 논리적 삭제 기능 구현
+	@DeleteMapping(value = "/products", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ApiResponse<Void>> deleteFlagshipBatch(@RequestBody List<ProductEntity> productList) {
+	    int result = productService.productDeleteByEntities(productList);
+	    if (result > 0) {
+	        return ResponseEntity.ok(new ApiResponse<>(ResponseCode.OK, "상품 삭제 성공"));
+	    }
+	    return ResponseEntity.badRequest().body(new ApiResponse<>(ResponseCode.BAD_REQUEST, "상품 삭제 실패"));
 	}
 	
 	// 판매 상품 상세 보기
@@ -136,6 +168,7 @@ public class SellerMainController {
     public String showProductDetailPage(@PathVariable String storeUrl,
                                         @PathVariable int productId,
                                         Model model) {
+		model.addAttribute("storeUrl",storeUrl);
         return "store/productDetail";
 	}
 	
@@ -144,6 +177,7 @@ public class SellerMainController {
     public String showProductUpdatePage(@PathVariable String storeUrl,
                                         @PathVariable int productId,
                                         Model model) {
+		model.addAttribute("storeUrl",storeUrl);
         return "store/seller/productUpdate";
 	}
 	
@@ -151,6 +185,7 @@ public class SellerMainController {
 		@GetMapping("/management/settlement")
 	    public String showSellrSettlementPage(@PathVariable String storeUrl,
 	                                        Model model) {
+			model.addAttribute("storeUrl",storeUrl);
 	        return "store/seller/sellerSettlement";
 		}
 	
@@ -162,13 +197,15 @@ public class SellerMainController {
 	
 	// 판매 리뷰 관리
 	@GetMapping("/reviews")
-	public String showReviewPage() {
+	public String showReviewPage(@PathVariable String storeUrl, Model model) {
+		model.addAttribute("storeUrl",storeUrl);
 		return "store/seller/sellerReview";
 	}
 	
 	// 문의 메시지
 	@GetMapping("/chat")
-	public String showChatPage() {
+	public String showChatPage(@PathVariable String storeUrl, Model model) {
+		model.addAttribute("storeUrl",storeUrl);
 		return "store/chat";
 	}
 	
@@ -180,38 +217,16 @@ public class SellerMainController {
 	
 	// 공지사항목록
 	@GetMapping("/management/notices")
-	public String showNoticePage() {
+	public String showNoticePage(@PathVariable String storeUrl, Model model) {
+		model.addAttribute("storeUrl",storeUrl);
 		return "store/seller/sellerNotice";
 	}
 	
 	// 폐업
 	@GetMapping("/close")
-	public String showDonePage() {
+	public String showDonePage(@PathVariable String storeUrl, Model model) {
+		model.addAttribute("storeUrl",storeUrl);
 		return "store/seller/storeClose";
-	}
-	
-	private String fileStorageSave(MultipartFile file) throws IOException {
-	    // 실제로는 서버에 파일 저장하는 경로, UUID 등 활용해 고유 파일명으로 저장 권장
-	    String originalFileName = file.getOriginalFilename();
-	    String extension = "";
-
-	    if (originalFileName != null && originalFileName.contains(".")) {
-	        extension = originalFileName.substring(originalFileName.lastIndexOf("."));
-	    }
-
-	    // 예: UUID + 확장자
-	    String newFileName = UUID.randomUUID().toString() + extension;
-
-	    // 저장 경로 (서버 로컬 경로나 AWS S3 등)
-	    Path uploadPath = Paths.get("C:/upload/product"); // 예시, 실제 경로 맞게 수정
-	    if (!Files.exists(uploadPath)) {
-	        Files.createDirectories(uploadPath);
-	    }
-
-	    Path filePath = uploadPath.resolve(newFileName);
-	    file.transferTo(filePath.toFile());
-
-	    return newFileName;
 	}
 	
 }

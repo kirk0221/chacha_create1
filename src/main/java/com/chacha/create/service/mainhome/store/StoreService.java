@@ -69,4 +69,9 @@ public class StoreService {
 		return storeMapper.selectAll();
 	}
 	
+	public boolean checkNotCreateable(MemberEntity memberEntity) {
+		// 개인판매자면 false, 아니면 true
+		return sellerMapper.selectByMemberId(memberEntity.getMemberId()).getPersonalCheck()==1?true:false;
+	}
+	
 }

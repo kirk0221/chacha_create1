@@ -324,6 +324,54 @@ const categorySection = document.getElementById('category-section');
 toggleCategoryBtn.addEventListener('click', () => {
   categorySection.classList.toggle('category-hidden');
 });
+
+
+// --------------스토어 목록--------------------
+$(document).ready(function () {
+	  $.ajax({
+	    url: '${cpath}/api/main/store/stores',
+	    method: 'GET',
+        contentType: 'application/json',
+	    success: function (response) {
+	      if (response.status === 200) {
+	        const storeList = response.data;
+	        const container = $('.store-grid-container');
+	        container.empty(); // 기존 카드 제거
+
+	        storeList.forEach(store => {
+	          const card = `
+	        	  <div class="store-card" data-url="\${store.storeUrl}">
+	              <div class="store-image">
+	                <img class="product-img" src="${cpath}/resources/images/\${store.logoImg}" alt="${store.storeName}" />
+	              </div>
+	              <div class="store-content">
+	                <h2 class="store-name">\${store.storeName}</h2>
+	                <div class="store-categories">
+	                  <span class="category">판매수: \${store.saleCnt}</span>
+	                  <span class="category">조회수: \${store.viewCnt}</span>
+	                </div>
+	                <div class="store-description">
+	                  ${store.storeDetail}
+	                </div>
+	              </div>
+	            </div>
+	          `;
+	          container.append(card);
+	        });
+		    $('.store-card').on('click', function () {
+		        const storeUrl = $(this).data('url');
+		        window.location.href = `${cpath}/\${storeUrl}`;
+		      });
+	      } else {
+	        $('.store-grid-container').html('<p>스토어가 없습니다.</p>');
+	      }
+	    },
+	    error: function (xhr, status, error) {
+	      console.error('스토어 목록 불러오기 실패:', error);
+	      $('.store-grid-container').html('<p>스토어 목록을 불러오는 중 오류가 발생했습니다.</p>');
+	    }
+	  });
+	});
 </script>
 
 
