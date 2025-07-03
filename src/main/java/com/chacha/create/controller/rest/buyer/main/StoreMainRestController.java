@@ -43,22 +43,29 @@ public class StoreMainRestController {
         log.info("조회 대상 스토어 ID: {}", storeId);
 
         Map<String, List<HomeProductDTO>> result = mainService.getStoreMainProductMap(storeId);
+        
         return ResponseEntity.ok(new ApiResponse<>(ResponseCode.OK, result));
     }
 
     // 스토어 전체상품 조회(조건조회)
     @GetMapping("/products")
     public ResponseEntity<ApiResponse<List<HomeProductDTO>>> getProductList(
-            @RequestParam int storeId,
+    			@PathVariable String storeUrl,
+            @RequestParam(required = false) Integer storeId,
             @RequestParam(required = false) List<String> type,
             @RequestParam(required = false) List<String> d,
             @RequestParam(required = false) List<String> u,
             @RequestParam(value = "keyword", required = false) String keyword,
             @RequestParam(required = false, defaultValue = "latest") String sort) {
+    		
+    		if(storeId == null  || storeId == 0) {
+    			storeId = mainService.storeIdCheck(storeUrl);
+    		}
 
         List<HomeProductDTO> result = mainService.getFilteredProductListWithParams(
                 storeId, type, d, u, keyword, sort);
-
         return ResponseEntity.ok(new ApiResponse<>(ResponseCode.OK, result));
     }
+    
+    
 }
