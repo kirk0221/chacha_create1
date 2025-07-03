@@ -71,7 +71,23 @@ public class StoreService {
 	
 	public boolean checkNotCreateable(MemberEntity memberEntity) {
 		// 개인판매자면 false, 아니면 true
-		return sellerMapper.selectByMemberId(memberEntity.getMemberId()).getPersonalCheck()==1?true:false;
+		int personalChk = sellerMapper.selectByMemberId(memberEntity.getMemberId()).getPersonalCheck();
+		log.info("개인판매자 여부(1이면 개인판매자, 0이면 아님) : " + personalChk);
+		return personalChk==0?true:false;
+	}
+
+	public boolean existsByStoreUrl(String storeUrl) {
+		if(storeUrl.equalsIgnoreCase("main")) {
+			//main을 넣으면 안되도록 설정
+			return true;
+		}
+		return storeMapper.selectForCountUrlByStoreUrl(storeUrl)>0;
+	}
+
+	public boolean checkProductCount(MemberEntity loginMember) {
+		int productCount = storeMapper.selectForCountProductByMemberId(loginMember.getMemberId());
+		log.info("로그인 사용자의 상품 개수 : " + productCount);
+		return productCount<2;
 	}
 	
 }

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.chacha.create.common.dto.error.ApiResponse;
@@ -26,11 +27,11 @@ import lombok.extern.slf4j.Slf4j;
 public class StoreRestController {
 
     @Autowired
-    private StoreService storeCreateService;
+    private StoreService storeService;
 
     @GetMapping("/stores")
     public ResponseEntity<ApiResponse<List<StoreEntity>>> storeList() {
-        List<StoreEntity> stores = storeCreateService.selectAll();
+        List<StoreEntity> stores = storeService.selectAll();
         return ResponseEntity.ok(new ApiResponse<>(ResponseCode.OK, stores));
     }
 
@@ -39,8 +40,14 @@ public class StoreRestController {
         MemberEntity memberEntity = (MemberEntity) session.getAttribute("loginMember");
         log.info("로그인 사용자 : {} 입력받은 스토어 정보 : {}", memberEntity, storeEntity);
         
-        int result = storeCreateService.storeUpdate(storeEntity, memberEntity, true);
+        int result = storeService.storeUpdate(storeEntity, memberEntity, true);
         return ResponseEntity.status(ResponseCode.OK.getStatus())
                              .body(new ApiResponse<>(ResponseCode.OK, result));
+    }
+    
+    @GetMapping("/checkurl")
+    public ResponseEntity<Boolean> checkStoreUrlDuplicate(@RequestParam String storeUrl) {
+        boolean exists = storeService.existsByStoreUrl(storeUrl);
+        return ResponseEntity.ok(!exists);  // true: 사용 가능, false: 중복
     }
 }

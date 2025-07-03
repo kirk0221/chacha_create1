@@ -35,6 +35,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM store
 		WHERE seller_id = #{sellerId}
 	</select>
+	
+	<select id="selectForCountUrlByStoreUrl" resultType="int">
+	  SELECT COUNT(*) FROM store WHERE store_url = #{storeUrl}
+	</select>
+
+	<select id="selectForCountProductByMemberId" resultType="int">
+	 	SELECT 
+	       COUNT(p.product_id) AS product_count
+		FROM member m
+		JOIN seller s ON m.member_id = s.member_id
+		JOIN store st ON s.seller_id = st.seller_id
+		JOIN product p ON st.store_id = p.store_id
+		WHERE m.member_id = #{memberId}
+		GROUP BY m.member_id
+	</select>
 
 	<insert id="insert" parameterType="storeEntity">
 		INSERT INTO store (store_id, seller_id, logo_img, store_name, store_detail, store_url)
