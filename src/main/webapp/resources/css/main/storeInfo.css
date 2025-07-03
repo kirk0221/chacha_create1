@@ -53,6 +53,43 @@ body {
   line-height: 1.5;
 }
 
+.intro-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch; /* 높이 기준선 맞추기 */
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.intro-flex ul {
+  flex: 1;
+  min-width: 300px;
+}
+
+/* 버튼 */
+.start-button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: auto; /* ✅ 버튼을 아래로 */
+  align-self: flex-end; /* ✅ 부모 요소의 하단 정렬 */
+  margin-bottom: 20px;
+}
+
+.start-sell-btn {
+  background-color: #2d4739;
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.3s ease;
+}
+
+.start-sell-btn:hover {
+  background-color: #3c5d49;
+}
 /* ✅ 단계 안내 */
 .step-section {
   display: flex;
