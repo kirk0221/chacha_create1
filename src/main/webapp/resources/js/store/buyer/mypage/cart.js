@@ -4,13 +4,13 @@ $(function () {
   const apiUrl = `${cpath}/api/main/mypage/cart`;
 
   // 현재 URL에서 storeUrl 추출
-function getCurrentStoreUrlFromPath() {
-  const pathSegments = window.location.pathname.split("/");
-  const storeUrl = pathSegments[2];
+  function getCurrentStoreUrlFromPath() {
+    const pathSegments = window.location.pathname.split("/");
+    const storeUrl = pathSegments[2];
 
-  // storeUrl이 "main"이어도 null로 처리(개인 판매자 고려)
-  return (storeUrl === "main" || !storeUrl) ? null : storeUrl;
-}
+    // storeUrl이 "main"이어도 null로 처리(개인 판매자 고려)
+    return (storeUrl === "main" || !storeUrl) ? null : storeUrl;
+  }
 
   // 이미지 경로 처리
   function getImageUrl(imgPath) {
@@ -109,7 +109,7 @@ function getCurrentStoreUrlFromPath() {
     `;
   }
 
-// 상품 페이지에서와 달리 DB에 값이 저장되어야 하므로 함수로 관리
+  // 상품 페이지에서와 달리 DB에 값이 저장되어야 하므로 함수로 관리
   function attachQuantityEvents() {
     $(".cart-item").each(function () {
       const $item = $(this);
@@ -250,7 +250,7 @@ function getCurrentStoreUrlFromPath() {
   }
 
   // 상품명, 이미지 클릭 시 해당 상품 상세 페이지 이동
-  $(document).on('click', '.product-name, .item-image', function() {
+  $(document).on('click', '.product-name, .item-image', function () {
     const $item = $(this).closest('.cart-item');
     const productId = $item.data('product-id');
     const storeUrl = $item.data('store-url') || 'main';
@@ -263,4 +263,39 @@ function getCurrentStoreUrlFromPath() {
     const storeUrl = $item.data('store-url') || 'main';
     window.location.href = `${cpath}/${storeUrl}`;
   });
+
+
+
+// 장바구니에서 선택된 상품 정보를 세션에 저장하여 order로 보내기
+$(document).on("click", ".checkout-btn", function () {
+  const $checkedItems = $(".item-checkbox:checked");
+
+  if ($checkedItems.length === 0) {
+    alert("선택된 상품이 없습니다.");
+    return;
+  }
+
+  const items = [];
+  $checkedItems.each(function () {
+    const $item = $(this).closest(".cart-item");
+
+    
+    items.push({
+      cartId: $item.data("cart-id"),
+      productId: $item.data("product-id"),
+      productName: $item.find(".product-name").text(),
+      storeName: $item.find(".store-name").text(),
+      productCnt: parseInt($item.find(".quantity").text(), 10),
+      price: parseInt($item.find(".product-price").text().replace(/[^0-9]/g, ''), 10),
+      pimgUrl: $item.find(".item-image").attr("src")
+    });
+  });
+
+  // sessionStorage에 저장
+  sessionStorage.setItem("orderItems", JSON.stringify(items));
+  console.log("items:", items);
+
+  window.location.href = `${cpath}/main/order`;
+});
+
 });
