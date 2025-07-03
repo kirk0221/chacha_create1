@@ -106,13 +106,32 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
 
-      // 장바구니 버튼 클릭 시 이동
-      const cartBtn = document.querySelector(".cart-button");
-      cartBtn.addEventListener("click", function () {
-        const totalPrice = unitPrice * quantity;
-        const targetUrl = `${cpath}/main/mypage/cart?productId=${product.productId}&quantity=${quantity}&totalPrice=${totalPrice}`;
-        location.href = targetUrl;
-      });
+      // 장바구니 버튼 클릭 시 상품 추가
+        const cartBtn = document.querySelector(".cart-button");
+		cartBtn.addEventListener("click", function (e) {
+		e.preventDefault();
+		  const cartData = {
+		    productId: product.productId,
+		    productCnt: quantity
+		  };
+		
+		  $.ajax({
+		    url: `${cpath}/api/main/mypage/cart`,
+		    method: "POST",
+		    contentType: "application/json",
+		    data: JSON.stringify(cartData),
+		    success: function(response) {
+		      alert("장바구니에 추가되었습니다.");
+		      // 성공 후 장바구니 페이지로 이동
+		      location.href = `${cpath}/main/mypage/cart`;
+		    },
+		    error: function(xhr, status, error) {
+		      alert("장바구니 추가 실패: " + error);
+		      console.error(error);
+		    }
+		  });
+		});
+
     },
     error: function (xhr, status, error) {
       console.error("상품 정보 로딩 실패:", error);
