@@ -1,5 +1,8 @@
 package com.chacha.create.service.mainhome.personal;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,6 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.chacha.create.common.dto.product.PersonalProductDTO;
 import com.chacha.create.common.entity.member.MemberEntity;
 import com.chacha.create.common.exception.NeedLoginException;
+import com.chacha.create.common.mapper.category.DCategoryMapper;
+import com.chacha.create.common.mapper.category.TypeCategoryMapper;
+import com.chacha.create.common.mapper.category.UCategoryMapper;
 import com.chacha.create.common.mapper.product.PersonalProductMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -20,10 +26,15 @@ import lombok.extern.slf4j.Slf4j;
 public class PersonalProductService {
 
     private final PersonalProductMapper mainProductMapper;
+    private final TypeCategoryMapper typeCategoryMapper;
+    private final DCategoryMapper dCategoryMapper;
 
     @Transactional(rollbackFor = Exception.class)
     public int insertOrUpdateProductImages(PersonalProductDTO dto, boolean isInsert) {
-        List<String> images = List.of(dto.getPimgUrl1(), dto.getPimgUrl2(), dto.getPimgUrl3());
+    	List<String> images = new ArrayList<>();
+    	if(dto.getPimgUrl1() != null) images.add(dto.getPimgUrl1());
+    	if(dto.getPimgUrl2() != null) images.add(dto.getPimgUrl2());
+    	if(dto.getPimgUrl3() != null) images.add(dto.getPimgUrl3());
         int result = 0;
 
         for (int i = 0; i < images.size(); i++) {
@@ -44,10 +55,13 @@ public class PersonalProductService {
     	if(member == null) {
     		throw new NeedLoginException("로그인이 필요합니다.");
     	}
-        Map<String, Integer> idMap = mainProductMapper.selectForSellerAndStoreByMemberId(member.getMemberId());
-        dto.setSellerId(idMap.get("sellerId"));
-        dto.setStoreId(idMap.get("storeId"));
-
+    	log.info(mainProductMapper.selectForSellerAndStoreByMemberId(member.getMemberId()).toString());
+        Map<String, Object> idMap = mainProductMapper.selectForSellerAndStoreByMemberId(member.getMemberId());
+        dto.setSellerId(((BigDecimal)idMap.get("SELLER_ID")).intValue());
+        dto.setStoreId(((BigDecimal)idMap.get("STORE_ID")).intValue());
+        
+        log.info(dto.toString());
+        
         int result1 = mainProductMapper.insertMainProduct(dto);
         result1 += insertOrUpdateProductImages(dto, true);
 
@@ -58,9 +72,10 @@ public class PersonalProductService {
     	if(member == null) {
     		throw new NeedLoginException("로그인이 필요합니다.");
     	}
-    	Map<String, Integer> idMap = mainProductMapper.selectForSellerAndStoreByMemberId(member.getMemberId());
+    	log.info(mainProductMapper.selectForSellerAndStoreByMemberId(member.getMemberId()).toString());
+        Map<String, Object> idMap = mainProductMapper.selectForSellerAndStoreByMemberId(member.getMemberId());
 
-        return mainProductMapper.selectProductsByStoreId(idMap.get("storeId"));
+        return mainProductMapper.selectProductsByStoreId(((BigDecimal)idMap.get("STORE_ID")).intValue());
     }
 
     @Transactional(rollbackFor = Exception.class)
@@ -68,15 +83,16 @@ public class PersonalProductService {
     	if(member == null) {
     		throw new NeedLoginException("로그인이 필요합니다.");
     	}
-    	Map<String, Integer> idMap = mainProductMapper.selectForSellerAndStoreByMemberId(member.getMemberId());
-        dto.setSellerId(idMap.get("sellerId"));
-        dto.setStoreId(idMap.get("storeId"));
+    	log.info(mainProductMapper.selectForSellerAndStoreByMemberId(member.getMemberId()).toString());
+        Map<String, Object> idMap = mainProductMapper.selectForSellerAndStoreByMemberId(member.getMemberId());
+        dto.setSellerId(((BigDecimal)idMap.get("SELLER_ID")).intValue());
+        dto.setStoreId(((BigDecimal)idMap.get("STORE_ID")).intValue());
 
         log.info("상품 수정 요청 - productId: {}, sellerId: {}, storeId: {}", 
             dto.getProductId(), idMap.get("sellerId"), idMap.get("storeId"));
 
         int belongs = mainProductMapper.checkProductBelongsToSellerStore(
-            dto.getProductId(), idMap.get("sellerId"), idMap.get("storeId"));
+            dto.getProductId(), ((BigDecimal)idMap.get("SELLER_ID")).intValue(), ((BigDecimal)idMap.get("STORE_ID")).intValue());
 
         if (belongs == 0) {
             log.warn("상품이 sellerId/storeId에 속하지 않음. 권한 없음.");
@@ -98,10 +114,10 @@ public class PersonalProductService {
     	if(member == null) {
     		throw new NeedLoginException("로그인이 필요합니다.");
     	}
-    	Map<String, Integer> idMap = mainProductMapper.selectForSellerAndStoreByMemberId(member.getMemberId());
-        int sellerId = idMap.get("sellerId");
-        int storeId = idMap.get("storeId");
-
+        Map<String, Object> idMap = mainProductMapper.selectForSellerAndStoreByMemberId(member.getMemberId());
+        int sellerId = ((BigDecimal)idMap.get("SELLER_ID")).intValue();
+        int storeId = ((BigDecimal)idMap.get("STORE_ID")).intValue();
+        
         int belongs = mainProductMapper.checkProductBelongsToSellerStore(productId, sellerId, storeId);
         if (belongs == 0) {
             log.warn("상품이 sellerId/storeId에 속하지 않음. 삭제 권한 없음.");
@@ -116,5 +132,12 @@ public class PersonalProductService {
             log.warn("상품 ID {} 삭제 실패 또는 존재하지 않음", productId);
             return 0;
         }
+    }
+    
+    public Map<String, Object> categoryList(){
+    	Map<String, Object> categoryMap = new HashMap<String, Object>();
+	    	categoryMap.put("typeCategory", typeCategoryMapper.selectAll());
+	    	categoryMap.put("dCategoryMapper", dCategoryMapper.selectAll());
+    	return categoryMap;
     }
 }

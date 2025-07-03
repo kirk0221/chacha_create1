@@ -35,4 +35,5 @@ public class MainPageSellController {
     public String settlementPage() {
         return "main/personal/personalSettlement";
     }
+
 }
