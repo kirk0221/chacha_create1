@@ -64,6 +64,11 @@
         <p>상품이 판매되면 정산 및 배송 처리는 자동으로 관리됩니다.</p>
         <img src="resources/images/step5.jpg" alt="step5">
       </div>
+      <div class="step">
+        <h3>스토어 개설 버튼</h3>
+        <p>스토어 개설 버튼</p>
+        <button onclick='location.href="${cpath}/main/store/openform"'>스토어 개설 버튼</button>
+      </div>
     </section>
     </main>
   </div>
@@ -80,5 +85,6 @@
     </div>
   </footer>
 </body>
+
 
 </html>

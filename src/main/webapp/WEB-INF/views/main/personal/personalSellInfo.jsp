@@ -86,6 +86,12 @@
     </div>
   </footer>
   
+  	<c:if test="${not empty sessionScope.fail}">
+	  <script>
+	    alert("${sessionScope.fail}");
+	  </script>
+	  <c:remove var="fail" scope="session" />
+	</c:if>
 
 </body>
 </html>
