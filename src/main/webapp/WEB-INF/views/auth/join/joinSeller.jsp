@@ -13,43 +13,47 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
-	<div class="container">
-		<!-- 상단 배너 -->
-		<div class="header-banner">
-			<div class="header-content">
-				<div class="logo-title-wrapper">
-					<img class="logo" src="${cpath}/resources/images/logo.png" />
-					<div class="page-title">회원가입하기</div>
-				</div>
-				<img class="header-illustration"
-					src="${cpath}/resources/images/illustration.png" />
-			</div>
-		</div>
+  <div class="container">
 
-		<!-- 메인 컨텐츠 -->
-		<div class="main-wrapper">
-			<!-- 가입 단계 -->
-			<div class="step-indicator">
-				<div class="step">
-					01 <br /> 약관동의
-				</div>
-				<img class="arrow" src="${cpath}/resources/images/arrow-right.svg" />
-				<div class="step">
-					02 <br /> 회원정보입력
-				</div>
-				<img class="arrow" src="${cpath}/resources/images/arrow-right.svg" />
-				<div class="step">
-					03 <br /> 완료
-				</div>
-				<img class="arrow" src="${cpath}/resources/images/arrow-right.svg" />
-				<div class="step current">
-					<span><span class="step-num">01<br /></span><span
-						class="step-label">판매자정보입력</span></span>
-				</div>
-			</div>
+    <!-- 상단 배너 -->
+    <div class="header-banner">
+      <div class="header-content">
+        <div class="logo-title-wrapper">
+          <img class="logo" src="${cpath}/resources/images/logo.png" />
+          <div class="page-title">회원가입하기</div>
+        </div>
+        <img class="header-illustration" src="${cpath}/resources/images/illustration.png" />
+      </div>
+    </div>
 
-		</div>
-		<form id="sellerinfo" class="seller-container">
+    <!-- 메인 컨텐츠 -->
+    <div class="main-wrapper">
+      <!-- 가입 단계 -->
+      <div class="step-indicator">
+  <div class="step">
+    <div class="step-circle">01</div>
+    <div class="step-label">약관동의</div>
+  </div>
+  <img class="arrow" src="${cpath}/resources/images/arrow-right.svg" />
+  <div class="step ">
+    <div class="step-circle">02</div>
+    <div class="step-label">회원정보입력</div>
+  </div>
+  <img class="arrow" src="${cpath}/resources/images/arrow-right.svg" />
+  <div class="step ">
+    <div class="step-circle">03</div>
+    <div class="step-label">완료</div>
+  </div>
+  <img class="arrow" src="${cpath}/resources/images/arrow-right.svg" />
+  <div class="step current">
+    <div class="step-circle">04</div>
+    <div class="step-label">판매자정보입력</div>
+  </div>
+</div>
+
+    
+
+			<form id="sellerinfo" class="seller-container">
 			<h2 class="main-title">판매자님의 추가 정보를 입력해주세요</h2>
 
 			<!-- ✅ 계좌 등록 -->
@@ -124,7 +128,11 @@
 			</div>
 		</form>
 	</div>
-
+			
+		
+      
+      
+    </div>
 
 <script>
 	

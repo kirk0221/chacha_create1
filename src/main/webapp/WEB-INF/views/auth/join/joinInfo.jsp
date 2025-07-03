@@ -10,54 +10,53 @@
 <!-- Pretendard 폰트 (CDN 연결) -->
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css" />
-
-<!-- CSS 적용 -->
-<link rel="stylesheet" type="text/css"
-	href="${cpath}/resources/css/auth/join/joinInfo.css">
-<script
+	
+  <link rel="stylesheet" type="text/css" href="${cpath}/resources/css/auth/join/joinInfo.css">
+ <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script
 	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
 </head>
 <body>
-	<div class="container">
+  <div class="container">
 
-		<!-- 상단 배너 -->
-		<div class="header-banner">
-			<div class="header-content">
-				<div class="logo-title-wrapper">
-					<img class="logo" src="${cpath}/resources/images/logo.png" />
-					<div class="page-title">회원가입하기</div>
-				</div>
-				<img class="header-illustration"
-					src="${cpath}/resources/images/illustration.png" />
-			</div>
-		</div>
+    <!-- 상단 배너 -->
+    <div class="header-banner">
+      <div class="header-content">
+        <div class="logo-title-wrapper">
+          <img class="logo" src="${cpath}/resources/images/logo.png" />
+          <div class="page-title">회원가입하기</div>
+        </div>
+        <img class="header-illustration" src="${cpath}/resources/images/illustration.png" />
+      </div>
+    </div>
 
-		<!-- 메인 컨텐츠 -->
-		<div class="main-wrapper">
-			<!-- 가입 단계 -->
-			<div class="step-indicator">
-				<div class="step">
-					01 <br /> 약관동의
-				</div>
-				<img class="arrow" src="${cpath}/resources/images/arrow-right.svg" />
-				<div class="step current">
-					<span><span class="step-num">02<br /></span><span
-						class="step-label">회원정보입력</span></span>
-				</div>
-				<img class="arrow" src="${cpath}/resources/images/arrow-right.svg" />
-				<div class="step">
-					03 <br /> 완료
-				</div>
-				<img class="arrow" src="${cpath}/resources/images/arrow-right.svg" />
-				<div class="step">
-					01 <br /> 판매자정보입력
-				</div>
-			</div>
+    <!-- 메인 컨텐츠 -->
+    <div class="main-wrapper">
+      <!-- 가입 단계 -->
+      <div class="step-indicator">
+  <div class="step">
+    <div class="step-circle">01</div>
+    <div class="step-label">약관동의</div>
+  </div>
+  <img class="arrow" src="${cpath}/resources/images/arrow-right.svg" />
+  <div class="step current">
+    <div class="step-circle">02</div>
+    <div class="step-label">회원정보입력</div>
+  </div>
+  <img class="arrow" src="${cpath}/resources/images/arrow-right.svg" />
+  <div class="step">
+    <div class="step-circle">03</div>
+    <div class="step-label">완료</div>
+  </div>
+  <img class="arrow" src="${cpath}/resources/images/arrow-right.svg" />
+  <div class="step">
+    <div class="step-circle">04</div>
+    <div class="step-label">판매자정보입력</div>
+  </div>
+</div>
 
-			<!-- 회원가입 입력 폼 -->
+      <!-- 회원가입 입력 폼 -->
 			<div class="register-wrapper">
 				<h2 class="title">회원님의 정보를 입력해주세요</h2>
 				<p class="subtitle">소셜정보로 원클릭 가입하기</p>
@@ -148,10 +147,13 @@
 					</div>
 				</form>
 			</div>
+      
+      
+    </div>
+  </div>
 
-		</div>
-	</div>
-	<script>
+  <!-- 스크립트: 모두 동의 시 각 항목 자동 체크 -->
+<script>
 	/*유효성 검사 진행 여부 확인용 객체*/
 	// => 모든 value가 true인 경우만 회원가입 진행
 	const checkObj = {
@@ -499,5 +501,7 @@
 	    	});
 	  });
 	</script>
+
+
 </body>
 </html>

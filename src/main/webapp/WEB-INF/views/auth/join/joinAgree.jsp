@@ -27,16 +27,26 @@
     <div class="main-wrapper">
       <!-- 가입 단계 -->
       <div class="step-indicator">
-        <div class="step current">
-          <span><span class="step-num">01<br /></span><span class="step-label">약관동의</span></span>
-        </div>
-        <img class="arrow" src="${cpath}/resources/images/arrow-right.svg" />
-        <div class="step">02 <br /> 회원정보입력</div>
-        <img class="arrow" src="${cpath}/resources/images/arrow-right.svg" />
-        <div class="step">03 <br /> 완료</div>
-        <img class="arrow" src="${cpath}/resources/images/arrow-right.svg" />
-        <div class="step">01 <br /> 판매자정보입력</div>
-      </div>
+  <div class="step current">
+    <div class="step-circle">01</div>
+    <div class="step-label">약관동의</div>
+  </div>
+  <img class="arrow" src="${cpath}/resources/images/arrow-right.svg" />
+  <div class="step">
+    <div class="step-circle">02</div>
+    <div class="step-label">회원정보입력</div>
+  </div>
+  <img class="arrow" src="${cpath}/resources/images/arrow-right.svg" />
+  <div class="step">
+    <div class="step-circle">03</div>
+    <div class="step-label">완료</div>
+  </div>
+  <img class="arrow" src="${cpath}/resources/images/arrow-right.svg" />
+  <div class="step">
+    <div class="step-circle">04</div>
+    <div class="step-label">판매자정보입력</div>
+  </div>
+</div>
 
       <div class="terms-section">
         <div class="section-title">이용약관 및 개인정보 처리방침</div>
@@ -56,80 +66,81 @@
         </div>
 
         <!-- 이용약관 동의 -->
-        <div class="terms-item">
-          <div class="terms-label">
-            <span><span class="label-main">이용약관을 읽고 동의합니다.</span><span class="label-required">(필수)</span></span>
-          </div>
-          <div class="radio-group">
-            <label class="radio-button">
-              <input type="radio" name="terms1" value="no" hidden />
-              <div class="radio-circle"></div>
-              <div class="radio-text">동의안함</div>
-            </label>
-            <label class="radio-button">
-              <input type="radio" name="terms1" value="yes" hidden />
-              <div class="radio-circle"></div>
-              <div class="radio-text">동의함</div>
-            </label>
-          </div>
-        </div>
-        <div class="terms-box">
-          ■ 이용약관 <br />
-          제1조(목적) 이 약관은 회사가 제공하는 서비스의 이용조건 및 절차에 관한 사항을 규정합니다.<br />
-          제2조(정의) "회원"이라 함은 사이트에 개인정보를 제공하여 가입한 자를 말합니다.<br />
-          제3조(약관의 효력 및 변경) 이 약관은 사이트에 게시함으로써 효력을 발생하며, 변경 시 별도 고지 후 적용됩니다.
-        </div>
+        <!-- ✅ 통합 카드 구조 -->
+<div class="terms-card">
+  <div class="terms-header">
+    <div class="terms-label">이용약관을 읽고 동의합니다. <span class="label-required">(필수)</span></div>
+    <div class="radio-group">
+      <label class="radio-button">
+        <input type="radio" name="terms1" value="no" hidden />
+        <div class="radio-circle"></div>
+        <div class="radio-text">동의안함</div>
+      </label>
+      <label class="radio-button">
+        <input type="radio" name="terms1" value="yes" hidden />
+        <div class="radio-circle"></div>
+        <div class="radio-text">동의함</div>
+      </label>
+    </div>
+  </div>
+  <div class="terms-box">
+    ■ 이용약관 <br />
+    제1조(목적) 이 약관은 회사가 제공하는 서비스의 이용조건 및 절차에 관한 사항을 규정합니다.<br />
+    제2조(정의) "회원"이라 함은 사이트에 개인정보를 제공하여 가입한 자를 말합니다.<br />
+    제3조(약관의 효력 및 변경) 이 약관은 사이트에 게시함으로써 효력을 발생하며, 변경 시 별도 고지 후 적용됩니다.
+  </div>
+</div>
 
-        <!-- 개인정보 수집 동의 -->
-        <div class="terms-item">
-          <div class="terms-label">
-            <span><span class="label-main">개인정보 수집 및 이용에 대한 안내 사항을 읽고 동의합니다.</span><span class="label-required">(필수)</span></span>
-          </div>
-          <div class="radio-group">
-            <label class="radio-button">
-              <input type="radio" name="terms2" value="no" hidden />
-              <div class="radio-circle"></div>
-              <div class="radio-text">동의안함</div>
-            </label>
-            <label class="radio-button">
-              <input type="radio" name="terms2" value="yes" hidden />
-              <div class="radio-circle"></div>
-              <div class="radio-text">동의함</div>
-            </label>
-          </div>
-        </div>
-        <div class="terms-box">
-          ■ 개인정보 수집 및 이용<br />
-          수집 항목: 이름, 이메일, 휴대폰번호(필수), 생년월일, 주소 (선택)<br />
-          이용 목적: 회원관리, 민원처리, 고지사항 전달 등<br />
-          보유 기간: 회원 탈퇴 시까지 또는 관련 법령 기준에 따름
-        </div>
+       <!-- 개인정보 수집 동의 카드형 구조 -->
+<div class="terms-card">
+  <div class="terms-header">
+    <div class="terms-label">개인정보 수집 및 이용에 대한 안내 사항을 읽고 동의합니다. <span class="label-required">(필수)</span></div>
+    <div class="radio-group">
+      <label class="radio-button">
+        <input type="radio" name="terms2" value="no" hidden />
+        <div class="radio-circle"></div>
+        <div class="radio-text">동의안함</div>
+      </label>
+      <label class="radio-button">
+        <input type="radio" name="terms2" value="yes" hidden />
+        <div class="radio-circle"></div>
+        <div class="radio-text">동의함</div>
+      </label>
+    </div>
+  </div>
+  <div class="terms-box">
+    ■ 개인정보 수집 및 이용<br />
+    수집 항목: 이름, 이메일, 휴대폰번호(필수), 생년월일, 주소 (선택)<br />
+    이용 목적: 회원관리, 민원처리, 고지사항 전달 등<br />
+    보유 기간: 회원 탈퇴 시까지 또는 관련 법령 기준에 따름
+  </div>
+</div>
 
-        <!-- 개인정보 제 3자 제공 동의 -->
-        <div class="terms-item">
-          <div class="terms-label">
-            <span><span class="label-main">개인정보 제 3자 제공 동의에 대한 안내 사항을 읽고 동의합니다.</span><span class="label-required">(필수)</span></span>
-          </div>
-          <div class="radio-group">
-            <label class="radio-button">
-              <input type="radio" name="terms3" value="no" hidden />
-              <div class="radio-circle"></div>
-              <div class="radio-text">동의안함</div>
-            </label>
-            <label class="radio-button">
-              <input type="radio" name="terms3" value="yes" hidden />
-              <div class="radio-circle"></div>
-              <div class="radio-text">동의함</div>
-            </label>
-          </div>
-        </div>
-        <div class="terms-box">
-          ■ 개인정보 제3자 제공 동의<br />
-          제공받는 자: 배송업체, 결제대행사<br />
-          제공 목적: 상품 배송, 결제 처리<br />
-          제공 항목: 이름, 연락처, 주소, 결제정보<br />
-          보유 및 이용 기간: 제공 목적 달성 후 즉시 파기
-        </div>
+<!-- 개인정보 제3자 제공 동의 카드형 구조 -->
+<div class="terms-card">
+  <div class="terms-header">
+    <div class="terms-label">개인정보 제 3자 제공 동의에 대한 안내 사항을 읽고 동의합니다. <span class="label-required">(필수)</span></div>
+    <div class="radio-group">
+      <label class="radio-button">
+        <input type="radio" name="terms3" value="no" hidden />
+        <div class="radio-circle"></div>
+        <div class="radio-text">동의안함</div>
+      </label>
+      <label class="radio-button">
+        <input type="radio" name="terms3" value="yes" hidden />
+        <div class="radio-circle"></div>
+        <div class="radio-text">동의함</div>
+      </label>
+    </div>
+  </div>
+  <div class="terms-box">
+    ■ 개인정보 제3자 제공 동의<br />
+    제공받는 자: 배송업체, 결제대행사<br />
+    제공 목적: 상품 배송, 결제 처리<br />
+    제공 항목: 이름, 연락처, 주소, 결제정보<br />
+    보유 및 이용 기간: 제공 목적 달성 후 즉시 파기
+  </div>
+</div>
 
         <!-- 버튼 영역 -->
         <div class="button-group">
