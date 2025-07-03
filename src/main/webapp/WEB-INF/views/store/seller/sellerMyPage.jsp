@@ -57,7 +57,6 @@
 					<div class="content-inner">
 						<!-- 주문/배송 -->
 
-
 						<div class="member-box fixed-box">
 							<div class="member-header">
 								<div class="title-with-info">
@@ -69,7 +68,6 @@
 								</div>
 							</div>
 							<div class="member-body">
-
 
 
 								<div class="frame-1034">
