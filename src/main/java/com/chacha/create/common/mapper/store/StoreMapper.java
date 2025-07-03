@@ -82,4 +82,8 @@ public interface StoreMapper {
     List<StoreEntity> selectByStoreInfo(String storeUrl);
     
     int updateStoreInfo(StoreEntity storeEntity);
+
+	int selectForCountUrlByStoreUrl(String storeUrl);
+
+	int selectForCountProductByMemberId(Integer memberId);
 }

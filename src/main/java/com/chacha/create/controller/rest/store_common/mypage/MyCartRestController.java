@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,7 +43,15 @@ public class MyCartRestController {
 
     // 장바구니 상품 정보 추가
     @PostMapping
-    public ResponseEntity<ApiResponse<CartViewDTO>> addCartItem(@RequestBody CartEntity cart) {
+    public ResponseEntity<ApiResponse<CartViewDTO>> addCartItem(@RequestBody CartEntity cart,
+    																										HttpSession session) {
+    	MemberEntity loginMember = (MemberEntity) session.getAttribute("loginMember");
+        if (loginMember == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                                 			  .body(new ApiResponse<>(ResponseCode.UNAUTHORIZED, null));
+        }
+
+        cart.setMemberId(loginMember.getMemberId());
         CartViewDTO cartViewDTO = myCartService.saveCartItemAndGetView(cart);
         return ResponseEntity.ok(new ApiResponse<>(ResponseCode.OK, cartViewDTO));
     }

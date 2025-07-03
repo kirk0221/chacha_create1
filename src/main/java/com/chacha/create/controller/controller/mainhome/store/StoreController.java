@@ -39,6 +39,12 @@ public class StoreController {
 			session.setAttribute("fail", message);
 			return "redirect:/main/sell/sellguide";
 		}
+		if(storeService.checkProductCount(loginMember)) {
+			String message = "상품이 2개 등록되어야 있어야 가능합니다!";
+			log.info(message);
+			session.setAttribute("fail", message);
+			return "redirect:/main/sell/sellguide";
+		}
 			return "main/sellerJoin";
 	}
 }
