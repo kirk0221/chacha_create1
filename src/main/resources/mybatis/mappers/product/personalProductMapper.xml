@@ -4,29 +4,35 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.chacha.create.common.mapper.product.PersonalProductMapper">
 
-  <insert id="insertMainProduct" parameterType="persnonalProductDTO">
-	  INSERT INTO product (
-	    product_id, store_id, type_category_id, d_category_id, product_name,
-	    price, product_detail, stock, product_date, last_modified_date,
-	    sale_cnt, view_cnt, flagship_check, delete_check
-	  )
-	  VALUES (
-	    seq_product_id.NEXTVAL,
-	    #{storeId},  <!-- 직접 주입 -->
-	    #{typeCategoryId},
-	    #{dcategoryId},
-	    #{productName},
-	    #{price},
-	    #{productDetail},
-	    #{stock},
-	    SYSDATE,
-	    SYSDATE,
-	    0,
-	    0,
-	    0,
-	    0
-	  )
-	</insert>
+<insert id="insertMainProduct" parameterType="persnonalProductDTO">
+  <!-- insert 전에 시퀀스 값 미리 조회 -->
+  <selectKey keyProperty="productId" resultType="int" order="BEFORE">
+    SELECT seq_product_id.NEXTVAL FROM dual
+  </selectKey>
+
+  INSERT INTO product (
+    product_id, store_id, type_category_id, d_category_id, product_name,
+    price, product_detail, stock, product_date, last_modified_date,
+    sale_cnt, view_cnt, flagship_check, delete_check
+  )
+  VALUES (
+    #{productId},  <!-- 미리 조회한 시퀀스값을 여기에 넣음 -->
+    #{storeId},
+    #{typeCategoryId},
+    #{dcategoryId},
+    #{productName},
+    #{price},
+    #{productDetail},
+    #{stock},
+    SYSDATE,
+    SYSDATE,
+    0,
+    0,
+    0,
+    0
+  )
+</insert>
+
 
 	<!-- 이미지 insert -->
 	<insert id="insertMainProductImage" parameterType="map">

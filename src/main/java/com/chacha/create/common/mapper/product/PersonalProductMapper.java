@@ -17,7 +17,7 @@ public interface PersonalProductMapper {
 
 	int updateMainProductImage(@Param("productId") int productId, @Param("seq") int seq, @Param("url") String url);
 
-	public Map<String, Integer> selectForSellerAndStoreByMemberId(int memberId);
+	public Map<String, Object> selectForSellerAndStoreByMemberId(int memberId);
 
 	public List<PersonalProductDTO> selectProductsByStoreId(Integer storeId);
 	
