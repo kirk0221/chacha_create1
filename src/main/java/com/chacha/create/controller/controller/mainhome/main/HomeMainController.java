@@ -20,7 +20,7 @@ public class HomeMainController {
     // 메인 홈 페이지
     @GetMapping
     public String showMainHome() {
-        return "main/main"; // /WEB-INF/views/main/main_test.jsp
+        return "main/main"; 
     }
     
     
@@ -39,6 +39,11 @@ public class HomeMainController {
     @GetMapping("/mypage")
     public String showMyPage() {
     	return "main/mypage/mainMyPage";
+    }
+    
+    @GetMapping("/order")
+    public String showOrderPage() {
+    	return "main/mypage/mainorder";
     }
  
 }

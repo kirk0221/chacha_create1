@@ -1,6 +1,9 @@
 package com.chacha.create.controller.controller.mainhome.mypage;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -16,12 +19,12 @@ public class MainMyPageController {
     
     @GetMapping("/cart")
     public String showCartPage() {
-		return "store/buyer/mypage/cart";
+		return "main/mypage/mainMyPageCart";
     }
     
     @GetMapping("/orders")
     public String showOrdersPage() {
-		return "store/buyer/mypage/orderList";
+		return "main/mypage/mainMyPageOrderList";
     }
     
     @GetMapping("/favorite")

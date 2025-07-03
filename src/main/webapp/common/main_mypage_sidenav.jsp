@@ -1,43 +1,48 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt"  uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions"%> 
 <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions"%>
+
 <c:set var="cpath" value="${pageContext.servletContext.contextPath}" />
 <c:set var="uri" value="${pageContext.request.requestURI}" />
 
 <aside class="sidebar">
   <ul>
-    <li><a href="${cpath}/main/mypage"
-           class="${fn:contains(uri, '/main/mypage') and !fn:contains(uri, '/mypage/cart') and !fn:contains(uri, '/mypage/orders') and !fn:contains(uri, '/mypage/interests') and !fn:contains(uri, '/mypage/reviews') ? 'active' : ''}">
-           마이정보수정</a></li>
-
-    <li><a href="${cpath}/main/mypage/cart"
-           class="${fn:contains(uri, '/mypage/cart') ? 'active' : ''}">
-           장바구니</a></li>
-
-    <li><a href="${cpath}/main/mypage/orders"
-           class="${fn:contains(uri, '/mypage/orders') ? 'active' : ''}">
-           주문내역</a></li>
-
-    <li><a href="${cpath}/main/mypage/favorite"
-           class="${fn:contains(uri, '/mypage/interests') ? 'active' : ''}">
-           관심사 선택</a></li>
-
-    <li><a href="${cpath}/main/mypage/myreview"
-           class="${fn:contains(uri, '/mypage/reviews') ? 'active' : ''}">
-           작성 리뷰 확인</a></li>
+    <li>
+      <a href="${cpath}/main/mypage"
+         class="${fn:contains(uri, '/main/mypage') and not fn:contains(uri, '/main/mypage/') ? 'active' : ''}">
+         마이정보수정</a>
+    </li>
+    <li>
+      <a href="${cpath}/main/mypage/cart"
+         class="${fn:contains(uri, '/mypage/cart') ? 'active' : ''}">
+         장바구니</a>
+    </li>
+    <li>
+      <a href="${cpath}/main/mypage/orders"
+         class="${fn:contains(uri, '/mypage/orders') ? 'active' : ''}">
+         주문내역</a>
+    </li>
+    <li>
+      <a href="${cpath}/main/mypage/favorite"
+         class="${fn:contains(uri, '/mypage/favorite') ? 'active' : ''}">
+         관심사 선택</a>
+    </li>
+    <li>
+      <a href="${cpath}/main/mypage/myreview"
+         class="${fn:contains(uri, '/mypage/myreview') ? 'active' : ''}">
+         작성 리뷰 확인</a>
+    </li>
   </ul>
 </aside>
+
 
 <style>
 .sidebar {
   width: 240px;
-  background-color: #E6F1E5; /* 연한 그린 */
+  background-color: #E6F1E5;
   padding-top: 20px;
-  flex-shrink: 0;
   border-radius: 12px;
   box-shadow: 2px 2px 8px rgba(0, 64, 0, 0.05);
-  height: auto;
 }
 
 .sidebar ul {
@@ -63,13 +68,14 @@
 }
 
 .sidebar ul li a.active {
-  background-color: #B0CBB0; /* 강조되는 초록 */
+  background-color: #B0CBB0;
   color: #fff;
 }
 
 .sidebar ul li a.active::after {
-  content: '\25B6'; /* 화살표 문자 */
+  content: '\25B6'; /* ▶ */
   float: right;
   margin-left: 10px;
 }
+
 </style>

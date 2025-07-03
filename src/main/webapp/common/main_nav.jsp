@@ -13,7 +13,7 @@
   <div class="nav-inner container-1440">
     <div class="logo">
       <!-- ✅ 로고 클릭 시 메인으로 이동 -->
-      <a href="${cpath}/main/home">
+      <a href="${cpath}/main">
         <img src="${cpath}/resources/images/logo/logohorizon_green.png" alt="뜨락상회 로고" style="height: 80px" />
       </a>
     </div>

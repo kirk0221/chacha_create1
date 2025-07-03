@@ -7,7 +7,7 @@
   <title>스토어메인페이지</title>
   
     <!-- ✅ Include Header & Nav -->
-<%@ include file="../common/header.jsp"%>
+<%@ include file="/common/header.jsp"%>
 <jsp:include page="/common/header.jsp" />
 <jsp:include page="/common/storeMain_nav.jsp" />
 
