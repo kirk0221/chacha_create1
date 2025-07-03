@@ -206,7 +206,7 @@
 <section>
   <div class="title-bar">
     <h2>금주 신상품</h2>
-    <a href="#" class="view-all">전체보기</a>
+    <a href="${cpath}/main/products" class="view-all">전체보기</a>
   </div>
   <div class="preview-grid">
     <% for(int i=1; i<=8; i++) { %>

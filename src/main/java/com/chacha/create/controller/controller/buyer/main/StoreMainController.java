@@ -44,7 +44,7 @@ public class StoreMainController {
 	@GetMapping("/mypage")
 	public String ShowMypage(@PathVariable String storeUrl, Model model) {
 		model.addAttribute("storeUrl",storeUrl);
-		return "main/mypage/mainMyPage";
+		return "store/buyer/mypage/storeMypage";
 	}
 	
 	// 상세페이지

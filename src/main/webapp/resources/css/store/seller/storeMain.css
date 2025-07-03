@@ -9,10 +9,11 @@ body {
   padding: 0;
 }
 
-.container-1440 {
-  max-width: 1440px;
+/* 📦 전체 컨테이너 */
+.container-store {
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 0 20px;
+  background-color: #fdfbf7;
 }
 
 main {
@@ -26,6 +27,80 @@ h2 {
   font-size: 24px;
   color: #333;
   margin-bottom: 20px;
+}
+
+/* 🏷️ 스토어 배너 */
+.store-banner {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  background-color: #fff6ee;
+  padding: 32px;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  margin-bottom: 40px;
+  margin-top:20px;
+}
+.store-banner img {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 16px;
+}
+.store-intro h1 {
+  font-size: 28px;
+  color: #2d4739;
+}
+.store-intro p {
+  font-size: 15px;
+  color: #555;
+}
+
+/* 📣 공지사항 */
+.store-notice {
+  background: #fff1e0;
+  padding: 10px 16px;
+  margin-bottom: 30px;
+  border-left: 6px solid #d6aa7b;
+  font-size: 14px;
+  color: #333;
+}
+
+/* 🧭 카테고리 탭 */
+.category-tabs {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+.category-tabs .tab {
+  padding: 8px 20px;
+  background-color: #eee;
+  border-radius: 20px;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+}
+.category-tabs .tab.active {
+  background-color: #2d4739;
+  color: white;
+}
+
+/* 🛍️ 상품 그리드 */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 24px;
+  margin-bottom: 60px;
+}
+
+/* 🧾 리뷰 요약 */
+.review-summary {
+  background-color: #fafafa;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 15px;
+  color: #666;
 }
 
 /* Swiper */
