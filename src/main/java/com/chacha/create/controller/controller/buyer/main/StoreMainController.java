@@ -53,6 +53,13 @@ public class StoreMainController {
 		return "store/productDetail";
 	}
 	
+	// 장바구니 페이지
+	@GetMapping("/mypage/cart")
+	public String ShowCart(@PathVariable String storeUrl, Model model) {
+		model.addAttribute("storeUrl",storeUrl);
+		return "store/buyer/mypage/cart";
+	}
+	
 	// 결제 페이지
 	@GetMapping("/order")
 	public String ShowOrder(@PathVariable String storeUrl, Model model) {
