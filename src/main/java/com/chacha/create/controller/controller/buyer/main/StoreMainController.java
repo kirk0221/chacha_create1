@@ -16,8 +16,9 @@ public class StoreMainController {
 	
 	// 스토어 구매자 메인페이지
 	@GetMapping
-	public String ShowstoreMain() {
-		return "";
+	public String ShowstoreMain(@PathVariable String storeUrl, Model model) {
+		model.addAttribute("storeUrl",storeUrl);
+		return "store/storeMain";
 	}
 	
 	// 구매자 마이페이지(구매자)
@@ -39,9 +40,8 @@ public class StoreMainController {
 	}
 	
 	// 결제 완료페이지
-	@GetMapping("/order/complete/{orderId}")
-	public String ShowOrderComplete(@PathVariable int orderId, Model model) {
-		model.addAttribute("orderId", orderId);
+	@GetMapping("/order/complete")
+	public String ShowOrderComplete() {
 		return "store/buyer/orderComplete";
 	}
 	
