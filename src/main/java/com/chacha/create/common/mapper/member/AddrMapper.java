@@ -26,6 +26,14 @@ public interface AddrMapper {
      * @return 조회된 AddressEntity 객체 (없으면 null)
      */
     AddrEntity selectByAddressId(int addressId);
+    
+    /**
+     * member_id로 특정 주소 데이터를 조회합니다.
+     * 
+     * @param memberId 조회할 멤버 ID
+     * @return 조회된 AddressEntity 객체 (없으면 null)
+     */
+    AddrEntity selectByMemberId(int memberId);
 
     /**
      * 새로운 주소 데이터를 삽입합니다.
@@ -51,5 +59,7 @@ public interface AddrMapper {
      * @return 삭제 성공 시 영향 받은 행 수
      */
     int delete(int addressId);
+
+	AddrEntity selectForBaseAddr(Integer memberId);
 }
 

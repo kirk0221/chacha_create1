@@ -35,6 +35,11 @@ public class MyOrderService {
     private final OrderInfoMapper orderInfoMapper;
     private final OrderDetailMapper orderDetailMapper;
 	private final DeliveryMapper deliveryMapper;
+	
+	
+	public Integer selectForOrderDetailId(int memberId, int productId) {
+        return orderMapper.selectForOrderDetailId(memberId, productId);
+    }
 
 	@Transactional(rollbackFor = Exception.class)
     public int placeOrder(OrderRequestDTO request, MemberEntity member) {
@@ -80,6 +85,10 @@ public class MyOrderService {
         List<OrderListDTO> orderlist = orderMapper.selectOrderListByMemberId(memberId);
         check_deliveryStatus(orderlist);
         return orderlist;
+    }
+    
+    public AddrEntity baseAddr(MemberEntity member) {
+    	return addrMapper.selectForBaseAddr(member.getMemberId());
     }
     
     @Transactional(rollbackFor = Exception.class)

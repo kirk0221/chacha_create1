@@ -3,7 +3,10 @@ package com.chacha.create.controller.rest.buyer.order;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +29,7 @@ public class OrderRestController {
     private MyOrderService orderService;
 
     @PostMapping
-    public ResponseEntity<ApiResponse<String>> placeOrder(@RequestBody OrderRequestDTO orderRequest,
+    public ResponseEntity<ApiResponse<Integer>> placeOrder(@RequestBody OrderRequestDTO orderRequest,
                                                           HttpSession session) {
         MemberEntity loginMember = (MemberEntity) session.getAttribute("loginMember");
         log.info("주문 요청 - 사용자ID: {}, 주문정보: {}", loginMember.getMemberId(), orderRequest);
@@ -36,11 +39,26 @@ public class OrderRestController {
         if (resultOrderId > 0) {
             String message = "주문이 완료되었습니다. 주문번호: " + resultOrderId;
             return ResponseEntity.status(ResponseCode.CREATED.getStatus())
-                    .body(new ApiResponse<>(ResponseCode.CREATED, message));
+                    .body(new ApiResponse<>(ResponseCode.CREATED, resultOrderId));
         } else {
             String errorMessage = "주문 처리에 실패했습니다.";
             return ResponseEntity.status(ResponseCode.BAD_REQUEST.getStatus())
                     .body(new ApiResponse<>(ResponseCode.BAD_REQUEST, errorMessage));
         }
+    }
+    
+    
+   
+    @GetMapping("/{memberId}/products/{productId}/orderdetail")
+    public ResponseEntity<ApiResponse<Integer>> getOrderDetailId(@PathVariable("storeUrl") String storeUrl,
+            							@PathVariable("memberId") int memberId, @PathVariable("productId") int productId) {
+
+        Integer orderDetailId = orderService.selectForOrderDetailId(memberId, productId);
+
+        if (orderDetailId == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new ApiResponse<>(ResponseCode.NOT_FOUND, null));
+        }
+        return ResponseEntity.ok(new ApiResponse<>(ResponseCode.OK, orderDetailId));
     }
 }

@@ -12,8 +12,6 @@ import com.chacha.create.common.entity.order.OrderInfoEntity;
 import com.chacha.create.common.enums.order.OrderStatusEnum;
 import com.chacha.create.common.mapper.order.OrderInfoMapper;
 import com.chacha.create.common.mapper.order.OrderMapper;
-import com.chacha.create.common.mapper.product.PImgMapper;
-import com.chacha.create.common.mapper.product.ProductManageMapper;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +23,7 @@ public class OrderManagementService {
 
 	private final OrderMapper orderMapper;
 	private final OrderInfoMapper orderInfoMapper;
+
 	
 	public List<OrderDTO> selectOrderAll(String storeUrl) {
 		return orderMapper.selectAll(storeUrl);

@@ -28,7 +28,10 @@ public class ProductDetailDTO {
     private Integer saleCnt;
     private Integer viewCnt;
     private Integer flagshipCheck;
-
+    
+    // StoreEntity
+    private String storeName;
+    
     // DCategoryEntity
     private UCategoryEnum uCategoryId;
     private String dCategoryName;

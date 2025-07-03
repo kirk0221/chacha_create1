@@ -2,6 +2,8 @@ package com.chacha.create.controller.rest.store_common.mypage;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.chacha.create.common.dto.error.ApiResponse;
 import com.chacha.create.common.dto.member.CartViewDTO;
 import com.chacha.create.common.entity.member.CartEntity;
+import com.chacha.create.common.entity.member.MemberEntity;
 import com.chacha.create.common.enums.error.ResponseCode;
 import com.chacha.create.service.store_common.mypage.MyCartService;
 
@@ -26,14 +29,14 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 @RequestMapping("/api/main/mypage/cart")
 public class MyCartRestController {
-
     @Autowired
     private MyCartService myCartService;
 
     // 장바구니 상세 정보 조회
     @GetMapping
-    public ResponseEntity<ApiResponse<List<CartViewDTO>>> getCartViewList(@RequestParam int memberId) {
-        List<CartViewDTO> result = myCartService.selectForCartViewList(memberId);
+    public ResponseEntity<ApiResponse<List<CartViewDTO>>> getCartViewList(HttpSession session) {
+    	MemberEntity loginMember = (MemberEntity) session.getAttribute("loginMember");
+        List<CartViewDTO> result = myCartService.selectForCartViewList(loginMember.getMemberId());
         return ResponseEntity.ok(new ApiResponse<>(ResponseCode.OK, result));
     }
 
