@@ -61,10 +61,7 @@
 					<div class="required-mark">*</div>
 				</div>
 				<textarea class="box" id="storeDetail" placeholder="내용을 입력하세요"></textarea>
-				<div class="counter-low">
-					<div class="_12">1</div>
-					<div class="_100">/3000</div>
-				</div>
+				<div class="counter-low">1/3000</div>
 			</div>
 
 			<div class="form-group consent-section">
@@ -90,6 +87,25 @@
 
 	<script>
 	$(function () {
+		
+		//-----------------텍스트 길이 체크--------------		
+		$('.counter-low').on('input', function() {
+	        const maxLength = 3000;
+	        const currentLength = $(this).val().length;
+	        const charCountText = currentLength + '/' + maxLength;
+	        
+	        // 같은 부모요소 내의 .char-count에 글자수 업데이트
+	        $(this).siblings('.char-count').text(charCountText);
+
+	        // 3000자 초과시 자르기 (선택사항)
+	        if (currentLength > maxLength) {
+	            $(this).val($(this).val().substring(0, maxLength));
+	            $(this).siblings('.char-count').text(maxLength + '/' + maxLength);
+	        }
+	    });
+		
+		
+		//------------------실시간 storeUrl 체크-------------------
 	let isUrlAvailable = false;
 
 	$('#storeUrl').on('keyup', function () {
@@ -124,6 +140,8 @@
 	});
 	});
 	
+	
+	//-------------------유효성 검사--------------------------------
 	$('.close-btn').on('click', function () {
 		const storeName = $('#storeName').val().trim();
 		const storeDetail = $('#storeDetail').val().trim();

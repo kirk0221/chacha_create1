@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.chacha.create.common.dto.member.SellerInfoDTO;
 import com.chacha.create.common.entity.store.StoreEntity;
 import com.chacha.create.service.buyer.storeinfo.StoreInfoService;
+import com.chacha.create.service.mainhome.store.StoreService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -26,9 +27,15 @@ public class StoreMainController {
 	@Autowired
 	private StoreInfoService storeinfo;
 	
+	@Autowired
+	private StoreService storeService;
+	
 	// 스토어 구매자 메인페이지
 	@GetMapping
 	public String ShowstoreMain(@PathVariable String storeUrl, Model model) {
+		if(!storeService.existsByStoreUrl(storeUrl)) {
+			return "redirect:/main";
+		}
 		model.addAttribute("storeUrl",storeUrl);
 		return "store/storeMain";
 	}
