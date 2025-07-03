@@ -79,7 +79,9 @@ body {
   width: 200px;
   height: 200px;
   background: #bbb;
+  overflow: hidden;
 }
+
 
 .product-info h3 {
   margin: 0;
