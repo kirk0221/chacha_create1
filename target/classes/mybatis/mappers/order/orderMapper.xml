@@ -365,9 +365,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <select id="selectOrderListByOrderId" resultType="com.chacha.create.common.dto.order.OrderListDTO">
 		SELECT
-			oi.order_date,
+		    oi.order_date,
+		    oi.order_id,
 		    p.product_id,
 		    p.product_name,
+		    p.product_detail,
+		    s.store_name,
 		    img.p_img_url,
 		    od.order_cnt,
 		    od.order_price,
@@ -375,13 +378,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM order_detail od
 		JOIN order_info oi ON od.order_id = oi.order_id
 		JOIN product p ON od.product_id = p.product_id
+		JOIN store s ON p.store_id = s.store_id
 		JOIN (
 		    SELECT * FROM p_img
 		    WHERE p_img_enum = 'THUMBNAIL' AND p_img_seq = 1
 		) img ON p.product_id = img.product_id
 		LEFT JOIN delivery d ON od.order_id = d.order_id
 		WHERE od.order_id = #{orderId}
-		AND oi.member_id = #{memberId}
+		  AND oi.member_id = #{memberId}
 		ORDER BY od.order_detail_id ASC
 	</select>
     
