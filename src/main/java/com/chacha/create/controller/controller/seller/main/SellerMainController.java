@@ -168,6 +168,7 @@ public class SellerMainController {
     public String showProductDetailPage(@PathVariable String storeUrl,
                                         @PathVariable int productId,
                                         Model model) {
+		model.addAttribute("storeUrl",storeUrl);
         return "store/productDetail";
 	}
 	
@@ -176,6 +177,7 @@ public class SellerMainController {
     public String showProductUpdatePage(@PathVariable String storeUrl,
                                         @PathVariable int productId,
                                         Model model) {
+		model.addAttribute("storeUrl",storeUrl);
         return "store/seller/productUpdate";
 	}
 	
@@ -183,6 +185,7 @@ public class SellerMainController {
 		@GetMapping("/management/settlement")
 	    public String showSellrSettlementPage(@PathVariable String storeUrl,
 	                                        Model model) {
+			model.addAttribute("storeUrl",storeUrl);
 	        return "store/seller/sellerSettlement";
 		}
 	
@@ -194,13 +197,15 @@ public class SellerMainController {
 	
 	// 판매 리뷰 관리
 	@GetMapping("/reviews")
-	public String showReviewPage() {
+	public String showReviewPage(@PathVariable String storeUrl, Model model) {
+		model.addAttribute("storeUrl",storeUrl);
 		return "store/seller/sellerReview";
 	}
 	
 	// 문의 메시지
 	@GetMapping("/chat")
-	public String showChatPage() {
+	public String showChatPage(@PathVariable String storeUrl, Model model) {
+		model.addAttribute("storeUrl",storeUrl);
 		return "store/chat";
 	}
 	
@@ -212,13 +217,15 @@ public class SellerMainController {
 	
 	// 공지사항목록
 	@GetMapping("/management/notices")
-	public String showNoticePage() {
+	public String showNoticePage(@PathVariable String storeUrl, Model model) {
+		model.addAttribute("storeUrl",storeUrl);
 		return "store/seller/sellerNotice";
 	}
 	
 	// 폐업
 	@GetMapping("/close")
-	public String showDonePage() {
+	public String showDonePage(@PathVariable String storeUrl, Model model) {
+		model.addAttribute("storeUrl",storeUrl);
 		return "store/seller/storeClose";
 	}
 	
