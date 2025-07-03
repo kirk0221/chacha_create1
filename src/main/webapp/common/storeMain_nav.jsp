@@ -25,12 +25,12 @@
 		<div class="menu">
 			<a href="${cpath}/${storeUrl}/products" class="nav-item">전체상품</a> 
 			<a href="${cpath}/${storeUrl}/info" class="nav-item">스토어 정보</a> 
-			<a href="${cpath}/${storeUrl}/notices"
-				class="nav-item ${fn:contains(uri, '/main/notice') ? 'active' : ''}">
-				공지/소식 </a> <a href="${cpath}/main/home" class="nav-item">메인 홈 가기</a> 
 			<a href="#" class="nav-item">클래스</a> 
 			<a href="${cpath}/${storeUrl}/mypage" class="nav-item">마이페이지</a> 
 			<a href="${cpath}/main/mypage/cart" class="nav-item">장바구니</a>
+			<a href="${cpath}/${storeUrl}/notices"
+				class="nav-item ${fn:contains(uri, '/main/notice') ? 'active' : ''}">
+				공지/소식 </a> <a href="${cpath}/main" class="nav-item">메인 홈 가기</a> 
 		</div>
 	</div>
 </nav>
@@ -69,12 +69,18 @@ nav {
 .logo-wrapper {
   display: flex;
   align-items: center;
-  gap: 80px; 
+  gap: 30px; 
+}
+
+#logoArear img {
+  height: 100%;
+  max-height: 60px;
+  object-fit: contain;
+  display: block;
 }
 
 #storename {
-  font-size: 32px;           
-  font-weight: bold;     
+  font-size: 24px;            
   font-weight: 700;              
   color: #1b2e23;                 
   font-family: 'Jua', sans-serif; 
