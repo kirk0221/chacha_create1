@@ -280,7 +280,7 @@ $(function() {
 	    else if (i === 3) pimgUrl3 = file.name;
 	
 	    // 미리보기 반영
-	    $(`#upload-placeholder\${i}`).html(`<img src="${cpath}/resources/images/\${file.name}">`);
+	    $(`#upload-placeholder\${i}`).html(`<img src="${cpath}/resources/productImages/\${file.name}">`);
 	  });
 	}
     

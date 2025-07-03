@@ -41,8 +41,9 @@
 					<div class="div17">스토어 대표사진(로고)</div>
 					<div class="required-mark">*</div>
 				</div>
-				<input type="file" id="logoImg" accept="image/*" />
+				<div class="frame-754" id="uploadBox"><span id="plusSign">+</span>
 			</div>
+				<input type="file" id="logoImg" accept=".jpg,.jpeg,.png,.gif" style="display: none;">
 
 			<div class="form-group">
 				<div class="field-label-wrapper">
@@ -61,7 +62,7 @@
 					<div class="required-mark">*</div>
 				</div>
 				<textarea class="box" id="storeDetail" placeholder="내용을 입력하세요"></textarea>
-				<div class="counter-low">1/3000</div>
+				<div class="char-count">1/3000</div>
 			</div>
 
 			<div class="form-group consent-section">
@@ -87,9 +88,37 @@
 
 	<script>
 	$(function () {
+	//------------이미지 프리뷰-------------------
+	$('#uploadBox').on('click', function () {
+		    $('#logoImg').click();
+		  });
+		  $('#logoImg').on('change', function (e) {
+			  const file = e.target.files[0];
+			  if (!file) return;
+
+			  // 허용할 확장자 배열
+			  const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+
+			  // 파일명에서 확장자 추출 (소문자 변환)
+			  const fileName = file.name.toLowerCase();
+			  const extension = fileName.split('.').pop();
+
+			  if (!allowedExtensions.includes(extension)) {
+			    alert('jpg, jpeg, png, gif 형식의 이미지 파일만 선택할 수 있습니다.');
+			    $(this).val('');  // 선택 초기화
+			    return;
+			  }
+
+			  // 이미지 파일일 때 처리 (기존 미리보기 등)
+			  const reader = new FileReader();
+			  reader.onload = function (event) {
+			    $('#uploadBox').html(`<img src="${cpath}/resources/productImages/\${file.name}" style="width: 100%; height: 100%; object-fit: cover;">`);
+			  };
+			  reader.readAsDataURL(file);
+			});
 		
 		//-----------------텍스트 길이 체크--------------		
-		$('.counter-low').on('input', function() {
+		$('.box').on('input', function() {
 	        const maxLength = 3000;
 	        const currentLength = $(this).val().length;
 	        const charCountText = currentLength + '/' + maxLength;
