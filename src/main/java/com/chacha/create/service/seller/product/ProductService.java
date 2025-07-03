@@ -63,25 +63,13 @@ public class ProductService {
 	        if (dto.getFlagshipCheck() == 1) {
 	            int count = productDetailMapper.countFlagshipByStoreId(storeUrl);
 	            if (count >= 3) {
-	                log.info("🚫 해당 스토어(store_url=" + storeUrl + ")는 이미 대표상품이 3개입니다. 상품 ID: " + dto.getProductId());
 	                continue; // 업데이트 안 함
 	            }
 	        }
 
 	        int updateCount = productDetailMapper.updateFlagship(dto); // 업데이트 시도
 	        result += updateCount; // 총 업데이트 건수 누적
-
-	        if (updateCount > 0) {
-	            if (dto.getFlagshipCheck() == 1) {
-	            	log.info("✅ 대표상품으로 등록되었습니다. 상품 ID: " + dto.getProductId());
-	            } else {
-	            	log.info("🔽 대표상품에서 해제되었습니다. 상품 ID: " + dto.getProductId());
-	            }
-	        } else {
-	        	log.info("❌ 업데이트 실패 또는 변경 없음: 상품 ID " + dto.getProductId());
-	        }
 	    }
-
 	    return result; // 전체 업데이트 건 수 반환
 	}
 	
