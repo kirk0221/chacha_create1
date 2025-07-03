@@ -8,6 +8,8 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/store/buyer/mypage/orderList.css" />
 </head>
 <body>
+<%@include file="/common/header.jsp" %>
+	<%@include file="/common/main_nav.jsp" %>
 <div class="order-history-page">
   <div class="order-history-layout">
 
@@ -56,30 +58,6 @@
 	      <div class="order-footer-header">배송 상태</div>
 	    </div>
 	  </div>
-	
-	  <!-- 실제 주문 아이템 -->
-	  <div class="order-item">
-	    <div class="order-date">2025-06-12</div>
-	    <img class="order-item-image" src="${pageContext.request.contextPath}/resources/img/home.jpg" alt="상품 이미지" />
-	    <div class="order-item-details">
-	      <div class="order-product-info">
-	        <div class="order-store-name">000 스토어</div>
-	        <div class="order-product-name">호박 수세미</div>
-	        <div class="order-product-desc">설명 생략...</div>
-	      </div>
-	      <div class="order-qty">
-	        <span class="order-qty">2</span>
-	      </div>
-	      <div class="order-price">
-	        <span class="order-price">4,000원</span>
-	      </div>
-	      <div class="order-footer">
-	        <div class="order-status">배송중</div>
-	        <button class="btn-detail">주문상세</button>
-	      </div>
-	    </div>
-	  </div>
-	  <!-- 복제용 주문 아이템들 ... -->
 	</div>
 	
 	<!-- 완료된 주문내역 -->
@@ -100,35 +78,68 @@
 	      <div class="order-footer-header">배송 상태</div>
 	    </div>
 	  </div>
-	
-	  <!-- 실제 주문 아이템 -->
-	  <div class="order-item">
-	    <div class="order-date">2025-06-12</div>
-	    <img class="order-item-image" src="${pageContext.request.contextPath}/resources/img/home.jpg" alt="상품 이미지" />
-	    <div class="order-item-details">
-	      <div class="order-product-info">
-	        <div class="order-store-name">000 스토어</div>
-	        <div class="order-product-name">호박 수세미</div>
-	        <div class="order-product-desc">설명 생략...아니고 길게길게야호</div>
-	      </div>
-	      <div class="order-qty">
-	        <span class="order-qty">3</span>
-	      </div>
-	      <div class="order-price">
-	        <span class="order-price">4,000원</span>
-	      </div>
-	      <div class="order-footer">
-	        <div class="order-status">배송 완료</div>
-	        <button class="btn-detail">주문상세</button>
-	      </div>
-	    </div>
-	  </div>
-	  <!-- 복제용 주문 아이템들 ... -->
 	</div>
 
 
     </section>
   </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function () {
+    $.ajax({
+        url: '${cpath}/api/main/mypage/orders',
+        method: 'GET',
+        contentType: 'application/json',
+        success: function (response) {
+            if (response.status === 200) {
+                const data = response.data;
+
+                data.forEach(order => {
+                    const date = new Date(order.orderDate);
+                    const formattedDate = date.toISOString().split('T')[0]; // yyyy-mm-dd
+
+                    const itemHtml = `
+                    <div class="order-item">
+                        <div class="order-date">\${formattedDate}</div>
+                        <img class="order-item-image" src="${cpath}/resources/images/\${order.pimgUrl}" alt="상품 이미지" />
+                        <div class="order-item-details">
+                            <div class="order-product-info">
+                                <div class="order-store-name">\${order.storeName}</div>
+                                <div class="order-product-name">\${order.productName}</div>
+                                <div class="order-product-desc">\${order.prodcutDetail}</div>
+                            </div>
+                            <div class="order-qty">
+                                <span class="order-qty">\${order.orderCnt}</span>
+                            </div>
+                            <div class="order-price">
+                                <span class="order-price">\${order.orderPrice.toLocaleString()}원</span>
+                            </div>
+                            <div class="order-footer">
+                                <div class="order-status">\${order.deliveryStatus}</div>
+                                <button class="btn-detail" onclick="location.href='${cpath}/main/mypage/orderdetail/\${order.orderId}'">주문상세</button>
+                            </div>
+                        </div>
+                    </div>`;
+
+                    // 배송 상태 분류
+                    if (order.deliveryStatus === '배송 전') {
+                        $('.order-list-section .order-block').eq(0).append(itemHtml); // 첫 번째 order-block (배송중인)
+                    } else {
+                        $('.order-list-section .order-block').eq(1).append(itemHtml); // 두 번째 order-block (완료된)
+                    }
+                });
+            } else {
+                alert("주문 내역을 불러오는 데 실패했습니다.");
+            }
+        },
+        error: function () {
+            alert("서버 오류로 주문 내역을 불러오지 못했습니다.");
+        }
+    });
+});
+</script>
+
 </body>
 </html>

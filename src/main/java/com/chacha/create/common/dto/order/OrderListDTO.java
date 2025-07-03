@@ -12,12 +12,19 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class OrderListDTO {
+	
+	// store
+	private String storeName;
+	
+	
 	// OrderInfoEntity
+	private int orderId;
 	private Date orderDate;
     
     // ProductEntity
 	private int productId;
     private String productName;
+    private String prodcutDetail;
     
     // PImgEntity
     private String pimgUrl;
