@@ -20,9 +20,12 @@ public class CartViewDTO {
     private String productName;
     private String productDetail;
     private Integer price;
+    private Integer stock;
     
     // StoreEntity
+    private Integer storeId;
     private String storeName;
+    private String storeUrl;
 
     // PImgEntity
     private String pImgUrl;

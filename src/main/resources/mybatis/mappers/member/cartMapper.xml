@@ -21,7 +21,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	        p.product_name,
 	        p.product_detail,
 	        p.price,
+	        p.stock,
+	        s.store_id,
 	        s.store_name,
+	        s.store_url,
 	        img.p_img_url AS p_img_url
 	    FROM cart c
 	    JOIN product p ON c.product_id = p.product_id
@@ -49,7 +52,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	        p.product_name,
 	        p.product_detail,
 	        p.price,
+	        p.stock,
+	        s.store_id,
 	        s.store_name,
+	        s.store_url,
 	        img.p_img_url AS p_img_url
 	    FROM cart c
 	    JOIN product p ON c.product_id = p.product_id
