@@ -24,7 +24,7 @@ public class OrderListDTO {
     // ProductEntity
 	private int productId;
     private String productName;
-    private String prodcutDetail;
+    private String productDetail;
     
     // PImgEntity
     private String pimgUrl;

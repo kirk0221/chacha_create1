@@ -108,7 +108,7 @@ $(document).ready(function () {
                             <div class="order-product-info">
                                 <div class="order-store-name">\${order.storeName}</div>
                                 <div class="order-product-name">\${order.productName}</div>
-                                <div class="order-product-desc">\${order.prodcutDetail}</div>
+                                <div class="order-product-desc">\${order.productDetail}</div>
                             </div>
                             <div class="order-qty">
                                 <span class="order-qty">\${order.orderCnt}</span>
