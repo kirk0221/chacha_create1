@@ -31,9 +31,11 @@
 	    </ul>
 	    
 	    <!-- ✅ 추가 버튼 -->
+	    <c:if test="${not empty sessionScope.loginMember}">
 		  <div class="start-button-wrapper">
-		    <a href="${cpath}/create/main/self" class="start-sell-btn">개인판매 시작하기</a>
+		    <a href="${cpath}/auth/join/seller" class="start-sell-btn">개인판매 시작하기</a>
 		  </div>
+	  	</c:if>
 		  </div>
 		  
 		  
