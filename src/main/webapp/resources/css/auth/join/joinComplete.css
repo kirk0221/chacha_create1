@@ -3,15 +3,15 @@
   box-sizing: border-box;
 }
 body {
-  margin: 0 auto;
-  font-family: 'Poppins', sans-serif;
-  background-color: #fff;
-  color: #1e2124;
+  font-family: 'Noto Sans KR', sans-serif;
+  background-color: #ffffff;
+  margin: 0;
+  padding: 0;
 }
 
 /* 전체 wrapper */
 .container {
-  padding: 24px;
+  padding: 0;
   position: relative;
 }
 
@@ -37,38 +37,69 @@ body {
   font-weight: 700;
 }
 
+
 /* 가입 단계 */
 .step-indicator {
   display: flex;
-  gap: 56px;
+  gap: 40px;
   justify-content: center;
   align-items: center;
-  height: 204px;
+  margin: 40px 0 20px;
 }
-/* ,는 or  .step.current는 AND */
-.step, .step.current, .step_label {
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 500;
+  color: #a0a0a0;
+}
+.step.current {
+  font-weight: 700;
+  color: #2d4739;
+}
+.step_label {
   text-align: center;
   font-size: 32px;
   font-weight: 700;
-	
 }
-.current{
-	color: #a3ab94;    
+
+.step-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #dfe8dc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.step.current .step-circle {
+  background-color: #4a7153;
+  color: white;
+}
+.arrow {
+  width: 20px;
+  height: 20px;
+  opacity: 0.6;
+}
+
+.current {
+  color: #a3ab94;
 }
 .step-num {
   text-decoration: underline;
   font-weight: 700;
-  color: #a3ab94;
+  color: #2d4739;
 }
 .arrow {
   width: 40px;
   height: 40px;
 }
 
-.vector {
-	width: 40px;
-	height: 40px;
-}
+
 /* 회원가입 완료 박스 */
 .complete-box {
   display: flex;

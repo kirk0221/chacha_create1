@@ -10,54 +10,53 @@
 <!-- Pretendard 폰트 (CDN 연결) -->
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css" />
-
-<!-- CSS 적용 -->
-<link rel="stylesheet" type="text/css"
-	href="${cpath}/resources/css/auth/join/joinInfo.css">
-<script
+	
+  <link rel="stylesheet" type="text/css" href="${cpath}/resources/css/auth/join/joinInfo.css">
+ <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script
 	src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
 </head>
 <body>
-	<div class="container">
+  <div class="container">
 
-		<!-- 상단 배너 -->
-		<div class="header-banner">
-			<div class="header-content">
-				<div class="logo-title-wrapper">
-					<img class="logo" src="${cpath}/resources/images/logo.png" />
-					<div class="page-title">회원가입하기</div>
-				</div>
-				<img class="header-illustration"
-					src="${cpath}/resources/images/illustration.png" />
-			</div>
-		</div>
+    <!-- 상단 배너 -->
+    <div class="header-banner">
+      <div class="header-content">
+        <div class="logo-title-wrapper">
+          <img class="logo" src="${cpath}/resources/images/logo.png" />
+          <div class="page-title">회원가입하기</div>
+        </div>
+        <img class="header-illustration" src="${cpath}/resources/images/illustration.png" />
+      </div>
+    </div>
 
-		<!-- 메인 컨텐츠 -->
-		<div class="main-wrapper">
-			<!-- 가입 단계 -->
-			<div class="step-indicator">
-				<div class="step">
-					01 <br /> 약관동의
-				</div>
-				<img class="arrow" src="${cpath}/resources/images/arrow-right.svg" />
-				<div class="step current">
-					<span><span class="step-num">02<br /></span><span
-						class="step-label">회원정보입력</span></span>
-				</div>
-				<img class="arrow" src="${cpath}/resources/images/arrow-right.svg" />
-				<div class="step">
-					03 <br /> 완료
-				</div>
-				<img class="arrow" src="${cpath}/resources/images/arrow-right.svg" />
-				<div class="step">
-					01 <br /> 판매자정보입력
-				</div>
-			</div>
+    <!-- 메인 컨텐츠 -->
+    <div class="main-wrapper">
+      <!-- 가입 단계 -->
+      <div class="step-indicator">
+  <div class="step">
+    <div class="step-circle">01</div>
+    <div class="step-label">약관동의</div>
+  </div>
+  <img class="arrow" src="${cpath}/resources/images/arrow-right.svg" />
+  <div class="step current">
+    <div class="step-circle">02</div>
+    <div class="step-label">회원정보입력</div>
+  </div>
+  <img class="arrow" src="${cpath}/resources/images/arrow-right.svg" />
+  <div class="step">
+    <div class="step-circle">03</div>
+    <div class="step-label">완료</div>
+  </div>
+  <img class="arrow" src="${cpath}/resources/images/arrow-right.svg" />
+  <div class="step">
+    <div class="step-circle">04</div>
+    <div class="step-label">판매자정보입력</div>
+  </div>
+</div>
 
-			<!-- 회원가입 입력 폼 -->
+      <!-- 회원가입 입력 폼 -->
 			<div class="register-wrapper">
 				<h2 class="title">회원님의 정보를 입력해주세요</h2>
 				<p class="subtitle">소셜정보로 원클릭 가입하기</p>
@@ -82,7 +81,7 @@
 							인증번호
 						</label>
 						<div class="signUp-input-area">
-							<input type="text" name="authKey" id="authKey" s
+							<input type="text" name="authKey" id="authKey"
 								placeholder="인증번호 입력" maxlength="6" autocomplete="off">
 
 							<button id="checkAuthKeyBtn" type="button">인증하기</button>
@@ -93,7 +92,7 @@
 
 
 					<div class="form-group">
-						<label>* 비밀번호</label> <input type="password"
+						<label>* 비밀번호(영문/숫자/특수문자 포함 8자 이상)</label> <input type="password"
 							placeholder="내용을 입력하세요" required>
 					</div>
 
@@ -103,11 +102,11 @@
 					</div>
 
 					<div class="form-group">
-						<label>사용자 이름</label> <input type="text" placeholder="내용을 입력하세요">
+						<label>사용자 이름</label> <input id="memberName" type="text" placeholder="내용을 입력하세요">
 					</div>
 
 					<div class="form-group">
-						<label>휴대전화번호</label> <input type="text" placeholder="내용을 입력하세요">
+						<label>휴대전화번호(01#-####-####)</label> <input type="text" placeholder="내용을 입력하세요">
 					</div>
 
 					<div class="form-group">
@@ -148,10 +147,13 @@
 					</div>
 				</form>
 			</div>
+      
+      
+    </div>
+  </div>
 
-		</div>
-	</div>
-	<script>
+  <!-- 스크립트: 모두 동의 시 각 항목 자동 체크 -->
+<script>
 	/*유효성 검사 진행 여부 확인용 객체*/
 	// => 모든 value가 true인 경우만 회원가입 진행
 	const checkObj = {
@@ -237,6 +239,13 @@
 	const contextPath = "${cpath}";
 	// 이메일 인증 버튼 클릭
 	$("#sendAuthKeyBtn").on("click", function() {
+		
+		if ($("#memberEmail").val().trim() === "") {
+	        alert("이메일을 먼저 입력해주세요.");
+	        $("#memberEmail").focus();
+	        return;
+	    }
+		
 	    authMin = 4;
 	    authSec = 59;
 	    clearInterval(authTimer); // 기존 타이머 제거
@@ -259,7 +268,7 @@
 	                authTimer = setInterval(() => {
 	                    let displayMin = authMin < 10 ? "0" + authMin : authMin;
 	                    let displaySec = authSec < 10 ? "0" + authSec : authSec;
-	                    authKeyMessage.innerText = `${displayMin}:${displaySec}`;
+	                    authKeyMessage.innerText = `\${displayMin}:\${displaySec}`;
 	
 	                    if (authMin === 0 && authSec === 0) {
 	                        clearInterval(authTimer);
@@ -304,6 +313,7 @@
 	                } else {
 	                    alert("인증번호가 일치하지 않습니다.");
 	                    checkObj.authKey = false;
+	                    $("#authKey").focus();
 	                }
 	            },
 	            error: function(xhr, status, error) {
@@ -313,6 +323,7 @@
 	        });
 	    } else {
 	        alert("인증 시간이 만료되었습니다. 다시 시도해주세요.");
+	        $("#memberEmail").focus();
 	    }
 	});
 	
@@ -379,11 +390,45 @@
 	$('#joinForm').on('submit', function(e) {
 	    e.preventDefault(); // 폼 기본 제출 막기
 	    
-	    // checkObj 모든 값이 true인지 확인
-	    const allValid = Object.values(checkObj).every(v => v === true);
-		console.log(checkObj);
-	    if (!allValid) {
-	      alert("입력 정보를 다시 확인하세요. 모든 항목이 올바르게 입력되어야 합니다.");
+	 // 각 항목별 검사 + 포커스 지정
+	    if (!checkObj.memberEmail) {
+	      alert("📧 이메일을 정확히 입력해주세요.");
+	      $('#memberEmail').focus();
+	      e.preventDefault();
+	      return;
+	    }
+	    if (!checkObj.authKey) {
+	      alert("🔐 이메일 인증을 완료해주세요.");
+	      $('#authKeyInput').focus(); // 실제 인증코드 입력 input ID가 다를 경우 수정
+	      e.preventDefault();
+	      return;
+	    }
+	    if (!checkObj.memberPwd) {
+	      alert("🔑 비밀번호는 8자 이상, 영문/숫자/특수문자를 모두 포함해야 합니다.");
+	      $passwordInput.focus();
+	      e.preventDefault();
+	      return;
+	    }
+	    if (!checkObj.memberName) {
+	      alert("👤 이름을 입력해주세요.");
+	      $nameInput.focus();
+	      e.preventDefault();
+	      return;
+	    }
+	    if (!checkObj.memberPhone) {
+	      alert("📱 휴대폰 번호를 정확히 입력해주세요. 예: 010-1234-5678");
+	      $phoneInput.focus();
+	      e.preventDefault();
+	      return;
+	    }
+	    if (!checkObj.memberRegi) {
+	      alert("🆔 주민등록번호 앞 6자리와 뒤 7자리를 올바르게 입력해주세요.");
+	      if (!/^\d{6}$/.test($rrnFront.val())) {
+	        $rrnFront.focus();
+	      } else {
+	        $rrnBack.focus();
+	      }
+	      e.preventDefault();
 	      return;
 	    }
 	
@@ -439,7 +484,7 @@
 	    	  data: JSON.stringify(data),
 	    	  success: function(response, textStatus, xhr) {
 	    	    if (xhr.status === 201 || response?.status === 201) {
-	    	      alert(response?.message);
+	    	      alert($('#memberName').val()+'님 회원가입을 축하합니다');
 	    	      if (userType === 'buyer') {
 	    	    	  window.location.href = contextPath + '/auth/join/complete';
 	    	    	} else if (userType === 'seller') {
@@ -447,7 +492,7 @@
 	    	    	}
 	    	    } else {
 	    	      // API 응답 형식은 맞지만 실패한 경우
-	    	      alert('전송 실패: ' + (response?.message || '알 수 없는 오류'));
+	    	      alert('회원가입 실패: ' + (response?.message || '알 수 없는 오류'));
 	    	    }
 	    	  },
 	    	  error: function(xhr, status, error) {
@@ -456,5 +501,7 @@
 	    	});
 	  });
 	</script>
+
+
 </body>
 </html>

@@ -13,43 +13,47 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <body>
-	<div class="container">
-		<!-- 상단 배너 -->
-		<div class="header-banner">
-			<div class="header-content">
-				<div class="logo-title-wrapper">
-					<img class="logo" src="${cpath}/resources/images/logo.png" />
-					<div class="page-title">회원가입하기</div>
-				</div>
-				<img class="header-illustration"
-					src="${cpath}/resources/images/illustration.png" />
-			</div>
-		</div>
+  <div class="container">
 
-		<!-- 메인 컨텐츠 -->
-		<div class="main-wrapper">
-			<!-- 가입 단계 -->
-			<div class="step-indicator">
-				<div class="step">
-					01 <br /> 약관동의
-				</div>
-				<img class="arrow" src="${cpath}/resources/images/arrow-right.svg" />
-				<div class="step">
-					02 <br /> 회원정보입력
-				</div>
-				<img class="arrow" src="${cpath}/resources/images/arrow-right.svg" />
-				<div class="step">
-					03 <br /> 완료
-				</div>
-				<img class="arrow" src="${cpath}/resources/images/arrow-right.svg" />
-				<div class="step current">
-					<span><span class="step-num">01<br /></span><span
-						class="step-label">판매자정보입력</span></span>
-				</div>
-			</div>
+    <!-- 상단 배너 -->
+    <div class="header-banner">
+      <div class="header-content">
+        <div class="logo-title-wrapper">
+          <img class="logo" src="${cpath}/resources/images/logo.png" />
+          <div class="page-title">회원가입하기</div>
+        </div>
+        <img class="header-illustration" src="${cpath}/resources/images/illustration.png" />
+      </div>
+    </div>
 
-		</div>
-		<form id="sellerinfo" class="seller-container">
+    <!-- 메인 컨텐츠 -->
+    <div class="main-wrapper">
+      <!-- 가입 단계 -->
+      <div class="step-indicator">
+  <div class="step">
+    <div class="step-circle">01</div>
+    <div class="step-label">약관동의</div>
+  </div>
+  <img class="arrow" src="${cpath}/resources/images/arrow-right.svg" />
+  <div class="step ">
+    <div class="step-circle">02</div>
+    <div class="step-label">회원정보입력</div>
+  </div>
+  <img class="arrow" src="${cpath}/resources/images/arrow-right.svg" />
+  <div class="step ">
+    <div class="step-circle">03</div>
+    <div class="step-label">완료</div>
+  </div>
+  <img class="arrow" src="${cpath}/resources/images/arrow-right.svg" />
+  <div class="step current">
+    <div class="step-circle">04</div>
+    <div class="step-label">판매자정보입력</div>
+  </div>
+</div>
+
+    
+
+			<form id="sellerinfo" class="seller-container">
 			<h2 class="main-title">판매자님의 추가 정보를 입력해주세요</h2>
 
 			<!-- ✅ 계좌 등록 -->
@@ -107,16 +111,14 @@
 				<div class="section-title">
 					<span class="check">✔</span> 나의 이력 등록하기
 				</div>
-				<p class="section-desc">판매자님의 작품 사진을 등록해주세요. 최대 5장 등록하실 수 있습니다.</p>
+				<p class="section-desc">판매자님의 작품 사진을 등록해주세요.</p>
 
 				<div class="career-wrapper">
-					<c:forEach begin="1" end="5" var="i">
-						<div class="career-box">
-							<div class="upload-placeholder">+</div>
-							<textarea class="career-text" placeholder="${i}번째 이력 설명"></textarea>
-							<div class="char-count">0/150</div>
-						</div>
-					</c:forEach>
+					<div class="career-box">
+						<div class="upload-placeholder">+</div><input type="file" id="fileInput" style="display: none;" />
+						<textarea class="career-text" placeholder="이력 설명"></textarea>
+						<div class="char-count">0/150</div>
+					</div>
 				</div>
 			</section>
 
@@ -126,14 +128,68 @@
 			</div>
 		</form>
 	</div>
+			
+		
+      
+      
+    </div>
 
+<script>
+	
+	$(document).ready(function () {
+		
+		//-----------------텍스트 길이 체크--------------		
+		$('.career-text').on('input', function() {
+	        const maxLength = 150;
+	        const currentLength = $(this).val().length;
+	        const charCountText = currentLength + '/' + maxLength;
+	        
+	        // 같은 부모요소 내의 .char-count에 글자수 업데이트
+	        $(this).siblings('.char-count').text(charCountText);
 
-	<script>
+	        // 150자 초과시 자르기 (선택사항)
+	        if (currentLength > maxLength) {
+	            $(this).val($(this).val().substring(0, maxLength));
+	            $(this).siblings('.char-count').text(maxLength + '/' + maxLength);
+	        }
+	    });
+
+		//-----------------사진 파일 실시간 반영(파일명 기준)--------------		
+		
+		  $('.upload-placeholder').on('click', function () {
+		    $('#fileInput').click();
+		  });
+		  $('#fileInput').on('change', function (e) {
+			  const file = e.target.files[0];
+			  if (!file) return;
+
+			  // 허용할 확장자 배열
+			  const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+
+			  // 파일명에서 확장자 추출 (소문자 변환)
+			  const fileName = file.name.toLowerCase();
+			  const extension = fileName.split('.').pop();
+
+			  if (!allowedExtensions.includes(extension)) {
+			    alert('jpg, jpeg, png, gif 형식의 이미지 파일만 선택할 수 있습니다.');
+			    $(this).val('');  // 선택 초기화
+			    return;
+			  }
+
+			  // 이미지 파일일 때 처리 (기존 미리보기 등)
+			  const reader = new FileReader();
+			  reader.onload = function (event) {
+			    $('.upload-placeholder').html(`<img src="${cpath}/resources/productImages/\${file.name}" style="width: 100%; height: 100%; object-fit: cover;">`);
+			  };
+			  reader.readAsDataURL(file);
+			});
+	});
 	const checkObj = {
 			"accountname": false
 		}
 	
 		$(function() {
+			
 			function checkmyinfo() {
 				const bank_code = $('#bankselect').val();
 				const bank_num = $('#accountnum').val();
@@ -221,7 +277,7 @@
        });
 	});
 
-	</script>
+</script>
 
 </body>
 </html>

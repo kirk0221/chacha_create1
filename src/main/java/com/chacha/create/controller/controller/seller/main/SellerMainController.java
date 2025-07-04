@@ -18,6 +18,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -36,12 +37,15 @@ import com.chacha.create.common.dto.error.ApiResponse;
 import com.chacha.create.common.dto.order.OrderSumDTO;
 import com.chacha.create.common.dto.product.ProductUpdateDTO;
 import com.chacha.create.common.dto.product.ProductWithImagesDTO;
+
 import com.chacha.create.common.dto.product.ProductlistDTO;
 import com.chacha.create.common.entity.product.ProductEntity;
 import com.chacha.create.common.enums.category.DCategoryEnum;
 import com.chacha.create.common.enums.category.TypeCategoryEnum;
 import com.chacha.create.common.enums.category.UCategoryEnum;
+
 import com.chacha.create.common.enums.error.ResponseCode;
+
 import com.chacha.create.service.seller.main.SellerMainService;
 import com.chacha.create.service.seller.product.ProductService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -176,9 +180,10 @@ public class SellerMainController {
     public String showProductDetailPage(@PathVariable String storeUrl,
                                         @PathVariable int productId,
                                         Model model) {
+		model.addAttribute("storeUrl",storeUrl);
         return "store/productDetail";
 	}
-	
+
 	// 판매 상품 수정 페이지 조회
 	@GetMapping("/productupdate/{productid}")
 	public String showProductUpdateForm(@PathVariable String storeUrl,
@@ -254,13 +259,15 @@ public class SellerMainController {
 	
 	// 판매 리뷰 관리
 	@GetMapping("/reviews")
-	public String showReviewPage() {
+	public String showReviewPage(@PathVariable String storeUrl, Model model) {
+		model.addAttribute("storeUrl",storeUrl);
 		return "store/seller/sellerReview";
 	}
 	
 	// 문의 메시지
 	@GetMapping("/chat")
-	public String showChatPage() {
+	public String showChatPage(@PathVariable String storeUrl, Model model) {
+		model.addAttribute("storeUrl",storeUrl);
 		return "store/chat";
 	}
 	
@@ -272,13 +279,15 @@ public class SellerMainController {
 	
 	// 공지사항목록
 	@GetMapping("/management/notices")
-	public String showNoticePage() {
+	public String showNoticePage(@PathVariable String storeUrl, Model model) {
+		model.addAttribute("storeUrl",storeUrl);
 		return "store/seller/sellerNotice";
 	}
 	
 	// 폐업
 	@GetMapping("/close")
-	public String showDonePage() {
+	public String showDonePage(@PathVariable String storeUrl, Model model) {
+		model.addAttribute("storeUrl",storeUrl);
 		return "store/seller/storeClose";
 	}
 	

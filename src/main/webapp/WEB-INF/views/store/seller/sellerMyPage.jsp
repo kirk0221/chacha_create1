@@ -21,43 +21,13 @@
 
 		<div class="main-area">
 			<div class="content-wrapper">
-				<nav class="sidebar">
-					<div class="profile-section" onclick="#" role="button" tabindex="0"
-						aria-label="스토어관리 페이지로 이동">
-						<img src="#" class="profile-img" />
-						<div class="store-name">수제대추고</div>
-					</div>
-					<ul class="menu-list">
-						<li><a href="${cpath}/${storeUrl}/seller/productinsert"><span
-								class="menu-text">상품등록</span><span class="arrow">></span></a></li>
-						<li><a href="${cpath}/${storeUrl}/seller/products"><span
-								class="menu-text">판매상품관리</span><span class="arrow">></span></a></li>
-						<li><a href="#"><span class="menu-text">주문/발송확인(취소/환불)</span><span
-								class="arrow">></span></a></li>
-						<li><a
-							href="${cpath}/${storeUrl}/seller/management/settlement"><span
-								class="menu-text">정산관리</span><span class="arrow">></span></a></li>
-						<li><a href="${cpath}/${storeUrl}/seller/chat"><span
-								class="menu-text">문의메시지</span><span class="arrow">></span></a></li>
-						<li><a href="${cpath}/${storeUrl}/seller/reviews"><span
-								class="menu-text">리뷰관리</span><span class="arrow">></span></a></li>
-						<li><a href="${cpath}/${storeUrl}/seller/management/notices"><span class="menu-text">공지사항목록</span><span
-								class="arrow">></span></a></li>
-						<li><a href="#"><span class="menu-text">스토어관리</span><span
-								class="arrow">></span></a></li>
-
-					</ul>
-					<div class="sidebar-footer">
-						<button class="btn-go-buyer"
-							onclick="location.href='${cpath}/${storeUrl}'">구매자페이지
-							이동</button>
-					</div>
-				</nav>
+			
+			<%-- ✅ 사이드바 인클루드 --%>
+    				<jsp:include page="/common/store_seller_sidenav.jsp" />
+    				
 				<main class="content">
 					<div class="content-inner">
 						<!-- 주문/배송 -->
-
-
 						<div class="member-box fixed-box">
 							<div class="member-header">
 								<div class="title-with-info">
@@ -69,7 +39,6 @@
 								</div>
 							</div>
 							<div class="member-body">
-
 
 
 								<div class="frame-1034">
@@ -92,52 +61,6 @@
 										</a>
 									</c:forEach>
 								</div>
-								<!-- <div class="frame-1034">
-									<a href="#" class="frame-1035 link-box">
-										<div class="ellipse-1">
-											<iconify-icon icon="mdi:file-document-outline"
-												class="icon-inner"></iconify-icon>
-										</div>
-										<div class="frame-1039">
-											<div class="div11">신규주문</div>
-											<div class="_1000">1000건</div>
-										</div>
-									</a> <a href="#" class="frame-1035 link-box">
-										<div class="ellipse-1">
-											<iconify-icon icon="mdi:clock-outline" class="icon-inner"></iconify-icon>
-										</div>
-										<div class="frame-1039">
-											<div class="div11">발송전</div>
-											<div class="_1000">1000건</div>
-										</div>
-									</a> <a href="#" class="frame-1035 link-box">
-										<div class="ellipse-1">
-											<iconify-icon icon="mdi:truck-check-outline"
-												class="icon-inner"></iconify-icon>
-										</div>
-										<div class="frame-1039">
-											<div class="div11">배송완료</div>
-											<div class="_1000">1000건</div>
-										</div>
-									</a> <a href="#" class="frame-1035 link-box">
-										<div class="ellipse-1">
-											<iconify-icon icon="mdi:close-circle-outline"
-												class="icon-inner"></iconify-icon>
-										</div>
-										<div class="frame-1039">
-											<div class="div11">취소요청</div>
-											<div class="_1000">1000건</div>
-										</div>
-									</a> <a href="#" class="frame-1035 link-box">
-										<div class="ellipse-1">
-											<iconify-icon icon="mdi:refresh-circle" class="icon-inner"></iconify-icon>
-										</div>
-										<div class="frame-1039">
-											<div class="div11">환불요청</div>
-											<div class="_1000">1000건</div>
-										</div>
-									</a>
-								</div> -->
 							</div>
 						</div>
 

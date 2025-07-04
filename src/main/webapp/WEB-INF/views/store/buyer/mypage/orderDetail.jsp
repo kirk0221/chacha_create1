@@ -7,18 +7,10 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/store/buyer/mypage/orderDetail.css" />
 </head>
 <body>
+	<%@include file="/common/header.jsp" %>
+	<%@include file="/common/main_nav.jsp" %>
 <div class="order-detail-page">
   <div class="order-detail-layout">
-
-    <!-- 사이드 메뉴 -->
-    <aside class="sidebar-menu">
-      <div class="menu-item"><span>마이정보수정</span><span class="arrow">&gt;</span></div>
-      <div class="menu-item"><span>장바구니</span><span class="arrow">&gt;</span></div>
-      <div class="menu-item selected"><span>주문내역</span><span class="arrow">&gt;</span></div>
-      <div class="menu-item"><span>관심사 선택</span><span class="arrow">&gt;</span></div>
-      <div class="menu-item"><span>작성 리뷰 확인</span><span class="arrow">&gt;</span></div>
-    </aside>
-
     <!-- 주문 상세 내용 -->
     <section class="order-detail-content">
 
@@ -121,5 +113,86 @@
 
   </div>
 </div>
+
+<script>
+$(document).ready(function () {
+  const orderId = '${orderId}'; // 모델에서 전달된 주문 ID
+
+  $.ajax({
+    url: '${cpath}/api/main/mypage/orderdetail/' + orderId,
+    method: 'GET',
+    success: function (res) {
+      if (res.status === 200) {
+        const data = res.data;
+		canReview = data.canWriteReview;
+        // 주문 날짜와 번호 표시
+        const orderDate = new Date(data.orderDate).toLocaleDateString();
+        $('.section-block').eq(0).find('.product-desc').text(orderDate);
+        $('.section-block').eq(0).find('p strong').text(data.orderId);
+
+        // 배송지 정보 표시
+        $('.section-block').eq(2).html(`
+          <p><strong>\${data.orderName}</strong></p>
+          <div class="product-desc">\${data.orderPhone}</div>
+          <p>\${data.addressRoad} \${data.addressDetail} \${data.addressExtra}</p>
+        `);
+
+        // 결제 정보 표시
+        $('.payment-summary').html(`
+          <div class="payment-total">
+            <span>총 결제 금액</span>
+            <span>\${data.totalAmount.toLocaleString()} 원</span>
+          </div>
+          <div class="payment-detail">
+            <span class="label">상품 금액</span>
+            <span class="value">\${data.totalAmount.toLocaleString()} 원</span>
+          </div>
+          <div class="payment-detail">
+            <span class="label">배송비</span>
+            <span class="value">0 원</span>
+          </div>
+          <hr class="payment-divider"/>
+          <div class="payment-detail">
+            <span class="label">카드 결제</span>
+            <span class="value">\${data.totalAmount.toLocaleString()} 원</span>
+          </div>
+          <div class="payment-note">
+            \${data.cardCompany ? data.cardCompany : ''} \${data.maskedCardNum ? '(' + data.maskedCardNum + ')' : ''}
+          </div>
+        `);
+
+        // 주문 상품 목록 렌더링
+        const $productList = $('.section-block').eq(1);
+        $productList.empty(); // 기존 dummy 상품 제거
+        data.orderItems.forEach(item => {
+        	productid = parseInt(`\${item.productId}`);
+          const productItemHtml = `
+            <div class="product-item">
+              <div class="product-box">
+                <img src="${cpath}/resources/images/\${item.pimgUrl}" class="product-image" />
+                <div class="product-info">
+                  <div class="store-name">\${item.storeName}</div>
+                  <div class="product-name">\${item.productName}</div>
+                  <div class="product-desc">\${item.productDetail}</div>
+                  <div class="product-price">₩ \${item.orderPrice.toLocaleString()}</div>
+                </div>
+                <div class="review-wrapper">
+                  \${canReview ? '<button class="review-button" onclick="location.href=`${cpath}/main/productdetail/\${productid}`">리뷰 쓰기</button>' : ''}
+                </div>
+              </div>
+            </div>
+          `;
+          $productList.append(productItemHtml);
+        });
+      } else {
+        alert("주문 정보를 불러오지 못했습니다.");
+      }
+    },
+    error: function () {
+      alert("서버 오류로 인해 주문 정보를 불러올 수 없습니다.");
+    }
+  });
+});
+</script>
 </body>
 </html>

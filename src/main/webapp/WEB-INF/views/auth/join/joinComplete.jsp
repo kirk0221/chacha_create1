@@ -11,40 +11,45 @@
 	href="${cpath}/resources/css/auth/join/joinComplete.css">
 </head>
 <body>
-	<div class="container">
-		<!-- 상단 배너 -->
-		<div class="header-banner">
-			<div class="header-content">
-				<div class="logo-title-wrapper">
-					<img class="logo" src="${cpath}/resources/images/logo.png" />
-					<div class="page-title">회원가입하기</div>
-				</div>
-				<img class="header-illustration"
-					src="${cpath}/resources/images/illustration.png" />
-			</div>
-		</div>
+  <div class="container">
 
-		<!-- 메인 컨텐츠 -->
-		<div class="main-wrapper">
-			<!-- 가입 단계 -->
-			<div class="step-indicator">
-				<div class="step">
-					01 <br /> 약관동의
-				</div>
-				<img class="arrow" src="${cpath}/resources/images/arrow-right.svg" />
-				<div class="step">
-					02 <br /> 회원정보입력
-				</div>
-				<img class="arrow" src="${cpath}/resources/images/arrow-right.svg" />
-				<div class="step current">
-					<span><span class="step-num">03<br /></span><span
-						class="step-label">완료</span></span>
-				</div>
-				<img class="arrow" src="${cpath}/resources/images/arrow-right.svg" />
-				<div class="step">
-					01 <br /> 판매자정보입력
-				</div>
-			</div>
+    <!-- 상단 배너 -->
+    <div class="header-banner">
+      <div class="header-content">
+        <div class="logo-title-wrapper">
+          <img class="logo" src="${cpath}/resources/images/logo.png" />
+          <div class="page-title">회원가입하기</div>
+        </div>
+        <img class="header-illustration" src="${cpath}/resources/images/illustration.png" />
+      </div>
+    </div>
+
+    <!-- 메인 컨텐츠 -->
+    <div class="main-wrapper">
+      <!-- 가입 단계 -->
+      <div class="step-indicator">
+  <div class="step">
+    <div class="step-circle">01</div>
+    <div class="step-label">약관동의</div>
+  </div>
+  <img class="arrow" src="${cpath}/resources/images/arrow-right.svg" />
+  <div class="step ">
+    <div class="step-circle">02</div>
+    <div class="step-label">회원정보입력</div>
+  </div>
+  <img class="arrow" src="${cpath}/resources/images/arrow-right.svg" />
+  <div class="step current">
+    <div class="step-circle">03</div>
+    <div class="step-label">완료</div>
+  </div>
+  <img class="arrow" src="${cpath}/resources/images/arrow-right.svg" />
+  <div class="step">
+    <div class="step-circle">04</div>
+    <div class="step-label">판매자정보입력</div>
+  </div>
+</div>
+
+    
 
 			<!-- ✅ 추가된 회원가입 완료 안내 영역 -->
 			<div class="complete-box">
@@ -54,7 +59,10 @@
 				<button class="btn-move" onclick="location.href='${cpath}/main'">
 					쇼핑몰 이동하기</button>
 			</div>
-		</div>
-	</div>
+		
+      
+      
+    </div>
+  </div>
 </body>
 </html>

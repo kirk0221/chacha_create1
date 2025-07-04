@@ -26,11 +26,22 @@
       <section class="intro-section">
         <h2>🏠 나만의 스토어를 런칭하세요</h2>
         <p>간단한 절차만 거치면 누구나 자신의 상품을 판매할 수 있습니다!</p>
+         <div class="intro-flex">
         <ul>
           <li>수수료 0원 (한시적)</li>
           <li>한 번 등록하면, 별도 검수 없이 1일 이내 등록 가능</li>
           <li>정산 및 배송 시스템은 플랫폼이 책임</li>
         </ul>
+        
+         <!-- ✅ 추가 버튼 -->
+	    <c:if test="${not empty sessionScope.loginMember}">
+		  <div class="start-button-wrapper">
+		    <a href="${cpath}/main/store/openform" class="start-sell-btn">스토어 런칭하기</a>
+		  </div>
+	  	</c:if>
+	  	</div>
+		  
+		  
         <div class="tip-box">
           ※ 판매자는 상품의 내용과 배송 정보를 성실히 기재해야 하며, 허위 정보 등록 시 제재를 받을 수 있습니다.
         </div>
@@ -64,6 +75,7 @@
         <p>상품이 판매되면 정산 및 배송 처리는 자동으로 관리됩니다.</p>
         <img src="resources/images/step5.jpg" alt="step5">
       </div>
+     
     </section>
     </main>
   </div>
@@ -80,5 +92,6 @@
     </div>
   </footer>
 </body>
+
 
 </html>

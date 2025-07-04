@@ -81,162 +81,7 @@
     
 <!--  스토어 목록 -->
 <div class="store-grid-container">
-  <!-- store-card는 반복 요소 -->
-<!-- 스토어 정보 섹션이 들어가는 곳 -->
 
-<!-- 테스트용 -->
-  <div class="store-card">
-    <div class="store-image"><img class="product-img" src="${cpath}/resources/images/chat_bg3.jpg" /></div> <!-- 대표 이미지 -->
-    <div class="store-content">
-      <h2 class="store-name">스토어명</h2>
-      <div class="store-categories">
-        <span class="category">카테고리1</span>
-        <span class="category">카테고리2</span>
-        <span class="category">카테고리3</span>
-      </div>
-      <div class="store-description">
-        블라블라 스토어 간단한 설명<br>
-        블라블라 스토어 간단한 설명<br>
-        블라블라 스토어 간단한 설명
-      </div>
-    </div>
-  </div>
-
-  <div class="store-card">
-    <div class="store-image"><img class="product-img" src="${cpath}/resources/images/chat_bg3.jpg" /></div> <!-- 대표 이미지 -->
-    <div class="store-content">
-      <h2 class="store-name">스토어명</h2>
-      <div class="store-categories">
-        <span class="category">카테고리1</span>
-        <span class="category">카테고리2</span>
-        <span class="category">카테고리3</span>
-      </div>
-      <div class="store-description">
-        블라블라 스토어 간단한 설명<br>
-        블라블라 스토어 간단한 설명<br>
-        블라블라 스토어 간단한 설명
-      </div>
-    </div>
-  </div>
-
-  <div class="store-card">
-    <div class="store-image"><img class="product-img" src="${cpath}/resources/images/chat_bg3.jpg" /></div> <!-- 대표 이미지 -->
-    <div class="store-content">
-      <h2 class="store-name">스토어명</h2>
-      <div class="store-categories">
-        <span class="category">카테고리1</span>
-        <span class="category">카테고리2</span>
-        <span class="category">카테고리3</span>
-      </div>
-      <div class="store-description">
-        블라블라 스토어 간단한 설명<br>
-        블라블라 스토어 간단한 설명<br>
-        블라블라 스토어 간단한 설명
-      </div>
-    </div>
-  </div>
-
-  <div class="store-card">
-    <div class="store-image"><img class="product-img" src="${cpath}/resources/images/chat_bg3.jpg" /></div> <!-- 대표 이미지 -->
-    <div class="store-content">
-      <h2 class="store-name">스토어명</h2>
-      <div class="store-categories">
-        <span class="category">카테고리1</span>
-        <span class="category">카테고리2</span>
-        <span class="category">카테고리3</span>
-      </div>
-      <div class="store-description">
-        블라블라 스토어 간단한 설명<br>
-        블라블라 스토어 간단한 설명<br>
-        블라블라 스토어 간단한 설명
-      </div>
-    </div>
-  </div>
-
-  <div class="store-card">
-    <div class="store-image"><img class="product-img" src="${cpath}/resources/images/chat_bg3.jpg" /></div> <!-- 대표 이미지 -->
-    <div class="store-content">
-      <h2 class="store-name">스토어명</h2>
-      <div class="store-categories">
-        <span class="category">카테고리1</span>
-        <span class="category">카테고리2</span>
-        <span class="category">카테고리3</span>
-      </div>
-      <div class="store-description">
-        블라블라 스토어 간단한 설명<br>
-        블라블라 스토어 간단한 설명<br>
-        블라블라 스토어 간단한 설명
-      </div>
-    </div>
-  </div>
-
-  <div class="store-card">
-    <div class="store-image"><img class="product-img" src="${cpath}/resources/images/chat_bg3.jpg" /></div> <!-- 대표 이미지 -->
-    <div class="store-content">
-      <h2 class="store-name">스토어명</h2>
-      <div class="store-categories">
-        <span class="category">카테고리1</span>
-        <span class="category">카테고리2</span>
-        <span class="category">카테고리3</span>
-      </div>
-      <div class="store-description">
-        블라블라 스토어 간단한 설명<br>
-        블라블라 스토어 간단한 설명<br>
-        블라블라 스토어 간단한 설명
-      </div>
-    </div>
-  </div>
-
-  <div class="store-card">
-    <div class="store-image"><img class="product-img" src="${cpath}/resources/images/chat_bg3.jpg" /></div> <!-- 대표 이미지 -->
-    <div class="store-content">
-      <h2 class="store-name">스토어명</h2>
-      <div class="store-categories">
-        <span class="category">카테고리1</span>
-        <span class="category">카테고리2</span>
-        <span class="category">카테고리3</span>
-      </div>
-      <div class="store-description">
-        블라블라 스토어 간단한 설명<br>
-        블라블라 스토어 간단한 설명<br>
-        블라블라 스토어 간단한 설명
-      </div>
-    </div>
-  </div>
-
-  <div class="store-card">
-    <div class="store-image"><img class="product-img" src="${cpath}/resources/images/chat_bg3.jpg" /></div> <!-- 대표 이미지 -->
-    <div class="store-content">
-      <h2 class="store-name">스토어명</h2>
-      <div class="store-categories">
-        <span class="category">카테고리1</span>
-        <span class="category">카테고리2</span>
-        <span class="category">카테고리3</span>
-      </div>
-      <div class="store-description">
-        블라블라 스토어 간단한 설명<br>
-        블라블라 스토어 간단한 설명<br>
-        블라블라 스토어 간단한 설명
-      </div>
-    </div>
-  </div>
-
-  <div class="store-card">
-    <div class="store-image"><img class="product-img" src="${cpath}/resources/images/chat_bg3.jpg" /></div> <!-- 대표 이미지 -->
-    <div class="store-content">
-      <h2 class="store-name">스토어명</h2>
-      <div class="store-categories">
-        <span class="category">카테고리1</span>
-        <span class="category">카테고리2</span>
-        <span class="category">카테고리3</span>
-      </div>
-      <div class="store-description">
-        블라블라 스토어 간단한 설명<br>
-        블라블라 스토어 간단한 설명<br>
-        블라블라 스토어 간단한 설명
-      </div>
-    </div>
-  </div>
 
 </div>
 
@@ -324,6 +169,54 @@ const categorySection = document.getElementById('category-section');
 toggleCategoryBtn.addEventListener('click', () => {
   categorySection.classList.toggle('category-hidden');
 });
+
+
+// --------------스토어 목록--------------------
+$(document).ready(function () {
+	  $.ajax({
+	    url: '${cpath}/api/main/store/stores',
+	    method: 'GET',
+        contentType: 'application/json',
+	    success: function (response) {
+	      if (response.status === 200) {
+	        const storeList = response.data;
+	        const container = $('.store-grid-container');
+	        container.empty(); // 기존 카드 제거
+
+	        storeList.forEach(store => {
+	          const card = `
+	        	  <div class="store-card" data-url="\${store.storeUrl}">
+	              <div class="store-image">
+	                <img class="product-img" src="${cpath}/resources/productImages/\${store.logoImg}" alt="${store.storeName}" />
+	              </div>
+	              <div class="store-content">
+	                <h2 class="store-name">\${store.storeName}</h2>
+	                <div class="store-categories">
+	                  <span class="category">판매수: \${store.saleCnt}</span>
+	                  <span class="category">조회수: \${store.viewCnt}</span>
+	                </div>
+	                <div class="store-description">
+	                  ${store.storeDetail}
+	                </div>
+	              </div>
+	            </div>
+	          `;
+	          container.append(card);
+	        });
+		    $('.store-card').on('click', function () {
+		        const storeUrl = $(this).data('url');
+		        window.location.href = `${cpath}/\${storeUrl}`;
+		      });
+	      } else {
+	        $('.store-grid-container').html('<p>스토어가 없습니다.</p>');
+	      }
+	    },
+	    error: function (xhr, status, error) {
+	      console.error('스토어 목록 불러오기 실패:', error);
+	      $('.store-grid-container').html('<p>스토어 목록을 불러오는 중 오류가 발생했습니다.</p>');
+	    }
+	  });
+	});
 </script>
 
 

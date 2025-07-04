@@ -2,12 +2,11 @@
 
 /* ========== 공통 설정 ========== */
 body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background-color: #ffffff;
   margin: 0;
   padding: 0;
-  font-family: 'Inter', 'Noto Sans KR', sans-serif;
-  background-color: #fff;
 }
-
 * {
   box-sizing: border-box;
 }
@@ -146,14 +145,14 @@ body {
 
 
 /* 구분선 hr */
-.divider {
+/* .divider {
   width: 100%;
-  max-width: 1200px; /* 스토어명 밑줄과 길이 맞춤 */
-  height: 2px; /* 조금 더 굵게 */
-  background-color: #888888; /* 진한 회색 */
+  max-width: 1200px; 스토어명 밑줄과 길이 맞춤
+  height: 2px; 조금 더 굵게
+  background-color: #888888; 진한 회색
   border: none;
   margin: 40px auto;
-}
+} */
 
 /* ========== 정렬 탭 ========== */
 

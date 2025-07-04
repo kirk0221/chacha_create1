@@ -8,27 +8,27 @@
 <aside class="sidebar">
   <ul>
     <li>
-      <a href="${cpath}/main/mypage"
+      <a href="${cpath}/${storeUrl}/mypage"
          class="${fn:contains(uri, '/main/mypage') and not fn:contains(uri, '/main/mypage/') ? 'active' : ''}">
          마이정보수정</a>
     </li>
     <li>
-      <a href="${cpath}/main/mypage/cart"
+      <a href="${cpath}/${storeUrl}/mypage/cart"
          class="${fn:contains(uri, '/mypage/cart') ? 'active' : ''}">
          장바구니</a>
     </li>
     <li>
-      <a href="${cpath}/main/mypage/orders"
+      <a href="${cpath}/${storeUrl}/mypage/orders"
          class="${fn:contains(uri, '/mypage/orders') ? 'active' : ''}">
          주문내역</a>
     </li>
     <li>
-      <a href="${cpath}/main/mypage/favorite"
+      <a href="${cpath}/${storeUrl}/mypage/favorite"
          class="${fn:contains(uri, '/mypage/favorite') ? 'active' : ''}">
          관심사 선택</a>
     </li>
     <li>
-      <a href="${cpath}/main/mypage/myreview"
+      <a href="${cpath}/${storeUrl}/mypage/myreview"
          class="${fn:contains(uri, '/mypage/myreview') ? 'active' : ''}">
          작성 리뷰 확인</a>
     </li>

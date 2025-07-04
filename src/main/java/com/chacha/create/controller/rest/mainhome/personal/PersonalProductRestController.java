@@ -85,4 +85,9 @@ public class PersonalProductRestController {
 			return ResponseEntity.status(ResponseCode.FAIL.getStatus()).body(new ApiResponse<>(ResponseCode.FAIL, 0));
 		}
 	}
+	
+	@GetMapping("/category")
+	public ResponseEntity<ApiResponse<Map<String, Object>>> categoryMap(){
+		return ResponseEntity.ok(new ApiResponse<Map<String, Object>>(ResponseCode.OK, personalProductService.categoryList()));
+	}
 }

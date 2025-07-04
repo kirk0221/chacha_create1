@@ -13,7 +13,7 @@ public class MainPageSellController {
 
     
 	// 개인 판매 홈 ( /main/sell )
-    @GetMapping("sellguide")
+    @GetMapping("/sellguide")
     public String personalSellHome() {
         return "main/personal/personalSellInfo";
     }
@@ -35,4 +35,5 @@ public class MainPageSellController {
     public String settlementPage() {
         return "main/personal/personalSettlement";
     }
+
 }
