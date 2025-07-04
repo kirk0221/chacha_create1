@@ -133,7 +133,7 @@ public class MessageService {
 				.memberId(memberEntity.getMemberId())
 				.build();
 		
-		messageDTOs = messageMapper.selectForMemberWithStoreAllMessage(messageDTO);
+		messageDTOs = messageMapper.selectForMemberWithChatroomIdAllMessage(messageDTO);
 		
 		return messageDTOs;
 	}

@@ -41,22 +41,7 @@
                 <h3>차팀장</h3>
               </div>
               <div class="chat-messages">
-                <div class="message received">
-                  <p class="message-text">천 조원 잘 되어가나요?</p>
-                  <span class="message-time">8:00 PM</span>
-                </div>
-                <div class="message received">
-                  <p class="message-text">너 나약하지 않잖아</p>
-                  <span class="message-time">8:00 PM</span>
-                </div>
-                <div class="message sent">
-                  <p class="message-text">차팀장 님 도저히 못 하겠어요</p>
-                  <span class="message-time">8:01 PM</span>
-                </div>
-                <div class="message sent">
-                  <p class="message-text">제발 그만</p>
-                  <span class="message-time">8:01 PM</span>
-                </div>
+
               </div>
               <div class="chat-input">
                 <input type="text" placeholder="메시지를 입력하세요">
@@ -80,6 +65,15 @@ let socket = null;
 let currentRoomId = null;
 
 $(document).ready(function() {
+	
+	//---------------엔터시 전송--------------
+	$(".chat-input input").on("keydown", function(e) {
+	    if (e.key === "Enter") {
+	        e.preventDefault();  // 기본 엔터 동작(줄바꿈 등) 방지
+	        $(".chat-input button").click();  // 전송 버튼 클릭 이벤트 실행
+	    }
+	});
+
     // 채팅방 목록 불러오기
     $.ajax({
         url: '${cpath}/api/main/message/chatrooms',
@@ -94,7 +88,7 @@ $(document).ready(function() {
                     const itemHtml = `
                         <li class="chat-room-item" data-room-id="\${room.chatroomId}" data-store-url="\${room.storeUrl}">
                             <div class="chat-room-name">\${room.storeName}</div>
-                            <div class="chat-room-preview">\${room.chattingText}</div>
+                            <div class="chat-room-preview" data-room-id="\${room.chatroomId}">\${room.chattingText}</div>
                         </li>
                     `;
                     $list.append(itemHtml);
@@ -108,8 +102,16 @@ $(document).ready(function() {
         }
     });
 
+    
+	 // 채팅방 preview 업데이트 함수
+	    function updateChatRoomPreview(roomId, text) {
+	        // 현재 방의 preview 텍스트를 최신 메시지로 변경
+	        $(`.chat-room-item[data-room-id="${roomId}"] .chat-room-preview`).text(text);
+	    }
+
     // 채팅방 클릭 시 WebSocket 연결
     $(document).on('click', '.chat-room-item', function() {
+        console.log('${sessionScope.loginMember}');
         currentRoomId = $(this).data('room-id');
 
         // 기존 연결 닫기
@@ -118,10 +120,7 @@ $(document).ready(function() {
         }
 
         // WebSocket 연결 생성
-        
-        socket = new WebSocket(`${location.origin.replace("http", "ws")}/create/chatserver?chatroomId=2`);
-        // socket = new WebSocket('${pageContext.request.scheme}://localhost:9999${pageContext.request.contextPath}/chatserver?chatroomId=' + currentRoomId);
-        // socket = new WebSocket('ws://localhost:9999/create/chatserver?chatroomId=' + currentRoomId);
+        socket = new WebSocket('ws://localhost:9999/create/chat/chatserver?chatroomId=' + currentRoomId);
 
         socket.onopen = function() {
             console.log('WebSocket 연결됨: ' + currentRoomId);
@@ -130,13 +129,17 @@ $(document).ready(function() {
 
         socket.onmessage = function(event) {
             const msg = JSON.parse(event.data);
+            const formattedDate = formatDate(msg.chattingDate);
             const messageHtml = `
                 <div class="message received">
-                    <p class="message-text">\${msg.message}</p>
-                    <span class="message-time">\${msg.time}</span>
+                    <p class="message-text">\${msg.chattingText}</p>
+                    <span class="message-time">'\${formattedDate}'</span>
                 </div>
             `;
-            $(".chat-messages").append(messageHtml);
+            const $chatMessages = $(".chat-messages");
+            $chatMessages.append(messageHtml);
+            $chatMessages.scrollTop($chatMessages[0].scrollHeight);  // 자동 스크롤
+            updateChatRoomPreview(currentRoomId, '\${msg.chattingText}'); // preview 업데이트
         };
 
         socket.onclose = function() {
@@ -157,21 +160,40 @@ $(document).ready(function() {
         }
 
         const sendData = {
-            roomId: currentRoomId,
-            message: message
+            chatroomId: currentRoomId,
+            chattingText: message
         };
 
         socket.send(JSON.stringify(sendData));
 
+        const now = new Date();
+        const formattedNow = formatDate(now.toISOString());
         const messageHtml = `
             <div class="message sent">
                 <p class="message-text">\${message}</p>
-                <span class="message-time">지금</span>
+                <span class="message-time">\${formattedNow}</span>
             </div>
         `;
-        $(".chat-messages").append(messageHtml);
         $(".chat-input input").val('');
+        const $chatMessages = $(".chat-messages");
+        $chatMessages.append(messageHtml);
+        $chatMessages.scrollTop($chatMessages[0].scrollHeight);  // 자동 스크롤
+        updateChatRoomPreview(currentRoomId, message); // preview 업데이트
     });
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        const pad = (n) => n.toString().padStart(2, '0');
+
+        const year = date.getFullYear();
+        const month = pad(date.getMonth() + 1); // 월은 0부터 시작
+        const day = pad(date.getDate());
+        const hours = pad(date.getHours());
+        const minutes = pad(date.getMinutes());
+        const seconds = pad(date.getSeconds());
+
+        return `\${year}/\${month}/\${day} \${hours}:\${minutes}:\${seconds}`;
+    }
+
 });
 </script>
 

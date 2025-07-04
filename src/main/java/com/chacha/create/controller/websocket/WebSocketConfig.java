@@ -53,7 +53,7 @@ public class WebSocketConfig implements WebSocketConfigurer {
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
     	log.info("chatserver 생성");
-        registry.addHandler(chatHandler, "/create/chatserver")
+        registry.addHandler(chatHandler, "/chat/chatserver")
                 .setAllowedOrigins("*")
                 .addInterceptors(handshakeInterceptor);
     }
