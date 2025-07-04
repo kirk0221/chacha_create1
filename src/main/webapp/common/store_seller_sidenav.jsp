@@ -144,7 +144,7 @@
       <ul class="submenu">
         <li><a href="${cpath}/${storeUrl}/seller/orders">주문/발송 확인</a></li>
         <li><a href="${cpath}/${storeUrl}/seller/refunds">환불 관리</a></li>
-        <li><a href="${cpath}/${storeUrl}/seller/refunds">정산 관리</a></li>
+        <li><a href="${cpath}/${storeUrl}/seller/management/settlement">정산 관리</a></li>
       </ul>
     </li>
 
@@ -155,7 +155,7 @@
         <span class="arrow">▼</span>
       </a>
       <ul class="submenu">
-        <li><a href="${cpath}/${storeUrl}/seller/management/settlement">문의 메시지</a></li>
+        <li><a href="${cpath}/${storeUrl}/seller/message">문의 메시지</a></li>
         <li><a href="${cpath}/${storeUrl}/seller/reviews">스토어 관리</a></li>
       </ul>
     </li>
