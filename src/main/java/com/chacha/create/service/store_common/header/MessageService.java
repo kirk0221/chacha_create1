@@ -134,7 +134,7 @@ public class MessageService {
 				.build();
 		
 		messageDTOs = messageMapper.selectForMemberWithChatroomIdAllMessage(messageDTO);
-		
+		log.info(messageDTOs.toString());
 		return messageDTOs;
 	}
 	

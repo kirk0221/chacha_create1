@@ -29,7 +29,7 @@
             <div class="chat-sidebar">
               <h2>채팅방</h2>
               <div class="chat-search">
-                <input type="text" placeholder="채팅방 검색">
+                <input type="text" id='chat-search-input' placeholder="채팅방 검색">
               </div>
               <ul id="chat-room-list" class="chat-room-list">
               </ul>
@@ -38,7 +38,7 @@
             <!-- 채팅방 내용 -->
             <div class="chat-main">
               <div class="chat-header">
-                <h3>차팀장</h3>
+                <h3></h3>
               </div>
               <div class="chat-messages">
 
@@ -74,7 +74,7 @@ $(document).ready(function() {
 	    }
 	});
 
-    // 채팅방 목록 불러오기
+//-------------------채팅방 목록 불러오기----------------------------------
     $.ajax({
         url: '${cpath}/api/main/message/chatrooms',
         method: 'GET',
@@ -102,17 +102,35 @@ $(document).ready(function() {
         }
     });
 
+ // ---------------- 채팅방 검색 기능 ----------------
+    $("#chat-search-input").on("input", function() {
+        const keyword = $(this).val().toLowerCase();
+
+        $("#chat-room-list .chat-room-item").each(function() {
+            const roomName = $(this).find(".chat-room-name").text().toLowerCase();
+            if (roomName.includes(keyword)) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    });
     
-	 // 채팅방 preview 업데이트 함수
-	    function updateChatRoomPreview(roomId, text) {
+//-------------------------------채팅방 preview 업데이트 함수-------------------------------
+	    function updateChatRoomPreview(chatroomId, text) {
 	        // 현재 방의 preview 텍스트를 최신 메시지로 변경
-	        $(`.chat-room-item[data-room-id="${roomId}"] .chat-room-preview`).text(text);
+	        console.log(text);
+	        $(`.chat-room-item[data-room-id='\${chatroomId}'] .chat-room-preview`).text(text);
 	    }
 
-    // 채팅방 클릭 시 WebSocket 연결
+//------------------------채팅방 클릭 시 WebSocket 연결-------------------
     $(document).on('click', '.chat-room-item', function() {
         console.log('${sessionScope.loginMember}');
         currentRoomId = $(this).data('room-id');
+        
+        // ✅ 여기에 storeName 설정
+        const storeName = $(this).find('.chat-room-name').text();
+        $(".chat-header h3").text(storeName);
 
         // 기존 연결 닫기
         if (socket) {
@@ -129,17 +147,28 @@ $(document).ready(function() {
 
         socket.onmessage = function(event) {
             const msg = JSON.parse(event.data);
+            console.log(msg);
             const formattedDate = formatDate(msg.chattingDate);
-            const messageHtml = `
-                <div class="message received">
-                    <p class="message-text">\${msg.chattingText}</p>
-                    <span class="message-time">'\${formattedDate}'</span>
-                </div>
-            `;
+            let messageHtml = ``;
+            if(parseInt(msg.memberCheck) === 0){
+	            messageHtml = `
+	                <div class="message received">
+	                    <p class="message-text">\${msg.chattingText}</p>
+	                    <span class="message-time">\${formattedDate}</span>
+	                </div>
+	            `;
+            }else{
+                messageHtml = `
+                    <div class="message sent">
+                        <p class="message-text">\${msg.chattingText}</p>
+                        <span class="message-time">\${formattedDate}</span>
+                    </div>
+                `;
+            }
             const $chatMessages = $(".chat-messages");
             $chatMessages.append(messageHtml);
             $chatMessages.scrollTop($chatMessages[0].scrollHeight);  // 자동 스크롤
-            updateChatRoomPreview(currentRoomId, '\${msg.chattingText}'); // preview 업데이트
+            updateChatRoomPreview(currentRoomId.toString(), msg.chattingText); // preview 업데이트
         };
 
         socket.onclose = function() {
@@ -151,7 +180,7 @@ $(document).ready(function() {
         };
     });
 
-    // 메시지 전송
+// --------------------메시지 전송---------------------------------------
     $(".chat-input button").on("click", function() {
         const message = $(".chat-input input").val().trim();
         if (!message || !socket || socket.readyState !== WebSocket.OPEN) {
@@ -161,24 +190,13 @@ $(document).ready(function() {
 
         const sendData = {
             chatroomId: currentRoomId,
-            chattingText: message
+            chattingText: message,
+            memberCheck: 1
         };
-
-        socket.send(JSON.stringify(sendData));
-
-        const now = new Date();
-        const formattedNow = formatDate(now.toISOString());
-        const messageHtml = `
-            <div class="message sent">
-                <p class="message-text">\${message}</p>
-                <span class="message-time">\${formattedNow}</span>
-            </div>
-        `;
         $(".chat-input input").val('');
         const $chatMessages = $(".chat-messages");
-        $chatMessages.append(messageHtml);
+        socket.send(JSON.stringify(sendData));
         $chatMessages.scrollTop($chatMessages[0].scrollHeight);  // 자동 스크롤
-        updateChatRoomPreview(currentRoomId, message); // preview 업데이트
     });
     function formatDate(dateString) {
         const date = new Date(dateString);

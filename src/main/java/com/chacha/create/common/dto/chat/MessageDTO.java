@@ -19,4 +19,5 @@ public class MessageDTO {
 	private String chattingText;
 	private String storeUrl;
     private Date chattingDate;
+    private Integer memberCheck;
 }

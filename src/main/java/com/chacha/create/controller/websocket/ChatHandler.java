@@ -1,6 +1,9 @@
 package com.chacha.create.controller.websocket;
 
 import java.net.URI;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -115,6 +118,10 @@ public class ChatHandler extends TextWebSocketHandler {
         MessageDTO messageDTO = objectMapper.readValue(message.getPayload(), MessageDTO.class);
         messageDTO.setMemberId(loginMember.getMemberId());
         messageDTO.setChatroomId(chatroomId);
+        // 현재 시간(Date 타입) 설정
+        LocalDateTime now = LocalDateTime.now();
+        Date nowDate = Date.from(now.atZone(ZoneId.systemDefault()).toInstant());
+        messageDTO.setChattingDate(nowDate);
 
         // 메시지 저장
         messageService.makeChattingInMyPage(messageDTO);
