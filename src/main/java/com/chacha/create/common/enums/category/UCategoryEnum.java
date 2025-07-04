@@ -34,12 +34,11 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum UCategoryEnum {
 
-    //CRAFT(1, "공예"),
-    FASHION(2, "패션잡화"),
-    INTERIOR(3, "인테리어 소품"),
-    ACCESSORY(4, "악세서리"),
-    LIFESTYLE(5, "생활잡화"),
-    ETC(6, "기타");
+    FASHION(1, "패션잡화"),
+    INTERIOR(2, "인테리어 소품"),
+    ACCESSORY(3, "악세서리"),
+    LIFESTYLE(4, "생활잡화"),
+    ETC(5, "기타");
 
     /** DB의 u_category_id와 매핑되는 고유 ID */
     private final int id;
