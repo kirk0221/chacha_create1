@@ -41,5 +41,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <delete id="delete" parameterType="int">
         DELETE FROM p_img WHERE p_img_id = #{pimgId}
     </delete>
+    
+    <delete id="deleteImagesByProductId" parameterType="int">
+	  DELETE FROM p_img WHERE product_id = #{productId}
+	</delete>
 
 </mapper>

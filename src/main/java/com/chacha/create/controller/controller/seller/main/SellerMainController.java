@@ -1,14 +1,18 @@
 package com.chacha.create.controller.controller.seller.main;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,11 +20,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,6 +34,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.chacha.create.common.dto.error.ApiResponse;
 import com.chacha.create.common.dto.order.OrderSumDTO;
+import com.chacha.create.common.dto.product.ProductUpdateDTO;
 import com.chacha.create.common.dto.product.ProductWithImagesDTO;
 import com.chacha.create.common.dto.product.ProductlistDTO;
 import com.chacha.create.common.entity.product.ProductEntity;
@@ -37,6 +44,7 @@ import com.chacha.create.common.enums.category.UCategoryEnum;
 import com.chacha.create.common.enums.error.ResponseCode;
 import com.chacha.create.service.seller.main.SellerMainService;
 import com.chacha.create.service.seller.product.ProductService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -171,20 +179,72 @@ public class SellerMainController {
         return "store/productDetail";
 	}
 	
-	// 판매 상품 수정
-	@GetMapping("/productupdate/{productId}")
-    public String showProductUpdatePage(@PathVariable String storeUrl,
-                                        @PathVariable int productId,
-                                        Model model) {
-        return "store/seller/productUpdate";
+	// 판매 상품 수정 페이지 조회
+	@GetMapping("/productupdate/{productid}")
+	public String showProductUpdateForm(@PathVariable String storeUrl,
+	                                    @PathVariable int productid,
+	                                    Model model,
+	                                    HttpServletResponse response) throws IOException {
+	    ProductUpdateDTO product = productService.getProductDetail(storeUrl, productid);
+	    if (product == null) {
+	        response.setContentType("text/html;charset=UTF-8");
+	        PrintWriter out = response.getWriter();
+	        out.println("<script>alert('해당 상품을 수정할 권한이 없습니다.'); location.href='/create/" + storeUrl + "/seller/products';</script>");
+	        out.flush();
+	        return null;
+	    }
+
+	    ObjectMapper mapper = new ObjectMapper();
+	    String productJson = mapper.writeValueAsString(product); // JSON 문자열 생성
+
+	    model.addAttribute("product", product);
+	    model.addAttribute("productJson", productJson);
+	    model.addAttribute("storeUrl", storeUrl);
+	    model.addAttribute("typeCategories", TypeCategoryEnum.values());
+	    model.addAttribute("uCategories", UCategoryEnum.values());
+
+	    // 소분류 그룹핑
+	    Map<Integer, List<Map<String, Object>>> dCategoriesByU = Arrays.stream(DCategoryEnum.values())
+	        .collect(Collectors.groupingBy(
+	            d -> d.getUcategory().getId(),
+	            Collectors.mapping(d -> {
+	                Map<String, Object> map = new HashMap<>();
+	                map.put("id", d.getId());
+	                map.put("name", d.getName());
+	                return map;
+	            }, Collectors.toList())
+	        ));
+	    model.addAttribute("dCategoriesByU", dCategoriesByU);
+
+	    return "store/seller/productUpdate";
 	}
 	
+	// 판매자 페이지 상품 수정 기능 
+	@PostMapping("/productupdate/{productId}")
+	public ResponseEntity<?> updateProduct(
+	    @PathVariable String storeUrl,
+	    @PathVariable int productId,
+	    @RequestPart("dto") ProductUpdateDTO dto,
+	    @RequestPart(value = "images", required = false) List<MultipartFile> images,
+	    @RequestParam(value = "imageSeqs", required = false) List<Integer> imageSeqs
+	) {
+	    log.info("받은 productId: {}", dto.getProductId());
+
+	    // null 방어
+	    if (images == null) images = List.of();
+	    if (imageSeqs == null) imageSeqs = List.of();
+
+	    boolean success = productService.updateProductDetailWithImages(storeUrl, dto, images, imageSeqs);
+	    return success ? ResponseEntity.ok().build() : ResponseEntity.badRequest().build();
+	}
+	
+	
 	// 판매 정산 관리
-		@GetMapping("/management/settlement")
-	    public String showSellrSettlementPage(@PathVariable String storeUrl,
-	                                        Model model) {
-	        return "store/seller/sellerSettlement";
-		}
+	@GetMapping("/management/settlement")
+    public String showSellrSettlementPage(@PathVariable String storeUrl,
+                                        Model model) {
+        return "store/seller/sellerSettlement";
+	}
 	
 	// 판매 주문 목록 --- 추가 필요
 //	@GetMapping("/management/order")

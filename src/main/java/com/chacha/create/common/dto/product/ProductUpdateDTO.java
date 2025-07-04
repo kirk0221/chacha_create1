@@ -28,6 +28,9 @@ public class ProductUpdateDTO {
     private int stock;
 
     private TypeCategoryEnum typeCategoryId;
+    private String typeCategoryName;
 	private DCategoryEnum dcategoryId;
+	private String dcategoryName;
 	private UCategoryEnum ucategoryId;
+	private String ucategoryName;
 }
