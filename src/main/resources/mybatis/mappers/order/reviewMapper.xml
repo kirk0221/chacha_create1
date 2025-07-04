@@ -21,17 +21,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		review_id = #{reviewId}
 	</select>
 	
-	<select id="selectByMemberId" resultMap="reviewResultMap">
+	<select id="selectByMemberId" resultType="com.chacha.create.common.dto.product.ReviewDTO">
 		SELECT
 			r.review_id,
-			r.order_detail_id,
 			r.review_date,
-			r.review_text
-		FROM
-			review r
+			r.review_text,
+			p.product_name,
+			p.product_id,
+			pi.p_img_url,
+			s.store_url
+		FROM review r
 		JOIN order_detail od ON r.order_detail_id = od.order_detail_id
-		JOIN order_info o ON od.order_id = o.order_id
-		WHERE o.member_id = #{memberId}
+		JOIN order_info oi ON od.order_id = oi.order_id
+		JOIN product p ON od.product_id = p.product_id
+		JOIN store s ON p.store_id = s.store_id
+		LEFT JOIN p_img pi ON p.product_id = pi.product_id
+				AND pi.p_img_enum = 'THUMBNAIL'
+				AND pi.p_img_seq = 1
+		WHERE oi.member_id = #{memberId}
 		ORDER BY r.review_date DESC
 	</select>
 	

@@ -75,7 +75,7 @@
   </div>
   
   <!-- 리뷰 섹션 -->
-	<div class="review-section">
+	<div id="review" class="review-section">
 	  <h2>리뷰</h2>
 	
 	  <!-- 리뷰 작성 폼 -->
