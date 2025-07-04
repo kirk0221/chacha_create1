@@ -91,7 +91,6 @@ public class ChatHandler extends TextWebSocketHandler {
 
         log.info("채팅방 {}에 사용자 {} 입장", chatroomId, loginMember.getMemberId());
         List<MessageDTO> oldMessages = messageService.getMemberStoreAllMessage(loginMember, chatroomId);
-        log.info(oldMessages.get(0).toString());
         for (MessageDTO msg : oldMessages) {
             session.sendMessage(new TextMessage(objectMapper.writeValueAsString(msg)));
         }

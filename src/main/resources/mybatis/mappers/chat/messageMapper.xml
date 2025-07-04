@@ -56,14 +56,35 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    SELECT
 	        room.chatroom_id AS chatroomId,
 	        room.member_id AS memberId,
+	        m.member_name AS memberName,
 	        store.store_name AS storeName,
 	        store.store_url AS storeUrl,
 	        MAX(chat.chatting_text) KEEP (DENSE_RANK FIRST ORDER BY chat.chatting_date DESC) AS chattingText
 	    FROM chatroom room
 	    JOIN store store ON room.store_id = store.store_id
+	    JOIN member m ON room.member_id = m.member_id
 	    LEFT JOIN chatting chat ON room.chatroom_id = chat.chatroom_id
 	    WHERE room.member_id = #{memberId}
-	    GROUP BY room.chatroom_id, room.member_id, store.store_name, store.store_url
+	    GROUP BY room.chatroom_id, room.member_id, m.member_name, store.store_name, store.store_url
+	    ORDER BY MAX(chat.chatting_date) DESC
+	</select>
+	
+	<select id="selectForStoreNameByStoreUrl"
+	        resultType="chatRoomInfoDTO"
+	        parameterType="String">
+	    SELECT
+	        room.chatroom_id AS chatroomId,
+	        room.member_id AS memberId,
+	        m.member_name AS memberName,
+	        store.store_name AS storeName,
+	        store.store_url AS storeUrl,
+	        MAX(chat.chatting_text) KEEP (DENSE_RANK FIRST ORDER BY chat.chatting_date DESC) AS chattingText
+	    FROM chatroom room
+	    JOIN store store ON room.store_id = store.store_id
+	    JOIN member m ON room.member_id = m.member_id
+	    LEFT JOIN chatting chat ON room.chatroom_id = chat.chatroom_id
+	    WHERE store.store_url = #{storeUrl}
+	    GROUP BY room.chatroom_id, room.member_id, m.member_name, store.store_name, store.store_url
 	    ORDER BY MAX(chat.chatting_date) DESC
 	</select>
 
