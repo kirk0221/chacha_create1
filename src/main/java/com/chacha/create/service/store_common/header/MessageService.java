@@ -1,6 +1,8 @@
 package com.chacha.create.service.store_common.header;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -140,6 +142,12 @@ public class MessageService {
 	
 	public List<ChatRoomInfoDTO> getMemberAllChatroom(MemberEntity memberEntity){
 		List<ChatRoomInfoDTO> chattingrooms = messageMapper.selectForStoreNameByMemberId(memberEntity.getMemberId());
+		log.info(chattingrooms.toString());
+		return chattingrooms;
+	}
+
+	public List<ChatRoomInfoDTO> getMemberStoreAllChatroom(MemberEntity memberEntity, String storeUrl) {
+		List<ChatRoomInfoDTO> chattingrooms = messageMapper.selectForStoreNameByStoreUrl(storeUrl);
 		log.info(chattingrooms.toString());
 		return chattingrooms;
 	}

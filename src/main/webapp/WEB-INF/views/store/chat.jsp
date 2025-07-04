@@ -75,7 +75,7 @@ $(document).ready(function() {
 
 //-------------------채팅방 목록 불러오기----------------------------------
     $.ajax({
-        url: '${cpath}/api/main/message/chatrooms',
+        url: '${cpath}/api/${storeUrl}/message/chatrooms',
         method: 'GET',
         success: function(response) {
             if (response.status === 200) {
@@ -86,7 +86,7 @@ $(document).ready(function() {
                 chatrooms.forEach(room => {
                     const itemHtml = `
                         <li class="chat-room-item" data-room-id="\${room.chatroomId}" data-store-url="\${room.storeUrl}">
-                            <div class="chat-room-name">\${room.storeName}</div>
+                            <div class="chat-room-name">\${room.memberName}</div>
                             <div class="chat-room-preview" data-room-id="\${room.chatroomId}">\${room.chattingText}</div>
                         </li>
                     `;
@@ -127,9 +127,9 @@ $(document).ready(function() {
         console.log('${sessionScope.loginMember}');
         currentRoomId = $(this).data('room-id');
         
-        // ✅ 여기에 storeName 설정
-        const storeName = $(this).find('.chat-room-name').text();
-        $(".chat-header h3").text(storeName);
+        // ✅ 여기에 memberName 설정
+        const memberName = $(this).find('.chat-room-name').text();
+        $(".chat-header h3").text(memberName);
 
         // 기존 연결 닫기
         if (socket) {
@@ -149,7 +149,7 @@ $(document).ready(function() {
             console.log(msg);
             const formattedDate = formatDate(msg.chattingDate);
             let messageHtml = ``;
-            if(parseInt(msg.memberCheck) === 0){
+            if(parseInt(msg.memberCheck) === 1){
 	            messageHtml = `
 	                <div class="message received">
 	                    <p class="message-text">\${msg.chattingText}</p>
@@ -190,7 +190,7 @@ $(document).ready(function() {
         const sendData = {
             chatroomId: currentRoomId,
             chattingText: message,
-            memberCheck: 1
+            memberCheck: 0
         };
         $(".chat-input input").val('');
         const $chatMessages = $(".chat-messages");
