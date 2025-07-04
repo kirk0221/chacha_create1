@@ -100,7 +100,6 @@ public class ProductService {
     }
 	
     private final String imageSavePath = "C:/shinhan/install/springFramework/workSpace2/chacha_create1/src/main/webapp/resources/productImages";
-    private final String imageWebPath = "/resources/productImages/";
 
     @Transactional(rollbackFor = Exception.class)
     public int registerMultipleProductsWithImages(String storeUrl, List<ProductWithImagesDTO> requestList) {
@@ -129,7 +128,7 @@ public class ProductService {
 
                 try {
                     String savedFileName = saveImageFile(file);
-                    String imageUrl = imageWebPath + savedFileName;
+                    String imageUrl = savedFileName;
 
                     PImgEntity image = PImgEntity.builder()
                             .productId(product.getProductId())
