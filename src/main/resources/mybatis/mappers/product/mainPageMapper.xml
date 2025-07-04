@@ -109,8 +109,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	        <when test="sort == 'popular'">
 	            ORDER BY p.sale_cnt DESC
 	        </when>
-	        <when test="sort == 'korasc'">
-	            ORDER BY p.product_name ASC
+	        <when test="sort == 'lowprice'">
+	            ORDER BY p.price ASC
+	        </when>
+	        <when test="sort == 'highprice'">
+	            ORDER BY p.price DESC
 	        </when>
 	        <otherwise>
 	            ORDER BY p.product_date DESC
