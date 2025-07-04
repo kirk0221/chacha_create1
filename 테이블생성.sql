@@ -38,20 +38,6 @@ CREATE TABLE type_category (
     type_category_name VARCHAR2(100)
 );
 
--- 5. 스토어
-CREATE TABLE store (
-    store_id     NUMBER PRIMARY KEY,
-    seller_id    NUMBER NOT NULL,
-    logo_img     VARCHAR2(500),
-    store_name   VARCHAR2(200),
-    store_detail VARCHAR2(400),
-    store_url    VARCHAR2(100) UNIQUE,
-    sale_cnt    NUMBER DEFAULT 0,
-    view_cnt     NUMBER DEFAULT 0,
-    CONSTRAINT fk_store_member FOREIGN KEY ( seller_id )
-        REFERENCES member ( member_id )
-);
-
 -- 6. 판매자
 CREATE TABLE seller (
     seller_id    NUMBER PRIMARY KEY,
@@ -64,6 +50,21 @@ CREATE TABLE seller (
     CONSTRAINT fk_seller_member FOREIGN KEY ( member_id )
         REFERENCES member ( member_id )
 );
+
+-- 5. 스토어
+CREATE TABLE store (
+    store_id     NUMBER PRIMARY KEY,
+    seller_id    NUMBER NOT NULL,
+    logo_img     VARCHAR2(500),
+    store_name   VARCHAR2(200),
+    store_detail VARCHAR2(400),
+    store_url    VARCHAR2(100) UNIQUE,
+    sale_cnt    NUMBER DEFAULT 0,
+    view_cnt     NUMBER DEFAULT 0,
+    CONSTRAINT fk_store_member FOREIGN KEY ( seller_id )
+        REFERENCES seller ( seller_id )
+);
+
 
 -- 7. 상품
 CREATE TABLE product (
@@ -145,7 +146,7 @@ CREATE TABLE order_info (
     order_name   VARCHAR2(100) NOT NULL,
     order_phone  VARCHAR2(20) NOT NULL,
     address_id   NUMBER NOT NULL,
-    card_id      NUMBER NOT NULL,
+    card_id      NUMBER,
     order_status VARCHAR2(30) DEFAULT 'ORDER_OK' NOT NULL CHECK ( order_status IN ( 'ORDER_OK', 'CONFIRM', 'REFUND', 'REFUND_OK' ) ),
     CONSTRAINT fk_ord_member FOREIGN KEY ( member_id )
         REFERENCES member ( member_id ),
@@ -257,6 +258,22 @@ CREATE TABLE alter_message(
     CONSTRAINT fk_alter_message_member FOREIGN KEY ( member_id )
         REFERENCES member ( member_id )
 );
+
+-- 22. 이메일 인증 키
+CREATE TABLE "AUTH_KEY" (
+   "AUTH_KEY_NO"   NUMBER      NOT NULL PRIMARY KEY,
+   "CODE"   CHAR(6)      NOT NULL,
+   "EMAIL"   VARCHAR2(50)      NOT NULL,
+   "CREATE_TIME"   DATE   DEFAULT SYSDATE   NOT NULL
+);
+
+COMMENT ON COLUMN "AUTH_KEY"."AUTH_KEY_NO" IS '인증키 구분 번호(SEQ_AUTH_KEY_NO)';
+
+COMMENT ON COLUMN "AUTH_KEY"."CODE" IS '코드';
+
+COMMENT ON COLUMN "AUTH_KEY"."EMAIL" IS '이메일';
+
+COMMENT ON COLUMN "AUTH_KEY"."CREATE_TIME" IS '인증 코드 생성 시간';
 
 
 -- 프로시저+JOB

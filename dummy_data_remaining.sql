@@ -43,11 +43,11 @@ INSERT INTO card (card_id, member_id, card_num, card_company, card_token, card_a
 (seq_card_id.nextval, 5, '5555-6666-7777-8888', '우리카드', 'token5', '나의카드5');
 
 INSERT INTO store (store_id, seller_id, logo_img, store_name, store_detail, store_url, sale_cnt, view_cnt) VALUES
-(seq_store_id.nextval, 1, 'logo1.jpg', '스토어1', '설명1', 'store1', 10, 100);
+(seq_store_id.nextval, 1, 'kakao.png', '스토어1', '설명1', 'store1', 10, 100);
 INSERT INTO store (store_id, seller_id, logo_img, store_name, store_detail, store_url, sale_cnt, view_cnt) VALUES
-(seq_store_id.nextval, 2, 'logo2.jpg', '스토어2', '설명2', 'store2', 20, 200);
+(seq_store_id.nextval, 2, 'naver.png', '스토어2', '설명2', 'store2', 20, 200);
 INSERT INTO store (store_id, seller_id, logo_img, store_name, store_detail, store_url, sale_cnt, view_cnt) VALUES
-(seq_store_id.nextval, 3, 'logo3.jpg', '스토어3', '설명3', 'store3', 30, 300);
+(seq_store_id.nextval, 3, 'naver.png', '스토어3', '설명3', 'store3', 30, 300);
 INSERT INTO store (store_id, seller_id) VALUES
 (seq_store_id.nextval, 4);
 INSERT INTO store (store_id, seller_id) VALUES
@@ -109,11 +109,11 @@ INSERT INTO product (product_id, store_id, type_category_id, d_category_id, prod
 (seq_product_id.nextval, 5, 5, 5, '상품5', 50000, '상세설명5', 10, TO_DATE('2025-05-05','YYYY-MM-DD'), TO_DATE('2025-05-14','YYYY-MM-DD'), 45, 300, 0);
 
 INSERT INTO p_img (p_img_id, product_id, p_img_url, p_img_enum, p_img_seq) VALUES
-(seq_p_img_id.nextval, 1, 'prod1_thumb.jpg', 'THUMBNAIL', 1);
+(seq_p_img_id.nextval, 1, 'kakao.png', 'THUMBNAIL', 1);
 INSERT INTO p_img (p_img_id, product_id, p_img_url, p_img_enum, p_img_seq) VALUES
-(seq_p_img_id.nextval, 1, 'prod1_desc1.jpg', 'DESCRIPTION', 2);
+(seq_p_img_id.nextval, 1, 'kakao.png', 'DESCRIPTION', 2);
 INSERT INTO p_img (p_img_id, product_id, p_img_url, p_img_enum, p_img_seq) VALUES
-(seq_p_img_id.nextval, 2, 'prod2_thumb.jpg', 'THUMBNAIL', 1);
+(seq_p_img_id.nextval, 2, 'naver.png', 'THUMBNAIL', 1);
 INSERT INTO p_img (p_img_id, product_id, p_img_url, p_img_enum, p_img_seq) VALUES
 (seq_p_img_id.nextval, 3, 'prod3_thumb.jpg', 'THUMBNAIL', 1);
 INSERT INTO p_img (p_img_id, product_id, p_img_url, p_img_enum, p_img_seq) VALUES

@@ -153,6 +153,13 @@ INCREMENT BY 1
 NOCACHE
 NOCYCLE;
 
+-- 이메일 인증 시퀀스 생성
+CREATE SEQUENCE SEQ_AUTH_KEY_NO
+START WITH 1
+INCREMENT BY 1
+NOCACHE
+NOCYCLE;
+
 -- 카테고리 값 insert
 insert into type_category VALUES(seq_type_category_id.nextval, '뜨개질');
 insert into type_category VALUES(seq_type_category_id.nextval, '금속공예');
