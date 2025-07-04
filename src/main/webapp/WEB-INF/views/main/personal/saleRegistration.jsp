@@ -482,8 +482,10 @@ for (let i = 1; i <= 6; i++) {
     else if (i === 5) pimgUrl5 = file.name;
     else if (i === 6) pimgUrl6 = file.name;
 
-    // 미리보기 반영
-    $(`#upload-placeholder\${i}`).html(`<img src="${cpath}/resources/productImages/\${file.name}">`);
+    // 이미지 미리보기 반영
+    $(`#upload-placeholder\${i}`).html(`<img src="${cpath}/resources/productImages/\${file.name}"
+    		style="max-width: 100%; max-height: 100%; object-fit: contain; display: block;">`
+    	);
   });
 }
 

@@ -9,7 +9,7 @@
 <head>
   <meta charset="UTF-8">
   <title>웹사이트 레이아웃</title>
-  <link rel="stylesheet" href="${cpath}/resources/css/main/mypage/mainMyPage.css">
+  <link rel="stylesheet" href="${cpath}/resources/css/store/buyer/mypage/storeMyPage.css">
 </head>
 <body>
   <div class="wrapper">
@@ -19,7 +19,7 @@
 <jsp:include page="/common/storeMain_nav.jsp" />
 
     <!-- 메인 콘텐츠 영역 -->
-    <main class="main-area">
+    <main class="main-area" data-cpath="${cpath}">
       <!-- 왼쪽 사이드바 -->
      <jsp:include page="/common/store_mypage_sidenav.jsp" />
 
