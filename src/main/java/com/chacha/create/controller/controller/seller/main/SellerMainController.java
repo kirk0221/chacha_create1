@@ -193,11 +193,10 @@ public class SellerMainController {
 	        return "store/seller/sellerSettlement";
 		}
 	
-	// 판매 주문 목록 --- 추가 필요
-//	@GetMapping("/management/order")
-//	public String showOrderPage() {
-//		return "";
-//	}
+		@GetMapping("/management/order")
+		public String showOrderPage(@PathVariable String storeUrl, Model model) {
+			return "store/seller/sellerOrderManage";
+		}
 	
 	// 판매 리뷰 관리
 	@GetMapping("/reviews")
