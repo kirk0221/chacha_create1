@@ -37,23 +37,38 @@ public class HttpHandshakeInterceptor implements HandshakeInterceptor {
      * @return              핸드셰이크 진행 여부 (true 반환 시 계속 진행)
      * @throws Exception    예외 발생 시
      */
-    @Override
-    public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler,
-                                   Map<String, Object> attributes) throws Exception {
-        if (request instanceof ServletServerHttpRequest) {
-            ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) request;
-            HttpSession session = servletRequest.getServletRequest().getSession();
+	@Override
+	public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler,
+	                               Map<String, Object> attributes) throws Exception {
+		log.info("beforeHandshake");
+	    if (request instanceof ServletServerHttpRequest) {
+	        ServletServerHttpRequest servletRequest = (ServletServerHttpRequest) request;
+	        HttpSession session = servletRequest.getServletRequest().getSession();
+			log.info("세션 ID: {}", session.getId());
+			log.info("loginMember: {}", session.getAttribute("loginMember"));
 
-            if (session != null) {
-                MemberEntity loginMember = (MemberEntity) session.getAttribute("loginMember");
-                if (loginMember != null) {
-                	log.info("WebSocket에 접속한 로그인한 member 정보 : " + loginMember.toString());
-                    attributes.put("loginMember", loginMember);
-                }
-            }
-        }
-        return true;
-    }
+	        if (session != null) {
+	            MemberEntity loginMember = (MemberEntity) session.getAttribute("loginMember");
+	            if (loginMember != null) {
+	                log.info("WebSocket에 접속한 로그인한 member 정보 : {}", loginMember);
+	                attributes.put("loginMember", loginMember);
+	            }
+	        }
+
+	        // 🔽 chatroomId 파라미터 추출 및 저장
+	        String chatroomIdStr = servletRequest.getServletRequest().getParameter("chatroomId");
+	        if (chatroomIdStr != null) {
+	            try {
+	                Integer chatroomId = Integer.parseInt(chatroomIdStr);
+	                attributes.put("chatroomId", chatroomId);
+	                log.info("WebSocket 요청 파라미터에서 추출한 chatroomId: {}", chatroomId);
+	            } catch (NumberFormatException e) {
+	                log.warn("잘못된 chatroomId 형식: {}", chatroomIdStr);
+	            }
+	        }
+	    }
+	    return true;
+	}
 
     /**
      * WebSocket 핸드셰이크 후 호출되는 메서드입니다.

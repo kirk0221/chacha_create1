@@ -59,23 +59,23 @@ public class ChatHandler extends TextWebSocketHandler {
             return;
         }
 
-        URI uri = session.getUri();
-        if (uri == null) {
-            session.close(CloseStatus.BAD_DATA.withReason("URI 없음"));
-            return;
-        }
+        // 🔽 interceptor에서 저장한 chatroomId 우선 사용
+        Integer chatroomId = (Integer) session.getAttributes().get("chatroomId");
 
-        Map<String, String> queryParams = UriComponentsBuilder.fromUri(uri).build().getQueryParams().toSingleValueMap();
+        if (chatroomId == null) {
+            // fallback: URI 쿼리 파라미터에서 추출 (storeUrl 기반)
+            URI uri = session.getUri();
+            if (uri == null) {
+                session.close(CloseStatus.BAD_DATA.withReason("URI 없음"));
+                return;
+            }
 
-        String storeUrl = queryParams.get("storeUrl");
-        String chatroomIdStr = queryParams.get("chatroomId");
+            Map<String, String> queryParams = UriComponentsBuilder.fromUri(uri).build().getQueryParams().toSingleValueMap();
+            String storeUrl = queryParams.get("storeUrl");
 
-        Integer chatroomId = null;
-
-        if (chatroomIdStr != null) {
-            chatroomId = Integer.parseInt(chatroomIdStr);
-        } else if (storeUrl != null) {
-            chatroomId = messageService.makeChattingInStore(loginMember, storeUrl);
+            if (storeUrl != null) {
+                chatroomId = messageService.makeChattingInStore(loginMember, storeUrl);
+            }
         }
 
         if (chatroomId == null) {

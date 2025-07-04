@@ -76,20 +76,23 @@
 </div>
 
 <script>
+let socket = null;
+let currentRoomId = null;
+
 $(document).ready(function() {
+    // 채팅방 목록 불러오기
     $.ajax({
         url: '${cpath}/api/main/message/chatrooms',
         method: 'GET',
         success: function(response) {
-        	if (response.status === 200) {
+            if (response.status === 200) {
                 const chatrooms = response.data;
                 const $list = $("#chat-room-list");
-                $list.empty(); // 기존 리스트 제거
+                $list.empty();
 
                 chatrooms.forEach(room => {
-                	console.log(room);
                     const itemHtml = `
-                        <li class="chat-room-item">
+                        <li class="chat-room-item" data-room-id="\${room.chatroomId}" data-store-url="\${room.storeUrl}">
                             <div class="chat-room-name">\${room.storeName}</div>
                             <div class="chat-room-preview">\${room.chattingText}</div>
                         </li>
@@ -104,7 +107,73 @@ $(document).ready(function() {
             alert("서버 오류 발생");
         }
     });
+
+    // 채팅방 클릭 시 WebSocket 연결
+    $(document).on('click', '.chat-room-item', function() {
+        currentRoomId = $(this).data('room-id');
+
+        // 기존 연결 닫기
+        if (socket) {
+            socket.close();
+        }
+
+        // WebSocket 연결 생성
+        
+        socket = new WebSocket(`${location.origin.replace("http", "ws")}/create/chatserver?chatroomId=2`);
+        // socket = new WebSocket('${pageContext.request.scheme}://localhost:9999${pageContext.request.contextPath}/chatserver?chatroomId=' + currentRoomId);
+        // socket = new WebSocket('ws://localhost:9999/create/chatserver?chatroomId=' + currentRoomId);
+
+        socket.onopen = function() {
+            console.log('WebSocket 연결됨: ' + currentRoomId);
+            $(".chat-messages").empty(); // 이전 메시지 초기화 (선택 사항)
+        };
+
+        socket.onmessage = function(event) {
+            const msg = JSON.parse(event.data);
+            const messageHtml = `
+                <div class="message received">
+                    <p class="message-text">\${msg.message}</p>
+                    <span class="message-time">\${msg.time}</span>
+                </div>
+            `;
+            $(".chat-messages").append(messageHtml);
+        };
+
+        socket.onclose = function() {
+            console.log("WebSocket 닫힘");
+        };
+
+        socket.onerror = function(error) {
+            console.error("WebSocket 오류", error);
+        };
+    });
+
+    // 메시지 전송
+    $(".chat-input button").on("click", function() {
+        const message = $(".chat-input input").val().trim();
+        if (!message || !socket || socket.readyState !== WebSocket.OPEN) {
+            alert("메시지를 보낼 수 없습니다. 채팅방을 먼저 선택하세요.");
+            return;
+        }
+
+        const sendData = {
+            roomId: currentRoomId,
+            message: message
+        };
+
+        socket.send(JSON.stringify(sendData));
+
+        const messageHtml = `
+            <div class="message sent">
+                <p class="message-text">\${message}</p>
+                <span class="message-time">지금</span>
+            </div>
+        `;
+        $(".chat-messages").append(messageHtml);
+        $(".chat-input input").val('');
+    });
 });
 </script>
+
 </body>
 </html>
