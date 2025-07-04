@@ -60,4 +60,6 @@ public interface PImgMapper {
      * @return 영향 받은 행 수
      */
     int delete(int pimgId);
+
+	void deleteImagesByProductId(int productId);
 }

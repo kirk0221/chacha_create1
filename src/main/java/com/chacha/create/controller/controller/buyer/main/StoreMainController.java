@@ -1,7 +1,6 @@
 package com.chacha.create.controller.controller.buyer.main;
 
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +53,13 @@ public class StoreMainController {
 		return "store/productDetail";
 	}
 	
+	// 장바구니 페이지
+	@GetMapping("/mypage/cart")
+	public String ShowCart(@PathVariable String storeUrl, Model model) {
+		model.addAttribute("storeUrl",storeUrl);
+		return "store/buyer/mypage/cart";
+	}
+	
 	// 결제 페이지
 	@GetMapping("/order")
 	public String ShowOrder(@PathVariable String storeUrl, Model model) {
@@ -62,7 +68,7 @@ public class StoreMainController {
 	}
 	
 	// 결제 완료페이지
-	@GetMapping("/order/complete")
+	@GetMapping("/order/complete/{orderId}")
 	public String ShowOrderComplete(@PathVariable String storeUrl, Model model) {
 		model.addAttribute("storeUrl",storeUrl);
 		return "store/buyer/orderComplete";

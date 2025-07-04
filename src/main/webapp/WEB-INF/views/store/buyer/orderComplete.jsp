@@ -178,9 +178,17 @@
 
   <script>
     $(document).ready(function () {
+    	
+    	const pathParts = window.location.pathname.split('/');
+    	const orderId = pathParts[pathParts.length - 1]; // 마지막 부분이 orderId
+    	
+    	// > 버튼 누르면 주문 상세로
+    	$('.section-more').on('click', function() {
+    	    window.location.href = `${pageContext.request.contextPath}/${storeUrl}/mypage/orderdetail/\${orderId}`;
+    	  });
 
       $.ajax({
-        url: '${pageContext.request.contextPath}/api/main/mypage/orderdetail/${orderId}',
+        url: `${pageContext.request.contextPath}/api/main/mypage/orderdetail/\${orderId}`,
         type: 'GET',
         contentType: 'application/json',
         success: function (res) {
