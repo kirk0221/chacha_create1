@@ -8,8 +8,12 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>웹사이트 레이아웃</title>
+  <title>마이페이지</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <link rel="stylesheet" href="${cpath}/resources/css/main/mypage/mainMyPage.css">
+  <script>const cpath = '${cpath}';</script>
+  <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <script src="${cpath}/resources/js/main/mypage/mainMyPage.js"></script>
 </head>
 <body>
   <div class="wrapper">
@@ -30,37 +34,39 @@
         <form class="info-form">
           <div class="form-group">
             <label>이름</label>
-            <input type="text" value="홍길동" disabled />
+            <input type="text" class="name" disabled />
           </div>
 
           <div class="form-group">
             <label>이메일</label>
-            <input type="email" value="example@naver.com" />
+            <input type="email" class="email" disabled/>
           </div>
 
           <div class="form-group">
             <label>비밀번호</label>
-            <input type="password" placeholder="변경할 비밀번호 입력" />
+            <input type="password" class="password" placeholder="변경할 비밀번호 입력" />
           </div>
 
           <div class="form-group">
             <label>비밀번호 확인</label>
-            <input type="password" placeholder="비밀번호 확인" />
+            <input type="password" class="password-ok" placeholder="비밀번호 확인" />
           </div>
 
           <div class="form-group">
             <label>연락처</label>
-            <input type="text" value="010-1234-5678" />
+            <input type="text" class="phone" disabled/>
           </div>
 
           <div class="form-group">
             <label>주소</label>
             <div class="address-group">
-              <input type="text" placeholder="우편번호" style="width: 120px;" />
+              <input type="text" class="post-num" placeholder="우편번호" style="width: 120px;" disabled/>
               <button type="button" class="search-btn">검색</button>
             </div>
-            <input type="text" placeholder="주소" />
-            <input type="text" placeholder="상세주소" />
+            <input type="hidden" class="address-road" name="address-road" />
+			<input type="hidden" class="address-extra" name="address-extra" />
+            <input type="text" class="address" placeholder="주소" />
+            <input type="text" class="address-detail" placeholder="상세주소" />
           </div>
 
           <div class="form-actions">
