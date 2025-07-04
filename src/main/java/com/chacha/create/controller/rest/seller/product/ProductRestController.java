@@ -89,7 +89,7 @@ public class ProductRestController {
 		return ResponseEntity.status(ResponseCode.NOT_FOUND.getStatus())
 				.body(new ApiResponse<>(ResponseCode.NOT_FOUND, "해당 상품을 찾을 수 없습니다."));
 	}
-
+	/*
 	@PutMapping("/productupdate/{productId}")
 	public ResponseEntity<ApiResponse<Void>> updateProductDetail(@PathVariable String storeUrl,
 			@PathVariable int productId, @RequestBody ProductUpdateDTO productUpdateDTO) {
@@ -102,8 +102,8 @@ public class ProductRestController {
 			productUpdateDTO.setPimgUrl2("");
 		if (productUpdateDTO.getPimgUrl3() == null)
 			productUpdateDTO.setPimgUrl3("");
-
-		boolean updated = productService.updateProductDetail(storeUrl, productUpdateDTO);
+		
+		boolean updated = productService.getProductDetail(storeUrl, productUpdateDTO);
 		if (updated) {
 			log.info("상품 수정 성공");
 			return ResponseEntity.ok(new ApiResponse<>(ResponseCode.OK, "상품 수정 성공"));
@@ -111,4 +111,5 @@ public class ProductRestController {
 		log.info("상품 수정 실패");
 		return ResponseEntity.badRequest().body(new ApiResponse<>(ResponseCode.BAD_REQUEST, "상품 수정 실패"));
 	}
+	*/
 }

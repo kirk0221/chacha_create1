@@ -93,13 +93,71 @@ public class ProductService {
         return productDetailMapper.updateProductDetail(storeUrl, productId);
     }
     
-    public boolean updateProductDetail(String storeUrl, ProductUpdateDTO dto) {
-        int updatedProduct = productDetailMapper.updateProduct(dto);
-        int img1 = productDetailMapper.updateProductImages(dto);
-        return updatedProduct > 0 || img1 > 0;
+    @Transactional
+    public boolean updateProductDetailWithImages(String storeUrl, ProductUpdateDTO dto,
+                                                 List<MultipartFile> images,
+                                                 List<Integer> imageSeqs) {
+
+        List<PImgEntity> existingImages = pimgMapper.selectByProductId(dto.getProductId());
+
+        for (int i = 0; i < images.size(); i++) {
+            MultipartFile file = images.get(i);
+            int seq = imageSeqs.get(i);
+
+            if (file.isEmpty()) continue;
+
+            // 기존 이미지 삭제
+            existingImages.stream()
+                .filter(img -> img.getPimgSeq() == seq)
+                .findFirst()
+                .ifPresent(img -> {
+                    deleteImageFile(img.getPimgUrl());
+                    pimgMapper.delete(img.getPimgId());
+                });
+
+            try {
+                String savedFileName = saveImageFile(file);
+                PImgEntity image = PImgEntity.builder()
+                    .productId(dto.getProductId())
+                    .pimgUrl(savedFileName)
+                    .pimgEnum(ProductImageTypeEnum.THUMBNAIL)
+                    .pimgSeq(seq)
+                    .build();
+
+                productimgInsert(image);
+
+            } catch (IOException e) {
+                log.error("이미지 저장 실패: {}", file.getOriginalFilename(), e);
+                throw new RuntimeException("이미지 저장 실패", e);
+            }
+        }
+
+        // 상품 정보 업데이트
+        int updated = productDetailMapper.updateProduct(dto);
+        return updated > 0;
     }
 	
-    private final String imageSavePath = "C:/shinhan/install/springFramework/workSpace2/chacha_create1/src/main/webapp/resources/productImages";
+    private boolean deleteImageFile(String pimgUrl) {
+        if (pimgUrl == null || pimgUrl.isEmpty()) return false;
+        
+        try {
+            String fileName = pimgUrl.substring(pimgUrl.lastIndexOf("/") + 1);
+            Path filePath = Paths.get(imageSavePath, fileName);
+            if (Files.exists(filePath)) {
+                Files.delete(filePath);
+                log.info("파일 삭제 성공: " + filePath);
+                return true;
+            } else {
+                log.warn("삭제할 파일 없음: " + filePath);
+                return false;
+            }
+        } catch (Exception e) {
+            log.error("파일 삭제 중 오류 발생: ", e);
+            return false;
+        }
+    }
+
+	private final String imageSavePath = "C:/shinhan/install/springFramework/workSpace2/chacha_create1/src/main/webapp/resources/productImages";
 
     @Transactional(rollbackFor = Exception.class)
     public int registerMultipleProductsWithImages(String storeUrl, List<ProductWithImagesDTO> requestList) {
