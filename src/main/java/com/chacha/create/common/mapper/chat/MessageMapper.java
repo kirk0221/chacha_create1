@@ -19,4 +19,5 @@ public interface MessageMapper {
 	int insertChatroom(MessageDTO messageDTO);
 	int insertChatting(MessageDTO messageDTO);
 	List<ChatRoomInfoDTO> selectForStoreNameByMemberId(Integer memberId);
+	List<MessageDTO> selectForMemberWithChatroomIdAllMessage(MessageDTO messageDTO);
 }
