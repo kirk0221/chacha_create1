@@ -13,6 +13,7 @@
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </head>
 <body>
+<%-- <%@ include file="/common/store_seller_sidenav.jsp" %> --%>
   <div class="swiper-container-wrapper">
     <div class="swiper mySwiper">
       <div class="swiper-wrapper">

@@ -9,27 +9,8 @@
 </head>
 <body>
   <div class="wrapper">
-    <!-- 헤더 -->
-    <header>
-      <div class="header-inner">
-        <div class="login-bar">
-          <span>관리자님 반갑습니다.</span>
-          <button class="logout-btn">로그아웃</button>
-        </div>
-      </div>
-    </header>
     <!-- 내비게이션 -->
-    <nav class="site-nav">
-      <div class="nav-inner">
-        <div class="nav-logo">뜨락상회</div>
-        <ul class="nav-menu">
-          <li><a href="#">홈</a></li>
-          <li><a href="#">스토어</a></li>
-          <li><a href="#">이벤트</a></li>
-          <li><a href="#">고객센터</a></li>
-        </ul>
-      </div>
-    </nav>
+	<%@ include file="/common/store_seller_sidenav.jsp" %>
     <!-- 메인 콘텐츠 영역 -->
     <main class="main-area">
       <aside class="sidebar">

@@ -317,7 +317,7 @@ public class SellerMainController {
 	}
 	
 	// 문의 메시지
-	@GetMapping("/chat")
+	@GetMapping("/message")
 	public String showChatPage(@PathVariable String storeUrl, Model model) {
 		model.addAttribute("storeUrl",storeUrl);
 		return "store/chat";
