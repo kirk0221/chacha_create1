@@ -23,9 +23,9 @@
          주문내역</a>
     </li>
     <li>
-      <a href="${cpath}/main/mypage/favorite"
+      <a href="${cpath}/main/mypage/message"
          class="${fn:contains(uri, '/mypage/favorite') ? 'active' : ''}">
-         관심사 선택</a>
+         문의 메시지</a>
     </li>
     <li>
       <a href="${cpath}/main/mypage/myreview"
