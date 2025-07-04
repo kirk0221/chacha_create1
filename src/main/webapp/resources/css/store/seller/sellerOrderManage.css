@@ -156,33 +156,24 @@ body {
 
 
 /* 각 상태 색상 */
-.member-table td.신규 {
+.member-table td.발송전 {
   background-color: #cfe2ff; /* 부드러운 파랑 */
   color: #0d47a1;
 }
 
-.member-table td.발송전 {
-  background-color: #d6d6d6; /* 연한 중성 회색 */
-  color: #212121;
-}
-
-.member-table td.환불 {
+.member-table td.환불요청 {
   background-color: #fde2e1; /* 연한 핑크빨강 */
   color: #b71c1c;
 }
 
-.member-table td.취소 {
+.member-table td.환불완료 {
   background-color: #fff3cd; /* 연한 노랑 */
   color: #9c6f00;
 }
 
-.member-table td.완료 {
+.member-table td.주문완료 {
   background-color: #d1e7dd; /* 연한 민트초록 */
   color: #1b5e20;
-}
-.member-table td.대시 {
-  background-color: #eeeeee;
-  color: #888;
 }
 
 .ellipsis {

@@ -34,19 +34,23 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.chacha.create.common.dto.error.ApiResponse;
+import com.chacha.create.common.dto.order.OrderDTO;
 import com.chacha.create.common.dto.order.OrderSumDTO;
 import com.chacha.create.common.dto.product.ProductUpdateDTO;
 import com.chacha.create.common.dto.product.ProductWithImagesDTO;
 
 import com.chacha.create.common.dto.product.ProductlistDTO;
+import com.chacha.create.common.entity.order.OrderInfoEntity;
 import com.chacha.create.common.entity.product.ProductEntity;
 import com.chacha.create.common.enums.category.DCategoryEnum;
 import com.chacha.create.common.enums.category.TypeCategoryEnum;
 import com.chacha.create.common.enums.category.UCategoryEnum;
 
 import com.chacha.create.common.enums.error.ResponseCode;
-
+import com.chacha.create.common.enums.order.OrderStatusEnum;
+import com.chacha.create.common.exception.InvalidRequestException;
 import com.chacha.create.service.seller.main.SellerMainService;
+import com.chacha.create.service.seller.order.OrderManagementService;
 import com.chacha.create.service.seller.product.ProductService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -65,6 +69,8 @@ public class SellerMainController {
 	final ProductService productService;
 	 
 	final SellerMainService sell;
+	
+	final OrderManagementService omService;
 	
 	
 	// 판매자 메인페이지
@@ -250,11 +256,58 @@ public class SellerMainController {
                                         Model model) {
         return "store/seller/sellerSettlement";
 	}
+		
+	// 판매자 페이지 주문 조회
+	@GetMapping("/management/order")
+	public String showOrderPage(@PathVariable String storeUrl,
+	                            @RequestParam(value = "status", required = false) String status,
+	                            Model model) {
+		List<OrderDTO> orderList;
+
+	    if (status != null && !status.isBlank()) {
+	        try {
+	            OrderStatusEnum statusEnum = OrderStatusEnum.from(status);
+	            orderList = omService.selectForOrderStatus(storeUrl, statusEnum);
+	            model.addAttribute("selectedStatus", statusEnum.getCode());
+	        } catch (IllegalArgumentException e) {
+	            orderList = omService.selectOrderAll(storeUrl);
+	            model.addAttribute("selectedStatus", "");
+	        }
+	    } else {
+	        orderList = omService.selectOrderAll(storeUrl);
+	        model.addAttribute("selectedStatus", "");
+	    }
+
+	    for (OrderDTO dto : orderList) {
+	        dto.setOrderStatusLabel(convertStatusLabel(dto.getOrderStatus()));
+	        dto.setAddressFull(dto.getAddressRoad() + " " + dto.getAddressDetail() + " " + dto.getAddressExtra());
+	    }
+	    model.addAttribute("storeUrl", storeUrl);
+	    model.addAttribute("orderList", orderList);
+	    return "store/seller/sellerOrderManage";
+	}
+	private String convertStatusLabel(OrderStatusEnum status) {
+	    switch (status) {
+	        case CONFIRM: return "발송전";
+	        case REFUND: return "환불요청";
+	        case REFUND_OK: return "환불완료";
+	        case ORDER_OK: return "주문완료";
+	        default: return "기타";
+	    }
+	}
 	
-		@GetMapping("/management/order")
-		public String showOrderPage(@PathVariable String storeUrl, Model model) {
-			return "store/seller/sellerOrderManage";
-		}
+	// 주문조회 중 환불요청을 완료로 업데이트
+	@PutMapping(value = "/management/order", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<ApiResponse<Void>> updateOrderStatus(@RequestBody OrderInfoEntity orderInfoEntity) {
+	    int result = omService.updateForRefundStatus(orderInfoEntity);
+
+	    if (result <= 0) {
+	        throw new InvalidRequestException("주문 상태 수정 실패");
+	    }
+
+	    return ResponseEntity.ok(new ApiResponse<>(ResponseCode.OK, "주문 상태 수정 성공"));
+	}
+
 	
 	// 판매 리뷰 관리
 	@GetMapping("/reviews")
