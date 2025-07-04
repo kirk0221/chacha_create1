@@ -63,9 +63,15 @@
 
 <!-- ✅ 주문 필터 버튼 -->
 <div class="order-filter-bar">
-  <button class="order-filter-btn active" data-status="신규">신규 주문 <%= java.util.Arrays.stream(status).filter(s -> s.equals("신규")).count() %>건</button>
-  <button class="order-filter-btn" data-status="환불">환불 요청 <%= java.util.Arrays.stream(status).filter(s -> s.equals("환불")).count() %>건</button>
-  <button class="order-filter-btn" data-status="취소">취소 요청 <%= java.util.Arrays.stream(status).filter(s -> s.equals("취소")).count() %>건</button>
+  <button class="order-filter-btn active" data-status="신규">
+  신규 주문 <span class="count" data-type="신규">3</span>건
+</button>
+<button class="order-filter-btn" data-status="환불">
+  환불 요청 <span class="count" data-type="환불">1</span>건
+</button>
+<button class="order-filter-btn" data-status="취소">
+  취소 요청 <span class="count" data-type="취소">1</span>건
+</button>
 </div>
 
 <!-- ✅ 필터링되는 테이블 -->
@@ -187,6 +193,20 @@ document.addEventListener("DOMContentLoaded", function () {
        });
      });
 
+     function updateOrderCount() {
+    	  const counts = { 신규: 0, 환불: 0, 취소: 0 };
+    	  document.querySelectorAll('#filter-order-body tr').forEach(row => {
+    	    if (!row.classList.contains('detail-row') && counts.hasOwnProperty(row.dataset.status)) {
+    	      counts[row.dataset.status]++;
+    	    }
+    	  });
+
+    	  document.querySelectorAll('.count').forEach(span => {
+    	    const type = span.dataset.type;
+    	    span.textContent = counts[type] || 0;
+    	  });
+    	}
+     
      // 상태별 버튼 클릭 이벤트 처리
      document.querySelector("#filter-order-body").addEventListener("click", function (e) {
        const btn = e.target;
@@ -219,6 +239,7 @@ document.addEventListener("DOMContentLoaded", function () {
          const detailRow = row.nextElementSibling;
          row.remove();
          if (detailRow.classList.contains("detail-row")) detailRow.remove();
+         updateOrderCount();
        }
      });
 
