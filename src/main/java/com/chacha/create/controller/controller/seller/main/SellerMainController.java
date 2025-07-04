@@ -286,7 +286,6 @@ public class SellerMainController {
 	    model.addAttribute("orderList", orderList);
 	    return "store/seller/sellerOrderManage";
 	}
-	
 	private String convertStatusLabel(OrderStatusEnum status) {
 	    switch (status) {
 	        case CONFIRM: return "발송전";
@@ -308,6 +307,7 @@ public class SellerMainController {
 
 	    return ResponseEntity.ok(new ApiResponse<>(ResponseCode.OK, "주문 상태 수정 성공"));
 	}
+
 	
 	// 판매 리뷰 관리
 	@GetMapping("/reviews")

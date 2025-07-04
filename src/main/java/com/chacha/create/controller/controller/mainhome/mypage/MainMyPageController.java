@@ -39,6 +39,11 @@ public class MainMyPageController {
 		return "";
     }
     
+    @GetMapping("/message")
+    public String showMessagePage() {
+    	return "main/mypage/chat";
+    }
+    
     @GetMapping("/myreview")
     public String showReviewPage() {
 		return "main/mypage/mainMyPageReview";

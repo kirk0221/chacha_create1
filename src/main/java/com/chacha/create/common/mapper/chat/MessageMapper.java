@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.chacha.create.common.dto.chat.ChatRoomInfoDTO;
 import com.chacha.create.common.dto.chat.MessageDTO;
 
 @Mapper
@@ -17,4 +18,5 @@ public interface MessageMapper {
 	
 	int insertChatroom(MessageDTO messageDTO);
 	int insertChatting(MessageDTO messageDTO);
+	List<ChatRoomInfoDTO> selectForStoreNameByMemberId(Integer memberId);
 }
