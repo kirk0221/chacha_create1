@@ -122,8 +122,14 @@
 
 <div class="sidebar">
   <div class="profile-section">
-    <div class="profile-img"></div>
-    <div class="store-name">스토어명</div>
+    <div class="profile-img">
+    	<!-- 동적으로 스토어 로고 삽입 -->
+		<img src="${cpath}/resources/productImages/${logoImg}" alt="스토어 로고" style="height: 80px"/>
+	</div>
+    <div class="store-name">
+		<!-- 동적으로 스토어 이름 삽입 -->
+		${storeName}
+    </div>
   </div>
 
   <ul class="menu-list">
