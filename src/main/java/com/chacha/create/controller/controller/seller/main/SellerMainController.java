@@ -52,6 +52,7 @@ import com.chacha.create.common.enums.category.UCategoryEnum;
 import com.chacha.create.common.enums.error.ResponseCode;
 import com.chacha.create.common.enums.order.OrderStatusEnum;
 import com.chacha.create.common.exception.InvalidRequestException;
+import com.chacha.create.common.exception.LoginFailException;
 import com.chacha.create.service.buyer.storeinfo.StoreInfoService;
 import com.chacha.create.service.seller.main.SellerMainService;
 import com.chacha.create.service.seller.order.OrderManagementService;
@@ -381,20 +382,25 @@ public class SellerMainController {
 	        return "store/seller/storeClose";
 	    }
 
-	    MemberEntity validatedMember = loginService.login(email, password);
-	    if (validatedMember == null || !validatedMember.equals(loginMember)) {
-	        model.addAttribute("errorMessage", "비밀번호가 일치하지 않습니다.");
-	        model.addAttribute("storeUrl", storeUrl);
-	        return "store/seller/storeClose";
-	    }
-
 	    try {
+	        MemberEntity validatedMember = loginService.login(email, password);
+
+	        if (!validatedMember.equals(loginMember)) {
+	            model.addAttribute("errorMessage", "비밀번호가 일치하지 않습니다.");
+	            model.addAttribute("storeUrl", storeUrl);
+	            return "store/seller/storeClose";
+	        }
+
 	        int result = shutdownService.shutdown(storeUrl);
 	        if (result > 0) {
-	            return "redirect:/create/main"; // 메인 페이지로 이동 (세션 유지)
+	            return "redirect:/main"; // 메인 페이지로 이동 (세션 유지)
 	        } else {
 	            model.addAttribute("errorMessage", "폐업 처리에 실패했습니다.");
 	        }
+	    } catch (LoginFailException e) {
+	        model.addAttribute("errorMessage", "비밀번호가 일치하지 않습니다.");
+	        model.addAttribute("storeUrl", storeUrl);
+	        return "store/seller/storeClose";
 	    } catch (IllegalStateException e) {
 	        model.addAttribute("errorMessage", e.getMessage());
 	    }

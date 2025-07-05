@@ -89,5 +89,7 @@ public interface StoreMapper {
 	int selectForCountProductByMemberId(Integer memberId);
 
 	StoreInfoDTO selectForThisStoreInfo(String storeUrl);
+	
+	int updatePersonalCheck(int sellerId);
 
 }

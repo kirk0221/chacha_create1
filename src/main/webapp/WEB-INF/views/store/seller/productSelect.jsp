@@ -16,11 +16,8 @@
 </script>
 </head>
 <body>
-<div class="wrapper">
-<<<<<<< Updated upstream
-  <div class="main-area">
-    <div class="content-wrapper">
-      <%@ include file="/common/store_seller_sidenav.jsp" %>
+<div class="content-wrapper">
+   <%@ include file="/common/store_seller_sidenav.jsp" %>
 
   <div class="main-area">
     <div class="content-wrapper">
@@ -80,8 +77,6 @@
       </main>
     </div>
   </div>
-
-  <footer>&copy; 2025 뜨락상회</footer>
 </div>
 
 </body>
