@@ -7,7 +7,6 @@
 <head>
   <meta charset="UTF-8">
   <title>주문/발송관리</title>
-  <%@ include file="/common/header.jsp" %>
   <link rel="stylesheet" type="text/css" href="${cpath}/resources/css/admin/authMain.css">
   <link rel="stylesheet" type="text/css" href="${cpath}/resources/css/store/seller/sellerOrderManage.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -49,13 +48,8 @@
 </script>
 </head>
 <body>
-<div class="wrapper">
-<<<<<<< Updated upstream
   <div class="main-area">
-    <div class="content-wrapper">
       <%@ include file="/common/store_seller_sidenav.jsp" %>
-
-  <div class="main-area">
     <div class="content-wrapper">
 
       <main class="content">
@@ -143,11 +137,14 @@
           </div>
         </div>
       </main>
+      <!-- 푸터 -->
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <p>© 2025 뜨락상회. All rights reserved.</p>
+      </div>
+    </footer>
     </div>
   </div>
-
-  <footer>&copy; 2025 뜨락상회</footer>
-</div>
 
 <script>
 $(document).ready(function () {

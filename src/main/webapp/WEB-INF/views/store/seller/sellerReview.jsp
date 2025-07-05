@@ -9,7 +9,6 @@
 </head>
 <body>
   <div class="wrapper">
-<<<<<<< Updated upstream
     <!-- 내비게이션 -->
 	<%@ include file="/common/store_seller_sidenav.jsp" %>
     <!-- 메인 콘텐츠 영역 -->
