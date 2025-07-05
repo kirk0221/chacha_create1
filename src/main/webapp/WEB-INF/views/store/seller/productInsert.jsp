@@ -99,18 +99,11 @@
 </head>
 <body>
 <div class="wrapper">
-  <header>
-    <div class="header-inner">
-      <div class="login-bar">
-        <span>수제대추고님 반갑습니다.</span>
-        <button class="logout-btn">로그아웃</button>
-      </div>
-    </div>
-  </header>
 
   <div class="main-area">
     <div class="content-wrapper">
       <%@ include file="/common/store_seller_sidenav.jsp" %>
+
 
       <main class="content">
         <div class="content-inner">

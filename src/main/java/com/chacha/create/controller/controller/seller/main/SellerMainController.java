@@ -13,6 +13,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -41,6 +42,7 @@ import com.chacha.create.common.dto.product.ProductWithImagesDTO;
 
 import com.chacha.create.common.dto.product.ProductlistDTO;
 import com.chacha.create.common.dto.store.StoreInfoDTO;
+import com.chacha.create.common.entity.member.MemberEntity;
 import com.chacha.create.common.entity.order.OrderInfoEntity;
 import com.chacha.create.common.entity.product.ProductEntity;
 import com.chacha.create.common.enums.category.DCategoryEnum;
@@ -54,6 +56,8 @@ import com.chacha.create.service.buyer.storeinfo.StoreInfoService;
 import com.chacha.create.service.seller.main.SellerMainService;
 import com.chacha.create.service.seller.order.OrderManagementService;
 import com.chacha.create.service.seller.product.ProductService;
+import com.chacha.create.service.seller.shut_down.ShutDownService;
+import com.chacha.create.service.store_common.header.auth.LoginService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.RequiredArgsConstructor;
@@ -75,6 +79,10 @@ public class SellerMainController {
 	private final OrderManagementService omService;
 	
 	private final StoreInfoService storeinfo;
+	
+	final LoginService loginService;
+	
+	final ShutDownService shutdownService;
 	
 	public void setStoreNavInfo(String storeUrl, Model model) {
 		StoreInfoDTO storeInfo = storeinfo.selectForThisStoreInfo(storeUrl);
@@ -350,11 +358,49 @@ public class SellerMainController {
 		return "store/seller/sellerNotice";
 	}
 	
-	// 폐업
+	// 폐업 페이지 불러오기
 	@GetMapping("/close")
 	public String showDonePage(@PathVariable String storeUrl, Model model) {
 		setStoreNavInfo(storeUrl, model);
 		return "store/seller/storeClose";
+	}
+	
+	// 폐업 처리 로직
+	@PostMapping("/close")
+	public String handleShutdown(@PathVariable String storeUrl,
+	                             @RequestParam("email") String email,
+	                             @RequestParam("password") String password,
+	                             HttpSession session,
+	                             Model model) {
+	    MemberEntity loginMember = (MemberEntity) session.getAttribute("loginMember");
+
+	    // 로그인된 사용자와 입력 정보 비교
+	    if (loginMember == null || !loginMember.getMemberEmail().equals(email)) {
+	        model.addAttribute("errorMessage", "이메일이 일치하지 않습니다.");
+	        model.addAttribute("storeUrl", storeUrl);
+	        return "store/seller/storeClose";
+	    }
+
+	    MemberEntity validatedMember = loginService.login(email, password);
+	    if (validatedMember == null || !validatedMember.equals(loginMember)) {
+	        model.addAttribute("errorMessage", "비밀번호가 일치하지 않습니다.");
+	        model.addAttribute("storeUrl", storeUrl);
+	        return "store/seller/storeClose";
+	    }
+
+	    try {
+	        int result = shutdownService.shutdown(storeUrl);
+	        if (result > 0) {
+	            return "redirect:/create/main"; // 메인 페이지로 이동 (세션 유지)
+	        } else {
+	            model.addAttribute("errorMessage", "폐업 처리에 실패했습니다.");
+	        }
+	    } catch (IllegalStateException e) {
+	        model.addAttribute("errorMessage", e.getMessage());
+	    }
+
+	    model.addAttribute("storeUrl", storeUrl);
+	    return "store/seller/storeClose";
 	}
 	
 }

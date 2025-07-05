@@ -17,9 +17,13 @@
 </head>
 <body>
 <div class="wrapper">
+<<<<<<< Updated upstream
   <div class="main-area">
     <div class="content-wrapper">
       <%@ include file="/common/store_seller_sidenav.jsp" %>
+
+  <div class="main-area">
+    <div class="content-wrapper">
 
       <main class="content">
         <div class="content-inner">
