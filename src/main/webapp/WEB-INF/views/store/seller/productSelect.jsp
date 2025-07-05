@@ -16,10 +16,11 @@
 </script>
 </head>
 <body>
-<div class="wrapper">
+<div class="content-wrapper">
+   <%@ include file="/common/store_seller_sidenav.jsp" %>
+
   <div class="main-area">
     <div class="content-wrapper">
-      <%@ include file="/common/store_seller_sidenav.jsp" %>
 
       <main class="content">
         <div class="content-inner">
@@ -76,8 +77,6 @@
       </main>
     </div>
   </div>
-
-  <footer>&copy; 2025 뜨락상회</footer>
 </div>
 
 </body>

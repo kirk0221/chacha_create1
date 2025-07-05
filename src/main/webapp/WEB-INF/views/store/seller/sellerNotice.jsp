@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>뜨락상회 관리자 페이지 - 신고 관리</title>
+<title>뜨락상회 판매자 공지사항 목록 페이지</title>
+<%@ include file="/common/header.jsp" %>
 <link rel="stylesheet" type="text/css" href="${cpath}/resources/css/admin/authMain.css">
 <link rel="stylesheet" type="text/css" href="${cpath}/resources/css/admin/declarationManage.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -14,6 +15,7 @@
 <div class="main-area">
 	<div class="content-wrapper">
     <%@ include file="/common/store_seller_sidenav.jsp" %>
+
     <main class="content">
         <div class="content-inner">
             <div class="suggestion-box">

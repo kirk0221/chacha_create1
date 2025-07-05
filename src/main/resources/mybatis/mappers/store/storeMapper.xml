@@ -99,5 +99,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	SELECT seller_id FROM store
 	WHERE store_id = #{storeId}
 	</select>
+	
+	<update id="updatePersonalCheck" parameterType="int">
+	  UPDATE seller
+	  SET personal_check = 1
+	  WHERE seller_id = #{sellerId}
+	</update>
 
 </mapper>
