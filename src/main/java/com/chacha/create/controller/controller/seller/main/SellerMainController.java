@@ -388,7 +388,6 @@ public class SellerMainController {
 
 	        if (!validatedMember.equals(loginMember)) {
 	            model.addAttribute("errorMessage", "비밀번호가 일치하지 않습니다.");
-	            model.addAttribute("storeUrl", storeUrl);
 	            return "store/seller/storeClose";
 	        }
 
@@ -400,13 +399,11 @@ public class SellerMainController {
 	        }
 	    } catch (LoginFailException e) {
 	        model.addAttribute("errorMessage", "비밀번호가 일치하지 않습니다.");
-	        model.addAttribute("storeUrl", storeUrl);
 	        return "store/seller/storeClose";
 	    } catch (IllegalStateException e) {
 	        model.addAttribute("errorMessage", e.getMessage());
 	    }
 
-	    model.addAttribute("storeUrl", storeUrl);
 	    return "store/seller/storeClose";
 	}
 	
