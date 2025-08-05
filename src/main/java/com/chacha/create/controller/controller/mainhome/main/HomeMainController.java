@@ -46,6 +46,11 @@ public class HomeMainController {
 		return "main/mainNotice";
     }
     
+    @GetMapping("/class")
+    public String showClassPage() {
+		return "main/mainClass";
+    }
+    
     
     @GetMapping("/mypage")
     public String showMyPage() {

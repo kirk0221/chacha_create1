@@ -1,58 +1,56 @@
-let cpath="";
+let cpath = "";
 
 $(() => {
-		cpath = document.getElementById("cpath").value;
-		
-		mainHomeInfo();
+  cpath = document.getElementById("cpath").value;
+  mainHomeInfo();
 });
 
-// 인기 스토어 조회
-function mainHomeInfo(){
-	const link = `${cpath}/api/main`;
-	
-	$.ajax({
-		url: link,
-		dataType: "json",
-		success:function(result){
-			bestStore = result.data.bestStore.filter(store => store.storeName !== null);
-			bestProduct = result.data.bestProduct;
-			newProduct = result.data.newProduct;
-			topRankStore = result.data.bestStore[0];
-			renderBestStore(bestStore);
-			renderBestProduct(bestProduct);
-			renderNewProduct(newProduct);
-			renderTopStore(topRankStore);
-		},
-		error: function (xhr, status, error) {
-	      console.error("전체 조회 실패:", error);
-	    }
-	});
-};
+// 인기 스토어, 인기 상품, 신상품 정보 조회
+function mainHomeInfo() {
+  const link = `${cpath}/api/main`;
 
+  $.ajax({
+    url: link,
+    dataType: "json",
+    success: function (result) {
+      const bestStore = result.data.bestStore.filter(store => store.storeName !== null);
+      const bestProduct = result.data.bestProduct;
+      const newProduct = result.data.newProduct;
+      const topRankStore = result.data.bestStore[0];
 
-// 인기 스토어 렌더링
+      renderBestStore(bestStore);      // ✅ Swiper 제거된 버전
+      renderBestProduct(bestProduct);
+      renderNewProduct(newProduct);
+      renderTopStore(topRankStore);
+    },
+    error: function (xhr, status, error) {
+      console.error("전체 조회 실패:", error);
+    }
+  });
+}
+
+// ✅ Swiper 제거된 인기 스토어 렌더링
 function renderBestStore(bestStore) {
-  const storeArea = document.getElementById("store-swiper-wrapper");
+  const storeArea = document.getElementById("store-grid"); // ✅ 변경된 ID
 
   let html = "";
 
   bestStore.forEach((bs) => {
     html += `
-      <div class="swiper-slide" onclick="location.href='${cpath}/${bs.storeUrl}'">
-        <div class="card">
-          <img class="store-img" src="${cpath}/resources/productImages/${bs.logoImg}" alt="${bs.storeName}">
-          <h3>${bs.storeName}</h3>
-          <div class="category-list">
-            <span class="category-tag">${bs.categoryName}</span>
-          </div>
-          <p class="store-desc">${bs.storeDetail}</p>
+      <div class="card" onclick="location.href='${cpath}/${bs.storeUrl}'">
+        <img class="store-img" src="${cpath}/resources/productImages/${bs.logoImg}" alt="${bs.storeName}">
+        <h3>${bs.storeName}</h3>
+        <div class="category-list">
+          <span class="category-tag">${bs.categoryName}</span>
         </div>
+        <p class="store-desc">${bs.storeDetail}</p>
       </div>
     `;
   });
 
   storeArea.innerHTML = html;
 }
+
 
 // 인기 상품 렌더링
 function renderBestProduct(bestProduct) {

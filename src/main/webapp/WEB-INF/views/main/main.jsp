@@ -91,19 +91,16 @@
 	</div>
 </section>
 
-		<section>
-	<div class="section-title">
-		<span class="icon">⭐</span>
-		<h2>인기 스토어</h2>
-	</div>
-	<div class="swiper store-swiper">
-		<div class="swiper-wrapper" id="store-swiper-wrapper">
-			<!-- 동적으로 인기 스토어 정보가 들어갈 공간 -->
-		</div>
-		<div class="swiper-pagination store-pagination"></div>
-		<div class="swiper-button-prev store-prev"></div>
-		<div class="swiper-button-next store-next"></div>
-	</div>
+<!-- 인기 스토어 영역: swiper 제거, 그리드 구성 -->
+<!-- 기존 Swiper 구조 제거 -->
+<section>
+  <div class="section-title">
+    <span class="icon">⭐</span>
+    <h2>인기 스토어</h2>
+  </div>
+  <div class="store-grid" id="store-grid">
+    <!-- 동적으로 인기 스토어 카드가 들어올 공간 -->
+  </div>
 </section>
 
 
